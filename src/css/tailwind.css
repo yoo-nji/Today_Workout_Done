@@ -10,11 +10,22 @@
     background-color: #fff;
     width: 30px;
     height: 30px;
-    bottom: 45px;
+    bottom: 30px;
     left: -12px;
     transform: rotate(45deg);
   }
   .scrollbar-none::-webkit-scrollbar {
     display: none;
+  }
+
+  /* 모달창 뒷 배경  */
+  .modal-back {
+    content: "";
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.7);
+    width: 100vw;
+    height: 100vh;
+    inset: 0;
+    z-index: 20;
   }
 }
