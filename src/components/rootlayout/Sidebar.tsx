@@ -79,7 +79,7 @@ export default function Sidebar() {
         >
           유저 목록
         </button>
-        {isOpen && <UserListModal />}
+        {isOpen && <UserListModal handleBackClick={handleBackClick} />}
       </div>
     </div>
   );
