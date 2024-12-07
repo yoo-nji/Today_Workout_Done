@@ -3,9 +3,11 @@ import Header from "../components/rootlayout/Header";
 
 export default function RootLayout() {
   return (
-    <div>
+    <div className="flex flex-col min-h-screen">
       <Header />
-      <Outlet />
+      <div className="flex-grow ">
+        <Outlet />
+      </div>
     </div>
   );
 }
