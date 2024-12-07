@@ -2,6 +2,11 @@ import { useState } from "react";
 import ChannelList from "../ChannelList";
 import UserListModal from "../userlistModal/UserListModal";
 import UserProfile from "../UserProfile";
+// 아이콘
+import dumbbell from "../../assets/dumbbell_icon.svg";
+import protein from "../../assets/protein_icon.svg";
+import routine from "../../assets/routine_icon.svg";
+import gym from "../../assets/gym_icon.svg";
 
 export default function Sidebar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -15,7 +20,7 @@ export default function Sidebar() {
     <div
       className={`flex flex-col items-center w-[350px] 
       py-5 gap-8 text-[#1D1D1D] bg-[#FEFEFE] border-r
-      border-gray-200/50 relative ${isOpen ? "before:modal-back" : ""}`}
+      border-gray-200/50 relative  ${isOpen ? "before:modal-back" : ""}`}
       onClick={(e) => handleBackClick(e)}
     >
       <button className="self-end w-10 mr-2">
@@ -51,16 +56,16 @@ export default function Sidebar() {
         {/* 채널목록 */}
         <div className="w-full">
           <ul className="flex flex-col w-full gap-1 px-1">
-            <ChannelList src="dumbbell_icon" alt="오운완 아이콘">
+            <ChannelList icon={dumbbell} alt="오운완 아이콘">
               오운완 인증
             </ChannelList>
-            <ChannelList src="protein_icon" alt="프로틴 아이콘">
+            <ChannelList icon={protein} alt="프로틴 아이콘">
               프로틴 추천
             </ChannelList>
-            <ChannelList src="routine_icon" alt="루틴 아이콘">
+            <ChannelList icon={routine} alt="루틴 아이콘">
               루틴 공유
             </ChannelList>
-            <ChannelList src="gym_icon" alt="헬스장 아이콘">
+            <ChannelList icon={gym} alt="헬스장 아이콘">
               헬스장 후기
             </ChannelList>
           </ul>
