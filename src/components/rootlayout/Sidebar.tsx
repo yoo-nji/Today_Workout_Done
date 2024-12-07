@@ -1,6 +1,7 @@
 import { useState } from "react";
 import ChannelList from "../ChannelList";
 import UserListModal from "../userlistModal/UserListModal";
+import UserProfile from "../UserProfile";
 
 export default function Sidebar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -17,7 +18,7 @@ export default function Sidebar() {
       border-gray-200/50 relative ${isOpen ? "before:modal-back" : ""}`}
       onClick={(e) => handleBackClick(e)}
     >
-      <button className="w-10 self-end mr-2">
+      <button className="self-end w-10 mr-2">
         <img src="/src/assets/double-left.svg" alt="" />
       </button>
       {/* 로고 */}
@@ -26,7 +27,7 @@ export default function Sidebar() {
       </a>
       {/* 멘트 */}
       <div className="flex flex-col items-center gap-[14px] pb-[23px] w-full">
-        <div className="flex flex-col items-center text-center text-xl font-bold">
+        <div className="flex flex-col items-center text-xl font-bold text-center">
           <div>
             어서오세요{" "}
             <span className="text-[#265CAC] text-[26px] font-extrabold">
@@ -37,24 +38,19 @@ export default function Sidebar() {
           <div>오늘도 운동 완료하셨나요?</div>
         </div>
         {/* 유저 프로필 */}
-        <div className="relative flex justify-center items-center w-[122px] h-[122px] shadow-profile-inner rounded-[50%] cursor-pointer">
-          <img
-            className="w-[84px] h-[84px]"
-            src="/src/assets/defaultUser.svg"
-            alt="userProfile"
-          />
-          <img
-            className="absolute right-[-10px] bottom-[-10px]"
-            src="/src/assets/profile-edit.svg"
-            alt="profile-edit"
-          />
-        </div>
+        <UserProfile
+          edit
+          BackWidth="w-[122px]"
+          BackHeight="h-[122px]"
+          IconWidth="w-[84px]"
+          IconHeight="h-[84px]"
+        />
       </div>
 
       <div className="flex flex-col justify-between w-full h-full">
         {/* 채널목록 */}
         <div className="w-full">
-          <ul className="flex flex-col gap-1 w-full px-1">
+          <ul className="flex flex-col w-full gap-1 px-1">
             <ChannelList src="dumbbell_icon" alt="오운완 아이콘">
               오운완 인증
             </ChannelList>
