@@ -1,13 +1,24 @@
 import { useNavigate } from "react-router";
 import defaultUser from "../../assets/defaultUser.svg";
+import { twMerge } from "tailwind-merge";
 
-export default function Header() {
+export default function Header({ logo }: { logo: boolean }) {
   const navigate = useNavigate();
 
   return (
-    <header className="h-[70px] flex items-center justify-end px-[36px] py-[8px]">
+    <header
+      className={twMerge(
+        "h-[70px] flex items-center justify-end px-[36px] py-[8px]",
+        logo ? "justify-between" : "justify-end"
+      )}
+    >
       {/* 로고 */}
-      {/* <div className="w-[100px] h-[55px] text-center cursor-default flex flex-col justify-center items-center bg-white">
+      <div
+        className={twMerge(
+          "w-[100px] h-[55px] text-center cursor-default flex-col justify-center items-center bg-white",
+          logo ? "flex " : "hidden"
+        )}
+      >
         <h1 className="text-[#265CAC] text-[20px] font-bold">
           <span className="text-[#AC265C] font-extrabold text-[30px]">!0</span>
           운완?
@@ -15,7 +26,7 @@ export default function Header() {
         <p className="text-[#265CAC] text-[20px] font-bold mt-[-10px] mb-[5px]">
           0운완
         </p>
-      </div> */}
+      </div>
       {/* 오른쪽 */}
       <div className="flex gap-[10px] items-center">
         <div
