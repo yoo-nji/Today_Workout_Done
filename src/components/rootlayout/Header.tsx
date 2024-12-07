@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router";
-import defaultUser from "../../assets/defaultUser.svg";
+import notifyIcon from "../../assets/notifyIcon.svg";
 import { twMerge } from "tailwind-merge";
 import logoImg from "../../assets/loge.svg";
 import UserProfile from "../UserProfile";
@@ -45,6 +45,10 @@ export default function Header({ logo }: { logo?: boolean }) {
             className="w-[33px] h-[33px]"
           />
         </div> */}
+        <div className="w-[48px] h-[48px]  flex justify-center items-center mx-[10px]">
+          <img src={notifyIcon} alt="알림 아이콘" className="cursor-pointer" />
+        </div>
+
         <UserProfile
           BackWidth="w-[48px]"
           BackHeight="h-[48px]"
