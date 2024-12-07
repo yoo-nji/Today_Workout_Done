@@ -51,16 +51,20 @@ export default function Sidebar() {
         {/* 채널목록 */}
         <div className="w-full">
           <ul className="flex flex-col w-full gap-1 px-1">
-            <ChannelList src="dumbbell_icon" alt="오운완 아이콘">
+            <ChannelList src="dumbbell_icon" alt="오운완 아이콘" route={"/"}>
               오운완 인증
             </ChannelList>
-            <ChannelList src="protein_icon" alt="프로틴 아이콘">
+            <ChannelList
+              src="protein_icon"
+              alt="프로틴 아이콘"
+              route={"protein"}
+            >
               프로틴 추천
             </ChannelList>
-            <ChannelList src="routine_icon" alt="루틴 아이콘">
+            <ChannelList src="routine_icon" alt="루틴 아이콘" route={"routine"}>
               루틴 공유
             </ChannelList>
-            <ChannelList src="gym_icon" alt="헬스장 아이콘">
+            <ChannelList src="gym_icon" alt="헬스장 아이콘" route={"gymreview"}>
               헬스장 후기
             </ChannelList>
           </ul>
