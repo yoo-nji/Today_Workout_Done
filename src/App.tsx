@@ -6,6 +6,7 @@ import RootLayout from "./layouts/RootLayout";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import AuthLayout from "./layouts/AuthLayout";
+import User from "./pages/User";
 
 export default function App() {
   return (
@@ -14,6 +15,7 @@ export default function App() {
         <Route element={<RootLayout />}>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
+          <Route path="/user/:user_id" element={<User />} />
         </Route>
 
         <Route element={<AuthLayout />}>
