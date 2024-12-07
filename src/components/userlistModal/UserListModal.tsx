@@ -5,10 +5,13 @@ export default function UserListModal() {
     <>
       <div
         className="w-[380px] h-[600px]
-      bg-white rounded-[50px] absolute bottom-3 left-[280px]
+      bg-white rounded-[30px] absolute bottom-[3px] left-[300px]
       before:modal-before  scrollbar-none flex flex-col justify-start items-center
-      gap-10 py-8
+      gap-10 py-8 z-30
       "
+        onClick={(e) => {
+          e.stopPropagation();
+        }}
       >
         <div className="relative flex justify-center items-center">
           <input

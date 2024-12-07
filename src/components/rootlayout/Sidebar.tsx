@@ -1,8 +1,22 @@
+import { useState } from "react";
 import ChannelList from "../ChannelList";
+import UserListModal from "../userlistModal/UserListModal";
 
 export default function Sidebar() {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleBackClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    e.stopPropagation();
+    setIsOpen(false);
+  };
+
   return (
-    <div className="flex flex-col items-center w-[350px] py-5 gap-8 text-[#1D1D1D] bg-[#FEFEFE] border-r border-gray-200/50">
+    <div
+      className={`flex flex-col items-center w-[350px] 
+      py-5 gap-8 text-[#1D1D1D] bg-[#FEFEFE] border-r
+      border-gray-200/50 relative ${isOpen ? "before:modal-back" : ""}`}
+      onClick={(e) => handleBackClick(e)}
+    >
       <button className="w-10 self-end mr-2">
         <img src="/src/assets/double-left.svg" alt="" />
       </button>
@@ -56,9 +70,16 @@ export default function Sidebar() {
           </ul>
         </div>
         {/* 유저목록 버튼 */}
-        <button className="self-center w-[243px] h-[50px] bg-[#3B6CB4] rounded-[20px] text-xl text-white font-bold">
+        <button
+          className="self-center w-[243px] h-[50px] bg-[#3B6CB4] rounded-[20px] text-xl text-white font-bold relative"
+          onClick={(e) => {
+            e.stopPropagation();
+            setIsOpen((prev) => !prev);
+          }}
+        >
           유저 목록
         </button>
+        {isOpen && <UserListModal />}
       </div>
     </div>
   );
