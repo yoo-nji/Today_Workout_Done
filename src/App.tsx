@@ -3,6 +3,9 @@ import { Routes } from "react-router";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import RootLayout from "./layouts/RootLayout";
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
+import AuthLayout from "./layouts/AuthLayout";
 
 export default function App() {
   return (
@@ -11,6 +14,11 @@ export default function App() {
         <Route element={<RootLayout />}>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
+        </Route>
+
+        <Route element={<AuthLayout />}>
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
         </Route>
       </Routes>
     </>
