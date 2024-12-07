@@ -1,1 +1,5 @@
 @import "./tailwind.css";
+
+* {
+  border: 1px solid #119b05;
+}
