@@ -5,7 +5,7 @@ export default function Header() {
   const navigate = useNavigate();
 
   return (
-    <header className="h-[70px] flex items-center justify-end px-[36px] py-[8px] border-b-2 border-solid border-[#C2C2C2]">
+    <header className="h-[70px] flex items-center justify-end px-[36px] py-[8px]">
       {/* 로고 */}
       {/* <div className="w-[100px] h-[55px] text-center cursor-default flex flex-col justify-center items-center bg-white">
         <h1 className="text-[#265CAC] text-[20px] font-bold">
@@ -36,7 +36,7 @@ export default function Header() {
         </div>
 
         {/*  유저 프로필 */}
-        <div className="bg-white w-[48px] h-[48px] ml-[10px] flex justify-center items-center rounded-[50%] shadow-inner cursor-pointer">
+        <div className="bg-white w-[48px] h-[48px] ml-[10px] flex justify-center items-center rounded-[50%] shadow-profile-inner cursor-pointer">
           <img
             src={defaultUser}
             alt="기본 유저사진"
