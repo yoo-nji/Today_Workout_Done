@@ -16,6 +16,37 @@ export default function Sidebar() {
     setIsOpen(false);
   };
 
+  const channel = [
+    {
+      id: 1,
+      title: "오운완 인증",
+      icon: dumbbell,
+      alt: "오운완 아이콘",
+      route: "/",
+    },
+    {
+      id: 2,
+      title: "프로틴 추천",
+      icon: protein,
+      alt: "프로틴 아이콘",
+      route: "protein",
+    },
+    {
+      id: 3,
+      title: "루틴 공유",
+      icon: routine,
+      alt: "루틴 아이콘",
+      route: "routine",
+    },
+    {
+      id: 4,
+      title: "헬스장 후기",
+      icon: gym,
+      alt: "헬스장 아이콘",
+      route: "gymreview",
+    },
+  ];
+
   return (
     <div
       className={`flex flex-col items-center w-[300px] h-[100vh] z-10
@@ -56,18 +87,18 @@ export default function Sidebar() {
         {/* 채널목록 */}
         <div className="w-full">
           <ul className="flex flex-col w-full gap-1 px-1">
-            <ChannelList icon={dumbbell} alt="오운완 아이콘">
-              오운완 인증
-            </ChannelList>
-            <ChannelList icon={protein} alt="프로틴 아이콘">
-              프로틴 추천
-            </ChannelList>
-            <ChannelList icon={routine} alt="루틴 아이콘">
-              루틴 공유
-            </ChannelList>
-            <ChannelList icon={gym} alt="헬스장 아이콘">
-              헬스장 후기
-            </ChannelList>
+            {channel.map((item) => {
+              return (
+                <ChannelList
+                  icon={item.icon}
+                  alt={item.alt}
+                  route={item.route}
+                  key={item.id}
+                >
+                  {item.title}
+                </ChannelList>
+              );
+            })}
           </ul>
         </div>
         {/* 유저목록 버튼 */}
