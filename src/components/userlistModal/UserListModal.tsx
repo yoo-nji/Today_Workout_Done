@@ -1,12 +1,16 @@
 import UserBox from "./UserBox";
 import closeIcon from "../../assets/close.svg";
 import searchIcon from "../../assets/searchIcon.svg";
+import { useState } from "react";
+import UserNone from "./UserNone";
 
 interface UserListModalType {
   handleBackClick: (e: React.MouseEvent<HTMLDivElement>) => void;
 }
 
 export default function UserListModal({ handleBackClick }: UserListModalType) {
+  const [searchUser, setSearchUser] = useState([]);
+
   return (
     <>
       <div
@@ -45,6 +49,8 @@ export default function UserListModal({ handleBackClick }: UserListModalType) {
         items-center gap-4 scrollbar-none 
         "
         >
+          {searchUser.length > 0 ? <UserBox /> : <UserNone />}
+          {/* <UserBox />
           <UserBox />
           <UserBox />
           <UserBox />
@@ -59,8 +65,7 @@ export default function UserListModal({ handleBackClick }: UserListModalType) {
           <UserBox />
           <UserBox />
           <UserBox />
-          <UserBox />
-          <UserBox />
+          <UserBox /> */}
         </div>
       </div>
     </>

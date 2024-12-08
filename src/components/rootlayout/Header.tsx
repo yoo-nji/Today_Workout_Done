@@ -1,7 +1,8 @@
 import { useNavigate } from "react-router";
-import defaultUser from "../../assets/defaultUser.svg";
+import notifyIcon from "../../assets/notifyIcon.svg";
 import { twMerge } from "tailwind-merge";
 import logoImg from "../../assets/loge.svg";
+import UserProfile from "../UserProfile";
 
 export default function Header({ logo }: { logo?: boolean }) {
   const navigate = useNavigate();
@@ -37,13 +38,23 @@ export default function Header({ logo }: { logo?: boolean }) {
         </div>
 
         {/*  유저 프로필 */}
-        <div className="bg-white w-[48px] h-[48px] ml-[10px] flex justify-center items-center rounded-[50%] shadow-profile-inner cursor-pointer">
+        {/* <div className="bg-white w-[48px] h-[48px] ml-[10px] flex justify-center items-center rounded-[50%] shadow-profile-inner cursor-pointer">
           <img
             src={defaultUser}
             alt="기본 유저사진"
             className="w-[33px] h-[33px]"
           />
+        </div> */}
+        <div className="w-[48px] h-[48px]  flex justify-center items-center mx-[10px]">
+          <img src={notifyIcon} alt="알림 아이콘" className="cursor-pointer" />
         </div>
+
+        <UserProfile
+          BackWidth="w-[48px]"
+          BackHeight="h-[48px]"
+          IconWidth="w-[33px]"
+          IconHeight="h-[33px]"
+        />
       </div>
     </header>
   );
