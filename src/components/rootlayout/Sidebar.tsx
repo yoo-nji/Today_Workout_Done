@@ -2,6 +2,11 @@ import { useState } from "react";
 import ChannelList from "../ChannelList";
 import UserListModal from "../userlistModal/UserListModal";
 import UserProfile from "../UserProfile";
+// 아이콘
+import dumbbell from "../../assets/dumbbell_icon.svg";
+import protein from "../../assets/protein_icon.svg";
+import routine from "../../assets/routine_icon.svg";
+import gym from "../../assets/gym_icon.svg";
 
 export default function Sidebar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -15,28 +20,28 @@ export default function Sidebar() {
     {
       id: 1,
       title: "오운완 인증",
-      src: "dumbbell_icon",
+      icon: dumbbell,
       alt: "오운완 아이콘",
       route: "/",
     },
     {
       id: 2,
       title: "프로틴 추천",
-      src: "protein_icon",
+      icon: protein,
       alt: "프로틴 아이콘",
       route: "protein",
     },
     {
       id: 3,
       title: "루틴 공유",
-      src: "routine_icon",
+      icon: routine,
       alt: "루틴 아이콘",
       route: "routine",
     },
     {
       id: 4,
       title: "헬스장 후기",
-      src: "gym_icon",
+      icon: gym,
       alt: "헬스장 아이콘",
       route: "gymreview",
     },
@@ -44,9 +49,9 @@ export default function Sidebar() {
 
   return (
     <div
-      className={`flex flex-col items-center w-[350px] 
+      className={`flex flex-col items-center w-[300px] h-[100vh] z-10
       py-5 gap-8 text-[#1D1D1D] bg-[#FEFEFE] border-r
-      border-gray-200/50 relative ${isOpen ? "before:modal-back" : ""}`}
+      border-gray-200/50 fixed  ${isOpen ? "before:modal-back" : ""}`}
       onClick={(e) => handleBackClick(e)}
     >
       <button className="self-end w-10 mr-2">
@@ -85,7 +90,7 @@ export default function Sidebar() {
             {channel.map((item) => {
               return (
                 <ChannelList
-                  src={item.src}
+                  icon={item.icon}
                   alt={item.alt}
                   route={item.route}
                   key={item.id}
