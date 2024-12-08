@@ -22,7 +22,6 @@ export default function ChannelList({
         <img className="w-8" src={icon} alt={alt} />
         <div>{children}</div>
       </NavLink>
-
     </li>
   );
 }
