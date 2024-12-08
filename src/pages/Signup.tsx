@@ -1,7 +1,6 @@
 import { useState } from "react";
 import logoImg from "../assets/loge.svg";
-import "../css/index.css";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 
 export default function Signup() {
   const [name, setName] = useState("");
