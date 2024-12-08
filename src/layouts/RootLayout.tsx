@@ -8,7 +8,7 @@ export default function RootLayout() {
       <Sidebar />
       <div className="flex flex-col h-screen min-h-screen w-full">
         <Header />
-        <div className="h-full">
+        <div className="h-full pl-[300px]">
           <Outlet />
         </div>
       </div>

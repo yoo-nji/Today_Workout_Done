@@ -18,9 +18,9 @@ export default function Sidebar() {
 
   return (
     <div
-      className={`flex flex-col items-center w-[350px] 
+      className={`flex flex-col items-center w-[300px] h-[100vh] z-10
       py-5 gap-8 text-[#1D1D1D] bg-[#FEFEFE] border-r
-      border-gray-200/50 relative  ${isOpen ? "before:modal-back" : ""}`}
+      border-gray-200/50 fixed  ${isOpen ? "before:modal-back" : ""}`}
       onClick={(e) => handleBackClick(e)}
     >
       <button className="self-end w-10 mr-2">
