@@ -1,9 +1,9 @@
 import FollowButton from "../FollowButton";
 import UserProfile from "../UserProfile";
 
-export default function UserCard() {
+export default function UserCard({ uname }: { uname: string }) {
   return (
-    <div className="border-2 border-red-500 w-[404px] h-[132px] flex justify-between items-center">
+    <div className="w-[404px] h-[132px] flex justify-between items-center">
       <UserProfile
         BackWidth="w-[132px]"
         BackHeight="h-[132px]"
@@ -11,8 +11,8 @@ export default function UserCard() {
         IconHeight="h-[92px]"
       />
       <div>
-        <div className="flex mb-6 border-2 border-red-500 gap-[32px] items-center">
-          <p className="text-4xl">유저1</p>
+        <div className="flex mb-6 gap-[32px] items-center">
+          <p className="text-4xl">{uname}</p>
           <FollowButton
             width="w-[128px]"
             height="h-[52px]"
