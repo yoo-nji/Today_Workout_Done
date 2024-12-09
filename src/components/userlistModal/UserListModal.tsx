@@ -1,15 +1,39 @@
 import UserBox from "./UserBox";
 import closeIcon from "../../assets/close.svg";
 import searchIcon from "../../assets/searchIcon.svg";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import UserNone from "./UserNone";
+import { getUserList, UserListType } from "../../utils/getUserList";
 
 interface UserListModalType {
   handleBackClick: (e: React.MouseEvent<HTMLDivElement>) => void;
 }
 
 export default function UserListModal({ handleBackClick }: UserListModalType) {
+  // 유저목록
+  const [userList, setUserList] = useState<UserListType[]>();
+
+  // 검색 유저
   const [searchUser, setSearchUser] = useState([]);
+
+  const [isLoading, setIsLoading] = useState(false);
+  const [userListError, setUserListError] = useState(false);
+
+  useEffect(() => {
+    const setUser = async () => {
+      try {
+        setIsLoading(true);
+        const userListData = await getUserList();
+        setUserList(userListData);
+      } catch (error) {
+        console.log(error);
+        setUserListError(true);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    setUser();
+  }, []);
 
   return (
     <>
@@ -49,23 +73,26 @@ export default function UserListModal({ handleBackClick }: UserListModalType) {
         items-center gap-4 scrollbar-none 
         "
         >
-          {searchUser.length > 0 ? <UserBox /> : <UserNone />}
-          {/* <UserBox />
-          <UserBox />
-          <UserBox />
-          <UserBox />
-          <UserBox />
-          <UserBox />
-          <UserBox />
-          <UserBox />
-          <UserBox />
-          <UserBox />
-          <UserBox />
-          <UserBox />
-          <UserBox />
-          <UserBox />
-          <UserBox />
-          <UserBox /> */}
+          {/* {searchUser.length > 0 ? <UserBox /> : <UserNone />} */}
+          {!isLoading ? (
+            !userListError ? (
+              userList?.map((user) => {
+                return user.role !== "SuperAdmin" ? (
+                  <UserBox
+                    key={user._id}
+                    fullname={user.fullName}
+                    followers={user.followers}
+                    following={user.following}
+                    isOnline={user.isOnline}
+                  />
+                ) : null;
+              })
+            ) : (
+              <h1>에러!!</h1>
+            )
+          ) : (
+            <p>로딩중..</p>
+          )}
         </div>
       </div>
     </>
