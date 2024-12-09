@@ -1,18 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Jua&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap");
 
-.jua {
-  font-family: "Jua", sans-serif;
-  font-weight: 400;
-  font-style: normal;
-}
-
-.dohyeon {
-  font-family: "Do Hyeon", sans-serif;
-  font-weight: 400;
-  font-style: normal;
-}
-
 @font-face {
   font-family: "yg-jalnan";
   src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff")
