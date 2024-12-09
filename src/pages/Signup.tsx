@@ -10,21 +10,57 @@ export default function Signup() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
 
-  const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) =>
-    setName(e.target.value);
-  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) =>
-    setEmail(e.target.value);
-  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) =>
-    setPassword(e.target.value);
+  const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const nameValue = e.target.value;
+
+    if (nameValue.includes(" ")) {
+      setError("아이디에 공백이 포함될 수 없습니다.");
+    } else {
+      setError("");
+    }
+
+    setName(nameValue);
+  };
+
+  const validateEmail = (email: string) => {
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    return emailRegex.test(email);
+  };
+
+  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const emailValue = e.target.value;
+
+    if (emailValue.includes(" ")) {
+      setError("이메일에 공백이 포함될 수 없습니다.");
+    } else if (!validateEmail(emailValue)) {
+      setError("올바른 이메일 형식이 아닙니다.");
+    } else {
+      setError("");
+    }
+
+    setEmail(emailValue);
+  };
+
+  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newPassword = e.target.value;
+    setPassword(newPassword);
+
+    if (confirmPassword !== "" && confirmPassword !== newPassword) {
+      setError("비밀번호가 일치하지 않음");
+    } else {
+      setError("");
+    }
+  };
 
   const handleConfirmPasswordChange = (
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
-    setConfirmPassword(e.target.value);
+    const newConfirmPassword = e.target.value;
+    setConfirmPassword(newConfirmPassword);
 
-    if (e.target.value === "") {
+    if (newConfirmPassword === "") {
       setError("");
-    } else if (e.target.value !== password) {
+    } else if (newConfirmPassword !== password) {
       setError("비밀번호가 일치하지 않음");
     } else {
       setError("");
@@ -33,7 +69,9 @@ export default function Signup() {
 
   const isFormValid =
     name &&
+    !name.includes(" ") &&
     email &&
+    !email.includes(" ") &&
     password &&
     confirmPassword &&
     password === confirmPassword &&
@@ -110,7 +148,7 @@ export default function Signup() {
           )}
         />
 
-        {/* 비밀번호 불일치 메시지 */}
+        {/* 에러 메시지 */}
         {error && (
           <p className="ml-[15px] text-red-500 text-[13px] font-dohyeon">
             {error}
