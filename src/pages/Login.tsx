@@ -1,9 +1,11 @@
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import logoImg from "../assets/loge.svg";
 import { useState } from "react";
 import { twMerge } from "tailwind-merge";
 
 export default function Login() {
+  const navigate = useNavigate();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [emailError, setEmailError] = useState("");
@@ -32,6 +34,10 @@ export default function Login() {
     } else {
       setEmailError("");
     }
+  };
+
+  const handleSignupClick = () => {
+    navigate("/signup");
   };
 
   const isFormValid = email && password && emailError === "";
@@ -95,7 +101,10 @@ export default function Login() {
         </button>
 
         {/* 가입하기 버튼 */}
-        <button className="w-full mt-[10px] py-[5px] rounded-[20px] bg-[#265CAC] text-white text-[15px] font-jua">
+        <button
+          onClick={handleSignupClick}
+          className="w-full mt-[10px] py-[5px] rounded-[20px] bg-[#265CAC] text-white text-[15px] font-jua"
+        >
           가입하기
         </button>
 
