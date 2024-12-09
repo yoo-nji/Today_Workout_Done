@@ -22,15 +22,15 @@ export default function Signup() {
   ) => {
     setConfirmPassword(e.target.value);
 
-    // 비밀번호 확인이 일치하지 않으면 에러 메시지 설정
-    if (e.target.value !== password) {
+    if (e.target.value === "") {
+      setError("");
+    } else if (e.target.value !== password) {
       setError("비밀번호가 일치하지 않음");
     } else {
-      setError(""); // 비밀번호가 일치하면 에러 메시지 제거
+      setError("");
     }
   };
 
-  // 모든 입력 필드가 채워지고 비밀번호가 일치하는지 체크
   const isFormValid =
     name &&
     email &&
@@ -40,7 +40,7 @@ export default function Signup() {
     error === "";
 
   return (
-    <div className="bg-[#FFFFFF] rounded-[45px] border-red-500 w-[400px] h-[500px] mx-auto my-auto">
+    <div className="bg-[#FFFFFF] rounded-[20px] border-red-500 w-[400px] h-[500px] mx-auto my-auto">
       {/* 로고 */}
       <img src={logoImg} className="pt-[50px] block mx-auto " />
 
@@ -48,6 +48,7 @@ export default function Signup() {
       <p className="text-center text-[20px] mt-[20px] font-jua ">
         새로운 계정 만들기
       </p>
+
       <form className="px-[50px]">
         {/* 이름 입력 필드 */}
         <input
@@ -111,7 +112,7 @@ export default function Signup() {
 
         {/* 비밀번호 불일치 메시지 */}
         {error && (
-          <p className="ml-[15px] text-red-500 font-bold text-[13px] font-dohyeon">
+          <p className="ml-[15px] text-red-500 text-[13px] font-dohyeon">
             {error}
           </p>
         )}
