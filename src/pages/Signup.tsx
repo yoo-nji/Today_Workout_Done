@@ -58,7 +58,7 @@ export default function Signup() {
           className={twMerge(
             `w-full h-[40px] py-auto pl-[15px] border rounded-[10px] mt-[10px] mb-[10px] font-jua text-[18px] ${
               name
-                ? "text-[#265CAC] border-[#265CAC] border-[2px] text-[16px]"
+                ? "text-[#265CAC] border-[#265CAC] border-[2px] text-[16px] font-ibm font-bold"
                 : "text-gray-400"
             }`
           )}
@@ -73,7 +73,7 @@ export default function Signup() {
           className={twMerge(
             `w-full h-[40px] py-auto pl-[15px] border rounded-[10px] mb-[10px] font-jua text-[18px] ${
               email
-                ? "text-[#265CAC] border-[#265CAC] border-[2px] text-[16px]"
+                ? "text-[#265CAC] border-[#265CAC] border-[2px] text-[16px] font-ibm font-bold"
                 : "text-gray-400"
             }`
           )}

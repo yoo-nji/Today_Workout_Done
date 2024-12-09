@@ -10,6 +10,8 @@ export default {
         jua: ["Jua", "sans-serif"],
         dohyeon: ["Do Hyeon", "sans-serif"],
         jalnan: ["yg-jalnan", "sans-serif"],
+        gowun: ["Gowun Dodum", "sans-serif"],
+        ibm: ["IBM Plex Sans KR", "sans-serif"],
       },
     },
   },
