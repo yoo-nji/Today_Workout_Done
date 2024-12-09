@@ -12,6 +12,7 @@ export default function Signup() {
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
 
+  /* 아이디 필드에 따른 에러 처리 */
   const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const nameValue = e.target.value;
 
@@ -29,6 +30,7 @@ export default function Signup() {
     return emailRegex.test(email);
   };
 
+  /* 이메일 필드에 따른 에러 처리 */
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const emailValue = e.target.value;
 
@@ -45,6 +47,7 @@ export default function Signup() {
     setEmail(emailValue);
   };
 
+  /* 비밀번호 필드에 따른 에러 처리 */
   const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newPassword = e.target.value;
     setPassword(newPassword);
@@ -56,6 +59,7 @@ export default function Signup() {
     }
   };
 
+  /* 비밀번호 확인 필드에 따른 에러 처리 */
   const handleConfirmPasswordChange = (
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
@@ -71,6 +75,7 @@ export default function Signup() {
     }
   };
 
+  /* 가입하기 버튼 활성화 조건 */
   const isFormValid =
     name &&
     !name.includes(" ") &&
@@ -147,7 +152,7 @@ export default function Signup() {
           value={password}
           onChange={handlePasswordChange}
           className={twMerge(
-            `w-full h-[40px] py-auto pl-[15px] border rounded-[10px] mb-[10px] font-jua text-[18px] ${
+            `w-full h-[40px] py-auto pl-[15px] border rounded-[10px] mb-[19.5px] font-jua text-[18px] ${
               emailError ? "mt-0" : "mt-[19.5px]"
             } ${
               password
