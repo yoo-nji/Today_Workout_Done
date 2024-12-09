@@ -4,8 +4,13 @@ export default {
   theme: {
     extend: {
       boxShadow: {
-        'profile-inner': 'inset 0px 4px 11px 0px rgba(0, 0, 0, 0.25)',
-      }
+        "profile-inner": "inset 0px 4px 11px 0px rgba(0, 0, 0, 0.25)",
+      },
+      fontFamily: {
+        jua: ["Jua", "sans-serif"],
+        dohyeon: ["Do Hyeon", "sans-serif"],
+        jalnan: ["yg-jalnan", "sans-serif"],
+      },
     },
   },
   plugins: [],
