@@ -15,7 +15,12 @@ export default function Header({ logo }: { logo?: boolean }) {
       )}
     >
       <div>
-        <img src={logoImg} alt="logo" className={twMerge(!logo && "hidden")} />
+        <img
+          src={logoImg}
+          alt="logo"
+          className={twMerge("cursor-pointer", !logo && "hidden")}
+          onClick={() => navigate("/")}
+        />
       </div>
 
       {/* 오른쪽 */}
