@@ -1,6 +1,7 @@
 import { useState } from "react";
 import logoImg from "../assets/loge.svg";
 import { Link } from "react-router";
+import { twMerge } from "tailwind-merge";
 
 export default function Signup() {
   const [name, setName] = useState("");
@@ -21,15 +22,15 @@ export default function Signup() {
   ) => {
     setConfirmPassword(e.target.value);
 
-    // 비밀번호 확인이 일치하지 않으면 에러 메시지 설정
-    if (e.target.value !== password) {
+    if (e.target.value === "") {
+      setError("");
+    } else if (e.target.value !== password) {
       setError("비밀번호가 일치하지 않음");
     } else {
-      setError(""); // 비밀번호가 일치하면 에러 메시지 제거
+      setError("");
     }
   };
 
-  // 모든 입력 필드가 채워지고 비밀번호가 일치하는지 체크
   const isFormValid =
     name &&
     email &&
@@ -47,6 +48,7 @@ export default function Signup() {
       <p className="text-center text-[20px] mt-[20px] font-jua ">
         새로운 계정 만들기
       </p>
+
       <form className="px-[50px]">
         {/* 이름 입력 필드 */}
         <input
@@ -54,11 +56,13 @@ export default function Signup() {
           placeholder="이름"
           value={name}
           onChange={handleNameChange}
-          className={`w-full h-[40px] py-auto pl-[15px] border rounded-[10px] mt-[10px] mb-[10px] font-jua text-[18px] ${
-            name
-              ? "text-[#265CAC] font-bold border-[#265CAC] border-[2px]"
-              : "text-gray-400"
-          }`}
+          className={twMerge(
+            `w-full h-[40px] py-auto pl-[15px] border rounded-[10px] mt-[10px] mb-[10px] font-jua text-[18px] ${
+              name
+                ? "text-[#265CAC] border-[#265CAC] border-[2px] text-[16px] font-ibm font-bold"
+                : "text-gray-400"
+            }`
+          )}
         />
 
         {/* 이메일 주소 입력 필드 */}
@@ -67,11 +71,13 @@ export default function Signup() {
           placeholder="이메일 주소"
           value={email}
           onChange={handleEmailChange}
-          className={`w-full h-[40px] py-auto pl-[15px] border rounded-[10px] mb-[10px] font-jua text-[18px] ${
-            email
-              ? "text-[#265CAC] font-bold border-[#265CAC] border-[2px]"
-              : "text-gray-400"
-          }`}
+          className={twMerge(
+            `w-full h-[40px] py-auto pl-[15px] border rounded-[10px] mb-[10px] font-jua text-[18px] ${
+              email
+                ? "text-[#265CAC] border-[#265CAC] border-[2px] text-[16px] font-ibm font-bold"
+                : "text-gray-400"
+            }`
+          )}
         />
 
         {/* 비밀번호 입력 필드 */}
@@ -80,11 +86,13 @@ export default function Signup() {
           placeholder="비밀번호"
           value={password}
           onChange={handlePasswordChange}
-          className={`w-full h-[40px] py-auto pl-[15px] border rounded-[10px] mb-[10px] font-jua text-[18px] ${
-            password
-              ? "text-[#265CAC] font-bold border-[#265CAC] border-[2px]"
-              : "text-gray-400"
-          }`}
+          className={twMerge(
+            `w-full h-[40px] py-auto pl-[15px] border rounded-[10px] mb-[10px] font-jua text-[18px] ${
+              password
+                ? "text-[#265CAC] border-[#265CAC] border-[2px] text-[16px]"
+                : "text-gray-400"
+            }`
+          )}
         />
 
         {/* 비밀번호 확인 입력 필드 */}
@@ -93,25 +101,29 @@ export default function Signup() {
           placeholder="비밀번호 확인"
           value={confirmPassword}
           onChange={handleConfirmPasswordChange}
-          className={`w-full h-[40px] py-auto pl-[15px] border rounded-[10px] mb-[10px] font-jua text-[18px] ${
-            confirmPassword
-              ? "text-[#265CAC] font-bold border-[#265CAC] border-[2px]"
-              : "text-gray-400"
-          }`}
+          className={twMerge(
+            `w-full h-[40px] py-auto pl-[15px] border rounded-[10px] mb-[10px] font-jua text-[18px] ${
+              confirmPassword
+                ? "text-[#265CAC] border-[#265CAC] border-[2px]"
+                : "text-gray-400"
+            }`
+          )}
         />
 
         {/* 비밀번호 불일치 메시지 */}
         {error && (
-          <p className="ml-[15px] text-red-500 font-bold text-[13px] font-dohyeon">
+          <p className="ml-[15px] text-red-500 text-[13px] font-dohyeon">
             {error}
           </p>
         )}
 
         {/* 로그인으로 이동하는 링크 */}
         <p
-          className={`text-center text-[#265CAC] font-dohyeon text-[13px] ${
-            error ? "mt-[10px]" : "mt-[29.5px]"
-          }`}
+          className={twMerge(
+            `text-center text-[#265CAC] font-dohyeon text-[13px] ${
+              error ? "mt-[10px]" : "mt-[29.5px]"
+            }`
+          )}
         >
           이미 계정이 있으신가요?{" "}
           <Link
@@ -125,9 +137,11 @@ export default function Signup() {
         {/* 가입하기 버튼 */}
         <button
           type="submit"
-          className={`w-full bg-[#265CAC] text-white py-[5px] text-[15px] rounded-[20px] mt-[10px] font-jua ${
-            isFormValid ? "" : "bg-[#BABABA] cursor-not-allowed"
-          }`}
+          className={twMerge(
+            `w-full bg-[#265CAC] text-white py-[5px] text-[15px] rounded-[20px] mt-[10px] font-jua ${
+              isFormValid ? "" : "bg-[#BABABA] cursor-not-allowed"
+            }`
+          )}
           disabled={!isFormValid}
         >
           가입하기
