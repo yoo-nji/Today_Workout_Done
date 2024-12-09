@@ -40,7 +40,7 @@ export default function Signup() {
     error === "";
 
   return (
-    <div className="bg-[#FFFFFF] rounded-[45px] border-red-500 w-[400px] h-[500px] mx-auto my-auto">
+    <div className="bg-[#FFFFFF] rounded-[20px] border-red-500 w-[400px] h-[500px] mx-auto my-auto">
       {/* 로고 */}
       <img src={logoImg} className="pt-[50px] block mx-auto " />
 
