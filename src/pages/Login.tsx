@@ -29,11 +29,11 @@ export default function Login() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!validateEmail(email)) {
-      setEmailError("이메일 형식이 올바르지 않습니다.");
-    } else {
-      setEmailError("");
-    }
+    // if (!validateEmail(email)) {
+    //   setEmailError("이메일 형식이 올바르지 않습니다.");
+    // } else {
+    //   setEmailError("");
+    // }
   };
 
   const handleSignupClick = () => {
@@ -45,7 +45,6 @@ export default function Login() {
   return (
     <>
       <form
-        action=""
         className="px-[50px] w-[400px] h-[500px] rounded-[20px] bg-[#FFFFFF]"
         onSubmit={handleSubmit}
       >
@@ -112,14 +111,9 @@ export default function Login() {
         <div className="w-full mt-[15px] mb-[10px] py-auto border-t border-[#B6B6B6]"></div>
 
         {/* 저희 서비스가 궁금하세요? */}
-        <form className="flex justify-center items-center mb-[10px]">
-          <Link
-            to="/"
-            className="text-[#265CAC] text-[13px] text-center font-dohyeon"
-          >
-            저희 서비스가 궁금하신가요?
-          </Link>
-        </form>
+        <p className="text-[#265CAC] text-[13px] text-center font-dohyeon mb-[10px]">
+          저희 서비스가 궁금하신가요?
+        </p>
 
         {/* 비회원 버튼 */}
         <button className="w-full h-[40px] py-auto border-2 border-[#265CAC]  rounded-[20px] bg-[#FFFFFF] text-[15px] font-jua">
