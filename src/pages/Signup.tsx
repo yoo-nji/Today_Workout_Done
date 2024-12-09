@@ -8,15 +8,17 @@ export default function Signup() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [error, setError] = useState("");
+  const [idError, setIdError] = useState("");
+  const [emailError, setEmailError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
 
   const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const nameValue = e.target.value;
 
     if (nameValue.includes(" ")) {
-      setError("아이디에 공백이 포함될 수 없습니다.");
+      setIdError("아이디에 공백이 포함될 수 없습니다.");
     } else {
-      setError("");
+      setIdError("");
     }
 
     setName(nameValue);
@@ -30,12 +32,14 @@ export default function Signup() {
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const emailValue = e.target.value;
 
-    if (emailValue.includes(" ")) {
-      setError("이메일에 공백이 포함될 수 없습니다.");
+    if (emailValue === "") {
+      setEmailError("");
+    } else if (emailValue.includes(" ")) {
+      setEmailError("이메일에 공백이 포함될 수 없습니다.");
     } else if (!validateEmail(emailValue)) {
-      setError("올바른 이메일 형식이 아닙니다.");
+      setEmailError("올바른 이메일 형식이 아닙니다.");
     } else {
-      setError("");
+      setEmailError("");
     }
 
     setEmail(emailValue);
@@ -46,9 +50,9 @@ export default function Signup() {
     setPassword(newPassword);
 
     if (confirmPassword !== "" && confirmPassword !== newPassword) {
-      setError("비밀번호가 일치하지 않음");
+      setPasswordError("비밀번호가 일치하지 않음");
     } else {
-      setError("");
+      setPasswordError("");
     }
   };
 
@@ -59,11 +63,11 @@ export default function Signup() {
     setConfirmPassword(newConfirmPassword);
 
     if (newConfirmPassword === "") {
-      setError("");
+      setPasswordError("");
     } else if (newConfirmPassword !== password) {
-      setError("비밀번호가 일치하지 않음");
+      setPasswordError("비밀번호가 일치하지 않음");
     } else {
-      setError("");
+      setPasswordError("");
     }
   };
 
@@ -75,7 +79,9 @@ export default function Signup() {
     password &&
     confirmPassword &&
     password === confirmPassword &&
-    error === "";
+    idError === "" &&
+    emailError === "" &&
+    passwordError === "";
 
   return (
     <div className="bg-[#FFFFFF] rounded-[20px] border-red-500 w-[400px] h-[500px] mx-auto my-auto">
@@ -95,13 +101,20 @@ export default function Signup() {
           value={name}
           onChange={handleNameChange}
           className={twMerge(
-            `w-full h-[40px] py-auto pl-[15px] border rounded-[10px] mt-[10px] mb-[10px] font-jua text-[18px] ${
+            `w-full h-[40px] py-auto pl-[15px] border rounded-[10px] mt-[10px] font-jua text-[18px] ${
               name
                 ? "text-[#265CAC] border-[#265CAC] border-[2px] text-[16px] font-ibm font-bold"
                 : "text-gray-400"
-            }`
+            } `
           )}
         />
+
+        {/* 아이디 에러 메시지 */}
+        {idError && (
+          <p className="ml-[15px] text-red-500 text-[13px] font-dohyeon">
+            {idError}
+          </p>
+        )}
 
         {/* 이메일 주소 입력 필드 */}
         <input
@@ -110,13 +123,22 @@ export default function Signup() {
           value={email}
           onChange={handleEmailChange}
           className={twMerge(
-            `w-full h-[40px] py-auto pl-[15px] border rounded-[10px] mb-[10px] font-jua text-[18px] ${
+            `w-full h-[40px] py-auto pl-[15px] border rounded-[10px] font-jua text-[18px] ${
+              idError ? "mt-0" : "mt-[19.5px]"
+            } ${
               email
                 ? "text-[#265CAC] border-[#265CAC] border-[2px] text-[16px] font-ibm font-bold"
                 : "text-gray-400"
             }`
           )}
         />
+
+        {/* 이메일 에러 메시지 */}
+        {emailError && (
+          <p className="ml-[15px] text-red-500 text-[13px] font-dohyeon">
+            {emailError}
+          </p>
+        )}
 
         {/* 비밀번호 입력 필드 */}
         <input
@@ -126,6 +148,8 @@ export default function Signup() {
           onChange={handlePasswordChange}
           className={twMerge(
             `w-full h-[40px] py-auto pl-[15px] border rounded-[10px] mb-[10px] font-jua text-[18px] ${
+              emailError ? "mt-0" : "mt-[19.5px]"
+            } ${
               password
                 ? "text-[#265CAC] border-[#265CAC] border-[2px] text-[16px]"
                 : "text-gray-400"
@@ -140,7 +164,7 @@ export default function Signup() {
           value={confirmPassword}
           onChange={handleConfirmPasswordChange}
           className={twMerge(
-            `w-full h-[40px] py-auto pl-[15px] border rounded-[10px] mb-[10px] font-jua text-[18px] ${
+            `w-full h-[40px] py-auto pl-[15px] border rounded-[10px] font-jua text-[18px] ${
               confirmPassword
                 ? "text-[#265CAC] border-[#265CAC] border-[2px]"
                 : "text-gray-400"
@@ -148,10 +172,10 @@ export default function Signup() {
           )}
         />
 
-        {/* 에러 메시지 */}
-        {error && (
+        {/* 비밀번호 에러 메시지 */}
+        {passwordError && (
           <p className="ml-[15px] text-red-500 text-[13px] font-dohyeon">
-            {error}
+            {passwordError}
           </p>
         )}
 
@@ -159,7 +183,7 @@ export default function Signup() {
         <p
           className={twMerge(
             `text-center text-[#265CAC] font-dohyeon text-[13px] ${
-              error ? "mt-[10px]" : "mt-[29.5px]"
+              passwordError ? "mt-[10px]" : "mt-[29.5px]"
             }`
           )}
         >
