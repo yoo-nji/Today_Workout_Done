@@ -37,7 +37,7 @@ export default function Sidebar() {
       route: "/",
     },
     {
-      id: 1,
+      id: 2,
       title: "프로틴 추천",
       icon: protein,
       alt: "프로틴 아이콘",
