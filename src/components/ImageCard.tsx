@@ -16,7 +16,7 @@ export default function ImageCard() {
     <div className="flex flex-col items-center gap-3">
       {/* 썸네일 */}
       <div
-        className="group relative w-[300px] h-[300px] bg-cover bg-center rounded-2xl shadow-lg"
+        className="group relative w-[250px] h-[250px] bg-cover bg-center rounded-2xl shadow-lg"
         style={{ backgroundImage: `url(${thumbnail})` }}
       >
         {/* Hover */}
