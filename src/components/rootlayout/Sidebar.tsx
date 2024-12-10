@@ -3,6 +3,7 @@ import ChannelList from "../ChannelList";
 import UserListModal from "../userlistModal/UserListModal";
 import UserProfile from "../UserProfile";
 import { twMerge } from "tailwind-merge";
+import { usesidebarToggleStore } from "../../stores/sideberToggleStore";
 // 아이콘
 import dumbbell from "../../assets/dumbbell_icon.svg";
 import protein from "../../assets/protein_icon.svg";
@@ -16,11 +17,12 @@ export default function Sidebar() {
   // 유저 목록 모달 상태
   const [isOpen, setIsOpen] = useState(false);
   // 사이드바 토글 상태
-  const [isToggleOpen, setIsToggleOpen] = useState(true);
+  const isToggle = usesidebarToggleStore((state) => state.isToggle);
+  const sidebarToggle = usesidebarToggleStore((state) => state.sidebarToggle);
 
   const handleToggleClick = () => {
-    console.log(isToggleOpen);
-    setIsToggleOpen(!isToggleOpen);
+    // console.log(isToggle);
+    sidebarToggle();
   };
 
   const handleBackClick = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -77,7 +79,7 @@ export default function Sidebar() {
       py-5 gap-8 text-[#1D1D1D] bg-[#FEFEFE] border-r
       border-gray-200/50 fixed transition-all `,
         isOpen ? "before:modal-back" : "",
-        isToggleOpen ? "w-[300px]" : "w-20"
+        isToggle ? "w-[300px]" : "w-20"
       )}
       onClick={(e) => handleBackClick(e)}
     >
@@ -86,16 +88,13 @@ export default function Sidebar() {
         onClick={handleToggleClick}
         className={twMerge(
           "self-end w-10 mr-2 hover:brightness-95 transition-all",
-          !isToggleOpen && "m-auto"
+          !isToggle && "m-auto"
         )}
       >
-        <img src={isToggleOpen ? left : right} alt="" />
+        <img src={isToggle ? left : right} alt="" />
       </button>
       {/* 로고 */}
-      <a
-        className={twMerge("w-20 h-[53px]", !isToggleOpen && "hidden")}
-        href="/"
-      >
+      <a className={twMerge("w-20 h-[53px]", !isToggle && "hidden")} href="/">
         <img src="/src/assets/loge.svg" alt="loge" />
       </a>
       {/* 멘트 */}
@@ -103,7 +102,7 @@ export default function Sidebar() {
         <div
           className={twMerge(
             "flex flex-col items-center text-xl font-bold text-center",
-            !isToggleOpen && "hidden"
+            !isToggle && "hidden"
           )}
         >
           <div>
@@ -116,7 +115,7 @@ export default function Sidebar() {
           <div>오늘도 운동 완료하셨나요?</div>
         </div>
         {/* 유저 프로필 */}
-        {isToggleOpen && (
+        {isToggle && (
           <UserProfile
             edit
             BackWidth="w-[122px]"
@@ -138,8 +137,8 @@ export default function Sidebar() {
                   alt={item.alt}
                   route={item.route}
                   key={item.id}
-                  toggleStyle={isToggleOpen ? "" : "p-0 justify-center"}
-                  isToggleOpen={isToggleOpen}
+                  toggleStyle={isToggle ? "" : "p-0 justify-center"}
+                  isToggleOpen={isToggle}
                 >
                   {item.title}
                 </ChannelList>
@@ -151,7 +150,7 @@ export default function Sidebar() {
         <button
           className={twMerge(
             "self-center w-[243px] h-[50px] bg-[#3B6CB4] rounded-[20px] text-xl text-white font-bold relative",
-            !isToggleOpen && "hidden"
+            !isToggle && "hidden"
           )}
           onClick={(e) => {
             e.stopPropagation();
@@ -160,7 +159,7 @@ export default function Sidebar() {
         >
           유저 목록
         </button>
-        <button className={twMerge(isToggleOpen && "hidden")}>
+        <button className={twMerge(isToggle && "hidden")}>
           <img
             src={user}
             alt="유저아이콘"
