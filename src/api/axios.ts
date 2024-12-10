@@ -6,7 +6,9 @@ export const api = axios.create({
 });
 
 api.interceptors.request.use((config) => {
+  // 토큰 가져오기
   const token = useAuth.getState().accessToken;
+  // 토큰이 있으면 요청 헤더에 추가
   if (token) {
     config.headers["Authorization"] = `Bearer ${token}`;
   }
