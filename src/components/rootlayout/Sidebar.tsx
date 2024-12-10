@@ -21,7 +21,6 @@ export default function Sidebar() {
   const sidebarToggle = usesidebarToggleStore((state) => state.sidebarToggle);
 
   const handleToggleClick = () => {
-    // console.log(isToggle);
     sidebarToggle();
   };
 
