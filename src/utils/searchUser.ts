@@ -17,6 +17,11 @@ export interface SearchUserType {
   email: string;
   createdAt: string;
   updatedAt: string;
+  __v: number;
+  image?: string;
+  imagePublicId?: string;
+  coverImage?: string;
+  coverImagePublicId?: string;
 }
 
 export const searchUserFn = async (searchparams: string) => {
