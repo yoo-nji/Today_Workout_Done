@@ -4,4 +4,5 @@ interface userProfileType {
   BackHeight: string;
   IconWidth: string;
   IconHeight: string;
+  onClick?: () => void;
 }
