@@ -5,6 +5,7 @@ interface UserBoxPropsType {
   fullname: string;
   followers: string[];
   following: string[];
+  image?: string | null;
 }
 
 export default function UserBox({
@@ -12,12 +13,17 @@ export default function UserBox({
   followers,
   following,
   isOnline,
+  image,
 }: UserBoxPropsType) {
   return (
     <div className="w-[320px] h-[75px] bg-[#EFEFEF] flex items-center gap-3 pl-[20px] rounded-[10px] flex-shrink-0">
       {/* 유저 프로필, 현활 */}
       <div className="bg-white w-[48px] h-[48px] flex justify-center items-center rounded-[50%] shadow-inner cursor-pointer relative">
-        <img src={defaultUserImg} alt="사용자 프로필 사진" />
+        <img
+          src={image ? image : defaultUserImg}
+          alt="사용자 프로필 사진"
+          className="w-[35px] h-[35px] rounded-[50%]"
+        />
         {isOnline && (
           <div className="w-3 h-3 rounded-[50%] bg-[#1CE777] absolute bottom-0 right-0"></div>
         )}

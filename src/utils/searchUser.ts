@@ -1,6 +1,6 @@
 import { api } from "../api/axios";
 
-export interface UserListType {
+export interface SearchUserType {
   role: string;
   emailVerified: boolean;
   banned: boolean;
@@ -8,15 +8,15 @@ export interface UserListType {
   posts: string[];
   likes: string[];
   comments: string[];
-  followers: string[];
-  following: string[];
+  followers: [];
+  following: [];
   notifications: string[];
   messages: string[];
   _id: string;
   fullName: string;
   email: string;
-  createdAt: Date | string;
-  updatedAt: Date | string;
+  createdAt: string;
+  updatedAt: string;
   __v: number;
   image?: string;
   imagePublicId?: string;
@@ -24,12 +24,12 @@ export interface UserListType {
   coverImagePublicId?: string;
 }
 
-export const getUserList = async () => {
+export const searchUserFn = async (searchparams: string) => {
   try {
-    const { data } = await api.get("/users/get-users");
-    const userListData: UserListType[] = data;
-
-    return userListData;
+    const { data }: { data: SearchUserType[] } = await api(
+      `/search/users/${searchparams}`
+    );
+    return data;
   } catch (err) {
     console.log(err);
   }
