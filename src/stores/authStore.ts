@@ -1,5 +1,5 @@
 import { create } from "zustand";
-
+import { PersistOptions, persist } from "zustand/middleware";
 interface UserInfo {
   _id: string;
   email: string;
@@ -29,11 +29,26 @@ interface Auth {
   setUser: (u: UserInfo) => void;
 }
 
-export const useAuth = create<Auth>((set) => ({
-  user: null,
-  isLoggedIn: false,
-  accessToken: null,
-  login: (accessToken: string) => set({ isLoggedIn: true, accessToken }),
-  logout: () => set({ isLoggedIn: false, accessToken: null }),
-  setUser: (u: UserInfo) => set({ user: u }),
-}));
+// export const useAuth = create<Auth>((set) => ({
+//   user: null,
+//   isLoggedIn: false,
+//   accessToken: null,
+//   login: (accessToken: string) => set({ isLoggedIn: true, accessToken }),
+//   logout: () => set({ isLoggedIn: false, accessToken: null }),
+//   setUser: (u: UserInfo) => set({ user: u }),
+// }));
+export const useAuth = create(
+  persist<Auth>(
+    (set) => ({
+      user: null,
+      isLoggedIn: false,
+      accessToken: null,
+      login: (accessToken: string) => set({ isLoggedIn: true, accessToken }),
+      logout: () => set({ isLoggedIn: false, accessToken: null }),
+      setUser: (u: UserInfo) => set({ user: u }),
+    }),
+    {
+      name: "auth-storage", // 로컬 스토리지에 저장될 키 이름
+    }
+  )
+);

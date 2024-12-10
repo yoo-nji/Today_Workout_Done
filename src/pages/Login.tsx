@@ -7,13 +7,9 @@ import { api } from "../api/axios";
 import { AxiosError } from "axios";
 
 export default function Login() {
-  const user = useAuth((state) => state.user);
-  console.log("유저", user);
-  const isLoggedIn = useAuth((state) => state.isLoggedIn);
   const login = useAuth((state) => state.login);
   const setUser = useAuth((state) => state.setUser);
   const navigate = useNavigate();
-  console.log("로그인상태", isLoggedIn);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
