@@ -143,6 +143,7 @@ export default function UserListModal({ handleBackClick }: UserListModalType) {
                       followers={user.followers}
                       following={user.following}
                       isOnline={user.isOnline}
+                      image={user.image ? user.image : null}
                     />
                   )
               )

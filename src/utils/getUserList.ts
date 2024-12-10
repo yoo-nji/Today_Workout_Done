@@ -17,6 +17,11 @@ export interface UserListType {
   email: string;
   createdAt: Date | string;
   updatedAt: Date | string;
+  __v: number;
+  image?: string;
+  imagePublicId?: string;
+  coverImage?: string;
+  coverImagePublicId?: string;
 }
 
 export const getUserList = async () => {
