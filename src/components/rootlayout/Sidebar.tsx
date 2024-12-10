@@ -149,7 +149,7 @@ export default function Sidebar() {
         {/* 유저목록 버튼 */}
         <button
           className={twMerge(
-            "self-center w-[243px] h-[50px] bg-[#3B6CB4] rounded-[20px] text-xl text-white font-bold relative",
+            "self-center w-[243px] h-[50px] bg-[#3B6CB4] rounded-[20px] text-lg text-white font-bold relative",
             !isToggle && "hidden"
           )}
           onClick={(e) => {
