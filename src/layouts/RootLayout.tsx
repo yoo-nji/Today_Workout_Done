@@ -10,7 +10,7 @@ export default function RootLayout() {
     <div className="flex">
       <Sidebar />
       <div className="flex flex-col h-screen min-h-screen w-full">
-        <Header />
+        <Header logo sidebar />
         <div
           className={twMerge(
             "h-full pl-[300px] transition-all",
