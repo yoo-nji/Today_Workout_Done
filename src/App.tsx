@@ -10,6 +10,7 @@ import AuthLayout from "./layouts/AuthLayout";
 import User from "./pages/User";
 import Posting from "./pages/Posting";
 import PublicRoute from "./route/PublicRoute";
+import PostDetail from "./pages/PostDetail";
 
 export default function App() {
   return (
@@ -20,6 +21,7 @@ export default function App() {
           <Route path="/about" element={<About />} />
           <Route path="/user/:user_id" element={<User />} />
           <Route path="/posting" element={<Posting />} />
+          <Route path="/posting/:post_id" element={<PostDetail />} />
           <Route path="*" element={<Error />} />
         </Route>
 
