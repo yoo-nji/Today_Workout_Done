@@ -29,11 +29,11 @@ export default function ChannelList({
         >
           <div
             className={twMerge(
-              "flex items-center gap-[10px] w-full h-[50px] pl-6 text-xl font-normal rounded-lg bg-[#FEFEFE] hover:bg-[#EAEAEA] transition cursor-pointer",
+              "flex items-center gap-[10px] w-full h-[50px] pl-6  text-lg font-normal rounded-lg bg-[#FEFEFE] hover:bg-[#EAEAEA] transition cursor-pointer",
               toggleStyle // 토글 스타일 지정
             )}
           >
-            <img className="w-8" src={icon} alt={alt} />
+            <img className="w-7" src={icon} alt={alt} />
             <div className={twMerge(!isToggleOpen && "hidden")}>{children}</div>
           </div>
         </li>
