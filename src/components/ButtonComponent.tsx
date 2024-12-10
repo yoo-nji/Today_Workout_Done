@@ -1,17 +1,8 @@
-import { useNavigate } from "react-router";
 import { twMerge } from "tailwind-merge";
 
 import React from "react";
 
-interface ButtonComponentProps {
-  bgcolor?: string;
-  textcolor?: string;
-  children: React.ReactNode;
-  onClick?: () => void;
-  className?: string;
-}
-
-const ButtonComponent: React.FC<ButtonComponentProps> = ({
+const ButtonComponent: React.FC<ButtonComponent> = ({
   bgcolor,
   textcolor,
   children,
