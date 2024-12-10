@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router";
+import { Await, useNavigate } from "react-router";
 import notifyIcon from "../../assets/notifyIcon.svg";
 import { twMerge } from "tailwind-merge";
 import logoImg from "../../assets/loge.svg";
@@ -6,6 +6,8 @@ import UserProfile from "../UserProfile";
 import ButtonComponent from "../ButtonComponent";
 import { useAuth } from "../../stores/authStore";
 import React, { useEffect } from "react";
+import { api } from "../../api/axios";
+import { AxiosError } from "axios";
 
 // 사이드바 접힐때 로고 보이도록 처리하자
 export default function Header({
@@ -16,16 +18,44 @@ export default function Header({
   sidebar?: boolean;
 }) {
   const navigate = useNavigate();
-  // Todo : 테스트 로그인 변경기능, 로그인 기능 개발 이후 연동후에 삭제해야함
-  const [testlogin, settestlogin] = React.useState(false);
-  const testloginHandler = () => {
-    settestlogin(!testlogin);
+  const authInfo = useAuth();
+  {
+    /* 정식배포시 삭제 */
+  }
+  // 아래는 테스트용 배포시에 제거
+  const login = useAuth((state) => state.login);
+  const setUser = useAuth((state) => state.setUser);
+
+  // 테스트버튼입니다 정식배포땐 삭제
+  const testhandler = () => {
+    console.log(authInfo.user?.fullName);
   };
 
-  // Todo : 로그인기능 구현 후에 이 값으로 로그인 분기처리
-  // const isLoggedin = useAuth().isLoggedIn;
-  // Todo : 로그아웃기능 구현
-  const logout = () => {};
+  // 테스트용 빠른 로그인입니다 귀찮으신분 자기 ID 비번 적어서 사용하세요
+  const fastlogin = async () => {
+    console.log(111);
+    try {
+      const { status, data } = await api.post("login", {
+        email: "wjw1469@gmail.com",
+        password: "asdf1234",
+      });
+      login(data.Token);
+      setUser(data.user);
+      alert("로그인 되었습니다.");
+      navigate("/");
+    } catch (error) {
+      if ((error as AxiosError).response?.status === 400) {
+        alert("아이디나 비밀번호가 틀립니다.");
+      }
+    }
+  };
+  {
+    /* 정식배포시 삭제 */
+  }
+  const isLoggedin = useAuth().isLoggedIn;
+  const logout = () => {
+    authInfo.logout();
+  };
 
   return (
     <header
@@ -43,22 +73,24 @@ export default function Header({
           onClick={() => navigate("/")}
         />
       </div>
+      {/* 정식배포시 삭제 */}
       <button
-        className="mx-10 items-center justify-center border-solid border"
-        onClick={testloginHandler}
+        className="border border-solid border-rose-400 w-[220px] h-[36px] rounded-[10px]"
+        onClick={() => testhandler()}
       >
-        테스트 로그인
+        헤더의 만능 테스트버튼
       </button>
-      {testlogin ? (
+      {/* 정식배포시 여기까지 삭제 */}
+
+      {isLoggedin ? (
         // 로그인 상태 분기
         <div className="flex gap-[10px] items-center">
-          <p className="mx-10 items-center justify-center">로그인상태</p>
-
           <ButtonComponent
             bgcolor="bg-[#265CAC]"
             textcolor="text-[white]"
-            // Todo : 로그이웃기능 zustand에서 로그인이 구현하는것 보고 추후 처리
-            onClick={() => useAuth().logout()}
+            onClick={() => {
+              logout();
+            }}
           >
             {"로그아웃"}
           </ButtonComponent>
@@ -102,7 +134,14 @@ export default function Header({
       ) : (
         // 비로그인 상태 분기
         <div className="flex gap-[10px] items-center">
-          <p className="mx-10 items-center justify-left">비로그인상태</p>
+          {/* 정식배포시 삭제 */}
+          <button
+            className="border border-solid border-rose-400 w-[220px] h-[36px] rounded-[10px]"
+            onClick={() => fastlogin()}
+          >
+            로그인이 귀찮은자를 위해
+          </button>
+          {/* 정식배포시 여기까지 삭제 */}
           <ButtonComponent
             bgcolor="bg-[#265CAC]"
             textcolor="text-white"
