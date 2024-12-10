@@ -5,12 +5,16 @@ import { useEffect, useState } from "react";
 import UserNone from "./UserNone";
 import { getUserList, UserListType } from "../../utils/getUserList";
 import { searchUserFn, SearchUserType } from "../../utils/searchUser";
+import { usesidebarToggleStore } from "../../stores/sideberToggleStore";
 
 interface UserListModalType {
   handleBackClick: (e: React.MouseEvent<HTMLDivElement>) => void;
 }
 
 export default function UserListModal({ handleBackClick }: UserListModalType) {
+  // 토글 상태
+  const isToggle = usesidebarToggleStore((state) => state.isToggle);
+
   // 상태
   const [status, setStatus] = useState<
     "idle" | "loading" | "searching" | "nouser"
@@ -79,7 +83,9 @@ export default function UserListModal({ handleBackClick }: UserListModalType) {
     <>
       <div
         className={`w-[380px] h-[600px]
-      bg-white rounded-[25px] absolute bottom-[3px] left-[300px]
+      bg-white rounded-[25px] absolute bottom-[3px] ${
+        isToggle ? `left-[290px]` : "left-[90px]"
+      }
       before:modal-before  scrollbar-none flex flex-col justify-start items-center
       gap-10 py-8 z-30`}
         onClick={(e) => {
