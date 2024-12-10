@@ -226,7 +226,9 @@ export default function Signup() {
               name
                 ? "text-[#265CAC] border-[#265CAC] border-[2px] text-[16px] font-ibm font-bold"
                 : "text-gray-400 border-[2px]"
-            } ${nameError ? "border-[#EB003E] border-[2px]" : ""}`
+            } ${
+              nameError ? "border-[#EB003E] border-[2px] text-[#EB003E]" : ""
+            }`
           )}
         />
 
@@ -251,7 +253,9 @@ export default function Signup() {
               email
                 ? "text-[#265CAC] border-[#265CAC] border-[2px] text-[16px] font-ibm font-bold"
                 : "text-gray-400"
-            } ${emailError ? "border-[#EB003E] border-[2px]" : ""}`
+            } ${
+              emailError ? "border-[#EB003E] border-[2px] text-[#EB003E]" : ""
+            }`
           )}
         />
 
@@ -276,7 +280,11 @@ export default function Signup() {
               password
                 ? "text-[#265CAC] border-[#265CAC] border-[2px] text-[16px]"
                 : "text-gray-400"
-            } ${passwordError ? "border-[#EB003E] border-[2px]" : ""}`
+            } ${
+              passwordError
+                ? "border-[#EB003E] border-[2px] text-[#EB003E]"
+                : ""
+            }`
           )}
         />
 
@@ -292,7 +300,11 @@ export default function Signup() {
               confirmPassword
                 ? "text-[#265CAC] border-[#265CAC] border-[2px]"
                 : "text-gray-400"
-            } ${passwordError ? "border-[#EB003E] border-[2px]" : ""}`
+            } ${
+              passwordError
+                ? "border-[#EB003E] border-[2px] text-[#EB003E]"
+                : ""
+            }`
           )}
         />
 
