@@ -1,5 +1,6 @@
 import { NavLink } from "react-router";
 import { twMerge } from "tailwind-merge";
+import { useChannelStore } from "../stores/channelStore";
 
 interface ChannelListProps {
   children: string;
@@ -8,6 +9,7 @@ interface ChannelListProps {
   route: string;
   toggleStyle?: string;
   isToggleOpen: boolean;
+  channel_id: string;
 }
 
 export default function ChannelList({
@@ -17,9 +19,19 @@ export default function ChannelList({
   route,
   toggleStyle,
   isToggleOpen,
+  channel_id,
 }: ChannelListProps) {
+  const setChannelId = useChannelStore((state) => state.setChannelId);
+
   return (
-    <NavLink id={route} to={route}>
+    <NavLink
+      id={route}
+      to={route}
+      onClick={() => {
+        setChannelId(channel_id);
+        console.log(channel_id);
+      }}
+    >
       {({ isActive }) => (
         <li
           className={twMerge(

@@ -37,6 +37,7 @@ export default function Sidebar() {
       icon: dumbbell,
       alt: "오운완 아이콘",
       route: "/",
+      channel_id: "6757a3a7ce18fa02ded5c758",
     },
     {
       id: 2,
@@ -44,6 +45,7 @@ export default function Sidebar() {
       icon: protein,
       alt: "프로틴 아이콘",
       route: "protein",
+      channel_id: "6758f6bf5f86e71ae5eb9b6c",
     },
     {
       id: 3,
@@ -51,6 +53,7 @@ export default function Sidebar() {
       icon: routine,
       alt: "루틴 아이콘",
       route: "routine",
+      channel_id: "6758f7305f86e71ae5eb9b82",
     },
     {
       id: 4,
@@ -58,6 +61,7 @@ export default function Sidebar() {
       icon: gym,
       alt: "헬스장 아이콘",
       route: "gymreview",
+      channel_id: "6758f75b5f86e71ae5eb9bae",
     },
   ];
 
@@ -144,6 +148,7 @@ export default function Sidebar() {
                   key={item.id}
                   toggleStyle={isToggle ? "" : "p-0 justify-center"}
                   isToggleOpen={isToggle}
+                  channel_id={item.channel_id}
                 >
                   {item.title}
                 </ChannelList>
