@@ -4,6 +4,8 @@ import { Link, Navigate, useNavigate } from "react-router";
 import { twMerge } from "tailwind-merge";
 import axios from "axios";
 import { api } from "../api/axios";
+import privateImg from "../assets/private.svg";
+import showPwImg from "../assets/showpw.svg";
 
 export default function Signup() {
   const navigate = useNavigate();
@@ -15,6 +17,9 @@ export default function Signup() {
   const [nameError, setNameError] = useState("");
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
+  const [confirmPasswordError, setConfirmPasswordError] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   /* 공통 스페이스바 차단 핸들러 */
@@ -121,12 +126,25 @@ export default function Signup() {
   /* 비밀번호 필드에 따른 에러 처리 */
   const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newPassword = e.target.value;
+    const regex = /^[A-Za-z0-9!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+$/;
     setPassword(newPassword);
 
-    if (confirmPassword !== "" && confirmPassword !== newPassword) {
-      setPasswordError("비밀번호가 일치하지 않음");
+    // 빈 칸일 때 에러 메시지 제거
+    if (newPassword === "") {
+      setPasswordError("");
+    } else if (!regex.test(newPassword)) {
+      setPasswordError("영문 대 소문자, 숫자, 특수문자를 사용하세요.");
+    } else if (newPassword.length > 16 || newPassword.length < 8) {
+      setPasswordError("8 ~ 16자 영문 대 소문자, 숫자, 특수문자를 사용하세요.");
     } else {
       setPasswordError("");
+    }
+
+    // 비밀번호 확인 에러 동기화
+    if (confirmPassword && newPassword !== confirmPassword) {
+      setConfirmPasswordError("비밀번호가 일치하지 않음");
+    } else {
+      setConfirmPasswordError("");
     }
   };
 
@@ -138,26 +156,25 @@ export default function Signup() {
     setConfirmPassword(newConfirmPassword);
 
     if (newConfirmPassword === "") {
-      setPasswordError("");
+      setConfirmPasswordError("");
     } else if (newConfirmPassword !== password) {
-      setPasswordError("비밀번호가 일치하지 않음");
+      setConfirmPasswordError("비밀번호가 일치하지 않음");
     } else {
-      setPasswordError("");
+      setConfirmPasswordError("");
     }
   };
 
   /* 가입하기 버튼 활성화 조건 */
   const isFormValid =
     name &&
-    !name.includes(" ") &&
     email &&
-    !email.includes(" ") &&
     password &&
     confirmPassword &&
     password === confirmPassword &&
     nameError === "" &&
     emailError === "" &&
-    passwordError === "";
+    passwordError === "" &&
+    confirmPasswordError === "";
 
   // useEffect(() => {
   //   const getUser = async () => {
@@ -258,7 +275,6 @@ export default function Signup() {
             }`
           )}
         />
-
         {/* 이메일 에러 메시지 */}
         {emailError && (
           <p className="ml-[15px] text-red-500 text-[13px] font-dohyeon">
@@ -266,60 +282,99 @@ export default function Signup() {
           </p>
         )}
 
-        {/* 비밀번호 입력 필드 */}
-        <input
-          type="password"
-          placeholder="비밀번호"
-          value={password}
-          onChange={handlePasswordChange}
-          onKeyDown={handleKeyDown}
-          className={twMerge(
-            `w-full h-[40px] py-auto pl-[15px] border rounded-[10px] mb-[19.5px] font-jua text-[18px] ${
-              emailError ? "mt-0" : "mt-[19.5px]"
-            } ${
-              password
-                ? "text-[#265CAC] border-[#265CAC] border-[2px] text-[16px]"
-                : "text-gray-400"
-            } ${
-              passwordError
-                ? "border-[#EB003E] border-[2px] text-[#EB003E]"
-                : ""
-            }`
-          )}
-        />
+        <div>
+          <div>
+            {/* 비밀번호 입력 필드 */}
+            <input
+              type={showPassword ? "text" : "password"}
+              placeholder="비밀번호"
+              value={password}
+              onChange={handlePasswordChange}
+              onKeyDown={handleKeyDown}
+              className={twMerge(
+                `w-full h-[40px] py-auto pl-[15px] border rounded-[10px] font-jua text-[18px] ${
+                  emailError ? "mt-0" : "mt-[19.5px]"
+                } ${
+                  password
+                    ? "text-[#265CAC] border-[#265CAC] border-[2px] text-[16px]"
+                    : "text-gray-400"
+                } ${
+                  passwordError
+                    ? "border-[#EB003E] border-[2px] text-[#EB003E]"
+                    : ""
+                }`
+              )}
+            />
+            <button
+              type="button"
+              onClick={() => setShowPassword(!showPassword)}
+              className="absolute right-[62px] top-[288px] translate-y-[0%] w-[20px] h-[20px] p-0 border-none bg-transparent"
+            >
+              <img
+                src={showPassword ? `${showPwImg}` : `${privateImg}`}
+                alt={showPassword ? "비밀번호 숨기기" : "비밀번호 보이기"}
+                className="w-full h-full"
+              />
+            </button>
+          </div>
 
-        {/* 비밀번호 확인 입력 필드 */}
-        <input
-          type="password"
-          placeholder="비밀번호 확인"
-          value={confirmPassword}
-          onChange={handleConfirmPasswordChange}
-          onKeyDown={handleKeyDown}
-          className={twMerge(
-            `w-full h-[40px] py-auto pl-[15px] border rounded-[10px] font-jua text-[18px] ${
-              confirmPassword
-                ? "text-[#265CAC] border-[#265CAC] border-[2px]"
-                : "text-gray-400"
-            } ${
-              passwordError
-                ? "border-[#EB003E] border-[2px] text-[#EB003E]"
-                : ""
-            }`
+          {/* 비밀번호 에러 메시지 */}
+          {passwordError && (
+            <p className="ml-[15px] text-red-500 text-[13px] font-dohyeon">
+              {passwordError}
+            </p>
           )}
-        />
 
-        {/* 비밀번호 에러 메시지 */}
-        {passwordError && (
-          <p className="ml-[15px] text-red-500 text-[13px] font-dohyeon">
-            {passwordError}
-          </p>
-        )}
+          <div>
+            {/* 비밀번호 확인 입력 필드 */}
+            <input
+              type={showConfirmPassword ? "text" : "password"}
+              placeholder="비밀번호 확인"
+              value={confirmPassword}
+              onChange={handleConfirmPasswordChange}
+              onKeyDown={handleKeyDown}
+              className={twMerge(
+                `w-full h-[40px] py-auto pl-[15px] border rounded-[10px] font-jua text-[18px] ${
+                  passwordError ? "mt-0" : "mt-[19.5px]"
+                } ${
+                  confirmPassword
+                    ? "text-[#265CAC] border-[#265CAC] border-[2px] text-[16px]"
+                    : "text-gray-400"
+                } ${
+                  confirmPasswordError
+                    ? " border-[#EB003E] border-[2px] text-[#EB003E]"
+                    : ""
+                }`
+              )}
+            />
+            <button
+              type="button"
+              onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+              className="absolute right-[62px] top-[348px] translate-y-[0%] w-[20px] h-[20px] p-0 border-none bg-transparent"
+            >
+              <img
+                src={showConfirmPassword ? `${showPwImg}` : `${privateImg}`}
+                alt={
+                  showConfirmPassword ? "비밀번호 숨기기" : "비밀번호 보이기"
+                }
+                className="w-full h-full"
+              />
+            </button>
+          </div>
+
+          {/* 비밀번호 확인 에러 메시지 */}
+          {confirmPasswordError && (
+            <p className="ml-[15px] text-red-500 text-[13px] font-dohyeon">
+              {confirmPasswordError}
+            </p>
+          )}
+        </div>
 
         {/* 로그인으로 이동하는 링크 */}
         <p
           className={twMerge(
             `text-center text-[#265CAC] font-dohyeon text-[13px] ${
-              passwordError ? "mt-[10px]" : "mt-[29.5px]"
+              confirmPasswordError ? "mt-[10px]" : "mt-[29.5px]"
             }`
           )}
         >
