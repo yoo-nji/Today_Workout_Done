@@ -106,8 +106,7 @@ export default function Header({
           <ButtonComponent
             bgcolor="bg-white"
             textcolor="text-[#265CAC]"
-            // Todo : 글작성 페이지 도메인으로 변경
-            onClick={() => navigate("/newPost")}
+            onClick={() => navigate("/posting")}
           >
             {"새글등록"}
           </ButtonComponent>
