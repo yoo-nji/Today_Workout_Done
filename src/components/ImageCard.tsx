@@ -18,11 +18,11 @@ export default function ImageCard({
     <div className="flex flex-col items-center gap-3">
       {/* 썸네일 */}
       <div
-        className="group relative w-[300px] h-[300px] bg-cover bg-center rounded-2xl shadow-lg"
+        className="group relative w-[250px] h-[250px] bg-cover bg-center rounded-2xl shadow-lg"
         style={{ backgroundImage: `url(${image || thumbnail})` }}
       >
         {/* Hover */}
-        <div className="absolute inset-0 flex flex-col justify-center items-center bg-black bg-opacity-50 text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100 rounded-lg">
+        <div className="absolute inset-0 flex flex-col items-center justify-center text-white transition-opacity duration-300 bg-black bg-opacity-50 rounded-lg opacity-0 group-hover:opacity-100">
           <h3 className="w-[80%] text-[20px] font-semibold truncate">
             {title}
           </h3>
@@ -41,7 +41,7 @@ export default function ImageCard({
       </div>
 
       {/* 글 작성자 정보 */}
-      <div className="flex  items-center justify-between w-full px-2">
+      <div className="flex items-center justify-between w-full px-2">
         <div className="flex items-center gap-[10px]">
           <UserProfile
             BackWidth="w-[40px]"
