@@ -8,10 +8,10 @@ export default function ImageCard({
   title,
   likes,
   comments,
+  createdAt,
   author,
-  updatedAt,
 }: PostType) {
-  const update = new Date(updatedAt);
+  const update = new Date(createdAt);
   const date = update.toLocaleDateString("ko-KR").slice(0, -1);
 
   return (
