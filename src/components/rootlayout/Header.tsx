@@ -28,12 +28,11 @@ export default function Header({
 
   // 테스트버튼입니다 정식배포땐 삭제
   const testhandler = () => {
-    console.log(authInfo.user?.notifications);
+    // if (isNotification?.length == 0) alert("1234");
   };
 
   // 테스트용 빠른 로그인입니다 귀찮으신분 자기 ID 비번 적어서 사용하세요
   const fastlogin = async () => {
-    console.log(111);
     try {
       const { status, data } = await api.post("login", {
         email: "wjw1469@gmail.com",
@@ -123,7 +122,7 @@ export default function Header({
           />
         </div> */}
 
-          <div className="w-[48px] h-[48px]  flex justify-center items-center mx-[10px]">
+          <div className="w-[48px] h-[48px]  flex justify-center items-center mx-[10px] relative">
             <img
               src={notifyIcon}
               alt="알림 아이콘"
