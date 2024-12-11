@@ -4,9 +4,13 @@ import searchIcon from "../assets/searchIcon.svg";
 export default function SearchBar({
   placeholder,
   style,
+  value,
+  onChange,
 }: {
   placeholder: string;
   style?: string;
+  value: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }) {
   return (
     <div
@@ -19,6 +23,8 @@ export default function SearchBar({
         className="w-full outline-none"
         type="text"
         placeholder={placeholder}
+        value={value}
+        onChange={onChange}
       />
       <img src={searchIcon} alt="검색 아이콘" />
     </div>
