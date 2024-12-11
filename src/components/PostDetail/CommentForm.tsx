@@ -2,7 +2,13 @@ import likeIcon from "../../assets/like_icon.svg";
 import chatIcon from "../../assets/chat_icon_black.svg";
 import ButtonComponent from "../ButtonComponent";
 
-export default function CommentForm() {
+export default function CommentForm({
+  likes,
+  comments,
+}: {
+  likes: LikeType[];
+  comments: CommentType[];
+}) {
   return (
     <div className="">
       {/* 좋아요 이모티콘 댓글 이모티콘 area */}
@@ -11,13 +17,13 @@ export default function CommentForm() {
           <button>
             <img src={likeIcon} alt="likeIcon" />
           </button>
-          4
+          {likes.length}
         </div>
         <div className="flex gap-1">
           <button>
             <img src={chatIcon} alt="chatIcon" />
           </button>
-          4
+          {comments.length}
         </div>
       </div>
 
