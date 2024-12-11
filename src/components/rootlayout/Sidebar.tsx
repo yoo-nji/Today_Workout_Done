@@ -76,13 +76,14 @@ export default function Sidebar() {
     <div
       className={twMerge(
         `flex flex-col items-center  h-[100vh] z-10
-      py-5 gap-8 text-[#1D1D1D] bg-[#FEFEFE] border-r
+      py-5 text-[#1D1D1D] bg-[#FEFEFE] border-r
       border-gray-200/50 fixed transition-all `,
         isOpen ? "before:modal-back" : "",
         isToggle ? "w-[300px]" : "w-20"
       )}
       onClick={(e) => handleBackClick(e)}
     >
+      <div></div>
       {/* 토글 버튼 */}
       <button
         onClick={handleToggleClick}
@@ -94,9 +95,13 @@ export default function Sidebar() {
         <img src={isToggle ? left : right} alt="" />
       </button>
       {/* 로고 */}
-      <a className={twMerge("w-20 h-[53px]", !isToggle && "hidden")} href="/">
+      <a
+        className={twMerge("w-20 h-[53px] mb-[14px]", !isToggle && "hidden")}
+        href="/"
+      >
         <img src="/src/assets/loge.svg" alt="loge" />
       </a>
+
       {/* 멘트 */}
       <div className="flex flex-col items-center gap-[14px] pb-[23px] w-full">
         <div
@@ -155,7 +160,7 @@ export default function Sidebar() {
           <div className="flex justify-center">
             <button
               className={twMerge(
-                "mt-6 self-center w-[243px] h-[50px] bg-[#265CAC] rounded-[20px] text-lg text-white font-bold relative",
+                "mt-2 self-center w-[243px] h-[50px] bg-[#265CAC] rounded-[20px] text-lg text-white font-bold relative",
                 !isToggle && "hidden"
               )}
               onClick={(e) => {
