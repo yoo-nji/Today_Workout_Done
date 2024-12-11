@@ -1,18 +1,8 @@
 import { api } from "../api/axios";
 
-interface PostingFnInfo {
-  title: string;
-  image: File | string;
-  channelId: string;
-}
-
-export const postingFn = async (info: PostingFnInfo) => {
+export const postingFn = async (formData: FormData) => {
   try {
-    const response = await api.post("/posts/create", {
-      title: JSON.stringify(info.title),
-      image: info.image,
-      channelId: info.channelId,
-    });
+    const response = await api.post("/posts/create", formData);
     console.log(response);
     return response;
   } catch (error) {
