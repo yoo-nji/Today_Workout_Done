@@ -1,4 +1,4 @@
-import { Await, useNavigate } from "react-router";
+import { useNavigate } from "react-router";
 import notifyIcon from "../../assets/notifyIcon.svg";
 import { twMerge } from "tailwind-merge";
 import logoImg from "../../assets/loge.svg";
@@ -55,6 +55,8 @@ export default function Header({
   const isNotification = authInfo.user?.notifications;
   const logout = () => {
     authInfo.logout();
+    // 로컬스토리지 삭제
+    useAuth.persist.clearStorage();
   };
 
   //

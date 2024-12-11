@@ -26,7 +26,7 @@ export default function Home() {
   }, [channelId]);
 
   return (
-    <div className="flex flex-col items-center mt-8 gap-16">
+    <div className="flex flex-col items-center gap-16 mt-8">
       <div className="flex flex-col items-center gap-[30px] w-full px-4">
         <SearchBar
           placeholder="검색어를 입력해 주세요"
