@@ -12,6 +12,7 @@ import gym from "../../assets/gym_icon.svg";
 import left from "../../assets/double-left.svg";
 import right from "../../assets/double-right.svg";
 import user from "../../assets/user_icon.svg";
+import ModeChange from "../button/ModeChange";
 
 export default function Sidebar() {
   // 유저 목록 모달 상태
@@ -145,30 +146,39 @@ export default function Sidebar() {
             })}
           </ul>
         </div>
-        {/* 유저목록 버튼 */}
-        <button
-          className={twMerge(
-            "self-center w-[243px] h-[50px] bg-[#3B6CB4] rounded-[20px] text-lg text-white font-bold relative",
-            !isToggle && "hidden"
-          )}
-          onClick={(e) => {
-            e.stopPropagation();
-            setIsOpen((prev) => !prev);
-          }}
-        >
-          유저 목록
-        </button>
-        <button className={twMerge(isToggle && "hidden")}>
-          <img
-            src={user}
-            alt="유저아이콘"
-            className={twMerge("self-center m-auto")}
-            onClick={(e) => {
-              e.stopPropagation();
-              setIsOpen((prev) => !prev);
-            }}
-          />
-        </button>
+        <div className=" items-center ">
+          {/* 모드변경 버튼 */}
+          <div className="flex justify-center">
+            <ModeChange />
+          </div>
+          {/* 유저목록 버튼 */}
+          <div className="flex justify-center">
+            <button
+              className={twMerge(
+                "mt-6 self-center w-[243px] h-[50px] bg-[#3B6CB4] rounded-[20px] text-lg text-white font-bold relative",
+                !isToggle && "hidden"
+              )}
+              onClick={(e) => {
+                e.stopPropagation();
+                setIsOpen((prev) => !prev);
+              }}
+            >
+              유저 목록
+            </button>
+            <button className={twMerge("mt-6", isToggle && "hidden")}>
+              <img
+                src={user}
+                alt="유저아이콘"
+                className={twMerge("self-center m-auto")}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setIsOpen((prev) => !prev);
+                }}
+              />
+            </button>
+          </div>
+        </div>
+
         {isOpen && <UserListModal handleBackClick={handleBackClick} />}
       </div>
     </div>
