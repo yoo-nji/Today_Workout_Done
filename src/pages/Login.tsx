@@ -9,6 +9,7 @@ import { AxiosError } from "axios";
 export default function Login() {
   const login = useAuth((state) => state.login);
   const setUser = useAuth((state) => state.setUser);
+
   const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
@@ -39,7 +40,7 @@ export default function Login() {
         password,
       });
       // 토큰 저장하기
-      login(data.Token);
+      login(data.token);
       console.log(data, status);
       setUser(data.user);
       alert("로그인 되었습니다.");
