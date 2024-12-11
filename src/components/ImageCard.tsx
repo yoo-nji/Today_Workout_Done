@@ -49,7 +49,7 @@ export default function ImageCard({
             IconWidth="w-[28px]"
             IconHeight="h-[28px]"
           />
-          <div className="text-base font-medium">{author.username}</div>
+          <div className="text-base font-medium">{author.fullName}</div>
         </div>
         <div className="text-base font-light">{date}</div>
       </div>
