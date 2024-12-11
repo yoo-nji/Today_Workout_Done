@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { Comment, getPostDetail } from "../utils/getPostDetail";
+import { newCommentFn } from "../utils/newCommentFn";
 
-export default function test() {
+export default function Test() {
   //댓글 목록
   const [comments, setComments] = useState<Comment[]>([]);
   // 로딩 상태
@@ -29,9 +30,24 @@ export default function test() {
   if (isLoading) return <p>댓글 불러오는 중...</p>;
   if (error) return <p>댓글을 불러오는데 실패했습니다.</p>;
 
+  //댓글 등록하기
+  const handleCommentSubmit = async () => {
+    const newComment = "댓글 등록 테스트";
+    const postId = "6757d369ce18fa02ded5c9ce";
+
+    try {
+      const nComment = await newCommentFn(newComment, postId);
+      console.log(nComment);
+      setComments((comments) => [nComment, ...comments]);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <>
       <pre>{JSON.stringify(comments, null, 2)}</pre>
+      <button onClick={handleCommentSubmit}>댓글 등록</button>
       <div className="max-w-md mx-auto p-4">
         {/* 댓글 입력 창 */}
         <div className="mb-4">

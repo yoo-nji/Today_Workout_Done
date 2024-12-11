@@ -11,6 +11,7 @@ import User from "./pages/User";
 import Posting from "./pages/Posting";
 import PublicRoute from "./route/PublicRoute";
 import PostDetail from "./pages/PostDetail";
+import Test from "./pages/Test";
 
 export default function App() {
   return (
@@ -22,6 +23,7 @@ export default function App() {
           <Route path="/user/:user_id" element={<User />} />
           <Route path="/posting" element={<Posting />} />
           <Route path="/posting/:post_id" element={<PostDetail />} />
+          <Route path="/test" element={<Test />} />
           <Route path="*" element={<Error />} />
         </Route>
 
