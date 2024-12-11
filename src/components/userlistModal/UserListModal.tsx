@@ -9,9 +9,13 @@ import { usesidebarToggleStore } from "../../stores/sideberToggleStore";
 
 interface UserListModalType {
   handleBackClick: (e: React.MouseEvent<HTMLDivElement>) => void;
+  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export default function UserListModal({ handleBackClick }: UserListModalType) {
+export default function UserListModal({
+  handleBackClick,
+  setIsOpen,
+}: UserListModalType) {
   // 토글 상태
   const isToggle = usesidebarToggleStore((state) => state.isToggle);
 
@@ -133,6 +137,8 @@ export default function UserListModal({ handleBackClick }: UserListModalType) {
                   followers={user.followers}
                   following={user.following}
                   image={user.image ? user.image : null}
+                  userid={user._id}
+                  setIsOpen={setIsOpen}
                 />
               ))
             ) : (
@@ -151,6 +157,8 @@ export default function UserListModal({ handleBackClick }: UserListModalType) {
                       following={user.following}
                       isOnline={user.isOnline}
                       image={user.image ? user.image : null}
+                      userid={user._id}
+                      setIsOpen={setIsOpen}
                     />
                   )
               )

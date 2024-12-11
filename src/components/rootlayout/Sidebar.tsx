@@ -155,7 +155,7 @@ export default function Sidebar() {
           <div className="flex justify-center">
             <button
               className={twMerge(
-                "mt-6 self-center w-[243px] h-[50px] bg-[#3B6CB4] rounded-[20px] text-lg text-white font-bold relative",
+                "mt-6 self-center w-[243px] h-[50px] bg-[#265CAC] rounded-[20px] text-lg text-white font-bold relative",
                 !isToggle && "hidden"
               )}
               onClick={(e) => {
@@ -179,7 +179,12 @@ export default function Sidebar() {
           </div>
         </div>
 
-        {isOpen && <UserListModal handleBackClick={handleBackClick} />}
+        {isOpen && (
+          <UserListModal
+            handleBackClick={handleBackClick}
+            setIsOpen={setIsOpen}
+          />
+        )}
       </div>
     </div>
   );

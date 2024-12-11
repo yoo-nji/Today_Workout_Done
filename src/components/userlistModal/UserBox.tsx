@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router";
 import defaultUserImg from "../../assets/defaultUser.svg";
 
 interface UserBoxPropsType {
@@ -6,6 +7,8 @@ interface UserBoxPropsType {
   followers: string[];
   following: string[];
   image?: string | null;
+  userid: string;
+  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export default function UserBox({
@@ -14,11 +17,22 @@ export default function UserBox({
   following,
   isOnline,
   image,
+  userid,
+  setIsOpen,
 }: UserBoxPropsType) {
+  const navigate = useNavigate();
+
+  const handleClick = (userId: string) => {
+    setIsOpen(false);
+    navigate(`/user/${userId}`);
+  };
   return (
     <div className="w-[320px] h-[75px] bg-[#EFEFEF] flex items-center gap-3 pl-[20px] rounded-[10px] flex-shrink-0">
       {/* 유저 프로필, 현활 */}
-      <div className="bg-white w-[48px] h-[48px] flex justify-center items-center rounded-[50%] shadow-inner cursor-pointer relative">
+      <div
+        className="bg-white w-[48px] h-[48px] flex justify-center items-center rounded-[50%] shadow-inner cursor-pointer relative"
+        onClick={() => handleClick(userid)}
+      >
         <img
           src={image ? image : defaultUserImg}
           alt="사용자 프로필 사진"
