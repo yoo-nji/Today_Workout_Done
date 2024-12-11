@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Comment, getPostDetail } from "../utils/getPostDetail";
-import { newCommentFn } from "../utils/newCommentFn";
+import { delCommentFn, newCommentFn } from "../utils/commentFn";
+import CommentBox from "../components/PostDetail/CommentBox";
 
 export default function Test() {
   //댓글 목록
@@ -41,17 +42,34 @@ export default function Test() {
     };
 
     try {
-      const nComment = await newCommentFn(option);
-      console.log(nComment);
-      setComments((comments) => [nComment, ...comments]);
+      const newComment = await newCommentFn(option);
+      console.log(newComment);
+      setComments((comments) => [...comments, newComment]);
     } catch (err) {
       console.log(err);
     }
   };
 
+  //내가 작성한 댓글 삭제
+  // 로컬스토리지에서 사용자 정보 가져오기
+  const storedAuth = localStorage.getItem("auth-storage");
+  const userId = storedAuth ? JSON.parse(storedAuth).state.user._id : null; //storedAuth가 존재하지 않으면 null을 반환
+
+  const handleDelete = async (commentId: string) => {
+    // 삭제할 id
+    console.log(commentId);
+    try {
+      await delCommentFn(commentId);
+      // 상태 업데이트
+      setComments((comments) =>
+        comments.filter((comment) => comment._id !== commentId)
+      );
+    } catch (err) {
+      console.log(err);
+    }
+  };
   return (
     <>
-      <pre>{JSON.stringify(comments, null, 2)}</pre>
       <button onClick={handleCommentSubmit}>댓글 등록</button>
       <div className="max-w-md mx-auto p-4">
         {/* 댓글 입력 창 */}
@@ -75,10 +93,21 @@ export default function Test() {
               <span className="text-sm text-gray-500">{comment.createdAt}</span>
             </div>
             <p className="text-gray-700">{comment.comment}</p>
-            <button className="border border-red-600 p-1">삭제</button>
+            {/* 댓글 작성자와 로그인한 사용자 비교 */}
+            {userId === comment.author._id && (
+              <button
+                onClick={() => handleDelete(comment._id)} // 개별 댓글 ID 전달
+                className="border border-red-600 p-1"
+              >
+                삭제
+              </button>
+            )}
           </div>
         </div>
       ))}
+      <CommentBox />
+
+      <pre>{JSON.stringify(comments, null, 2)}</pre>
     </>
   );
 }
