@@ -5,7 +5,7 @@ import logoImg from "../../assets/loge.svg";
 import UserProfile from "../UserProfile";
 import ButtonComponent from "../ButtonComponent";
 import { useAuth } from "../../stores/authStore";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { api } from "../../api/axios";
 import { AxiosError } from "axios";
 
@@ -28,12 +28,11 @@ export default function Header({
 
   // 테스트버튼입니다 정식배포땐 삭제
   const testhandler = () => {
-    console.log(authInfo.user?.fullName);
+    // if (isNotification?.length == 0) alert("1234");
   };
 
   // 테스트용 빠른 로그인입니다 귀찮으신분 자기 ID 비번 적어서 사용하세요
   const fastlogin = async () => {
-    console.log(111);
     try {
       const { status, data } = await api.post("login", {
         email: "wjw1469@gmail.com",
@@ -53,8 +52,18 @@ export default function Header({
     /* 정식배포시 삭제 */
   }
   const isLoggedin = useAuth().isLoggedIn;
+  const isNotification = authInfo.user?.notifications;
   const logout = () => {
     authInfo.logout();
+  };
+
+  //
+
+  // Todo : 알림창 폼 보여줄지 분기처리
+  const [showNoti, setShowNoti] = useState(false);
+  const showNotiHandler = () => {
+    // e.stopPropagation();
+    setShowNoti(!showNoti);
   };
 
   return (
@@ -97,8 +106,7 @@ export default function Header({
           <ButtonComponent
             bgcolor="bg-white"
             textcolor="text-[#265CAC]"
-            // Todo : 글작성 페이지 도메인으로 변경
-            onClick={() => navigate("/newPost")}
+            onClick={() => navigate("/posting")}
           >
             {"새글등록"}
           </ButtonComponent>
@@ -113,13 +121,20 @@ export default function Header({
           />
         </div> */}
 
-          <div className="w-[48px] h-[48px]  flex justify-center items-center mx-[10px]">
+          <div className="w-[48px] h-[48px]  flex justify-center items-center mx-[10px] relative">
             <img
               src={notifyIcon}
               alt="알림 아이콘"
               className="cursor-pointer"
-              onClick={() => {}}
+              // 알림창 띄워주는 변수
+              onClick={() => {
+                showNotiHandler();
+              }}
             />
+            {/* 알림이 있다면 뱃지색 처리 */}
+            {isNotification?.length != 0 && (
+              <div className="w-3 h-3 rounded-[50%] bg-red-500 absolute bottom-0 right-0"></div>
+            )}
           </div>
 
           <UserProfile
