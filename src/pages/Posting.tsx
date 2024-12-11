@@ -56,24 +56,30 @@ export default function Posting() {
     setOpenChannel((prev) => !prev);
   };
 
-  // 보낼 요청값
-  const info = {
-    title: JSON.stringify({ HTitle: title, desc }),
-    image:
-      imgRef.current && imgRef.current.files ? imgRef.current.files[0] : "",
-    channelId,
-  };
   // 글 등록 요청
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    if (info.image === "") throw new Error("이미지 다시 선택하세요");
-    console.log(info);
     e.preventDefault();
-    // try {
-    //   const response = await postingFn(info);
-    //   console.log(response);
-    // } catch (error) {
-    //   console.log(error);
-    // }
+    if (
+      !imgRef.current ||
+      !imgRef.current.files ||
+      imgRef.current.files.length === 0
+    ) {
+      alert("이미지를 선택하세요.");
+      return;
+    }
+
+    const formData = new FormData();
+
+    formData.append("title", JSON.stringify({ HTitle: title, desc }));
+    formData.append("image", imgRef.current.files[0]);
+    formData.append("channelId", channelId);
+
+    try {
+      const response = await postingFn(formData);
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
