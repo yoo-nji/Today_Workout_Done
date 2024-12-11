@@ -29,7 +29,7 @@ export default function PostStatus({
   }, [img, channel]);
 
   return (
-    <div className="w-[25%] h-[45px] flex items-center justify-between border-t border-[#a3badc] mt-3">
+    <div className="w-[250px] h-[45px] flex items-center justify-between border-t border-[#a3badc] mt-3">
       {/* 아이콘 */}
       <div
         className={`w-[45px] flex flex-col justify-center items-center gap-2`}
