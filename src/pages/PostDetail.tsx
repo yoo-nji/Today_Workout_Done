@@ -24,7 +24,7 @@ export default function PostDetail() {
   const getPostData = async () => {
     try {
       // 여기에 포스트 id 값 넣기
-      const { data } = await api.get("/posts/6759314fde84b53b732ceea7");
+      const { data } = await api.get("/posts/6759a934e7568a3d77d15e40");
       const {
         author: { fullName, _id },
         comments,
