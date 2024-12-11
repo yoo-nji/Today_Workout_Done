@@ -10,6 +10,8 @@ import AuthLayout from "./layouts/AuthLayout";
 import User from "./pages/User";
 import Posting from "./pages/Posting";
 import PublicRoute from "./route/PublicRoute";
+// 댓글테스트 페이지 삭제하기!! ❌
+import Test from "./pages/test";
 
 export default function App() {
   return (
@@ -20,6 +22,8 @@ export default function App() {
           <Route path="/about" element={<About />} />
           <Route path="/user/:user_id" element={<User />} />
           <Route path="/posting" element={<Posting />} />
+          {/* 댓글테스트 페이지 삭제하기!! ❌ */}
+          <Route path="/test" element={<Test />} />
           <Route path="*" element={<Error />} />
         </Route>
 
