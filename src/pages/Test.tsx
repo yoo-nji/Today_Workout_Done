@@ -32,11 +32,16 @@ export default function Test() {
 
   //댓글 등록하기
   const handleCommentSubmit = async () => {
-    const newComment = "댓글 등록 테스트";
+    const comment = "댓글 등록 테스트";
     const postId = "6757d369ce18fa02ded5c9ce";
 
+    const option = {
+      comment,
+      postId,
+    };
+
     try {
-      const nComment = await newCommentFn(newComment, postId);
+      const nComment = await newCommentFn(option);
       console.log(nComment);
       setComments((comments) => [nComment, ...comments]);
     } catch (err) {

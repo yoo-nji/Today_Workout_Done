@@ -1,8 +1,13 @@
 import { api } from "../api/axios";
 
-export const newCommentFn = async (newComment: string, postId: string) => {
+interface newCommentFnType {
+  comment: string;
+  postId: string;
+}
+
+export const newCommentFn = async (option: newCommentFnType) => {
   try {
-    const { data } = await api.post("/comments/create", { newComment, postId });
+    const { data } = await api.post("/comments/create", option);
     // 응답 처리
     console.log("댓글 등록 성공:", data);
     return data;
