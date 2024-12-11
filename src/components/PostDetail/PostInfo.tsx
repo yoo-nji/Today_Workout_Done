@@ -5,7 +5,7 @@ export default function PostInfo() {
     <>
       <div className="mb-2 text-sm">게시판이름</div>
       <h1 className="mb-8 text-4xl">제목</h1>
-      <div className="flex gap-[10px] border-blue-500 border-2 items-center">
+      <div className="flex gap-[10px] items-center">
         <UserProfile
           BackWidth="w-[36px]"
           BackHeight="h-[36px]"
@@ -17,8 +17,8 @@ export default function PostInfo() {
           <p className="text-xs">2024.12.10</p>
         </div>
       </div>
-      <div className="my-[30px] border border-green-500 flex flex-col items-center">
-        <div className="border-2 border-red-500">
+      <div className="my-[30px] flex flex-col items-center">
+        <div className="">
           <img
             src="https://image.ajunews.com/content/image/2024/01/21/20240121132054894779.jpg"
             alt=""
