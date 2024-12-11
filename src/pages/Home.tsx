@@ -18,6 +18,7 @@ export default function Home() {
       if (data.length === 0) {
         console.log("게시물이 없습니다.");
       }
+
       setPosts(data);
       setSearchPosts(data);
     } catch (err) {
