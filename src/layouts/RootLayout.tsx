@@ -7,7 +7,7 @@ import { twMerge } from "tailwind-merge";
 export default function RootLayout() {
   const isToggle = usesidebarToggleStore((state) => state.isToggle);
   return (
-    <div className="flex">
+    <div className="flex font-pretendard">
       <Sidebar />
       <div className="flex flex-col h-screen min-h-screen w-full">
         <Header logo sidebar />

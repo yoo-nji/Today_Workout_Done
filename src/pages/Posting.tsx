@@ -1,14 +1,13 @@
 import { useRef, useState } from "react";
 import { twMerge } from "tailwind-merge";
 import downIcon from "../assets/down.svg";
-import uploadImgIcon from "../assets/uploadImgIcon.svg";
-import selectChannel from "../assets/selectChannel.svg";
-import writeTitle from "../assets/writeTitle.svg";
+import PostStatus from "../components/posting/PostStatus";
+import { postingFn } from "../utils/postingFn";
 
 export default function Posting() {
   const imgRef = useRef<HTMLInputElement>(null);
   // 이미지
-  const [img, setImg] = useState<File>();
+  const [img, setImg] = useState<string>("");
   // 제목
   const [title, setTitle] = useState("");
   // 설명
@@ -21,9 +20,24 @@ export default function Posting() {
 
   const [openChannel, setOpenChannel] = useState(false);
 
+  // 이미지 미리보기
   const handleChange = () => {
     if (imgRef.current && imgRef.current.files) {
       console.log(imgRef.current.files);
+      const image = imgRef.current.files[0];
+      if (image.type.startsWith("image/")) {
+        const imgUrl = URL.createObjectURL(image);
+        setImg(imgUrl);
+      } else {
+        alert("이미지 선택하세요");
+      }
+
+      // 다중 이미지 (나중에 api업데이트 시 사용)
+      // for (let i = 0; i < images.length; i++) {
+      //   const imgUrl = URL.createObjectURL(images[i]);
+      //   console.log(imgUrl);
+      //   setImg((prev) => [...prev, imgUrl]);
+      // }
     }
   };
 
@@ -32,7 +46,7 @@ export default function Posting() {
   };
 
   const channels = [
-    { id: "WorkoutDon", name: "오운완 인증" },
+    { id: "6757a3a7ce18fa02ded5c758", name: "오운완 인증" },
     { id: "Protein", name: "프로틴 추천" },
     { id: "Routine", name: "루틴 공유" },
     { id: "Gymreview", name: "헬스장 리뷰" },
@@ -42,59 +56,62 @@ export default function Posting() {
     setOpenChannel((prev) => !prev);
   };
 
+  // 글 등록 요청
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (
+      !imgRef.current ||
+      !imgRef.current.files ||
+      imgRef.current.files.length === 0
+    ) {
+      alert("이미지를 선택하세요.");
+      return;
+    }
+
+    const formData = new FormData();
+
+    formData.append("title", JSON.stringify({ HTitle: title, desc }));
+    formData.append("image", imgRef.current.files[0]);
+    formData.append("channelId", channelId);
+
+    try {
+      const response = await postingFn(formData);
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div className="flex justify-start items-start outline-none h-full bg-slate-100">
       <div className="m-auto pt-[20px] pb-[20px] h-[650px] bg-white flex flex-col items-center gap-5 rounded-[20px]">
         <h1 className="text-[#030712] font-bold text-[30px]">글쓰기</h1>
         {/* log */}
-        <div className="w-[25%] h-[45px] flex items-center justify-between border-t border-[#a3badc] mt-3">
-          {/* 아이콘 */}
-          <div className="w-[45px] flex flex-col justify-center items-center gap-2 ">
-            <div className="w-[45px] h-[45px] rounded-[50%] bg-[#265CAC] flex justify-center items-center ">
-              <img
-                src={uploadImgIcon}
-                alt="이미지 업로드 아이콘"
-                className="w-[30px] h-[30px] block "
-              />
-            </div>
-            <p className="text-[#265CAC] text-center leading-[16px]">
-              이미지 등록
-            </p>
-          </div>
 
-          <div className="w-[45px] flex flex-col justify-center items-center gap-2">
-            <div className="w-[45px] h-[45px] rounded-[50%] bg-[#92ADD5] flex justify-center items-center">
-              <img
-                src={selectChannel}
-                alt="이미지 업로드 아이콘"
-                className="w-[30px] h-[30px] block"
-              />
-            </div>
-            <p className="text-[#92ADD5] text-center leading-[16px]">
-              게시판 선택
-            </p>
-          </div>
+        <PostStatus img={img} title={title} desc={desc} channel={channel} />
 
-          <div className="w-[45px] flex flex-col justify-center items-center gap-2">
-            <div className="w-[45px] h-[45px] rounded-[50%] bg-[#92ADD5] flex justify-center items-center">
-              <img
-                src={writeTitle}
-                alt="이미지 업로드 아이콘"
-                className="w-[30px] h-[30px] block ml-[6px]"
-              />
-            </div>
-            <p className="text-[#92ADD5] text-center leading-[16px]">
-              내용 작성
-            </p>
-          </div>
-        </div>
-
-        <form className="w-[1000px] h-[480px] flex items-center justify-center gap-10 bg-white">
+        <form
+          className="w-[1000px] h-[480px] flex items-center justify-center gap-10 bg-white"
+          onSubmit={(e) => handleSubmit(e)}
+        >
           {/* 이미지 등록 */}
           <div className=" h-[390px] flex flex-col justify-center items-center gap-3">
-            <div className="w-[300px] h-full bg-[#F4F6F8] flex items-center justify-center rounded-[5px]">
+            <div
+              className={`w-[300px] h-full bg-[#F4F6F8] flex  gap-[10px] ${
+                img.length > 0
+                  ? "flex-wrap items-start justify-start"
+                  : "items-center justify-center"
+              }  rounded-[5px]`}
+            >
+              {img.length > 0 && (
+                <img
+                  src={img}
+                  alt="이미지"
+                  className="w-full h-full bg-white"
+                />
+              )}
               <p className="text-[#91989E] w-[80px] text-center">
-                {!img ? "이미지 등록 필수입니다" : ""}
+                {img.length < 1 ? "이미지 등록 필수입니다" : ""}
               </p>
             </div>
             <div>
@@ -103,6 +120,7 @@ export default function Posting() {
                 id="uploadImg"
                 className="hidden"
                 ref={imgRef}
+                accept="image/*"
                 onChange={handleChange}
               />
               <label
@@ -152,7 +170,9 @@ export default function Posting() {
               type="text"
               placeholder="제목을 입력해주세요"
               className=" w-full h-[50px] bg-[#F4F6F8]  outline-none text-[18px] px-[15px]"
-              disabled={channelId ? false : true}
+              disabled={img.length && channel !== "게시판 선택" ? false : true}
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
             />
             <textarea
               name="desc"
@@ -160,11 +180,19 @@ export default function Posting() {
               placeholder="내용을 작성해주세요"
               className=" resize-none outline-none w-full h-[200px] bg-[#F4F6F8] py-[10px] px-[15px] text-[20px]"
               maxLength={1000}
-              disabled={channelId ? false : true}
+              disabled={img.length && channel !== "게시판 선택" ? false : true}
+              value={desc}
+              onChange={(e) => setDesc(e.target.value)}
             ></textarea>
             <button
-              className="bg-[#4772b2] w-[80px] h-[40px] text-white rounded-[10px] cursor-pointer"
-              disabled
+              className={`w-[80px] h-[40px] text-white rounded-[10px] ${
+                !img.length || channel === "게시판 선택" || !title || !desc
+                  ? "cursor-default bg-[#4772b2a5]"
+                  : "cursor-pointer bg-[#4772b2]"
+              }`}
+              disabled={
+                !img.length || channel === "게시판 선택" || !title || !desc
+              }
             >
               등록하기
             </button>

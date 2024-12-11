@@ -39,7 +39,7 @@ export default function Header({
         email: "wjw1469@gmail.com",
         password: "asdf1234",
       });
-      login(data.Token);
+      login(data.token);
       setUser(data.user);
       alert("로그인 되었습니다.");
       navigate("/");

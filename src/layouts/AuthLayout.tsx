@@ -4,7 +4,7 @@ import Header from "../components/rootlayout/Header";
 
 export default function AuthLayout() {
   return (
-    <div className="flex flex-col w-full h-screen min-h-screen ">
+    <div className="flex flex-col w-full h-screen min-h-screen font-pretendard ">
       <Header logo />
       <div className="relative flex h-full border-2 bg-[#EFF3F7]">
         {/* 이미지 백그라운드 */}
