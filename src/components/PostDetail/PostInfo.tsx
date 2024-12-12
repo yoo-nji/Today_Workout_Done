@@ -8,6 +8,7 @@ interface PostInfoProps {
   createdAt: string;
   image: string;
   fullName: string;
+  channelId: string;
   owner: boolean;
 }
 
@@ -17,11 +18,14 @@ export default function PostInfo({
   createdAt,
   image,
   fullName,
+  channelId,
   owner,
 }: PostInfoProps) {
-  console.log(owner, "소유주");
+  const imgRef = useRef<HTMLInputElement>(null);
   const [titleInput, setTitleInput] = useState(title);
   const [context, setContext] = useState(desc);
+  const [img, setImg] = useState(image);
+  const [uploadImg, setUploadImg] = useState<File | null>(null);
   const [edit, setEdit] = useState(false);
   const textarea = useRef<HTMLTextAreaElement | null>(null);
 
@@ -40,14 +44,41 @@ export default function PostInfo({
       JSON.stringify({ HTitle: titleInput, desc: context })
     );
     formData.append("postId", "6759a934e7568a3d77d15e40");
+    formData.append("channelId", channelId);
+    if (uploadImg) {
+      formData.append("image", uploadImg);
+    }
 
     try {
-      const response = await updatePost(formData);
-      console.log(response);
+      await updatePost(formData);
       alert("수정되었습니다.");
       setEdit(false);
     } catch (error) {
       console.log(error);
+    }
+  };
+
+  const editButtonHandler = () => {
+    console.log(textarea.current);
+    if (textarea.current) {
+      console.log("hi");
+      textarea.current.style.height = "auto"; // 높이 초기화
+      textarea.current.style.height = `${textarea.current.scrollHeight}px`; // 내용에 맞게 높이 조정
+    }
+    setEdit(true);
+  };
+
+  // 이미지 미리보기
+  const handleChange = () => {
+    if (imgRef.current && imgRef.current.files) {
+      const image = imgRef.current.files[0];
+      if (image.type.startsWith("image/")) {
+        const imgUrl = URL.createObjectURL(image);
+        setImg(imgUrl);
+        setUploadImg(imgRef.current.files[0]);
+      } else {
+        alert("이미지 선택하세요");
+      }
     }
   };
 
@@ -59,19 +90,19 @@ export default function PostInfo({
     .padStart(2, "0")}.${date.getDate().toString().padStart(2, "0")}`;
   return (
     <>
-      <div className="mb-2 text-sm">
+      <div className="text-sm ">
         게시판이름 (넣을려고했는데 어떻게 처리할지고 고민중)
       </div>
       {edit ? (
         <input
-          className="mb-8 text-4xl focus:outline-none border w-full border-[#d3d3d3d3] "
+          className="py-3 mb-4 text-4xl focus:outline-none border w-full border-[#d3d3d3d3]"
           value={titleInput}
           onChange={(e) => setTitleInput(e.target.value)}
         />
       ) : (
-        <h1 className="mb-8 text-4xl">{titleInput}</h1>
+        <h1 className="py-3 mb-4 text-4xl">{titleInput}</h1>
       )}
-      <div className="flex items-center justify-between border-2 border-red-500">
+      <div className="flex items-center justify-between">
         {/* 왼쪽 프로필 */}
         <div className="flex gap-[10px] items-center">
           <UserProfile
@@ -91,26 +122,46 @@ export default function PostInfo({
             <button onClick={updateHandler}>저장</button>
           ) : (
             <div className="flex gap-2 text-[#505050]">
-              <button onClick={() => setEdit(true)}>수정</button>
+              <button onClick={editButtonHandler}>수정</button>
               <button>삭제</button>
             </div>
           ))}
       </div>
-      <div className="my-[30px] flex flex-col items-center border-2 border-red-500">
+      <div className="my-[30px] flex flex-col items-center">
         <div className="">
-          <img src={image} alt="업로드이미지" />
+          {edit ? (
+            <>
+              <input
+                type="file"
+                id="uploadImg"
+                className="hidden"
+                ref={imgRef}
+                accept="image/*"
+                onChange={handleChange}
+              />
+              <label htmlFor="uploadImg" className="cursor-pointer">
+                <div className="border-2 border-red-500 w-fit h-fit">
+                  <img src={img} alt="업로드이미지" className="" />
+                </div>
+              </label>
+            </>
+          ) : (
+            <img src={img} alt="업로드이미지" />
+          )}
         </div>
         {edit ? (
-          <textarea
-            ref={textarea}
-            rows={1}
-            className="w-full mt-10 overflow-hidden border border-[#505050] resize-none focus:outline-none"
-            onChange={(e) => handleInput(e)}
-          >
-            {context}
-          </textarea>
+          <div className="py-3 border border-[#d3d3d3d3] w-full mt-10">
+            <textarea
+              ref={textarea}
+              className="w-full overflow-hidden resize-none focus:outline-none"
+              onChange={(e) => handleInput(e)}
+              value={context}
+            >
+              {context}
+            </textarea>
+          </div>
         ) : (
-          <div className="w-full mt-10">{context}</div>
+          <div className="w-full py-3 mt-10 whitespace-pre-line">{context}</div>
         )}
       </div>
     </>
