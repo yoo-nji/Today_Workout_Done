@@ -9,11 +9,8 @@ export default function MyPage() {
   const myInfo = useAuth((state) => state.user)!;
   console.log(myInfo);
 
-  const update = new Date();
-  const date = update.toLocaleDateString("ko-KR").slice(0, -1);
-
   return (
-    <div className="w-full flex flex-col items-center">
+    <div className="flex flex-col items-center relative">
       <div className=" w-[1200px] flex flex-col gap-[40px]">
         <UserCard
           uname={myInfo.fullName}
@@ -25,6 +22,7 @@ export default function MyPage() {
           IconHeight="h-[80px]"
           edit={true}
           update={true}
+          userImg={myInfo.image}
         />
 
         <div>
@@ -38,6 +36,23 @@ export default function MyPage() {
                 const update = new Date();
                 const date = update.toLocaleDateString("ko-KR").slice(0, -1);
 
+                function isValidJson(data: string) {
+                  try {
+                    JSON.parse(data);
+                    return true; // 유효한 JSON
+                  } catch (e) {
+                    return false; // 잘못된 JSON
+                  }
+                }
+
+                let postTitle = "";
+                if (isValidJson(post.title)) {
+                  const parsedData = JSON.parse(post.title);
+                  postTitle = parsedData.HTitle;
+                } else {
+                  // title이 JSON이 아닌 경우
+                  postTitle = post.title;
+                }
                 return (
                   <div
                     className="flex flex-col items-center gap-3"
@@ -53,7 +68,7 @@ export default function MyPage() {
                       {/* Hover */}
                       <div className="absolute inset-0 flex flex-col items-center justify-center text-white transition-opacity duration-300 bg-black bg-opacity-50 rounded-lg opacity-0 group-hover:opacity-100">
                         <h3 className="w-[80%] text-[20px] font-semibold truncate">
-                          {post.title}
+                          {postTitle}
                         </h3>
                         {/* 아이콘 */}
                         <div className="absolute bottom-6 right-6 flex gap-[18px] text-xl font-normal ">
@@ -77,6 +92,7 @@ export default function MyPage() {
                           BackHeight="h-[40px]"
                           IconWidth="w-[28px]"
                           IconHeight="h-[28px]"
+                          userImg={myInfo.image}
                         />
                         <div className="text-base font-medium">
                           {myInfo.fullName}
