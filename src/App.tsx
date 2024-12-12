@@ -12,6 +12,7 @@ import Posting from "./pages/Posting";
 import PublicRoute from "./route/PublicRoute";
 import PostDetail from "./pages/PostDetail";
 import PrivateRoute from "./route/PrivateRoute";
+import ReviewPost from "./pages/ReviewPost";
 
 export default function App() {
   return (
@@ -21,7 +22,7 @@ export default function App() {
           <Route path="/" element={<Home />} />
           <Route path="/protein" element={<Home />} />
           <Route path="/routine" element={<Home />} />
-          <Route path="/gymreview" element={<Home />} />
+          <Route path="/gymreview" element={<ReviewPost />} />
 
           <Route path="/about" element={<About />} />
           <Route path="/user/:user_id" element={<User />} />

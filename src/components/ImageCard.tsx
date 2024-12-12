@@ -32,7 +32,6 @@ export default function ImageCard({
     postTitle = title;
   }
 
-  //const { HTitle } = JSON.parse(title);
   return (
     <div className="flex flex-col items-center gap-3">
       {/* 썸네일 */}
