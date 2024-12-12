@@ -12,7 +12,7 @@ export default function CommentSec({
 }: {
   likes: LikeType[];
   comments: CommentType[];
-  postId: string;
+  postId: string | undefined;
 }) {
   //댓글 목록
   const [commentList, setCommentList] = useState<Comment[]>([]);
@@ -80,10 +80,6 @@ export default function CommentSec({
   if (isLoading) return <p>댓글 불러오는 중...</p>;
   if (error) return <p>댓글을 불러오는데 실패했습니다.</p>;
 
-  //[ ] 디자인추가
-  if (commentList.length === 0)
-    return <p>아직 댓글이 없습니다! 댓글을 작성해 주세요</p>;
-
   return (
     <>
       {/* 코멘트 폼 */}
@@ -100,13 +96,19 @@ export default function CommentSec({
       </div>
       <div className="">
         {/* 댓글 박스 */}
-        {commentList.map((comment) => (
-          <CommentBox
-            key={comment._id}
-            comment={comment}
-            handleDelete={handleDelete}
-          />
-        ))}
+        {commentList.length === 0 ? (
+          <p className="text-lg">
+            아직 댓글이 없습니다! 댓글을 작성해 주세요 😊
+          </p>
+        ) : (
+          commentList.map((comment) => (
+            <CommentBox
+              key={comment._id}
+              comment={comment}
+              handleDelete={handleDelete}
+            />
+          ))
+        )}
       </div>
     </>
   );

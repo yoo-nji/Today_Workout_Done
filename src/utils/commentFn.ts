@@ -2,7 +2,7 @@ import { api } from "../api/axios";
 
 interface newCommentFnType {
   comment: string;
-  postId: string;
+  postId: string | undefined;
 }
 
 export const newCommentFn = async (option: newCommentFnType) => {

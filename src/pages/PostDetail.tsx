@@ -1,5 +1,3 @@
-import CommentBox from "../components/PostDetail/CommentBox";
-import CommentForm from "../components/PostDetail/CommentForm";
 import PostInfo from "../components/PostDetail/PostInfo";
 import leftIcon from "../assets/double-left.svg";
 import rightIcon from "../assets/double-right.svg";
@@ -93,7 +91,7 @@ export default function PostDetail() {
           likes={data.likes}
           comments={data.comments}
           //포스트 아이디
-          postId={"6757d369ce18fa02ded5c9ce"}
+          postId={post_id}
         />
       </div>
     </div>

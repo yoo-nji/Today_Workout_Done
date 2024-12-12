@@ -5,7 +5,7 @@ import ButtonComponent from "../ButtonComponent";
 interface CommentFormProps {
   likes: LikeType[];
   comments: CommentType[];
-  postId: string;
+  postId: string | undefined;
   handleCommentSubmit: (comment: string) => Promise<void>;
   newComment: string;
   setNewComment: React.Dispatch<React.SetStateAction<string>>;
