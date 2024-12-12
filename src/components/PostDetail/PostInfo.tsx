@@ -8,6 +8,7 @@ interface PostInfoProps {
   createdAt: string;
   image: string;
   fullName: string;
+  owner: boolean;
 }
 
 export default function PostInfo({
@@ -16,8 +17,11 @@ export default function PostInfo({
   createdAt,
   image,
   fullName,
+  owner,
 }: PostInfoProps) {
-  const [input, setInput] = useState("");
+  console.log(owner, "소유주");
+  const [titleInput, setTitleInput] = useState(title);
+  const [context, setContext] = useState(desc);
   const [edit, setEdit] = useState(false);
   const textarea = useRef<HTMLTextAreaElement | null>(null);
 
@@ -26,18 +30,22 @@ export default function PostInfo({
       textarea.current.style.height = "auto"; // 높이 초기화
       textarea.current.style.height = `${textarea.current.scrollHeight}px`; // 내용에 맞게 높이 조정
     }
-    setInput(e.target.value);
+    setContext(e.target.value);
   };
 
   const updateHandler = async () => {
     const formData = new FormData();
-    formData.append("title", JSON.stringify({ HTitle: title, desc: input }));
+    formData.append(
+      "title",
+      JSON.stringify({ HTitle: titleInput, desc: context })
+    );
     formData.append("postId", "6759a934e7568a3d77d15e40");
 
     try {
       const response = await updatePost(formData);
       console.log(response);
       alert("수정되었습니다.");
+      setEdit(false);
     } catch (error) {
       console.log(error);
     }
@@ -54,7 +62,15 @@ export default function PostInfo({
       <div className="mb-2 text-sm">
         게시판이름 (넣을려고했는데 어떻게 처리할지고 고민중)
       </div>
-      <h1 className="mb-8 text-4xl">{title}</h1>
+      {edit ? (
+        <input
+          className="mb-8 text-4xl focus:outline-none border w-full border-[#d3d3d3d3] "
+          value={titleInput}
+          onChange={(e) => setTitleInput(e.target.value)}
+        />
+      ) : (
+        <h1 className="mb-8 text-4xl">{titleInput}</h1>
+      )}
       <div className="flex items-center justify-between border-2 border-red-500">
         {/* 왼쪽 프로필 */}
         <div className="flex gap-[10px] items-center">
@@ -70,14 +86,15 @@ export default function PostInfo({
           </div>
         </div>
         {/* 오른쪽 수정 및 삭제 */}
-        {edit ? (
-          <button onClick={updateHandler}>저장</button>
-        ) : (
-          <div className="flex gap-2 text-[#505050]">
-            <button onClick={() => setEdit(true)}>수정</button>
-            <button>삭제</button>
-          </div>
-        )}
+        {owner &&
+          (edit ? (
+            <button onClick={updateHandler}>저장</button>
+          ) : (
+            <div className="flex gap-2 text-[#505050]">
+              <button onClick={() => setEdit(true)}>수정</button>
+              <button>삭제</button>
+            </div>
+          ))}
       </div>
       <div className="my-[30px] flex flex-col items-center border-2 border-red-500">
         <div className="">
@@ -87,13 +104,13 @@ export default function PostInfo({
           <textarea
             ref={textarea}
             rows={1}
-            className="w-full mt-10 overflow-hidden border-2 border-red-500 resize-none focus:outline-none"
+            className="w-full mt-10 overflow-hidden border border-[#505050] resize-none focus:outline-none"
             onChange={(e) => handleInput(e)}
           >
-            {desc}
+            {context}
           </textarea>
         ) : (
-          <div className="w-full mt-10">{desc}</div>
+          <div className="w-full mt-10">{context}</div>
         )}
       </div>
     </>
