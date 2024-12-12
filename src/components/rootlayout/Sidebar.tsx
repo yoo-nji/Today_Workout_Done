@@ -37,6 +37,7 @@ export default function Sidebar() {
       icon: dumbbell,
       alt: "오운완 아이콘",
       route: "/",
+      channel_id: "6757a3a7ce18fa02ded5c758",
     },
     {
       id: 2,
@@ -44,6 +45,7 @@ export default function Sidebar() {
       icon: protein,
       alt: "프로틴 아이콘",
       route: "protein",
+      channel_id: "6758f6bf5f86e71ae5eb9b6c",
     },
     {
       id: 3,
@@ -51,6 +53,7 @@ export default function Sidebar() {
       icon: routine,
       alt: "루틴 아이콘",
       route: "routine",
+      channel_id: "6758f7305f86e71ae5eb9b82",
     },
     {
       id: 4,
@@ -58,6 +61,7 @@ export default function Sidebar() {
       icon: gym,
       alt: "헬스장 아이콘",
       route: "gymreview",
+      channel_id: "6758f75b5f86e71ae5eb9bae",
     },
   ];
 
@@ -76,13 +80,14 @@ export default function Sidebar() {
     <div
       className={twMerge(
         `flex flex-col items-center  h-[100vh] z-10
-      py-5 gap-8 text-[#1D1D1D] bg-[#FEFEFE] border-r
+      py-5 text-[#1D1D1D] bg-[#FEFEFE] border-r
       border-gray-200/50 fixed transition-all `,
         isOpen ? "before:modal-back" : "",
         isToggle ? "w-[300px]" : "w-20"
       )}
       onClick={(e) => handleBackClick(e)}
     >
+      <div></div>
       {/* 토글 버튼 */}
       <button
         onClick={handleToggleClick}
@@ -94,9 +99,13 @@ export default function Sidebar() {
         <img src={isToggle ? left : right} alt="" />
       </button>
       {/* 로고 */}
-      <a className={twMerge("w-20 h-[53px]", !isToggle && "hidden")} href="/">
+      <a
+        className={twMerge("w-20 h-[53px] mb-[14px]", !isToggle && "hidden")}
+        href="/"
+      >
         <img src="/src/assets/loge.svg" alt="loge" />
       </a>
+
       {/* 멘트 */}
       <div className="flex flex-col items-center gap-[14px] pb-[23px] w-full">
         <div
@@ -139,6 +148,7 @@ export default function Sidebar() {
                   key={item.id}
                   toggleStyle={isToggle ? "" : "p-0 justify-center"}
                   isToggleOpen={isToggle}
+                  channel_id={item.channel_id}
                 >
                   {item.title}
                 </ChannelList>
@@ -155,7 +165,7 @@ export default function Sidebar() {
           <div className="flex justify-center">
             <button
               className={twMerge(
-                "mt-6 self-center w-[243px] h-[50px] bg-[#3B6CB4] rounded-[20px] text-lg text-white font-bold relative",
+                "mt-2 self-center w-[243px] h-[50px] bg-[#265CAC] rounded-[20px] text-lg text-white font-bold relative",
                 !isToggle && "hidden"
               )}
               onClick={(e) => {
@@ -179,7 +189,12 @@ export default function Sidebar() {
           </div>
         </div>
 
-        {isOpen && <UserListModal handleBackClick={handleBackClick} />}
+        {isOpen && (
+          <UserListModal
+            handleBackClick={handleBackClick}
+            setIsOpen={setIsOpen}
+          />
+        )}
       </div>
     </div>
   );

@@ -1,4 +1,7 @@
+import { useNavigate } from "react-router";
 import defaultUserImg from "../../assets/defaultUser.svg";
+import FollowButton from "../FollowButton";
+import { useAuth } from "../../stores/authStore";
 
 interface UserBoxPropsType {
   isOnline?: boolean;
@@ -6,6 +9,8 @@ interface UserBoxPropsType {
   followers: string[];
   following: string[];
   image?: string | null;
+  userid: string;
+  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export default function UserBox({
@@ -14,11 +19,25 @@ export default function UserBox({
   following,
   isOnline,
   image,
+  userid,
+  setIsOpen,
 }: UserBoxPropsType) {
+  const navigate = useNavigate();
+
+  const handleClick = (userId: string) => {
+    setIsOpen(false);
+    navigate(`/user/${userId}`);
+  };
+
+  //로그인 여부
+  const isLogin = useAuth((state) => state.isLoggedIn);
   return (
     <div className="w-[320px] h-[75px] bg-[#EFEFEF] flex items-center gap-3 pl-[20px] rounded-[10px] flex-shrink-0">
       {/* 유저 프로필, 현활 */}
-      <div className="bg-white w-[48px] h-[48px] flex justify-center items-center rounded-[50%] shadow-inner cursor-pointer relative">
+      <div
+        className="bg-white w-[48px] h-[48px] flex justify-center items-center rounded-[50%] shadow-inner cursor-pointer relative"
+        onClick={() => handleClick(userid)}
+      >
         <img
           src={image ? image : defaultUserImg}
           alt="사용자 프로필 사진"
@@ -33,9 +52,13 @@ export default function UserBox({
       <div>
         <div className="flex gap-3 items-center">
           <p className="font-semibold text-[18px]">{fullname}</p>
-          <div className="bg-[#265CAC] text-white w-[90px] flex justify-center items-center h-[30px] rounded-[10px] text-sm cursor-pointer">
-            팔로우
-          </div>
+          {isLogin && (
+            <FollowButton
+              width="w-[90px]"
+              height="h-[30px]"
+              rounded="rounded-[10px]"
+            />
+          )}
         </div>
         <div className="text-[15px] flex gap-3 mt-[2px]">
           <p>팔로워: {followers.length}</p>
