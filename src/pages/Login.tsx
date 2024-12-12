@@ -5,9 +5,12 @@ import { twMerge } from "tailwind-merge";
 import { useAuth } from "../stores/authStore";
 import { api } from "../api/axios";
 import { AxiosError } from "axios";
+import { useToken } from "../stores/toeknStore";
 
 export default function Login() {
   const login = useAuth((state) => state.login);
+  // 토큰 저장하기
+  const setToken = useToken((state) => state.setToken);
   const setUser = useAuth((state) => state.setUser);
 
   const navigate = useNavigate();
@@ -40,8 +43,9 @@ export default function Login() {
         password,
       });
       // 토큰 저장하기
-      login(data.token);
-      console.log(data, status);
+      setToken(data.token);
+      // 로그인
+      login();
       setUser(data.user);
       alert("로그인 되었습니다.");
       // Todo -> 로그인성공 후 이동페이지

@@ -9,6 +9,7 @@ import React, { useEffect, useState } from "react";
 import { api } from "../../api/axios";
 import { AxiosError } from "axios";
 import Notification from "../notification/Notification";
+import { useToken } from "../../stores/toeknStore";
 
 // 사이드바 접힐때 로고 보이도록 처리하자
 export default function Header({
@@ -18,6 +19,7 @@ export default function Header({
   logo?: boolean;
   sidebar?: boolean;
 }) {
+  const setToken = useToken((state) => state.setToken);
   const navigate = useNavigate();
   const authInfo = useAuth();
   {
@@ -39,7 +41,8 @@ export default function Header({
         email: "wjw1469@gmail.com",
         password: "asdf1234",
       });
-      login(data.token);
+      setToken(data.token);
+      login();
       setUser(data.user);
       alert("로그인 되었습니다.");
       navigate("/");
@@ -57,7 +60,7 @@ export default function Header({
   const logout = () => {
     authInfo.logout();
     // 로컬스토리지 삭제
-    useAuth.persist.clearStorage();
+    useToken.persist.clearStorage();
   };
 
   //
@@ -147,7 +150,7 @@ export default function Header({
             IconWidth="w-[33px]"
             IconHeight="h-[33px]"
             // Todo : 추후 마이페이지 어케 이동하는지 보고 처리
-            onClick={() => navigate("/user/login")}
+            onClick={() => navigate("/myprofile")}
           />
         </div>
       ) : (
