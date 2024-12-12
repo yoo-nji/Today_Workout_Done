@@ -5,6 +5,7 @@ import leftIcon from "../assets/double-left.svg";
 import rightIcon from "../assets/double-right.svg";
 import { useEffect, useState } from "react";
 import { api } from "../api/axios";
+import { useAuth } from "../stores/authStore";
 
 // 아직 comments 타입을 정확히 지정하지않았다.
 interface PostInfo {
@@ -19,12 +20,14 @@ interface PostInfo {
 }
 
 export default function PostDetail() {
+  const loginId = useAuth((state) => state.user);
+  console.log(loginId);
   const [data, setData] = useState<PostInfo | null>(null);
 
   const getPostData = async () => {
     try {
       // 여기에 포스트 id 값 넣기
-      const { data } = await api.get("/posts/6759314fde84b53b732ceea7");
+      const { data } = await api.get("/posts/6759a934e7568a3d77d15e40");
       const {
         author: { fullName, _id },
         comments,
@@ -45,7 +48,6 @@ export default function PostDetail() {
         likes,
       });
       console.log(data);
-      console.log("댓글", data.comments);
     } catch (error) {
       console.error("Error fetching post data: ", error);
     }
@@ -67,6 +69,7 @@ export default function PostDetail() {
           createdAt={data.createdAt}
           image={data.image}
           fullName={data.fullName}
+          owner={data.userID === loginId?._id}
         />
         <div className="flex justify-between">
           <div className="w-[360px] border-2 -[64px] flex items-center gap-4 rounded-[8px]">
