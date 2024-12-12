@@ -13,7 +13,7 @@ export default function MyPage() {
   const date = update.toLocaleDateString("ko-KR").slice(0, -1);
 
   return (
-    <div className="w-full flex flex-col items-center">
+    <div className="flex flex-col items-center relative">
       <div className=" w-[1200px] flex flex-col gap-[40px]">
         <UserCard
           uname={myInfo.fullName}
@@ -25,6 +25,7 @@ export default function MyPage() {
           IconHeight="h-[80px]"
           edit={true}
           update={true}
+          userImg={myInfo.image}
         />
 
         <div>
@@ -77,6 +78,7 @@ export default function MyPage() {
                           BackHeight="h-[40px]"
                           IconWidth="w-[28px]"
                           IconHeight="h-[28px]"
+                          userImg={myInfo.image}
                         />
                         <div className="text-base font-medium">
                           {myInfo.fullName}

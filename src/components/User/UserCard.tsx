@@ -14,6 +14,7 @@ interface UserCardType {
   isFollowBtn?: boolean;
   edit?: boolean;
   update?: boolean;
+  userImg?: string;
 }
 
 export default function UserCard({
@@ -27,6 +28,7 @@ export default function UserCard({
   isFollowBtn,
   edit,
   update,
+  userImg,
 }: UserCardType) {
   const [updateName, setUpdateName] = useState(uname);
 
@@ -66,6 +68,7 @@ export default function UserCard({
         IconHeight={IconHeight}
         edit={edit}
         update={update}
+        userImg={userImg}
       />
       <div>
         <div className="flex mb-6 gap-[32px] items-center">
