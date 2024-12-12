@@ -1,5 +1,4 @@
-import { Route } from "react-router";
-import { Routes } from "react-router";
+import { Route, useLocation, Routes } from "react-router";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import RootLayout from "./layouts/RootLayout";
@@ -14,8 +13,15 @@ import PostDetail from "./pages/PostDetail";
 import PrivateRoute from "./route/PrivateRoute";
 import ReviewPost from "./pages/ReviewPost";
 import MyPage from "./pages/MyPage";
+import { useEffect } from "react";
+import { verifyUser } from "./utils/verifyUser";
 
 export default function App() {
+  const path = useLocation();
+
+  useEffect(() => {
+    verifyUser();
+  }, [path]);
   return (
     <>
       <Routes>

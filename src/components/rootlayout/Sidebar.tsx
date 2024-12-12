@@ -13,8 +13,13 @@ import left from "../../assets/double-left.svg";
 import right from "../../assets/double-right.svg";
 import user from "../../assets/user_icon.svg";
 import ModeChange from "../button/ModeChange";
+import { useAuth } from "../../stores/authStore";
 
 export default function Sidebar() {
+  //로그인상태
+  const isLoggedIn = useAuth((state) => state.isLoggedIn);
+  // 유저정보
+  const userInfo = useAuth((state) => state.user);
   // 유저 목록 모달 상태
   const [isOpen, setIsOpen] = useState(false);
   // 사이드바 토글 상태
@@ -117,7 +122,7 @@ export default function Sidebar() {
           <div>
             어서오세요{" "}
             <span className="text-[#265CAC] text-[26px] font-extrabold">
-              수영
+              {userInfo && isLoggedIn ? userInfo.fullName : "회원"}
             </span>
             님
           </div>
@@ -156,7 +161,7 @@ export default function Sidebar() {
             })}
           </ul>
         </div>
-        <div className=" items-center ">
+        <div className="items-center ">
           {/* 모드변경 버튼 */}
           <div className="flex justify-center">
             <ModeChange />
