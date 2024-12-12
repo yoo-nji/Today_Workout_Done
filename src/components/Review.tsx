@@ -35,14 +35,17 @@ export default function Review({
     postContent = title;
   }
   return (
-    <div className="w-[1080px] h-[315px] relative flex flex-row">
+    <div className="w-[900px] h-[315px] mb-[109px] relative flex flex-row">
       {/* 썸네일 */}
-      <div
-        className="group relative w-[500px] h-[300px] bg-cover bg-center
-        rounded-[15px] shadow-lg mr-[60px] items-start"
-        style={{ backgroundImage: `url(${image || thumbnail})` }}
-      />
-      <div className="">
+      <div>
+        <div
+          className="group relative w-[400px] h-[300px] bg-cover bg-center
+        rounded-[15px] shadow-lg mr-[60px] mt-2 mb-[7px] items-start"
+          style={{ backgroundImage: `url(${image || thumbnail})` }}
+        />
+      </div>
+
+      <div className="relative">
         {/* 글 작성자 정보 */}
         <div className="flex justify-start mb-[30px]">
           <div className="flex flex-row gap-[13px]">
@@ -59,7 +62,7 @@ export default function Review({
           </div>
         </div>
         <h3 className="ml-[45px] mb-[30px] text-[24px] ">{postTitle}</h3>
-        <p className="ml-[45px] text-[16px]  w-[475px] h-[120px] line-clamp-5">
+        <p className="ml-[45px] text-[16px]  w-[400px] h-[120px] line-clamp-5">
           {postContent}
         </p>
         {/* 아이콘 */}
