@@ -3,8 +3,12 @@ import { twMerge } from "tailwind-merge";
 import downIcon from "../assets/down.svg";
 import PostStatus from "../components/posting/PostStatus";
 import { postingFn } from "../utils/postingFn";
+import { useNavigate } from "react-router";
 
 export default function Posting() {
+  const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
+
   const imgRef = useRef<HTMLInputElement>(null);
   // 이미지
   const [img, setImg] = useState<string>("");
@@ -46,10 +50,14 @@ export default function Posting() {
   };
 
   const channels = [
-    { id: "6757a3a7ce18fa02ded5c758", name: "오운완 인증" },
-    { id: "Protein", name: "프로틴 추천" },
-    { id: "Routine", name: "루틴 공유" },
-    { id: "Gymreview", name: "헬스장 리뷰" },
+    { id: "6757a3a7ce18fa02ded5c758", name: "오운완 인증", route: "/" },
+    { id: "6758f6bf5f86e71ae5eb9b6c", name: "프로틴 추천", route: "/protein" },
+    { id: "6758f7305f86e71ae5eb9b82", name: "루틴 공유", route: "/routine" },
+    {
+      id: "6758f75b5f86e71ae5eb9bae",
+      name: "헬스장 리뷰",
+      route: "/gymreview",
+    },
   ];
 
   const channelBtnClick = () => {
@@ -74,11 +82,18 @@ export default function Posting() {
     formData.append("image", imgRef.current.files[0]);
     formData.append("channelId", channelId);
 
+    const route = channels.filter((ch) => channelId === ch.id);
+
     try {
+      setIsLoading(true);
       const response = await postingFn(formData);
       console.log(response);
+      alert("글 등록 성공!!");
+      navigate(route[0].route);
     } catch (error) {
       console.log(error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -186,15 +201,23 @@ export default function Posting() {
             ></textarea>
             <button
               className={`w-[80px] h-[40px] text-white rounded-[10px] ${
-                !img.length || channel === "게시판 선택" || !title || !desc
+                !img.length ||
+                channel === "게시판 선택" ||
+                !title ||
+                !desc ||
+                isLoading
                   ? "cursor-default bg-[#4772b2a5]"
                   : "cursor-pointer bg-[#4772b2]"
               }`}
               disabled={
-                !img.length || channel === "게시판 선택" || !title || !desc
+                !img.length ||
+                channel === "게시판 선택" ||
+                !title ||
+                !desc ||
+                isLoading
               }
             >
-              등록하기
+              {isLoading ? "로딩중" : "등록하기"}
             </button>
           </div>
         </form>
