@@ -90,7 +90,7 @@ export default function PostInfo({
     .padStart(2, "0")}.${date.getDate().toString().padStart(2, "0")}`;
   return (
     <>
-      <div className=" text-sm">
+      <div className="text-sm ">
         게시판이름 (넣을려고했는데 어떻게 처리할지고 고민중)
       </div>
       {edit ? (
@@ -161,7 +161,7 @@ export default function PostInfo({
             </textarea>
           </div>
         ) : (
-          <div className="w-full mt-10 py-3 whitespace-pre-line">{context}</div>
+          <div className="w-full py-3 mt-10 whitespace-pre-line">{context}</div>
         )}
       </div>
     </>
