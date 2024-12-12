@@ -12,6 +12,7 @@ import Posting from "./pages/Posting";
 import PublicRoute from "./route/PublicRoute";
 import PostDetail from "./pages/PostDetail";
 import PrivateRoute from "./route/PrivateRoute";
+import MyPage from "./pages/MyPage";
 
 export default function App() {
   return (
@@ -23,12 +24,15 @@ export default function App() {
           <Route path="/routine" element={<Home />} />
           <Route path="/gymreview" element={<Home />} />
 
+          {/* 오운완 페이지 */}
+          <Route path="/records/:post_id" element={<PostDetail />} />
+
           <Route path="/about" element={<About />} />
           <Route path="/user/:user_id" element={<User />} />
-          <Route path="/posting/:post_id" element={<PostDetail />} />
           <Route path="*" element={<Error />} />
           <Route element={<PrivateRoute />}>
             <Route path="/posting" element={<Posting />} />
+            <Route path="/myprofile" element={<MyPage />} />
           </Route>
         </Route>
 

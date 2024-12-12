@@ -19,7 +19,6 @@ export default function Home() {
       if (data.length === 0) {
         console.log("게시물이 없습니다.");
       }
-
       setPosts(data);
       setSearchPosts(data);
     } catch (err) {
@@ -64,7 +63,7 @@ export default function Home() {
       <div>
         {/* 피드 이미지 */}
         <div className="flex flex-col items-center mt-8">
-          <div className="grid 2xl:grid-cols-4 xl:grid-cols-3 lg:grid-cols-2 gap-8">
+          <div className="grid gap-8 2xl:grid-cols-4 xl:grid-cols-3 lg:grid-cols-2">
             {searchPosts.length > 0 ? (
               searchPosts.map((post) => <ImageCard key={post._id} {...post} />)
             ) : (
