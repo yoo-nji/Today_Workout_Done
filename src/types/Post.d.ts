@@ -1,11 +1,11 @@
 interface PostType {
-  likes: [];
+  likes: string[];
   comments: string[];
-  _id: string;
+  _id?: string;
   title: string;
   image: string;
-  imagePublicId: string;
-  channel: {
+  imagePublicId?: string;
+  channel?: {
     authRequired: boolean;
     posts: string[];
     _id: string;
@@ -15,19 +15,19 @@ interface PostType {
     updatedAt: string;
     __v: number;
   };
-  author: {
+  author?: {
     role: string;
     emailVerified: boolean;
     banned: boolean;
     isOnline: boolean;
     posts: string[];
     //
-    likes: [];
+    likes: string[];
     comments: string[];
-    followers: [];
-    following: [];
-    notifications: [];
-    messages: [];
+    followers: string[];
+    following: string[];
+    notifications: string[];
+    messages: string[];
     _id: string;
     fullName: string;
     email: string;
@@ -37,6 +37,10 @@ interface PostType {
     username: string;
   };
   createdAt: string;
-  updatedAt: string;
-  __v: number;
+  updatedAt?: string;
+  __v?: number;
+}
+
+interface MyInfo {
+  fullName?: string;
 }

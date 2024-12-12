@@ -4,6 +4,7 @@ import UserProfile from "../components/UserProfile";
 import thumbnail from "../assets/images/feed_thumbnail.jpg";
 import likeIcon from "../assets/like_icon.svg";
 import chatIcon from "../assets/chat_icon.svg";
+import ImageCard from "../components/ImageCard";
 
 export default function MyPage() {
   const myInfo = useAuth((state) => state.user)!;
@@ -101,6 +102,20 @@ export default function MyPage() {
                       <div className="text-base font-light">{date}</div>
                     </div>
                   </div>
+                );
+              })}
+
+              {myInfo.posts.map((post) => {
+                return (
+                  <ImageCard
+                    key={post._id}
+                    image={post.image}
+                    comments={post.comments}
+                    createdAt={post.updatedAt}
+                    likes={post.likes}
+                    title={post.title}
+                    fullName={myInfo.fullName}
+                  />
                 );
               })}
             </div>
