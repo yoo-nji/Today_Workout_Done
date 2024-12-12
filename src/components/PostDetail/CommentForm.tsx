@@ -2,7 +2,11 @@ import likeIcon from "../../assets/like_icon.svg";
 import chatIcon from "../../assets/chat_icon_black.svg";
 import ButtonComponent from "../ButtonComponent";
 
-export default function CommentForm() {
+interface CommentFormProps {
+  setCommentInput: React.Dispatch<React.SetStateAction<string>>;
+}
+
+export default function CommentForm({ setCommentInput }: CommentFormProps) {
   return (
     <div className="">
       {/* 좋아요 이모티콘 댓글 이모티콘 area */}

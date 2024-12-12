@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Comment, getPostDetail } from "../utils/getPostDetail";
 import { delCommentFn, newCommentFn } from "../utils/commentFn";
 import CommentBox from "../components/PostDetail/CommentBox";
+import CommentForm from "../components/PostDetail/CommentForm";
 
 export default function Test() {
   //댓글 목록
@@ -10,6 +11,8 @@ export default function Test() {
   const [isLoading, setIsLoading] = useState(false);
   // 에러 상태
   const [error, setError] = useState(false);
+  // 댓글 인풋
+  const [commentInput, setCommentInput] = useState<string>("");
 
   //댓글 목록 불러오기
   useEffect(() => {
@@ -27,9 +30,6 @@ export default function Test() {
     };
     fetchComments();
   }, []);
-
-  if (isLoading) return <p>댓글 불러오는 중...</p>;
-  if (error) return <p>댓글을 불러오는데 실패했습니다.</p>;
 
   //댓글 등록하기
   const handleCommentSubmit = async () => {
@@ -68,8 +68,17 @@ export default function Test() {
       console.log(err);
     }
   };
+
+  if (isLoading) return <p>댓글 불러오는 중...</p>;
+  if (error) return <p>댓글을 불러오는데 실패했습니다.</p>;
+
   return (
     <>
+      {/* 코멘트 폼 */}
+      <div className="mt-4">
+        <CommentForm setCommentInput={setCommentInput} />
+      </div>
+
       <button onClick={handleCommentSubmit}>댓글 등록</button>
       <div className="max-w-md mx-auto p-4">
         {/* 댓글 입력 창 */}
