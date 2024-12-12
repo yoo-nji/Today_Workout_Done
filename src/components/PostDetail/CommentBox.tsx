@@ -1,6 +1,26 @@
 import UserProfile from "../UserProfile";
 import trashIcon from "../../assets/trash.svg";
-export default function CommentBox() {
+import { Comment } from "../../utils/getPostDetail";
+import { useAuth } from "../../stores/authStore";
+export default function CommentBox({
+  comment,
+  handleDelete,
+}: {
+  comment: Comment;
+  handleDelete: (commentId: string) => Promise<void>;
+}) {
+  // 사용자 정보 가져오기
+  const loginId = useAuth((state) => state.user);
+  // console.log(loginId?._id);
+
+  //날짜 포맷
+  const update = new Date(comment.createdAt);
+  // 연도, 월, 일 추출
+  const year = update.getFullYear();
+  const month = update.getMonth() + 1;
+  const day = update.getDate();
+  const formattedDate = `${year}년 ${month}월 ${day}일`;
+
   return (
     <div className="flex flex-col py-5 border-b border-gray-200">
       <div className="flex justify-between ">
@@ -12,15 +32,22 @@ export default function CommentBox() {
             IconHeight="h-[25px]"
           />
           <div>
-            <p className="text-[15px] mb-[2px] font-bold">강수영</p>
-            <p className="text-xs font-light">2024.12.10</p>
+            <p className="text-[13px] mb-[4px] font-bold">
+              {comment.author.fullName}
+            </p>
+            <p className="text-xs font-light">{formattedDate}</p>
           </div>
         </div>
-        <button className="w-8 mr-2">
-          <img src={trashIcon} alt="trashIcon" />
-        </button>
+        {loginId?._id === comment.author._id && (
+          <button
+            onClick={() => handleDelete(comment._id)}
+            className="w-8 mr-2"
+          >
+            <img src={trashIcon} alt="trashIcon" />
+          </button>
+        )}
       </div>
-      <div className="mt-3 text-[14px]">댓글 감사합니다</div>
+      <div className="mt-3 text-[14px]">{comment.comment}</div>
     </div>
   );
 }

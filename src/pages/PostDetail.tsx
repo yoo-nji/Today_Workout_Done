@@ -6,6 +6,7 @@ import rightIcon from "../assets/double-right.svg";
 import { useEffect, useState } from "react";
 import { api } from "../api/axios";
 import { useAuth } from "../stores/authStore";
+import CommentSec from "../components/PostDetail/CommentSec";
 
 // 아직 comments 타입을 정확히 지정하지않았다.
 interface PostInfo {
@@ -21,7 +22,7 @@ interface PostInfo {
 
 export default function PostDetail() {
   const loginId = useAuth((state) => state.user);
-  console.log(loginId);
+  // console.log(loginId);
   const [data, setData] = useState<PostInfo | null>(null);
 
   const getPostData = async () => {
@@ -47,7 +48,7 @@ export default function PostDetail() {
         image,
         likes,
       });
-      console.log(data);
+      // console.log(data);
     } catch (error) {
       console.error("Error fetching post data: ", error);
     }
@@ -82,19 +83,13 @@ export default function PostDetail() {
           </div>
         </div>
 
-        {/* 코멘트 폼 */}
-        <div className="mt-4">
-          <CommentForm likes={data.likes} comments={data.comments} />
-        </div>
-
-        <div className="">
-          {/* 댓글 박스 */}
-          <CommentBox />
-          <CommentBox />
-          <CommentBox />
-          <CommentBox />
-          <CommentBox />
-        </div>
+        {/* 댓글 섹션 */}
+        <CommentSec
+          likes={data.likes}
+          comments={data.comments}
+          //포스트 아이디
+          postId={"6757d369ce18fa02ded5c9ce"}
+        />
       </div>
     </div>
   );

@@ -18,10 +18,10 @@ export const newCommentFn = async (option: newCommentFnType) => {
 
 export const delCommentFn = async (commentId: string) => {
   try {
-    const { data } = await api.delete("/comments/delete", {
+    await api.delete("/comments/delete", {
       data: { id: commentId },
     });
-    console.log(`삭제 성공: ${JSON.stringify(data)}`);
+    // console.log(`삭제 성공: ${JSON.stringify(data)}`);
   } catch (err) {
     console.error("삭제 실패:", err);
   }

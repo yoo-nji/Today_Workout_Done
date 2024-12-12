@@ -58,10 +58,9 @@ export interface Post {
   __v: number; // MongoDB 버전 키
 }
 
-export const getPostDetail = async () => {
+export const getPostDetail = async (postId: string) => {
   try {
-    //일단 고정 post id로 진행
-    const { data } = await api.get("/posts/6757d369ce18fa02ded5c9ce");
+    const { data } = await api.get(postId);
     const getPostDetail: Post = data;
 
     return getPostDetail;
