@@ -14,7 +14,10 @@ export default function DeleteConfirm({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+    <div
+      onClick={onClose}
+      className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center"
+    >
       <div className=" bg-white p-[50px] w-[310px] h-[183px] rounded-[15px] font-bold text-[14px] text-center">
         <p>{message}</p>
         <div className="flex justify-between mt-[24px] w-[210px] h-[38px]">
