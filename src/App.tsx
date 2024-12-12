@@ -19,6 +19,10 @@ export default function App() {
       <Routes>
         <Route element={<RootLayout />}>
           <Route path="/" element={<Home />} />
+          <Route path="/protein" element={<Home />} />
+          <Route path="/routine" element={<Home />} />
+          <Route path="/gymreview" element={<Home />} />
+
           <Route path="/about" element={<About />} />
           <Route path="/user/:user_id" element={<User />} />
           <Route path="/posting/:post_id" element={<PostDetail />} />
