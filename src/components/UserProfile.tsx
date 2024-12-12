@@ -64,7 +64,7 @@ export default function UserProfile({
 
       {/* 업데이트 기능이 있는 유저 */}
       {update ? (
-        <form>
+        <div>
           <input
             type="file"
             accept="image/*"
@@ -80,7 +80,7 @@ export default function UserProfile({
               alt="profile-edit"
             />
           </label>
-        </form>
+        </div>
       ) : null}
     </div>
   );
