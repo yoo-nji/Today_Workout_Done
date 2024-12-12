@@ -17,11 +17,11 @@ interface PostInfo {
   comments: CommentType[];
   desc: string;
   likes: LikeType[];
+  channelId: string;
 }
 
 export default function PostDetail() {
   const loginId = useAuth((state) => state.user);
-  console.log(loginId);
   const [data, setData] = useState<PostInfo | null>(null);
 
   const getPostData = async () => {
@@ -29,7 +29,8 @@ export default function PostDetail() {
       // 여기에 포스트 id 값 넣기
       const { data } = await api.get("/posts/6759a934e7568a3d77d15e40");
       const {
-        author: { fullName, _id },
+        author: { fullName, _id: userID },
+        channel: { _id: channelId },
         comments,
         title,
         createdAt,
@@ -39,13 +40,14 @@ export default function PostDetail() {
       const { HTitle, desc } = JSON.parse(title);
       setData({
         fullName,
-        userID: _id,
+        userID,
         comments,
         title: HTitle,
         desc,
         createdAt,
         image,
         likes,
+        channelId,
       });
       console.log(data);
     } catch (error) {
@@ -70,6 +72,7 @@ export default function PostDetail() {
           image={data.image}
           fullName={data.fullName}
           owner={data.userID === loginId?._id}
+          channelId={data.channelId}
         />
         <div className="flex justify-between">
           <div className="w-[360px] border-2 -[64px] flex items-center gap-4 rounded-[8px]">
