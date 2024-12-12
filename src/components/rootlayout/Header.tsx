@@ -150,7 +150,7 @@ export default function Header({
             IconWidth="w-[33px]"
             IconHeight="h-[33px]"
             // Todo : 추후 마이페이지 어케 이동하는지 보고 처리
-            onClick={() => navigate("/user/login")}
+            onClick={() => navigate("/myprofile")}
           />
         </div>
       ) : (

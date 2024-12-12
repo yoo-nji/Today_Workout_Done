@@ -23,6 +23,8 @@ export default function App() {
     verifyUser();
   }, [path]);
   return (
+    // 잠시 private 라우터 지우겠습니다.
+    // 수정해야할거같습니다.
     <>
       <Routes>
         <Route element={<RootLayout />}>
@@ -37,10 +39,8 @@ export default function App() {
           <Route path="/about" element={<About />} />
           <Route path="/user/:user_id" element={<User />} />
           <Route path="*" element={<Error />} />
-          <Route element={<PrivateRoute />}>
-            <Route path="/posting" element={<Posting />} />
-            <Route path="/myprofile" element={<MyPage />} />
-          </Route>
+          <Route path="/posting" element={<Posting />} />
+          <Route path="/myprofile" element={<MyPage />} />
         </Route>
 
         <Route element={<PublicRoute />}>
