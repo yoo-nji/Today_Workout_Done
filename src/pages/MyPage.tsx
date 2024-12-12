@@ -40,6 +40,7 @@ export default function MyPage() {
                       title={post.title}
                       fullName={myInfo.fullName}
                       userImg={myInfo.image}
+                      _id={post._id}
                     />
                   );
                 })}
