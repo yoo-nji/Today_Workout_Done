@@ -41,6 +41,7 @@ export default function UserCard({
     try {
       const response = await updateNameFn(e.target.value);
       console.log(response);
+      alert("이름이 수정되었습니다");
     } catch (error) {
       console.log(error);
     }
@@ -55,6 +56,7 @@ export default function UserCard({
         const response = await updateNameFn(updateName);
         console.log(response);
         inputRef.current?.blur();
+        alert("이름이 수정되었습니다");
       } catch (error) {
         console.log(error);
       }
@@ -87,7 +89,9 @@ export default function UserCard({
               <input
                 type="text"
                 id="updateName"
-                className="text-3xl font-bold w-[250px] py-[5px] disabled:bg-white"
+                className="text-3xl font-bold w-[180px] py-[5px] disabled:bg-white outline-none focus:border 
+                focus: border-[#bcbcbc] rounded-[5px] px-[3px]"
+                maxLength={8}
                 value={updateName}
                 ref={inputRef}
                 onChange={(e) => setUpdateName(e.target.value)}
@@ -97,7 +101,7 @@ export default function UserCard({
               />
               <label
                 htmlFor="updateName"
-                className="ml-5 text-[18px] text-[#265CAC] underline
+                className="ml-[3px] text-[18px] text-[#265CAC] underline
                 cursor-pointer"
                 onClick={() => setDisabled(false)}
               >

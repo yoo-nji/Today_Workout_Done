@@ -31,6 +31,7 @@ export default function UserProfile({
       setIsLoading(true);
       const response = await updateUserImg(formData);
       console.log(response);
+      alert("이미지 변경 완료!");
     } catch (error) {
       console.log(error);
     } finally {

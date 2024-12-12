@@ -11,8 +11,10 @@ export default function ImageCard({
   comments,
   createdAt,
   author,
+  fullName,
+  userImg,
   _id: post_id,
-}: PostType) {
+}: PostType & MyInfo) {
   const navigate = useNavigate();
   const update = new Date(createdAt);
   const date = update.toLocaleDateString("ko-KR").slice(0, -1);
@@ -71,8 +73,11 @@ export default function ImageCard({
             BackHeight="h-[40px]"
             IconWidth="w-[28px]"
             IconHeight="h-[28px]"
+            userImg={userImg}
           />
-          <div className="text-base font-medium">{author.fullName}</div>
+          <div className="text-base font-bold">
+            {author ? author.fullName : fullName}
+          </div>
         </div>
         <div className="text-base font-light">{date}</div>
       </div>
