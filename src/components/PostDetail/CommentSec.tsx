@@ -80,8 +80,9 @@ export default function CommentSec({
   // 포스트 좋아요🔥
   const handleLike = async (postId: string) => {
     try {
-      await addPostLike(postId);
+      const response = await addPostLike(postId);
       console.log(`좋아요성공: ${postId}`);
+      console.log(response);
     } catch (err) {
       console.log(err);
     }
