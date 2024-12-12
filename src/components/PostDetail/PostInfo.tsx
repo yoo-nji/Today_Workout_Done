@@ -130,7 +130,7 @@ export default function PostInfo({
       <div className="my-[30px] flex flex-col items-center">
         <div className="">
           {edit ? (
-            <button>
+            <>
               <input
                 type="file"
                 id="uploadImg"
@@ -140,9 +140,11 @@ export default function PostInfo({
                 onChange={handleChange}
               />
               <label htmlFor="uploadImg" className="cursor-pointer">
-                <img src={img} alt="업로드이미지" />
+                <div className="border-2 border-red-500 w-fit h-fit">
+                  <img src={img} alt="업로드이미지" className="" />
+                </div>
               </label>
-            </button>
+            </>
           ) : (
             <img src={img} alt="업로드이미지" />
           )}
