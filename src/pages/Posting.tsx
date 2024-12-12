@@ -201,7 +201,11 @@ export default function Posting() {
             ></textarea>
             <button
               className={`w-[80px] h-[40px] text-white rounded-[10px] ${
-                !img.length || channel === "게시판 선택" || !title || !desc
+                !img.length ||
+                channel === "게시판 선택" ||
+                !title ||
+                !desc ||
+                isLoading
                   ? "cursor-default bg-[#4772b2a5]"
                   : "cursor-pointer bg-[#4772b2]"
               }`}
