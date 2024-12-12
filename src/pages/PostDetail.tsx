@@ -1,10 +1,11 @@
-import CommentBox from "../components/PostDetail/CommentBox";
-import CommentForm from "../components/PostDetail/CommentForm";
 import PostInfo from "../components/PostDetail/PostInfo";
 import leftIcon from "../assets/double-left.svg";
 import rightIcon from "../assets/double-right.svg";
 import { useEffect, useState } from "react";
 import { api } from "../api/axios";
+import { useAuth } from "../stores/authStore";
+import CommentSec from "../components/PostDetail/CommentSec";
+import { useParams } from "react-router";
 
 // 아직 comments 타입을 정확히 지정하지않았다.
 interface PostInfo {
@@ -16,17 +17,22 @@ interface PostInfo {
   comments: CommentType[];
   desc: string;
   likes: LikeType[];
+  channelId: string;
 }
 
 export default function PostDetail() {
+  const { post_id } = useParams();
+  const loginId = useAuth((state) => state.user);
   const [data, setData] = useState<PostInfo | null>(null);
 
   const getPostData = async () => {
     try {
       // 여기에 포스트 id 값 넣기
-      const { data } = await api.get("/posts/6759314fde84b53b732ceea7");
+      const { data } = await api.get(`/posts/${post_id}`);
+      console.log(data);
       const {
-        author: { fullName, _id },
+        author: { fullName, _id: userID },
+        channel: { _id: channelId },
         comments,
         title,
         createdAt,
@@ -36,16 +42,15 @@ export default function PostDetail() {
       const { HTitle, desc } = JSON.parse(title);
       setData({
         fullName,
-        userID: _id,
+        userID,
         comments,
         title: HTitle,
         desc,
         createdAt,
         image,
         likes,
+        channelId,
       });
-      console.log(data);
-      console.log("댓글", data.comments);
     } catch (error) {
       console.error("Error fetching post data: ", error);
     }
@@ -67,6 +72,8 @@ export default function PostDetail() {
           createdAt={data.createdAt}
           image={data.image}
           fullName={data.fullName}
+          owner={data.userID === loginId?._id}
+          channelId={data.channelId}
         />
         <div className="flex justify-between">
           <div className="w-[360px] border-2 -[64px] flex items-center gap-4 rounded-[8px]">
@@ -79,19 +86,13 @@ export default function PostDetail() {
           </div>
         </div>
 
-        {/* 코멘트 폼 */}
-        <div className="mt-4">
-          <CommentForm likes={data.likes} comments={data.comments} />
-        </div>
-
-        <div className="">
-          {/* 댓글 박스 */}
-          <CommentBox />
-          <CommentBox />
-          <CommentBox />
-          <CommentBox />
-          <CommentBox />
-        </div>
+        {/* 댓글 섹션 */}
+        <CommentSec
+          likes={data.likes}
+          comments={data.comments}
+          //포스트 아이디
+          postId={post_id}
+        />
       </div>
     </div>
   );

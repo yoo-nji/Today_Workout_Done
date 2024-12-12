@@ -8,6 +8,7 @@ import { useAuth } from "../../stores/authStore";
 import React, { useEffect, useState } from "react";
 import { api } from "../../api/axios";
 import { AxiosError } from "axios";
+import Notification from "../notification/Notification";
 
 // 사이드바 접힐때 로고 보이도록 처리하자
 export default function Header({
@@ -28,7 +29,7 @@ export default function Header({
 
   // 테스트버튼입니다 정식배포땐 삭제
   const testhandler = () => {
-    // if (isNotification?.length == 0) alert("1234");
+    console.log(authInfo.user);
   };
 
   // 테스트용 빠른 로그인입니다 귀찮으신분 자기 ID 비번 적어서 사용하세요
@@ -64,7 +65,6 @@ export default function Header({
   // Todo : 알림창 폼 보여줄지 분기처리
   const [showNoti, setShowNoti] = useState(false);
   const showNotiHandler = () => {
-    // e.stopPropagation();
     setShowNoti(!showNoti);
   };
 
@@ -137,6 +137,8 @@ export default function Header({
             {isNotification?.length != 0 && (
               <div className="w-3 h-3 rounded-[50%] bg-red-500 absolute bottom-0 right-0"></div>
             )}
+            {/* 알림창 보여줘야한다면 처리 */}
+            {showNoti && <Notification closeNoti={showNotiHandler} />}
           </div>
 
           <UserProfile

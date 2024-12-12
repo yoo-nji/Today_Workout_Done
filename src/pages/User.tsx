@@ -7,7 +7,13 @@ export default function User() {
   return (
     <div className="flex flex-col items-center">
       <div className="border-2 border-blue-500 gap-[68px] flex flex-col mt-[120px]">
-        <UserCard uname={`유저${user_id}`} />
+        <UserCard
+          uname={`유저${user_id}`}
+          BackWidth="w-[132px]"
+          BackHeight="h-[132px]"
+          IconWidth="w-[92px]"
+          IconHeight="h-[92px]"
+        />
         <div>
           게시물 12개
           <div className="flex items-center">

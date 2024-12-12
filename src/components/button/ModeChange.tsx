@@ -7,14 +7,34 @@ import verticalAfternoon from "../../assets/verticalAfternoon.svg";
 import verticalNight from "../../assets/verticalNight.svg";
 import sun from "../../assets/sun.svg";
 import moon from "../../assets/moon.svg";
+import DeleteConfirm from "../modal/DeleteConfirm";
 
 export default function ModeChange() {
   const [isClicked, setIsClicked] = useState(false);
   const isToggle = usesidebarToggleStore((state) => state.isToggle);
 
+  /* 삭제 모달 테스트용 코드 */
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const handleClick = () => {
-    setIsClicked((click) => !click);
+    // 모달 열기
+    setIsModalOpen(true);
   };
+
+  const handleModalClose = () => {
+    // 모달 닫기
+    setIsModalOpen(false);
+  };
+
+  const handleModeChange = () => {
+    // 실제 모드 변경 로직
+    setIsClicked((click) => !click);
+    setIsModalOpen(false);
+  };
+  /* 테스트용 코드 여기까지 */
+
+  // const handleClick = () => {
+  //   setIsClicked((click) => !click);
+  // };
 
   return (
     <div>
@@ -70,6 +90,15 @@ export default function ModeChange() {
           }}
         />
       </button>
+      {/* DeleteConfirm 모달 */}
+      {isModalOpen && (
+        <DeleteConfirm
+          isOpen={isModalOpen}
+          onClose={handleModalClose}
+          onConfirm={handleModeChange}
+          message="이 게시글을 정말 삭제하시겠습니까?"
+        />
+      )}
     </div>
   );
 }
