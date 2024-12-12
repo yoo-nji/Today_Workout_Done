@@ -8,6 +8,7 @@ import { useAuth } from "../../stores/authStore";
 import React, { useEffect, useState } from "react";
 import { api } from "../../api/axios";
 import { AxiosError } from "axios";
+import Notification from "../notification/Notification";
 
 // 사이드바 접힐때 로고 보이도록 처리하자
 export default function Header({
@@ -133,87 +134,11 @@ export default function Header({
               }}
             />
             {/* 알림이 있다면 뱃지색 처리 */}
-            {isNotification?.length == 0 && (
+            {isNotification?.length != 0 && (
               <div className="w-3 h-3 rounded-[50%] bg-red-500 absolute bottom-0 right-0"></div>
             )}
-
-            {/* Todo 알림창 바깥을 눌러도 꺼질수 있도록 방법 알아보자 */}
-            {/* Todo API있어야지 이후에 처리 가능할거같음 그전까지 최대한 만들어보자*/}
-            {showNoti && (
-              <div className="absolute z-10 top-[32px] right-[80px] mt-2 w-[280px]  p-[18px] rounded-[10px] max-h-1">
-                {/* 말풍선 꼬리 */}
-                {/* Todo 말풍선 꼬리 tailwind로 만드는법 알아보자 */}
-                {/* 말풍선 본문 */}
-                <div
-                  className="w-[350px] bg-white border border-gray-200 rounded-xl shadow-lg p-6"
-                  onClick={(e) => e.stopPropagation()}
-                >
-                  <div className="space-y-4">
-                    <h3 className="text-lg font-semibold text-gray-900 mb-4">
-                      알림 내용
-                    </h3>
-
-                    {/* 댓글의 앞부분 가져와서 한줄로 보여주고 길이초과시 ...처리  */}
-                    <div className="space-y-2">
-                      <label
-                        htmlFor="name"
-                        className="block text-sm font-medium text-gray-700"
-                      >
-                        댓글이 달린 나의 글
-                      </label>
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                      Possimus, repudiandae saepe quod quam iste laborum rem
-                      molestias? Eaque nisi exercitationem quibusdam dolorem
-                      eius animi, iusto, ratione, voluptatem laborum a modi?
-                    </div>
-
-                    {/* 이부분 디자인하고 퍼블리싱 해야한다 */}
-
-                    <div className="space-y-2">
-                      <label
-                        htmlFor="email"
-                        className="block text-sm font-medium text-gray-700"
-                      >
-                        새로운 좋아요
-                      </label>
-                      <div>*개</div>
-                    </div>
-
-                    <div className="space-y-2">
-                      <label
-                        htmlFor="memo"
-                        className="block text-sm font-medium text-gray-700"
-                      >
-                        새로운 팔로워
-                        <div>*명</div>
-                      </label>
-                    </div>
-
-                    <div className="space-y-2">
-                      <label
-                        htmlFor="memo"
-                        className="block text-sm font-medium text-gray-700"
-                      >
-                        받은 메세지
-                        <div>*개</div>
-                      </label>
-                    </div>
-
-                    <div className="flex justify-end space-x-2 mt-4">
-                      <ButtonComponent
-                        bgcolor="bg-[#265CAC]"
-                        textcolor="text-[white]"
-                        onClick={() => {
-                          setShowNoti(false);
-                        }}
-                      >
-                        {"닫기"}
-                      </ButtonComponent>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            )}
+            {/* 알림창 보여줘야한다면 처리 */}
+            {showNoti && <Notification closeNoti={showNotiHandler} />}
           </div>
 
           <UserProfile
