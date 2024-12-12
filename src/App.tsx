@@ -12,6 +12,7 @@ import Posting from "./pages/Posting";
 import PublicRoute from "./route/PublicRoute";
 import PostDetail from "./pages/PostDetail";
 import PrivateRoute from "./route/PrivateRoute";
+import MyPage from "./pages/MyPage";
 
 export default function App() {
   return (
@@ -29,6 +30,7 @@ export default function App() {
           <Route path="*" element={<Error />} />
           <Route element={<PrivateRoute />}>
             <Route path="/posting" element={<Posting />} />
+            <Route path="/myprofile" element={<MyPage />} />
           </Route>
         </Route>
 
