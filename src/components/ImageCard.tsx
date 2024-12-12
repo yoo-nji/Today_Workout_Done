@@ -8,12 +8,31 @@ export default function ImageCard({
   title,
   likes,
   comments,
+  createdAt,
   author,
-  updatedAt,
 }: PostType) {
-  const update = new Date(updatedAt);
+  const update = new Date(createdAt);
   const date = update.toLocaleDateString("ko-KR").slice(0, -1);
 
+  function isValidJson(data: string) {
+    try {
+      JSON.parse(data);
+      return true; // 유효한 JSON
+    } catch (e) {
+      return false; // 잘못된 JSON
+    }
+  }
+
+  let postTitle = "";
+  if (isValidJson(title)) {
+    const parsedData = JSON.parse(title);
+    postTitle = parsedData.HTitle;
+  } else {
+    // title이 JSON이 아닌 경우
+    postTitle = title;
+  }
+
+  //const { HTitle } = JSON.parse(title);
   return (
     <div className="flex flex-col items-center gap-3">
       {/* 썸네일 */}
@@ -24,7 +43,7 @@ export default function ImageCard({
         {/* Hover */}
         <div className="absolute inset-0 flex flex-col items-center justify-center text-white transition-opacity duration-300 bg-black bg-opacity-50 rounded-lg opacity-0 group-hover:opacity-100">
           <h3 className="w-[80%] text-[20px] font-semibold truncate">
-            {title}
+            {postTitle}
           </h3>
           {/* 아이콘 */}
           <div className="absolute bottom-6 right-6 flex gap-[18px] text-xl font-normal ">
