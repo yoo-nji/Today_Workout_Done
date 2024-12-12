@@ -5,4 +5,5 @@ interface userProfileType {
   IconWidth: string;
   IconHeight: string;
   onClick?: () => void;
+  update?: boolean;
 }
