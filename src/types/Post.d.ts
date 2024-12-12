@@ -35,6 +35,8 @@ interface PostType {
     updatedAt: string;
     __v: number;
     username: string;
+    image?: string;
+    imagePublicId?: string;
   };
   createdAt: string;
   updatedAt?: string;
