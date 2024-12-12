@@ -3,15 +3,16 @@ import CommentBox from "./CommentBox";
 import CommentForm from "./CommentForm";
 import { Comment, getPostDetail } from "../../utils/getPostDetail";
 import { delCommentFn, newCommentFn } from "../../utils/commentFn";
+import { addPostLike } from "../../utils/addPostLike";
 
 export default function CommentSec({
   likes,
-  comments,
+  // comments,
   //포스트 아이디
   postId,
 }: {
   likes: LikeType[];
-  comments: CommentType[];
+  // comments: CommentType[];
   postId: string | undefined;
 }) {
   //댓글 목록
@@ -76,6 +77,16 @@ export default function CommentSec({
     }
   };
 
+  // 포스트 좋아요🔥
+  const handleLike = async (postId: string) => {
+    try {
+      await addPostLike(postId);
+      console.log(`좋아요성공: ${postId}`);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   // 응답 상태
   if (isLoading) return <p>댓글 불러오는 중...</p>;
   if (error) return <p>댓글을 불러오는데 실패했습니다.</p>;
@@ -86,12 +97,14 @@ export default function CommentSec({
       <div className="mt-4">
         <CommentForm
           likes={likes}
-          comments={comments}
+          // comments={comments}
           postId={postId}
           handleCommentSubmit={handleCommentSubmit}
           newComment={newComment}
+          commentList={commentList}
           setNewComment={setNewComment}
           commentinputRef={commentinputRef}
+          handleLike={handleLike}
         />
       </div>
       <div className="">

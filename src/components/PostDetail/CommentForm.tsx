@@ -1,31 +1,37 @@
 import likeIcon from "../../assets/like_icon.svg";
 import chatIcon from "../../assets/chat_icon_black.svg";
 import ButtonComponent from "../ButtonComponent";
+import { Comment } from "../../utils/getPostDetail";
 
 interface CommentFormProps {
   likes: LikeType[];
-  comments: CommentType[];
+  // comments: CommentType[];
   postId: string | undefined;
   handleCommentSubmit: (comment: string) => Promise<void>;
   newComment: string;
+  commentList: Comment[];
   setNewComment: React.Dispatch<React.SetStateAction<string>>;
   commentinputRef: React.MutableRefObject<HTMLTextAreaElement | null>;
+  handleLike: (postId: string) => Promise<void>;
 }
 
 export default function CommentForm({
   likes,
-  comments,
+  // comments,
+  postId,
   handleCommentSubmit,
   newComment,
+  commentList,
   setNewComment,
   commentinputRef,
+  handleLike,
 }: CommentFormProps) {
   return (
     <div className="">
       {/* 좋아요 이모티콘 댓글 이모티콘 area */}
       <div className="flex gap-4">
         <div className="flex gap-1">
-          <button>
+          <button onClick={() => handleLike(postId as string)}>
             <img src={likeIcon} alt="likeIcon" />
           </button>
           {likes.length}
@@ -34,7 +40,7 @@ export default function CommentForm({
           <button>
             <img src={chatIcon} alt="chatIcon" />
           </button>
-          {comments.length}
+          {commentList.length}
         </div>
       </div>
 
