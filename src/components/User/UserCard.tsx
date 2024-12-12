@@ -14,6 +14,7 @@ interface UserCardType {
   isFollowBtn?: boolean;
   edit?: boolean;
   update?: boolean;
+  userImg?: string;
 }
 
 export default function UserCard({
@@ -27,14 +28,16 @@ export default function UserCard({
   isFollowBtn,
   edit,
   update,
+  userImg,
 }: UserCardType) {
+  const [disabled, setDisabled] = useState(true);
   const [updateName, setUpdateName] = useState(uname);
 
   const inputRef = useRef<HTMLInputElement>(null);
 
   const handleOutFocus = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    setDisabled(true);
     if (updateName === uname) return;
-
     try {
       const response = await updateNameFn(e.target.value);
       console.log(response);
@@ -47,6 +50,7 @@ export default function UserCard({
     if (updateName === uname) return;
 
     if (e.key === "Enter") {
+      setDisabled(true);
       try {
         const response = await updateNameFn(updateName);
         console.log(response);
@@ -66,6 +70,7 @@ export default function UserCard({
         IconHeight={IconHeight}
         edit={edit}
         update={update}
+        userImg={userImg}
       />
       <div>
         <div className="flex mb-6 gap-[32px] items-center">
@@ -78,21 +83,23 @@ export default function UserCard({
             />
           )}
           {update && (
-            <div className="absolute">
+            <div className="absolute l-0">
               <input
                 type="text"
                 id="updateName"
-                className="text-4xl w-[250px]"
+                className="text-3xl font-bold w-[250px] py-[5px] disabled:bg-white"
                 value={updateName}
                 ref={inputRef}
                 onChange={(e) => setUpdateName(e.target.value)}
                 onBlur={handleOutFocus}
                 onKeyDown={handleKeyDown}
+                disabled={disabled}
               />
               <label
                 htmlFor="updateName"
                 className="ml-5 text-[18px] text-[#265CAC] underline
                 cursor-pointer"
+                onClick={() => setDisabled(false)}
               >
                 수정
               </label>
