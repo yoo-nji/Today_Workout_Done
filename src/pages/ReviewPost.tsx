@@ -4,17 +4,22 @@ import { api } from "../api/axios";
 import SearchBar from "../components/SearchBar";
 import Tag from "../components/Tag";
 import Review from "../components/Review";
+import PostZero from "../components/PostZero";
 import { useLocation } from "react-router";
 
 export default function ReviewPost() {
   const location = useLocation();
+  const channelRoute = location.pathname.split("/")[1];
+  const route: { [key: string]: string } = {
+    gymreview: "6758f75b5f86e71ae5eb9bae",
+  };
   // channelId
   const channelId = useChannelStore((state) => state.channelId);
 
   // 상태
-  const [status, setStatus] = useState<"idle" | "loading" | "searching">(
-    "idle"
-  );
+  const [status, setStatus] = useState<
+    "idle" | "loading" | "searching" | "nopost"
+  >("idle");
 
   // 게시글
   const [posts, setPosts] = useState<PostType[]>([]);
@@ -29,9 +34,9 @@ export default function ReviewPost() {
   const getChannelPost = async () => {
     setStatus("loading");
     try {
-      const { data } = await api.get(`/posts/channel/${channelId}`);
+      const { data } = await api.get(`/posts/channel/${route[channelRoute]}`);
       if (data.length === 0) {
-        console.log("등록된 게시물이 없습니다.");
+        setStatus("nopost");
       }
       setPosts(data);
     } catch (err) {
@@ -94,7 +99,8 @@ export default function ReviewPost() {
       {/* 피드 게시물 */}
       <div className="flex items-center">
         <div>
-          {/* 로딩중 */}
+          {status === "nopost" && <PostZero />}
+
           {status === "loading" && <p>로딩중..</p>}
 
           {status === "searching" &&
@@ -108,7 +114,7 @@ export default function ReviewPost() {
             (posts.length ? (
               posts.map((post) => <Review key={post._id} {...post} />)
             ) : (
-              <p>" "</p>
+              <p>로딩중...</p>
             ))}
         </div>
       </div>

@@ -5,15 +5,23 @@ import { useEffect, useState } from "react";
 import { useChannelStore } from "../stores/channelStore";
 import { api } from "../api/axios";
 import scrollUp from "../assets/scrollUp.svg";
+import PostZero from "../components/PostZero";
+import { useLocation } from "react-router";
 
 export default function Home() {
+  const location = useLocation();
+  const channelRoute = location.pathname.split("/")[1];
+  const route: { [key: string]: string } = {
+    protein: "6758f6bf5f86e71ae5eb9b6c",
+    routine: "6758f7305f86e71ae5eb9b82",
+  };
   // channelId
   const channelId = useChannelStore((state) => state.channelId);
 
   // 상태
-  const [status, setStatus] = useState<"idle" | "loading" | "searching">(
-    "idle"
-  );
+  const [status, setStatus] = useState<
+    "idle" | "loading" | "searching" | "nopost"
+  >("idle");
 
   // 게시글
   const [posts, setPosts] = useState<PostType[]>([]);
@@ -28,9 +36,11 @@ export default function Home() {
   const getChannelPost = async () => {
     setStatus("loading");
     try {
-      const { data } = await api.get(`/posts/channel/${channelId}`);
+      const { data } = await api.get(
+        `/posts/channel/${route[channelRoute] || "6757a3a7ce18fa02ded5c758"}`
+      );
       if (data.length === 0) {
-        console.log("등록된 게시물이 없습니다.");
+        setStatus("nopost");
       }
       setPosts(data);
     } catch (err) {
@@ -43,7 +53,7 @@ export default function Home() {
   useEffect(() => {
     if (!channelId) return;
     getChannelPost();
-  }, [channelId]);
+  }, [location]);
 
   // 검색 디바운스 처리
   useEffect(() => {
@@ -96,7 +106,8 @@ export default function Home() {
         {/* 피드 이미지 */}
         <div className="flex flex-col items-center mt-8">
           <div className="grid gap-8 2xl:grid-cols-4 xl:grid-cols-3 lg:grid-cols-2">
-            {/* 로딩중 */}
+            {status === "nopost" && <PostZero />}
+
             {status === "loading" && <p>로딩중..</p>}
 
             {status === "searching" &&
