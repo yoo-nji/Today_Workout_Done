@@ -3,6 +3,7 @@ import likeFill from "../../assets/icons/like_fill_icon.svg";
 import chatIcon from "../../assets/chat_icon_black.svg";
 import ButtonComponent from "../ButtonComponent";
 import { Comment } from "../../utils/getPostDetail";
+import { useAuth } from "../../stores/authStore";
 
 interface CommentFormProps {
   // likes: LikeType[];
@@ -31,6 +32,10 @@ export default function CommentForm({
   likeList,
   isLiked,
 }: CommentFormProps) {
+  //로그인 상태
+  const loginId = useAuth((state) => state.isLoggedIn);
+  console.log(loginId);
+
   return (
     <div className="">
       {/* 좋아요 이모티콘 댓글 이모티콘 area */}
@@ -57,11 +62,14 @@ export default function CommentForm({
       <form onSubmit={(e) => e.preventDefault()}>
         <textarea
           ref={commentinputRef}
-          className="my-3 h-[100px] px-4 py-3 text-xs border-2 rounded-[6px] w-full resize-none focus:outline-none"
-          placeholder="댓글을 작성하세요"
+          className="my-3 h-[100px] px-4 py-3 text-sm border-2 rounded-[6px] w-full resize-none focus:outline-none"
+          placeholder={
+            loginId ? "댓글을 작성해 주세요" : "로그인 후 이용해 주세요"
+          }
           value={newComment}
           onChange={(e) => setNewComment(e.target.value)}
           maxLength={300} // 최대 글자 수 제한
+          disabled={!loginId} // 로그인 상태가 아닐시 비활성화
         ></textarea>
         <div className="flex justify-between">
           <p>{newComment.length}/300</p>
