@@ -16,7 +16,7 @@ interface CommentFormProps {
   commentinputRef: React.MutableRefObject<HTMLTextAreaElement | null>;
   handleLike: (postId: string) => Promise<void>;
   likeList: LikeType[];
-  isLiked: boolean;
+  isLiked: boolean | undefined;
 }
 
 export default function CommentForm({

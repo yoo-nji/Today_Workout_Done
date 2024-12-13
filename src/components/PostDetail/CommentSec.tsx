@@ -15,23 +15,17 @@ export default function CommentSec({
   // comments: CommentType[];
   postId: string | undefined;
 }) {
-  //댓글 목록
-  const [commentList, setCommentList] = useState<Comment[]>([]);
-  // 로딩 상태
-  const [isLoading, setIsLoading] = useState(false);
-  // 에러 상태
-  const [error, setError] = useState(false);
-  //등록할 댓글
-  const [newComment, setNewComment] = useState<string>("");
-  // 댓글 인풋
-  const commentinputRef = useRef<HTMLTextAreaElement | null>(null);
-  // 좋아요 목록
-  const [likeList, setLikeList] = useState<LikeType[]>(likes);
-  // 게시글 좋아요 상태
-  const [isLiked, setIsLiked] = useState(false);
+  const [commentList, setCommentList] = useState<Comment[]>([]); //댓글 목록
+  const [isLoading, setIsLoading] = useState(false); // 로딩 상태
+  const [error, setError] = useState(false); // 에러 상태
+  const [newComment, setNewComment] = useState<string>(""); //등록할 댓글
+  const commentinputRef = useRef<HTMLTextAreaElement | null>(null); // 댓글 인풋
+  const [likeList, setLikeList] = useState<LikeType[]>(likes); // 좋아요 목록
+  const [isLiked, setIsLiked] = useState<boolean | undefined>(false); // 게시글 좋아요 상태
 
   //로그인 상태
-  const loginId = useAuth((state) => state.isLoggedIn);
+  const isLogin = useAuth((state) => state.isLoggedIn);
+  const UserId = useAuth((state) => state.user?._id);
 
   //댓글 목록 불러오기
   useEffect(() => {
@@ -41,12 +35,6 @@ export default function CommentSec({
         //포스트 아이디
         const postDetail = await getPostDetail(`/posts/${postId}`);
         setCommentList(postDetail?.comments || []); // 댓글 목록 상태 업데이트
-
-        // 좋아요 여부 확인
-        const alreadyLiked = likeList?.some(
-          (like) => like.post && like.post === postId
-        );
-        setIsLiked(alreadyLiked); //좋아요 상태 변경
       } catch (error) {
         console.log(`댓글 불러오기 실패: ${error}`);
         setError(true);
@@ -90,39 +78,41 @@ export default function CommentSec({
     }
   };
 
+  // 좋아요 여부 확인
+  const checkIfLiked = () => likeList.some((like) => like.user === UserId);
+
+  useEffect(() => {
+    if (!isLogin) return;
+    setIsLiked(checkIfLiked());
+  }, [likeList, isLogin]);
+
   // 포스트 좋아요 토글
   const handleLike = async (postId: string) => {
-    try {
-      // 로그인 여부
-      if (!loginId) return;
-      // 좋아요 여부 확인
-      const alreadyLiked = likeList.some(
-        (like) => like.post && like.post === postId
-      );
+    if (!isLogin) return;
 
+    // 좋아요 여부 확인
+    const alreadyLiked = checkIfLiked();
+    setIsLiked(alreadyLiked);
+
+    try {
       // 이미 좋아요 누른 경우
       if (alreadyLiked) {
-        console.log("이미 좋아요를 눌렀습니다!");
-
+        // console.log("좋아요를 취소합니다!");
         //좋아요 취소
-        //포스트랑 일치하는 like id
-        const likeId = likeList.find(
-          (like) => like.post && like.post === postId
-        )?._id;
-        console.log("likeId:", likeId);
-
-        await removePostLike(likeId);
-        setLikeList((likeList) =>
-          likeList.filter((like) => like._id !== likeId)
-        );
-        setIsLiked(false);
-        return;
+        const likeId = likeList.find((like) => like.user === UserId)?._id;
+        if (likeId) {
+          await removePostLike(likeId);
+          setLikeList((likeList) =>
+            likeList.filter((like) => like._id !== likeId)
+          );
+          setIsLiked(false);
+        }
+      } else {
+        //좋아요 등록
+        const data = await addPostLike(postId);
+        setLikeList((likeList) => [...likeList, data]);
+        setIsLiked(true);
       }
-
-      //좋아요 등록
-      const data = await addPostLike(postId);
-      setLikeList((likeList) => [...likeList, data]);
-      setIsLiked(true);
     } catch (err) {
       console.log(err);
     }
