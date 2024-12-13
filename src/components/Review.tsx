@@ -2,6 +2,7 @@ import thumbnail from "../assets/images/feed_thumbnail.jpg";
 import likeIcon from "../assets/like_icon.svg";
 import chatIcon from "../assets/chat_icon_black.svg";
 import UserProfile from "./UserProfile";
+import { useNavigate } from "react-router";
 
 export default function Review({
   image,
@@ -10,9 +11,16 @@ export default function Review({
   comments,
   createdAt,
   author,
-}: PostType) {
+  fullName,
+  userImg, // 마이페이지, 로그인 한 유저의 사진
+  _id: post_id,
+}: PostType & MyInfo) {
+  const navigate = useNavigate();
   const update = new Date(createdAt);
-  const date = update.toLocaleDateString("ko-KR").slice(0, -1);
+  const date = update
+    .toLocaleDateString("ko-KR")
+    .slice(0, -1)
+    .replace(/\s/g, "");
 
   function isValidJson(data: string) {
     try {
@@ -35,7 +43,10 @@ export default function Review({
     postContent = title;
   }
   return (
-    <div className="w-[900px] h-[315px] mb-[109px] relative flex flex-row">
+    <div
+      className="w-[900px] h-[315px] mb-[109px] relative flex flex-row"
+      onClick={() => navigate(`/records/${post_id}`)}
+    >
       {/* 썸네일 */}
       <div>
         <div
@@ -54,9 +65,10 @@ export default function Review({
               BackHeight="h-[40px]"
               IconWidth="w-[28px]"
               IconHeight="h-[28px]"
+              userImg={userImg ? userImg : author?.image}
             />
             <div className="flex flex-col">
-              <div className="">{author?.fullName}</div>
+              <div className="">{author ? author.fullName : fullName}</div>
               <div className="">{date}</div>
             </div>
           </div>

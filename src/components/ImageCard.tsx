@@ -17,7 +17,10 @@ export default function ImageCard({
 }: PostType & MyInfo) {
   const navigate = useNavigate();
   const update = new Date(createdAt);
-  const date = update.toLocaleDateString("ko-KR").slice(0, -1);
+  const date = update
+    .toLocaleDateString("ko-KR")
+    .slice(0, -1)
+    .replace(/\s/g, "");
 
   function isValidJson(data: string) {
     try {
