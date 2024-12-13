@@ -1,4 +1,4 @@
-import likeIcon from "../../assets/icons/like_icon.svg";
+import likeIcon from "../../assets/like_icon.svg";
 import likeFill from "../../assets/icons/like_fill_icon.svg";
 import chatIcon from "../../assets/chat_icon_black.svg";
 import ButtonComponent from "../ButtonComponent";
