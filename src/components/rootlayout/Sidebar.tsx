@@ -13,6 +13,7 @@ import left from "../../assets/double-left.svg";
 import right from "../../assets/double-right.svg";
 import user from "../../assets/user_icon.svg";
 import { useAuth } from "../../stores/authStore";
+import CheckDone from "../checkDone/CheckDone";
 
 export default function Sidebar() {
   //로그인상태
@@ -136,7 +137,9 @@ export default function Sidebar() {
         )}
       </div>
 
-      <div className="flex flex-col justify-between w-full h-full">
+      {isLoggedIn && <CheckDone textSize="text-[18px]" width="w-[90px]" />}
+
+      <div className="flex flex-col justify-between w-full h-full mt-[20px] border-t">
         {/* 채널목록 */}
         <div className="w-full">
           <ul className="flex flex-col w-full gap-1">

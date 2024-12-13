@@ -1,10 +1,10 @@
 import UserCard from "../components/User/UserCard";
 import { useAuth } from "../stores/authStore";
 import ImageCard from "../components/ImageCard";
+import CheckDone from "../components/checkDone/CheckDone";
 
 export default function MyPage() {
   const myInfo = useAuth((state) => state.user);
-  console.log(myInfo);
 
   return (
     <>
@@ -23,6 +23,8 @@ export default function MyPage() {
               update={true}
               userImg={myInfo.image}
             />
+            <CheckDone bg="bg-[#f3f3f3]" />
+
             <div className="border-t pt-[10px] px-1 flex justify-center">
               <div className="flex flex-col items-start mt-[20px]">
                 <p className="text-[22px] mb-[20px] font-bold">
