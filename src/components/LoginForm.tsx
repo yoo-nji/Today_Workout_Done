@@ -1,5 +1,5 @@
 import { Link } from "react-router";
-
+import logoImg from "../assets/loge.svg";
 export default function LoginForm() {
   return (
     <>
@@ -7,17 +7,7 @@ export default function LoginForm() {
         action=""
         className=" flex flex-col items-center w-[600px] h-[730px] bg-[#FFFFFF]"
       >
-        <div className="mt-[50px] mb-[35px]">
-          <h1 className="text-[#265CAC] text-[20px] font-bold">
-            <span className="text-[#AC265C] font-extrabold text-[30px]">
-              !0
-            </span>
-            운완?
-          </h1>
-          <p className="text-center text-[#265CAC] text-[20px] font-bold mt-[-10px] mb-[5px]">
-            0운완
-          </p>
-        </div>
+        <img src={logoImg} className="pt-[50px] block mx-auto " />
         <h2 className=" font-bold mb-[47px]">로그인</h2>
         <input
           type="text"

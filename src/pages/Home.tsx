@@ -4,8 +4,6 @@ import Tag from "../components/Tag";
 import { useEffect, useState } from "react";
 import { useChannelStore } from "../stores/channelStore";
 import { api } from "../api/axios";
-import scrollUp from "../assets/scrollUp.svg";
-import PostZero from "../components/PostZero";
 import { useLocation } from "react-router";
 
 export default function Home() {
@@ -106,8 +104,6 @@ export default function Home() {
         {/* 피드 이미지 */}
         <div className="flex flex-col items-center mt-8">
           <div className="grid gap-8 2xl:grid-cols-4 xl:grid-cols-3 lg:grid-cols-2">
-            {status === "nopost" && <PostZero />}
-
             {status === "loading" && <p>로딩중..</p>}
 
             {status === "searching" &&

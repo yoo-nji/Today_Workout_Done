@@ -4,7 +4,6 @@ import { api } from "../api/axios";
 import SearchBar from "../components/SearchBar";
 import Tag from "../components/Tag";
 import Review from "../components/Review";
-import PostZero from "../components/PostZero";
 import { useLocation } from "react-router";
 
 export default function ReviewPost() {
@@ -99,8 +98,6 @@ export default function ReviewPost() {
       {/* 피드 게시물 */}
       <div className="flex items-center">
         <div>
-          {status === "nopost" && <PostZero />}
-
           {status === "loading" && <p>로딩중..</p>}
 
           {status === "searching" &&
