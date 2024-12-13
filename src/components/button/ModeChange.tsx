@@ -8,6 +8,7 @@ import verticalNight from "../../assets/verticalNight.svg";
 import sun from "../../assets/sun.svg";
 import moon from "../../assets/moon.svg";
 import DeleteConfirm from "../modal/DeleteConfirm";
+import innercircle from "../../assets/innercircle.svg";
 
 export default function ModeChange() {
   const [isClicked, setIsClicked] = useState(false);
@@ -37,13 +38,12 @@ export default function ModeChange() {
   };
 
   return (
-    <div>
-      {/* 사이드바 열렸을 때 다크모드 버튼 */}
+    <div className="flex items-center justify-center">
+      {/* 다크모드 버튼 */}
       <button
         onClick={handleClick}
         className={twMerge(
-          "relative w-[100px] h-[40px] rounded-full text-white font-bold text-[16px] overflow-hidden group",
-          !isToggle && "hidden"
+          "relative w-[63px] h-[30px] rounded-full text-white font-bold text-[16px] overflow-hidden group shadow-inner"
         )}
         style={{
           backgroundImage: isClicked
@@ -57,35 +57,19 @@ export default function ModeChange() {
           src={isClicked ? moon : sun}
           alt="circleHorizontal"
           className={twMerge(
-            `absolute w-[30px] h-[30px] rounded-full transition-all duration-300 ease-in-out ${
-              isClicked ? "translate-x-[5px]" : "translate-x-[65px]"
+            `absolute w-[18px] h-[18x] rounded-full transition-all duration-300 ease-in-out translate-y-[5.5px] ${
+              isClicked ? "translate-x-[8px]" : "translate-x-[34px]"
             } mt-[-15px] top-[50%] group-hover:scale-75`
           )}
         />
-      </button>
-
-      {/* 사이드바 닫혔을 때 다크모드 버튼 */}
-      <button
-        onClick={handleClick}
-        className={twMerge(
-          "relative w-[40px] h-[100px] rounded-full text-white font-bold text-[16px] overflow-hidden group",
-          isToggle && "hidden"
-        )}
-        style={{
-          backgroundImage: isClicked
-            ? `url(${verticalNight})`
-            : `url(${verticalAfternoon})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
-      >
         <img
-          src={isClicked ? moon : sun}
-          alt="circleVertical"
-          className={twMerge(`absolute w-[30px] h-[30px] rounded-full transition-all duration-300 ease-in-out 
-            ${
-              isClicked ? "translate-y-[65px]" : "translate-y-[5px]"
-            } mt-0 top-0 right-[12%]  group-hover:scale-75`)}
+          src={innercircle}
+          alt="innercircle"
+          className={twMerge(
+            `absolute w-[25px] h-[25x] rounded-full transition-all duration-300 ease-in-out z-10 translate-y-[3.3px] ${
+              isClicked ? "translate-x-[36px]" : "translate-x-[2px]"
+            } mt-[-15px] top-[50%]`
+          )}
         />
       </button>
 
