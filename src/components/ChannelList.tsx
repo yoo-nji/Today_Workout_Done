@@ -29,7 +29,6 @@ export default function ChannelList({
       to={route}
       onClick={() => {
         setChannelId(channel_id);
-        console.log(channel_id);
       }}
     >
       {({ isActive }) => (

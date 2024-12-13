@@ -1,11 +1,11 @@
-import SearchBar from "../components/SearchBar";
-import ImageCard from "../components/ImageCard";
-import Tag from "../components/Tag";
 import { useEffect, useState } from "react";
 import { useChannelStore } from "../stores/channelStore";
 import { api } from "../api/axios";
+import SearchBar from "../components/SearchBar";
+import Tag from "../components/Tag";
+import Review from "../components/Review";
 
-export default function Home() {
+export default function ReviewPost() {
   const channelId = useChannelStore((state) => state.channelId);
 
   const [posts, setPosts] = useState<PostType[]>([]);
@@ -18,6 +18,7 @@ export default function Home() {
       if (data.length === 0) {
         console.log("게시물이 없습니다.");
       }
+
       setPosts(data);
       setSearchPosts(data);
     } catch (err) {
@@ -41,34 +42,29 @@ export default function Home() {
       );
     }
   }, [searchTerm, posts]);
-
   return (
-    <div>
-      <div className="flex flex-col items-center gap-16 mt-8">
-        <div className="flex flex-col items-center gap-[30px] w-full px-4">
-          <SearchBar
-            placeholder="검색어를 입력해 주세요"
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            style="w-full max-w-[785px]"
-          />
-          <div className="flex gap-[19px]">
-            <Tag>#오운완</Tag>
-            <Tag>#오운완</Tag>
-            <Tag>#오운완</Tag>
-          </div>
+    <div className="flex flex-col items-center gap-16 mt-8">
+      <div className="flex flex-col items-center gap-[30px] w-full px-4">
+        <SearchBar
+          placeholder="검색어를 입력해 주세요"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          style="w-full max-w-[785px]"
+        />
+        <div className="flex gap-[19px]">
+          <Tag>#오운완</Tag>
+          <Tag>#오운완</Tag>
+          <Tag>#오운완</Tag>
         </div>
       </div>
-      <div>
-        {/* 피드 이미지 */}
-        <div className="flex flex-col items-center mt-8">
-          <div className="grid gap-8 2xl:grid-cols-4 xl:grid-cols-3 lg:grid-cols-2">
-            {searchPosts.length > 0 ? (
-              searchPosts.map((post) => <ImageCard key={post._id} {...post} />)
-            ) : (
-              <p>검색 결과가 없습니다.</p>
-            )}
-          </div>
+      {/* 피드 게시물 */}
+      <div className="flex items-center">
+        <div>
+          {searchPosts.length > 0 ? (
+            searchPosts.map((post) => <Review key={post._id} {...post} />)
+          ) : (
+            <p>검색 결과가 없습니다.</p>
+          )}
         </div>
       </div>
     </div>

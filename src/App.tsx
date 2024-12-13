@@ -1,5 +1,4 @@
-import { Route } from "react-router";
-import { Routes } from "react-router";
+import { Route, useLocation, Routes } from "react-router";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import RootLayout from "./layouts/RootLayout";
@@ -12,17 +11,27 @@ import Posting from "./pages/Posting";
 import PublicRoute from "./route/PublicRoute";
 import PostDetail from "./pages/PostDetail";
 import PrivateRoute from "./route/PrivateRoute";
+import ReviewPost from "./pages/ReviewPost";
 import MyPage from "./pages/MyPage";
+import { useEffect } from "react";
+import { verifyUser } from "./utils/verifyUser";
 
 export default function App() {
+  const path = useLocation();
+
+  useEffect(() => {
+    verifyUser();
+  }, [path]);
   return (
+    // 잠시 private 라우터 지우겠습니다.
+    // 수정해야할거같습니다.
     <>
       <Routes>
         <Route element={<RootLayout />}>
           <Route path="/" element={<Home />} />
           <Route path="/protein" element={<Home />} />
           <Route path="/routine" element={<Home />} />
-          <Route path="/gymreview" element={<Home />} />
+          <Route path="/gymreview" element={<ReviewPost />} />
 
           {/* 오운완 페이지 */}
           <Route path="/records/:post_id" element={<PostDetail />} />
@@ -30,10 +39,8 @@ export default function App() {
           <Route path="/about" element={<About />} />
           <Route path="/user/:user_id" element={<User />} />
           <Route path="*" element={<Error />} />
-          <Route element={<PrivateRoute />}>
-            <Route path="/posting" element={<Posting />} />
-            <Route path="/myprofile" element={<MyPage />} />
-          </Route>
+          <Route path="/posting" element={<Posting />} />
+          <Route path="/myprofile" element={<MyPage />} />
         </Route>
 
         <Route element={<PublicRoute />}>
