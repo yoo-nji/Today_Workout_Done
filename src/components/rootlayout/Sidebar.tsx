@@ -12,7 +12,6 @@ import gym from "../../assets/gym_icon.svg";
 import left from "../../assets/double-left.svg";
 import right from "../../assets/double-right.svg";
 import user from "../../assets/user_icon.svg";
-import ModeChange from "../button/ModeChange";
 import { useAuth } from "../../stores/authStore";
 
 export default function Sidebar() {
@@ -162,10 +161,6 @@ export default function Sidebar() {
           </ul>
         </div>
         <div className="items-center ">
-          {/* 모드변경 버튼 */}
-          <div className="flex justify-center">
-            <ModeChange />
-          </div>
           {/* 유저목록 버튼 */}
           <div className="flex justify-center">
             <button

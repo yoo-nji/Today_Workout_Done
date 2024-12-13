@@ -10,6 +10,7 @@ import { api } from "../../api/axios";
 import { AxiosError } from "axios";
 import Notification from "../notification/Notification";
 import { useToken } from "../../stores/toeknStore";
+import ModeChange from "../button/ModeChange";
 
 // 사이드바 접힐때 로고 보이도록 처리하자
 export default function Header({
@@ -99,6 +100,11 @@ export default function Header({
       {isLoggedin ? (
         // 로그인 상태 분기
         <div className="flex gap-[10px] items-center">
+          {/* 모드변경 버튼 */}
+          <div className="flex justify-center">
+            <ModeChange />
+          </div>
+
           <ButtonComponent
             bgcolor="bg-[#265CAC]"
             textcolor="text-[white]"
@@ -163,6 +169,11 @@ export default function Header({
           >
             로그인이 귀찮은자를 위해
           </button>
+          {/* 모드변경 버튼 */}
+          <div className="flex justify-center">
+            <ModeChange />
+          </div>
+
           {/* 정식배포시 여기까지 삭제 */}
           <ButtonComponent
             bgcolor="bg-[#265CAC]"
@@ -171,6 +182,7 @@ export default function Header({
           >
             {"로그인"}
           </ButtonComponent>
+
           <ButtonComponent
             bgcolor="bg-white"
             textcolor="text-[#265CAC]"
