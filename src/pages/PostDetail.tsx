@@ -18,6 +18,7 @@ interface PostInfo {
   desc: string;
   likes: LikeType[];
   channelId: string;
+  postID: string;
 }
 
 export default function PostDetail() {
@@ -38,6 +39,7 @@ export default function PostDetail() {
         createdAt,
         image,
         likes,
+        _id: postID,
       } = data;
       const { HTitle, desc } = JSON.parse(title);
       setData({
@@ -50,6 +52,7 @@ export default function PostDetail() {
         image,
         likes,
         channelId,
+        postID,
       });
     } catch (error) {
       console.error("Error fetching post data: ", error);
@@ -74,6 +77,7 @@ export default function PostDetail() {
           fullName={data.fullName}
           owner={data.userID === loginId?._id}
           channelId={data.channelId}
+          postID={data.postID}
         />
         <div className="flex justify-between">
           <div className="w-[360px] border-2 -[64px] flex items-center gap-4 rounded-[8px]">
