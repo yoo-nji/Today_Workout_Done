@@ -34,7 +34,7 @@ export default function CommentForm({
 }: CommentFormProps) {
   //로그인 상태
   const loginId = useAuth((state) => state.isLoggedIn);
-  console.log(loginId);
+  // console.log(loginId);
 
   return (
     <div className="">
