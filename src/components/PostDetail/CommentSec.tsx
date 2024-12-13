@@ -82,7 +82,7 @@ export default function CommentSec({
   const checkIfLiked = () => likeList.some((like) => like.user === UserId);
 
   useEffect(() => {
-    if (!isLogin) return;
+    if (!isLogin) return setIsLiked(false);
     setIsLiked(checkIfLiked());
   }, [likeList, isLogin]);
 
