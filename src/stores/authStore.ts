@@ -4,9 +4,9 @@ import { create } from "zustand";
 // UserInfo.d.ts파일에 넣어놨습니다. 확인하시고 주석지워주세요
 interface MyInfo {
   role: string;
-  emailVerified: false;
-  banned: false;
-  isOnline: true;
+  emailVerified: boolean;
+  banned: boolean;
+  isOnline: boolean;
   posts: MyInfoPost[];
   likes: string[];
   comments: string[];

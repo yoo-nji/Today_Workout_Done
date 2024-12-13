@@ -10,7 +10,7 @@ export default function MyPage() {
     <>
       {myInfo && (
         <div className="relative flex flex-col items-center">
-          <div className="w-[1600px] flex flex-col gap-[40px] pt-10">
+          <div className="flex flex-col gap-[40px] pt-10">
             <UserCard
               uname={myInfo.fullName}
               followers={myInfo.followers}
