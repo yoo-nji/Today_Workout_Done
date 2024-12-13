@@ -2,7 +2,6 @@ import SearchBar from "../components/SearchBar";
 import ImageCard from "../components/ImageCard";
 import Tag from "../components/Tag";
 import { useEffect, useState } from "react";
-import { useChannelStore } from "../stores/channelStore";
 import { api } from "../api/axios";
 import { useLocation } from "react-router";
 
@@ -13,13 +12,11 @@ export default function Home() {
     protein: "6758f6bf5f86e71ae5eb9b6c",
     routine: "6758f7305f86e71ae5eb9b82",
   };
-  // channelId
-  const channelId = useChannelStore((state) => state.channelId);
 
   // 상태
-  const [status, setStatus] = useState<
-    "idle" | "loading" | "searching" | "nopost"
-  >("idle");
+  const [status, setStatus] = useState<"idle" | "loading" | "searching">(
+    "idle"
+  );
 
   // 게시글
   const [posts, setPosts] = useState<PostType[]>([]);
@@ -38,7 +35,7 @@ export default function Home() {
         `/posts/channel/${route[channelRoute] || "6757a3a7ce18fa02ded5c758"}`
       );
       if (data.length === 0) {
-        setStatus("nopost");
+        console.log("등록된 게시물이 없습니다.");
       }
       setPosts(data);
     } catch (err) {
@@ -49,7 +46,7 @@ export default function Home() {
   };
 
   useEffect(() => {
-    if (!channelId) return;
+    if (!location) return;
     getChannelPost();
   }, [location]);
 

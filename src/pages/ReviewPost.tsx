@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { useChannelStore } from "../stores/channelStore";
 import { api } from "../api/axios";
 import SearchBar from "../components/SearchBar";
 import Tag from "../components/Tag";
@@ -12,13 +11,11 @@ export default function ReviewPost() {
   const route: { [key: string]: string } = {
     gymreview: "6758f75b5f86e71ae5eb9bae",
   };
-  // channelId
-  const channelId = useChannelStore((state) => state.channelId);
 
   // 상태
-  const [status, setStatus] = useState<
-    "idle" | "loading" | "searching" | "nopost"
-  >("idle");
+  const [status, setStatus] = useState<"idle" | "loading" | "searching">(
+    "idle"
+  );
 
   // 게시글
   const [posts, setPosts] = useState<PostType[]>([]);
@@ -35,7 +32,7 @@ export default function ReviewPost() {
     try {
       const { data } = await api.get(`/posts/channel/${route[channelRoute]}`);
       if (data.length === 0) {
-        setStatus("nopost");
+        console.log("등록된 게시물이 없습니다.");
       }
       setPosts(data);
     } catch (err) {
@@ -46,9 +43,9 @@ export default function ReviewPost() {
   };
 
   useEffect(() => {
-    if (!channelId) return;
+    if (!location) return;
     getChannelPost();
-  }, [channelId]);
+  }, [location]);
 
   // 검색 디바운스 처리
   useEffect(() => {
