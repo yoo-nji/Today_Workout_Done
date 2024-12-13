@@ -29,15 +29,18 @@ export default function UserProfile({
     console.log(formData);
     try {
       setIsLoading(true);
+
       const response = await updateUserImg(formData);
       console.log(response);
       alert("이미지 변경 완료!");
+      window.location.reload();
     } catch (error) {
       console.log(error);
     } finally {
       setIsLoading(false);
     }
   };
+
   return (
     <div
       className={twMerge(

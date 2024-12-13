@@ -1,13 +1,13 @@
 import axios from "axios";
-import { useAuth } from "../stores/authStore";
+import { useToken } from "../stores/toeknStore";
 
 export const api = axios.create({
   baseURL: "https://5th.fe.dev-cos.com:5001",
 });
 
-api.interceptors.request.use((config) => {
+api.interceptors.request.use(async (config) => {
   // 토큰 가져오기
-  const token = useAuth.getState().accessToken;
+  const token = useToken.getState().accessToken;
   // 토큰이 있으면 요청 헤더에 추가
   if (token) {
     config.headers["Authorization"] = `Bearer ${token}`;

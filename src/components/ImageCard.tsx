@@ -12,7 +12,7 @@ export default function ImageCard({
   createdAt,
   author,
   fullName,
-  userImg,
+  userImg, // 마이페이지, 로그인 한 유저의 사진
   _id: post_id,
 }: PostType & MyInfo) {
   const navigate = useNavigate();
@@ -72,7 +72,7 @@ export default function ImageCard({
             BackHeight="h-[40px]"
             IconWidth="w-[28px]"
             IconHeight="h-[28px]"
-            userImg={userImg}
+            userImg={userImg ? userImg : author?.image}
           />
           <div className="text-base font-bold">
             {author ? author.fullName : fullName}

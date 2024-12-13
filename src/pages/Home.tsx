@@ -127,19 +127,6 @@ export default function Home() {
               ))}
           </div>
         </div>
-        {/* 위로 가기 버튼 */}
-        <form className="fixed right-[10px] bottom-[10px] z-50 w-[50px]">
-          <button
-            type="button"
-            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-          >
-            <img
-              src={scrollUp}
-              alt="위로 이동"
-              className="rounded-full shadow-xl"
-            />
-          </button>
-        </form>
       </div>
     </div>
   );

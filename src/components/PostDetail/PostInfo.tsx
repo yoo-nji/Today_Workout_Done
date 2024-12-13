@@ -1,6 +1,9 @@
 import { useRef, useState } from "react";
 import UserProfile from "../UserProfile";
 import { updatePost } from "../../utils/updatePost";
+import { deletePost } from "../../utils/api/deletePosts";
+import DeleteConfirm from "../modal/DeleteConfirm";
+import { useNavigate } from "react-router";
 
 interface PostInfoProps {
   title: string;
@@ -10,6 +13,7 @@ interface PostInfoProps {
   fullName: string;
   channelId: string;
   owner: boolean;
+  postID: string;
 }
 
 export default function PostInfo({
@@ -20,7 +24,11 @@ export default function PostInfo({
   fullName,
   channelId,
   owner,
+  postID,
 }: PostInfoProps) {
+  // 삭제 모달 확인
+  const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
   const imgRef = useRef<HTMLInputElement>(null);
   const [titleInput, setTitleInput] = useState(title);
   const [context, setContext] = useState(desc);
@@ -43,7 +51,7 @@ export default function PostInfo({
       "title",
       JSON.stringify({ HTitle: titleInput, desc: context })
     );
-    formData.append("postId", "6759a934e7568a3d77d15e40");
+    formData.append("postId", postID);
     formData.append("channelId", channelId);
     if (uploadImg) {
       formData.append("image", uploadImg);
@@ -80,6 +88,15 @@ export default function PostInfo({
         alert("이미지 선택하세요");
       }
     }
+  };
+
+  // 게시물 삭제 함수
+  const deleteHandler = async () => {
+    await deletePost(postID);
+    setIsOpen(!isOpen);
+    alert("삭제되었습니다");
+    // 어디로 이동할지는 아직 미정입니다. 일단은 메인으로 이동하게 설정하였습니다.
+    navigate("/");
   };
 
   // Date 객체로 변환
@@ -123,7 +140,7 @@ export default function PostInfo({
           ) : (
             <div className="flex gap-2 text-[#505050]">
               <button onClick={editButtonHandler}>수정</button>
-              <button>삭제</button>
+              <button onClick={() => setIsOpen(!isOpen)}>삭제</button>
             </div>
           ))}
       </div>
@@ -164,6 +181,12 @@ export default function PostInfo({
           <div className="w-full py-3 mt-10 whitespace-pre-line">{context}</div>
         )}
       </div>
+      <DeleteConfirm
+        isOpen={isOpen}
+        onClose={() => setIsOpen(false)}
+        onConfirm={deleteHandler}
+        message={"이 게시글을 정말 삭제하시겠습니까?"}
+      />
     </>
   );
 }
