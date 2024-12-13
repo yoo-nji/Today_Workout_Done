@@ -2,6 +2,7 @@ import thumbnail from "../assets/images/feed_thumbnail.jpg";
 import likeIcon from "../assets/like_icon.svg";
 import chatIcon from "../assets/chat_icon_black.svg";
 import UserProfile from "./UserProfile";
+import { useNavigate } from "react-router";
 
 export default function Review({
   image,
@@ -10,7 +11,11 @@ export default function Review({
   comments,
   createdAt,
   author,
-}: PostType) {
+  fullName,
+  userImg, // 마이페이지, 로그인 한 유저의 사진
+  _id: post_id,
+}: PostType & MyInfo) {
+  const navigate = useNavigate();
   const update = new Date(createdAt);
   const date = update.toLocaleDateString("ko-KR").slice(0, -1);
 
@@ -42,6 +47,7 @@ export default function Review({
           className="group relative w-[400px] h-[300px] bg-cover bg-center
         rounded-[15px] shadow-lg mr-[60px] mt-2 mb-[7px] items-start"
           style={{ backgroundImage: `url(${image || thumbnail})` }}
+          onClick={() => navigate(`/records/${post_id}`)}
         />
       </div>
 
@@ -54,9 +60,10 @@ export default function Review({
               BackHeight="h-[40px]"
               IconWidth="w-[28px]"
               IconHeight="h-[28px]"
+              userImg={userImg ? userImg : author?.image}
             />
             <div className="flex flex-col">
-              <div className="">{author?.fullName}</div>
+              <div className="">{author ? author.fullName : fullName}</div>
               <div className="">{date}</div>
             </div>
           </div>
