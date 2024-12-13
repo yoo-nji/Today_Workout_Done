@@ -135,6 +135,7 @@ export default function Sidebar() {
             BackHeight="h-[122px]"
             IconWidth="w-[84px]"
             IconHeight="h-[84px]"
+            userImg={userInfo?.image}
           />
         )}
       </div>

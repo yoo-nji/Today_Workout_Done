@@ -14,7 +14,6 @@ interface PostInfo {
   createdAt: string;
   title: string;
   image: string;
-  comments: CommentType[];
   desc: string;
   likes: LikeType[];
   channelId: string;
@@ -30,11 +29,11 @@ export default function PostDetail() {
     try {
       // 여기에 포스트 id 값 넣기
       const { data } = await api.get(`/posts/${post_id}`);
-      console.log(data);
+      // console.log(data);
       const {
         author: { fullName, _id: userID },
         channel: { _id: channelId },
-        comments,
+        // comments,
         title,
         createdAt,
         image,
@@ -45,7 +44,7 @@ export default function PostDetail() {
       setData({
         fullName,
         userID,
-        comments,
+        // comments,
         title: HTitle,
         desc,
         createdAt,
@@ -93,7 +92,7 @@ export default function PostDetail() {
         {/* 댓글 섹션 */}
         <CommentSec
           likes={data.likes}
-          comments={data.comments}
+          // comments={data.comments}
           //포스트 아이디
           postId={post_id}
         />
