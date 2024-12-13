@@ -1,40 +1,60 @@
 import likeIcon from "../../assets/like_icon.svg";
+import likeFill from "../../assets/icons/like_fill_icon.svg";
 import chatIcon from "../../assets/chat_icon_black.svg";
 import ButtonComponent from "../ButtonComponent";
+import { Comment } from "../../utils/getPostDetail";
+import { useAuth } from "../../stores/authStore";
 
 interface CommentFormProps {
-  likes: LikeType[];
-  comments: CommentType[];
+  // likes: LikeType[];
+  // comments: CommentType[];
   postId: string | undefined;
   handleCommentSubmit: (comment: string) => Promise<void>;
   newComment: string;
+  commentList: Comment[];
   setNewComment: React.Dispatch<React.SetStateAction<string>>;
   commentinputRef: React.MutableRefObject<HTMLTextAreaElement | null>;
+  handleLike: (postId: string) => Promise<void>;
+  likeList: LikeType[];
+  isLiked: boolean;
 }
 
 export default function CommentForm({
-  likes,
-  comments,
+  // likes,
+  // comments,
+  postId,
   handleCommentSubmit,
   newComment,
+  commentList,
   setNewComment,
   commentinputRef,
+  handleLike,
+  likeList,
+  isLiked,
 }: CommentFormProps) {
+  //로그인 상태
+  const loginId = useAuth((state) => state.isLoggedIn);
+  // console.log(loginId);
+
   return (
     <div className="">
       {/* 좋아요 이모티콘 댓글 이모티콘 area */}
       <div className="flex gap-4">
         <div className="flex gap-1">
-          <button>
-            <img src={likeIcon} alt="likeIcon" />
+          <button onClick={() => handleLike(postId as string)}>
+            {isLiked ? (
+              <img className="w-6" src={likeFill} alt="likeFill" />
+            ) : (
+              <img className="w-6" src={likeIcon} alt="likeIcon" />
+            )}
           </button>
-          {likes.length}
+          {likeList.length}
         </div>
         <div className="flex gap-1">
           <button>
             <img src={chatIcon} alt="chatIcon" />
           </button>
-          {comments.length}
+          {commentList.length}
         </div>
       </div>
 
@@ -42,11 +62,14 @@ export default function CommentForm({
       <form onSubmit={(e) => e.preventDefault()}>
         <textarea
           ref={commentinputRef}
-          className="my-3 h-[100px] px-4 py-3 text-xs border-2 rounded-[6px] w-full resize-none focus:outline-none"
-          placeholder="댓글을 작성하세요"
+          className="my-3 h-[100px] px-4 py-3 text-sm border-2 rounded-[6px] w-full resize-none focus:outline-none"
+          placeholder={
+            loginId ? "댓글을 작성해 주세요" : "로그인 후 이용해 주세요"
+          }
           value={newComment}
           onChange={(e) => setNewComment(e.target.value)}
           maxLength={300} // 최대 글자 수 제한
+          disabled={!loginId} // 로그인 상태가 아닐시 비활성화
         ></textarea>
         <div className="flex justify-between">
           <p>{newComment.length}/300</p>

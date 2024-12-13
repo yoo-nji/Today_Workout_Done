@@ -56,7 +56,7 @@ export default function Review({
               IconHeight="h-[28px]"
             />
             <div className="flex flex-col">
-              <div className="">{author.fullName}</div>
+              <div className="">{author?.fullName}</div>
               <div className="">{date}</div>
             </div>
           </div>
