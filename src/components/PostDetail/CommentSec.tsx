@@ -3,12 +3,12 @@ import CommentBox from "./CommentBox";
 import CommentForm from "./CommentForm";
 import { Comment, getPostDetail } from "../../utils/getPostDetail";
 import { delCommentFn, newCommentFn } from "../../utils/commentFn";
-import { addPostLike } from "../../utils/addPostLike";
+import { addPostLike, removePostLike } from "../../utils/postLikeFn";
+import { useAuth } from "../../stores/authStore";
 
 export default function CommentSec({
   likes,
   // comments,
-  //포스트 아이디
   postId,
 }: {
   likes: LikeType[];
@@ -25,6 +25,15 @@ export default function CommentSec({
   const [newComment, setNewComment] = useState<string>("");
   // 댓글 인풋
   const commentinputRef = useRef<HTMLTextAreaElement | null>(null);
+  // 좋아요 목록
+  const [likeList, setLikeList] = useState<LikeType[]>(likes);
+  // 게시글 좋아요 상태
+  const [isLiked, setIsLiked] = useState(false);
+
+  // 사용자 정보
+  const loginId = useAuth((state) => state.user);
+  const userLikes = loginId?.likes || [];
+  console.log(userLikes);
 
   //댓글 목록 불러오기
   useEffect(() => {
@@ -34,6 +43,12 @@ export default function CommentSec({
         //포스트 아이디
         const postDetail = await getPostDetail(`/posts/${postId}`);
         setCommentList(postDetail?.comments || []); // 댓글 목록 상태 업데이트
+
+        // 좋아요 여부 확인
+        const alreadyLiked = userLikes?.some(
+          (like) => like.post && like.post === postId
+        );
+        setIsLiked(alreadyLiked); //좋아요 상태 변경
       } catch (error) {
         console.log(`댓글 불러오기 실패: ${error}`);
         setError(true);
@@ -77,16 +92,40 @@ export default function CommentSec({
     }
   };
 
-  // 포스트 좋아요🔥
+  // 포스트 좋아요
   const handleLike = async (postId: string) => {
     try {
-      const response = await addPostLike(postId);
-      console.log(`좋아요성공: ${postId}`);
-      console.log(response);
+      // 좋아요 여부 확인
+      const alreadyLiked = userLikes?.some(
+        (like) => like.post && like.post === postId
+      );
+
+      if (alreadyLiked) {
+        console.log("이미 좋아요를 눌렀습니다!");
+        return;
+      }
+
+      const data = await addPostLike(postId);
+      setLikeList((likeList) => [...likeList, data]);
+      setIsLiked(true);
     } catch (err) {
       console.log(err);
     }
   };
+
+  // 포스트 좋아요 취소
+  const handleUnlike = async () => {
+    try {
+      let likeId = "D";
+      await removePostLike(likeId);
+      setLikeList((likeList) => likeList.filter((like) => like._id !== likeId));
+      setIsLiked(false);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  // 좋아요/��어요 버��
 
   // 응답 상태
   if (isLoading) return <p>댓글 불러오는 중...</p>;
@@ -97,7 +136,7 @@ export default function CommentSec({
       {/* 코멘트 폼 */}
       <div className="mt-4">
         <CommentForm
-          likes={likes}
+          // likes={likes}
           // comments={comments}
           postId={postId}
           handleCommentSubmit={handleCommentSubmit}
@@ -106,6 +145,8 @@ export default function CommentSec({
           setNewComment={setNewComment}
           commentinputRef={commentinputRef}
           handleLike={handleLike}
+          likeList={likeList}
+          isLiked={isLiked}
         />
       </div>
       <div className="">

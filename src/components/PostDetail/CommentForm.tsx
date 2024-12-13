@@ -1,10 +1,11 @@
-import likeIcon from "../../assets/like_icon.svg";
+import likeIcon from "../../assets/icons/like_icon.svg";
+import likeFill from "../../assets/icons/like_fill_icon.svg";
 import chatIcon from "../../assets/chat_icon_black.svg";
 import ButtonComponent from "../ButtonComponent";
 import { Comment } from "../../utils/getPostDetail";
 
 interface CommentFormProps {
-  likes: LikeType[];
+  // likes: LikeType[];
   // comments: CommentType[];
   postId: string | undefined;
   handleCommentSubmit: (comment: string) => Promise<void>;
@@ -13,10 +14,12 @@ interface CommentFormProps {
   setNewComment: React.Dispatch<React.SetStateAction<string>>;
   commentinputRef: React.MutableRefObject<HTMLTextAreaElement | null>;
   handleLike: (postId: string) => Promise<void>;
+  likeList: LikeType[];
+  isLiked: boolean;
 }
 
 export default function CommentForm({
-  likes,
+  // likes,
   // comments,
   postId,
   handleCommentSubmit,
@@ -25,6 +28,8 @@ export default function CommentForm({
   setNewComment,
   commentinputRef,
   handleLike,
+  likeList,
+  isLiked,
 }: CommentFormProps) {
   return (
     <div className="">
@@ -32,9 +37,13 @@ export default function CommentForm({
       <div className="flex gap-4">
         <div className="flex gap-1">
           <button onClick={() => handleLike(postId as string)}>
-            <img src={likeIcon} alt="likeIcon" />
+            {isLiked ? (
+              <img className="w-6" src={likeFill} alt="likeFill" />
+            ) : (
+              <img className="w-6" src={likeIcon} alt="likeIcon" />
+            )}
           </button>
-          {likes.length}
+          {likeList.length}
         </div>
         <div className="flex gap-1">
           <button>

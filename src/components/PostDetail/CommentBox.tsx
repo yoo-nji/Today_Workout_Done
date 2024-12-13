@@ -11,7 +11,7 @@ export default function CommentBox({
 }) {
   // 사용자 정보 가져오기
   const loginId = useAuth((state) => state.user);
-  // console.log(loginId?._id);
+  console.log(loginId?._id);
 
   //날짜 포맷
   const update = new Date(comment.createdAt);

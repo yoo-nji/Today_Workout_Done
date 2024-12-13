@@ -9,7 +9,7 @@ interface MyInfo {
   banned: false;
   isOnline: true;
   posts: MyInfoPost[];
-  likes: string[];
+  likes: Like[];
   comments: string[];
   followers: string[];
   following: string[];
@@ -36,6 +36,15 @@ interface MyInfoPost {
   imagePublicId: string;
   channel: string;
   author: string;
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
+}
+
+interface Like {
+  _id: string;
+  post?: string;
+  user: string;
   createdAt: string;
   updatedAt: string;
   __v: number;
