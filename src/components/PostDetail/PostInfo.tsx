@@ -95,6 +95,7 @@ export default function PostInfo({
     await deletePost(postID);
     setIsOpen(!isOpen);
     alert("삭제되었습니다");
+    // 어디로 이동할지는 아직 미정입니다. 일단은 메인으로 이동하게 설정하였습니다.
     navigate("/");
   };
 
