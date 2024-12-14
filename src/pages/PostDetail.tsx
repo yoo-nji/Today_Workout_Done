@@ -29,7 +29,7 @@ export default function PostDetail() {
     try {
       // 여기에 포스트 id 값 넣기
       const { data } = await api.get(`/posts/${post_id}`);
-      // console.log(data);
+      console.log(data);
       const {
         author: { fullName, _id: userID },
         channel: { _id: channelId },
