@@ -137,7 +137,10 @@ export default function Sidebar() {
         )}
       </div>
 
-      {isLoggedIn && <CheckDone textSize="text-[18px]" width="w-[90px]" />}
+      {/* 한달 운동 횟수 */}
+      {isLoggedIn && isToggle ? (
+        <CheckDone textSize="text-[18px]" width="w-[90px]" />
+      ) : null}
 
       <div className="flex flex-col justify-between w-full h-full mt-[20px] border-t">
         {/* 채널목록 */}
