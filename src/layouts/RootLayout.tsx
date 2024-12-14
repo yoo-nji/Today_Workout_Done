@@ -4,11 +4,18 @@ import Sidebar from "../components/rootlayout/Sidebar";
 import { usesidebarToggleStore } from "../stores/sideberToggleStore";
 import { twMerge } from "tailwind-merge";
 import scrollUp from "../assets/scrollUp.svg";
+import { useLoadingStore } from "../stores/loadingStore";
 
 export default function RootLayout() {
+  const isLoading = useLoadingStore((state) => state.isLoading);
   const isToggle = usesidebarToggleStore((state) => state.isToggle);
   return (
-    <div className="flex font-pretendard">
+    <div
+      className={twMerge(
+        "flex font-pretendard",
+        isLoading && "overflow-hidden"
+      )}
+    >
       <Sidebar />
       <div className="flex flex-col h-screen min-h-screen w-full">
         <Header logo sidebar />
