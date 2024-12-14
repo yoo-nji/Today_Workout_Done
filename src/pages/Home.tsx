@@ -4,8 +4,13 @@ import Tag from "../components/Tag";
 import { useEffect, useState } from "react";
 import { api } from "../api/axios";
 import { useLocation } from "react-router";
+import Loading from "../components/Loading";
+import { useLoadingStore } from "../stores/loadingStore";
 
 export default function Home() {
+  const startLoading = useLoadingStore((state) => state.startLoading);
+  const stopLoading = useLoadingStore((state) => state.stopLoading);
+
   const location = useLocation();
   const channelRoute = location.pathname.split("/")[1];
   const route: { [key: string]: string } = {
@@ -30,7 +35,12 @@ export default function Home() {
 
   const getChannelPost = async () => {
     setStatus("loading");
+    //로딩 시작
+    startLoading();
     try {
+      // 로딩 테스트: 나중에 지우기!! ❌
+      // await new Promise((resolve) => setTimeout(resolve, 2000));
+
       const { data } = await api.get(
         `/posts/channel/${route[channelRoute] || "6757a3a7ce18fa02ded5c758"}`
       );
@@ -42,6 +52,8 @@ export default function Home() {
       console.log(err);
     } finally {
       setStatus("idle");
+      //로딩 종료
+      stopLoading();
     }
   };
 
@@ -81,7 +93,8 @@ export default function Home() {
   }, [searchTerm]);
 
   return (
-    <div>
+    <div className="relative">
+      <Loading />
       <div className="flex flex-col items-center gap-16 mt-8">
         <div className="flex flex-col items-center gap-[30px] w-full px-4">
           <SearchBar
@@ -101,7 +114,7 @@ export default function Home() {
         {/* 피드 이미지 */}
         <div className="flex flex-col items-center mt-8">
           <div className="grid gap-8 2xl:grid-cols-4 xl:grid-cols-3 lg:grid-cols-2">
-            {status === "loading" && <p>로딩중..</p>}
+            {/* {status === "loading" && <p>로딩중..</p>} */}
 
             {status === "searching" &&
               (searchPosts.length ? (
