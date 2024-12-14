@@ -5,7 +5,7 @@ import logoImg from "../../assets/loge.svg";
 import UserProfile from "../UserProfile";
 import ButtonComponent from "../ButtonComponent";
 import { useAuth } from "../../stores/authStore";
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
 import { api } from "../../api/axios";
 import { AxiosError } from "axios";
 import Notification from "../notification/Notification";
@@ -20,20 +20,17 @@ export default function Header({
   logo?: boolean;
   sidebar?: boolean;
 }) {
-  const setToken = useToken((state) => state.setToken);
   const navigate = useNavigate();
-  const authInfo = useAuth();
-  {
-    /* 정식배포시 삭제 */
-  }
-  // 아래는 테스트용 배포시에 제거
-  const login = useAuth((state) => state.login);
-  const setUser = useAuth((state) => state.setUser);
 
-  // 테스트버튼입니다 정식배포땐 삭제
-  const testhandler = () => {
-    console.log(authInfo.user);
-  };
+  // 토큰 설정
+  const setToken = useToken((state) => state.setToken);
+
+  // 로그인상태, 로그인, 로그아웃, 유저정보저장
+  const isLoggedIn = useAuth((state) => state.isLoggedIn);
+  const login = useAuth((state) => state.login);
+  const logout = useAuth((state) => state.logout);
+  const setUser = useAuth((state) => state.setUser);
+  const userInfo = useAuth((state) => state.user);
 
   // 테스트용 빠른 로그인입니다 귀찮으신분 자기 ID 비번 적어서 사용하세요
   const fastlogin = async () => {
@@ -53,18 +50,15 @@ export default function Header({
       }
     }
   };
-  {
-    /* 정식배포시 삭제 */
-  }
-  const isLoggedin = useAuth().isLoggedIn;
-  const isNotification = authInfo.user?.notifications;
-  const logout = () => {
-    authInfo.logout();
+
+  const logoutHandler = () => {
+    // 로그아웃 / 토큰 삭제 / 유저정보 삭제
+    logout();
+    setToken(null);
+    setUser(null);
     // 로컬스토리지 삭제
     useToken.persist.clearStorage();
   };
-
-  //
 
   // Todo : 알림창 폼 보여줄지 분기처리
   const [showNoti, setShowNoti] = useState(false);
@@ -88,16 +82,7 @@ export default function Header({
           onClick={() => navigate("/")}
         />
       </div>
-      {/* 정식배포시 삭제 */}
-      <button
-        className="border border-solid border-rose-400 w-[220px] h-[36px] rounded-[10px]"
-        onClick={() => testhandler()}
-      >
-        헤더의 만능 테스트버튼
-      </button>
-      {/* 정식배포시 여기까지 삭제 */}
-
-      {isLoggedin ? (
+      {isLoggedIn ? (
         // 로그인 상태 분기
         <div className="flex gap-[10px] items-center">
           {/* 모드변경 버튼 */}
@@ -108,9 +93,7 @@ export default function Header({
           <ButtonComponent
             bgcolor="bg-[#265CAC]"
             textcolor="text-[white]"
-            onClick={() => {
-              logout();
-            }}
+            onClick={logoutHandler}
           >
             {"로그아웃"}
           </ButtonComponent>
@@ -121,17 +104,6 @@ export default function Header({
           >
             {"새글등록"}
           </ButtonComponent>
-
-          {/* {!isLoggedIn && } */}
-          {/*  유저 프로필 */}
-          {/* <div className="bg-white w-[48px] h-[48px] ml-[10px] flex justify-center items-center rounded-[50%] shadow-profile-inner cursor-pointer">
-          <img
-            src={defaultUser}
-            alt="기본 유저사진"
-            className="w-[33px] h-[33px]"
-          />
-        </div> */}
-
           <div className="w-[48px] h-[48px]  flex justify-center items-center mx-[10px] relative">
             <img
               src={notifyIcon}
@@ -143,7 +115,7 @@ export default function Header({
               }}
             />
             {/* 알림이 있다면 뱃지색 처리 */}
-            {isNotification?.length != 0 && (
+            {userInfo?.notifications.length != 0 && (
               <div className="w-3 h-3 rounded-[50%] bg-red-500 absolute bottom-0 right-0"></div>
             )}
             {/* 알림창 보여줘야한다면 처리 */}

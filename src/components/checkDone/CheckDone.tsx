@@ -13,7 +13,7 @@ export default function CheckDone({ width, textSize, bg }: CheckDoneType) {
   const CHANNEL_ID = "6757a3a7ce18fa02ded5c758";
 
   const myInfo = useAuth((state) => state.user)!;
-  console.log(myInfo);
+  // console.log(myInfo);
 
   const [checkNumber, setCheckNumber] = useState(0);
 
@@ -26,7 +26,7 @@ export default function CheckDone({ width, textSize, bg }: CheckDoneType) {
 
     setCheckNumber(checkPosts.length);
 
-    console.log(checkNumber);
+    // console.log(checkNumber);
   }, [myInfo]);
 
   return (

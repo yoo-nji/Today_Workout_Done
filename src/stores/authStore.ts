@@ -54,7 +54,7 @@ interface Auth {
   isLoggedIn: boolean;
   login: () => void;
   logout: () => void;
-  setUser: (u: MyInfo) => void;
+  setUser: (u: MyInfo | null) => void;
 }
 
 export const useAuth = create<Auth>((set) => ({
@@ -62,5 +62,5 @@ export const useAuth = create<Auth>((set) => ({
   isLoggedIn: false,
   login: () => set({ isLoggedIn: true }),
   logout: () => set({ isLoggedIn: false, user: null }),
-  setUser: (u: MyInfo) => set({ user: u }),
+  setUser: (u: MyInfo | null) => set({ user: u }),
 }));
