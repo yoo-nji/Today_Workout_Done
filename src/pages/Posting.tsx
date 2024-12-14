@@ -166,7 +166,7 @@ export default function Posting() {
                       key={item.id}
                       id={item.id}
                       className={twMerge(
-                        `bg-white border w-full h-[45px] px-[10px] text-[18px] flex items-center justify-center hover:bg-rose-200 ${
+                        `bg-white border w-full h-[45px] px-[10px] text-[18px] flex items-center justify-center hover:bg-[#E8F3FC] ${
                           openChannel ? "flex" : "hidden"
                         }`
                       )}
@@ -185,7 +185,6 @@ export default function Posting() {
               type="text"
               placeholder="제목을 입력해주세요"
               className=" w-full h-[50px] bg-[#F4F6F8]  outline-none text-[18px] px-[15px]"
-              disabled={img.length && channel !== "게시판 선택" ? false : true}
               value={title}
               onChange={(e) => setTitle(e.target.value)}
             />
@@ -195,7 +194,6 @@ export default function Posting() {
               placeholder="내용을 작성해주세요"
               className=" resize-none outline-none w-full h-[200px] bg-[#F4F6F8] py-[10px] px-[15px] text-[20px]"
               maxLength={1000}
-              disabled={img.length && channel !== "게시판 선택" ? false : true}
               value={desc}
               onChange={(e) => setDesc(e.target.value)}
             ></textarea>
