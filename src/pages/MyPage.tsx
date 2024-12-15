@@ -23,8 +23,10 @@ export default function MyPage() {
               update={true}
               userImg={myInfo.image}
             />
-            <CheckDone bg="bg-[#f3f3f3]" />
-
+            <div className="flex items-center w-full gap-4">
+              {/* <CustomCalendar /> */}
+              <CheckDone bg="bg-[#F7FAFF]" />
+            </div>
             <div className="border-t pt-[10px] px-1 flex justify-center">
               <div className="flex flex-col items-start mt-[20px]">
                 <p className="text-[22px] mb-[20px] font-bold">
