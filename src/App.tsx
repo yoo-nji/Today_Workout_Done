@@ -35,6 +35,9 @@ export default function App() {
 
           {/* 오운완 페이지 */}
           <Route path="/records/:post_id" element={<PostDetail />} />
+          <Route path="/protein/:post_id" element={<PostDetail />} />
+          <Route path="/routine/:post_id" element={<PostDetail />} />
+          <Route path="/gymreview/:post_id" element={<PostDetail />} />
 
           <Route path="/about" element={<About />} />
           <Route path="/user/:user_id" element={<User />} />

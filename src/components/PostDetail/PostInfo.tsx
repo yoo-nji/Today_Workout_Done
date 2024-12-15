@@ -4,6 +4,7 @@ import { updatePost } from "../../utils/updatePost";
 import { deletePost } from "../../utils/api/deletePosts";
 import DeleteConfirm from "../modal/DeleteConfirm";
 import { useNavigate } from "react-router";
+import { channelMapping } from "../../constants/channel";
 
 interface PostInfoProps {
   title: string;
@@ -14,6 +15,8 @@ interface PostInfoProps {
   channelId: string;
   owner: boolean;
   postID: string;
+  edit: boolean;
+  setEdit: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export default function PostInfo({
@@ -25,6 +28,8 @@ export default function PostInfo({
   channelId,
   owner,
   postID,
+  edit,
+  setEdit,
 }: PostInfoProps) {
   // 삭제 모달 확인
   const [isOpen, setIsOpen] = useState(false);
@@ -34,7 +39,6 @@ export default function PostInfo({
   const [context, setContext] = useState(desc);
   const [img, setImg] = useState(image);
   const [uploadImg, setUploadImg] = useState<File | null>(null);
-  const [edit, setEdit] = useState(false);
   const textarea = useRef<HTMLTextAreaElement | null>(null);
 
   const handleInput = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -45,6 +49,7 @@ export default function PostInfo({
     setContext(e.target.value);
   };
 
+  // 게시물 정보 업데이트
   const updateHandler = async () => {
     const formData = new FormData();
     formData.append(
@@ -107,6 +112,8 @@ export default function PostInfo({
     // 어디로 이동할지는 아직 미정입니다. 일단은 메인으로 이동하게 설정하였습니다.
     navigate("/");
   };
+
+  // 삭제 모달 창 떴을 때 스크롤 제한
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = "hidden"; // 스크롤 금지
@@ -118,17 +125,37 @@ export default function PostInfo({
     };
   }, [isOpen]);
 
+  // 수정 버튼 눌렀을 때 높이 조정
+  useEffect(() => {
+    if (textarea.current) {
+      textarea.current.style.height = "auto"; // 높이 초기화
+      textarea.current.style.height = `${textarea.current.scrollHeight}px`; // 내용에 맞게 높이 조정
+    }
+  }, [edit]);
+
   // Date 객체로 변환
   const date = new Date(createdAt);
   // 원하는 포맷으로 변환
   const formattedDate = `${date.getFullYear()}.${(date.getMonth() + 1)
     .toString()
     .padStart(2, "0")}.${date.getDate().toString().padStart(2, "0")}`;
+
+  // 게시판 이름
+
+  const channel = Object.keys(channelMapping).find(
+    (key) => channelMapping[key] === channelId
+  );
+
+  const channelName: { [key: string]: string } = {
+    records: "오운완 인증",
+    protein: "프로틴 추천",
+    routine: "루틴 공유",
+    gymreview: "헬스장 리뷰",
+  };
+
   return (
     <>
-      <div className="text-sm ">
-        게시판이름 (넣을려고했는데 어떻게 처리할지고 고민중)
-      </div>
+      <div className="text-sm ">{channel ? channelName[channel] : null} </div>
       {edit ? (
         <input
           className="py-3 mb-4 text-4xl focus:outline-none border w-full border-[#d3d3d3d3]"

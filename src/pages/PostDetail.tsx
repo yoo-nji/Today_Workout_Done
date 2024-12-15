@@ -24,6 +24,8 @@ export default function PostDetail() {
   const { post_id } = useParams();
   const loginId = useAuth((state) => state.user);
   const [data, setData] = useState<PostInfo | null>(null);
+  // 편집모드
+  const [edit, setEdit] = useState(false);
 
   const getPostData = async () => {
     try {
@@ -77,25 +79,32 @@ export default function PostDetail() {
           owner={data.userID === loginId?._id}
           channelId={data.channelId}
           postID={data.postID}
+          edit={edit}
+          setEdit={setEdit}
         />
-        <div className="flex justify-between">
-          <div className="w-[360px] border-2 -[64px] flex items-center gap-4 rounded-[8px]">
-            <img src={leftIcon} alt="leftIcon" />
-            <span>이전 포스트</span>
-          </div>
-          <div className="w-[360px] border-2 h-[64px] flex items-center gap-4 justify-end rounded-[8px]">
-            <span>다음 포스트</span>
-            <img src={rightIcon} alt="leftIcon" />
-          </div>
-        </div>
+        {/* 편집모드 일때는 댓글 렌더링 X */}
+        {!edit && (
+          <>
+            <div className="flex justify-between">
+              <div className="w-[360px] border-2 -[64px] flex items-center gap-4 rounded-[8px]">
+                <img src={leftIcon} alt="leftIcon" />
+                <span>이전 포스트</span>
+              </div>
+              <div className="w-[360px] border-2 h-[64px] flex items-center gap-4 justify-end rounded-[8px]">
+                <span>다음 포스트</span>
+                <img src={rightIcon} alt="leftIcon" />
+              </div>
+            </div>
 
-        {/* 댓글 섹션 */}
-        <CommentSec
-          likes={data.likes}
-          // comments={data.comments}
-          //포스트 아이디
-          postId={post_id}
-        />
+            {/* 댓글 섹션 */}
+            <CommentSec
+              likes={data.likes}
+              // comments={data.comments}
+              //포스트 아이디
+              postId={post_id}
+            />
+          </>
+        )}
       </div>
     </div>
   );

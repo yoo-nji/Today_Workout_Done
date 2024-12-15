@@ -3,6 +3,7 @@ import likeIcon from "../assets/like_icon.svg";
 import chatIcon from "../assets/chat_icon.svg";
 import UserProfile from "./UserProfile";
 import { useNavigate } from "react-router";
+import { channelMapping } from "../constants/channel";
 
 export default function ImageCard({
   image,
@@ -14,6 +15,7 @@ export default function ImageCard({
   fullName,
   userImg, // 마이페이지, 로그인 한 유저의 사진
   _id: post_id,
+  channel,
 }: PostType & MyInfo) {
   const navigate = useNavigate();
   const update = new Date(createdAt);
@@ -40,13 +42,17 @@ export default function ImageCard({
     postTitle = title;
   }
 
+  const channelName = Object.keys(channelMapping).find(
+    (key) => channelMapping[key] === channel?._id
+  );
+
   return (
     <div className="flex flex-col items-center gap-3">
       {/* 썸네일 */}
       <div
         className="group relative w-[250px] h-[250px] bg-cover bg-center rounded-2xl shadow-lg cursor-pointer"
         style={{ backgroundImage: `url(${image || thumbnail})` }}
-        onClick={() => navigate(`/records/${post_id}`)}
+        onClick={() => navigate(`/${channelName}/${post_id}`)}
       >
         {/* Hover */}
         <div className="absolute inset-0 flex flex-col items-center justify-center text-white transition-opacity duration-300 bg-black bg-opacity-50 rounded-2xl opacity-0 group-hover:opacity-100">
