@@ -1,6 +1,7 @@
 import { twMerge } from "tailwind-merge";
 import defaultUser from "../assets/defaultUser.svg";
 import profileEdit from "../assets/profile-edit.svg";
+import home from "../assets/icons/home_icon.svg";
 import { useRef, useState } from "react";
 import { updateUserImg } from "../utils/updateUserImg";
 
@@ -13,6 +14,7 @@ export default function UserProfile({
   onClick,
   update,
   userImg,
+  myProfile,
 }: userProfileType) {
   const imgRef = useRef<HTMLInputElement>(null);
 
@@ -61,6 +63,16 @@ export default function UserProfile({
         <img
           className="absolute right-[-10px] bottom-[-10px]"
           src={profileEdit}
+          alt="profile-edit"
+          onClick={onClick}
+        />
+      )}
+
+      {/* 로그인 유저 마이페이지 아이콘 표시 */}
+      {myProfile && (
+        <img
+          className="absolute right-[-10px] bottom-[-10px]"
+          src={home}
           alt="profile-edit"
           onClick={onClick}
         />
