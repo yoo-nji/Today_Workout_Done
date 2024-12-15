@@ -81,7 +81,7 @@ export default function ImageCard({
             BackHeight="h-[30px]"
             userImg={userImg ? userImg : author?.image}
           />
-          <div className="text-base font-bold">
+          <div className="text-base font-medium">
             {author ? author.fullName : fullName}
           </div>
         </div>
