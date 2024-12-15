@@ -83,7 +83,7 @@ export default function Sidebar() {
   return (
     <div
       className={twMerge(
-        `flex flex-col items-center  h-[100vh] z-10
+        `flex flex-col items-center gap-1 h-[100vh] z-10
       py-5 text-[#1D1D1D] bg-[#FEFEFE] border-r
       border-gray-200/50 fixed transition-all `,
         isOpen ? "before:modal-back" : "",
