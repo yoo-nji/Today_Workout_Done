@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import UserProfile from "../UserProfile";
 import { updatePost } from "../../utils/updatePost";
 import { deletePost } from "../../utils/api/deletePosts";
@@ -107,6 +107,16 @@ export default function PostInfo({
     // 어디로 이동할지는 아직 미정입니다. 일단은 메인으로 이동하게 설정하였습니다.
     navigate("/");
   };
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden"; // 스크롤 금지
+    } else {
+      document.body.style.overflow = ""; // 원래 상태 복원
+    }
+    return () => {
+      document.body.style.overflow = ""; // 컴포넌트 언마운트 시 복원
+    };
+  }, [isOpen]);
 
   // Date 객체로 변환
   const date = new Date(createdAt);
