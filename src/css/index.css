@@ -1,5 +1,6 @@
 @import "./tailwind.css";
 @import "./fonts.css";
+@import "./calendar.css";
 
 * {
   margin: 0px;
