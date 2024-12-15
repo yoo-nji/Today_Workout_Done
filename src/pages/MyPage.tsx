@@ -2,9 +2,13 @@ import UserCard from "../components/User/UserCard";
 import { useAuth } from "../stores/authStore";
 import ImageCard from "../components/ImageCard";
 import CheckDone from "../components/checkDone/CheckDone";
+import Loading from "../components/Loading";
+import { useLoadingStore } from "../stores/loadingStore";
 
 export default function MyPage() {
   const myInfo = useAuth((state) => state.user);
+
+  const isLoading = useLoadingStore((state) => state.isLoading);
 
   return (
     <>
@@ -50,6 +54,7 @@ export default function MyPage() {
               </div>
             </div>
           </div>
+          {isLoading ? <Loading /> : null}
         </div>
       )}
     </>
