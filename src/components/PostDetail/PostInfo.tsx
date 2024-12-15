@@ -14,6 +14,8 @@ interface PostInfoProps {
   channelId: string;
   owner: boolean;
   postID: string;
+  edit: boolean;
+  setEdit: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export default function PostInfo({
@@ -25,6 +27,8 @@ export default function PostInfo({
   channelId,
   owner,
   postID,
+  edit,
+  setEdit,
 }: PostInfoProps) {
   // 삭제 모달 확인
   const [isOpen, setIsOpen] = useState(false);
@@ -34,7 +38,6 @@ export default function PostInfo({
   const [context, setContext] = useState(desc);
   const [img, setImg] = useState(image);
   const [uploadImg, setUploadImg] = useState<File | null>(null);
-  const [edit, setEdit] = useState(false);
   const textarea = useRef<HTMLTextAreaElement | null>(null);
 
   const handleInput = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -45,6 +48,7 @@ export default function PostInfo({
     setContext(e.target.value);
   };
 
+  // 게시물 정보 업데이트
   const updateHandler = async () => {
     const formData = new FormData();
     formData.append(
@@ -107,6 +111,8 @@ export default function PostInfo({
     // 어디로 이동할지는 아직 미정입니다. 일단은 메인으로 이동하게 설정하였습니다.
     navigate("/");
   };
+
+  // 삭제 모달 창 떴을 때 스크롤 제한
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = "hidden"; // 스크롤 금지
@@ -117,6 +123,14 @@ export default function PostInfo({
       document.body.style.overflow = ""; // 컴포넌트 언마운트 시 복원
     };
   }, [isOpen]);
+
+  // 수정 버튼 눌렀을 때 높이 조정
+  useEffect(() => {
+    if (textarea.current) {
+      textarea.current.style.height = "auto"; // 높이 초기화
+      textarea.current.style.height = `${textarea.current.scrollHeight}px`; // 내용에 맞게 높이 조정
+    }
+  }, [edit]);
 
   // Date 객체로 변환
   const date = new Date(createdAt);
