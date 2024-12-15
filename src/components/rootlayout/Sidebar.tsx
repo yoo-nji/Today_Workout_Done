@@ -168,7 +168,7 @@ export default function Sidebar() {
           <div className="flex justify-center">
             <button
               className={twMerge(
-                "mt-2 self-center w-[243px] h-[50px] bg-[#265CAC] hover:bg-[#1e4d8a] rounded-[20px] text-lg text-white font-bold relative",
+                "mt-2 self-center w-[230px] h-[40px] bg-[#265CAC] hover:bg-[#1e4d8a] rounded-[15px] text-base text-white font-medium relative",
                 !isToggle && "hidden"
               )}
               onClick={(e) => {
