@@ -31,26 +31,28 @@ export default function MyPage() {
               <CustomCalendar />
               <CheckDone bg="bg-[#F7FAFF]" />
             </div>
-            <div className="border-t pt-[10px] px-1 flex justify-center">
-              <div className="flex flex-col items-start mt-[20px]">
-                <p className="text-[18px] mb-[20px] font-bold">
-                  게시물 {myInfo.posts.length}개
-                </p>
-                <div className="flex items-center justify-center">
-                  <div className="grid gap-8 2xl:grid-cols-4 xl:grid-cols-3 lg:grid-cols-2">
-                    {myInfo.posts.map((post) => (
-                      <ImageCard
-                        key={post._id}
-                        image={post.image}
-                        comments={post.comments}
-                        createdAt={post.updatedAt}
-                        likes={post.likes}
-                        title={post.title}
-                        fullName={myInfo.fullName}
-                        userImg={myInfo.image}
-                        _id={post._id}
-                      />
-                    ))}
+            <div>
+              <p className=" text-[18px] mb-[20px] font-medium">
+                게시물 {myInfo.posts.length}개
+              </p>
+              <div className="border-t pt-[10px] px-1 flex justify-center">
+                <div className="flex flex-col items-start mt-[20px]">
+                  <div className="flex items-center justify-center">
+                    <div className="grid gap-8 2xl:grid-cols-4 xl:grid-cols-3 lg:grid-cols-2">
+                      {myInfo.posts.map((post) => (
+                        <ImageCard
+                          key={post._id}
+                          image={post.image}
+                          comments={post.comments}
+                          createdAt={post.updatedAt}
+                          likes={post.likes}
+                          title={post.title}
+                          fullName={myInfo.fullName}
+                          userImg={myInfo.image}
+                          _id={post._id}
+                        />
+                      ))}
+                    </div>
                   </div>
                 </div>
               </div>

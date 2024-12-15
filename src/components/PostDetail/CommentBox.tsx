@@ -24,12 +24,7 @@ export default function CommentBox({
     <div className="flex flex-col py-5 border-b border-gray-200">
       <div className="flex justify-between ">
         <div className="flex gap-[12px] w-fit items-center">
-          <UserProfile
-            BackWidth="w-[36px]"
-            BackHeight="h-[36px]"
-            IconWidth="w-[25px]"
-            IconHeight="h-[25px]"
-          />
+          <UserProfile BackWidth="w-[36px]" BackHeight="h-[36px]" />
           <div>
             <p className="text-[13px] mb-[4px] font-bold">
               {comment.author.fullName}

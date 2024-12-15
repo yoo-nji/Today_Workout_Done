@@ -2,7 +2,7 @@ import { twMerge } from "tailwind-merge";
 import defaultUser from "../assets/defaultUser.svg";
 import profileEdit from "../assets/profile-edit.svg";
 import home from "../assets/icons/home_icon.svg";
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import { updateUserImg } from "../utils/updateUserImg";
 import { useLoadingStore } from "../stores/loadingStore";
 
@@ -10,8 +10,6 @@ export default function UserProfile({
   edit,
   BackWidth,
   BackHeight,
-  IconWidth,
-  IconHeight,
   onClick,
   update,
   userImg,
@@ -53,7 +51,7 @@ export default function UserProfile({
       )}
     >
       <img
-        className={twMerge(IconWidth, IconHeight, "rounded-[50%]")}
+        className={twMerge("w-full h-full rounded-[50%]")}
         src={userImg ? userImg : defaultUser}
         alt="userProfile"
         onClick={onClick}
@@ -62,18 +60,17 @@ export default function UserProfile({
       {/* edit 기능 있는 유저 프로필 */}
       {edit && (
         <img
-          className="absolute right-[-10px] bottom-[-10px]"
+          className="absolute right-[-5px] bottom-[-5px] w-10"
           src={profileEdit}
           alt="profile-edit"
           onClick={onClick}
         />
       )}
 
-
       {/* 로그인 유저 마이페이지 아이콘 표시 */}
       {myProfile && (
         <img
-          className="absolute right-[-10px] bottom-[-10px]"
+          className="absolute right-[-5px] bottom-[-5px] w-10"
           src={home}
           alt="profile-edit"
           onClick={onClick}
@@ -93,7 +90,7 @@ export default function UserProfile({
           />
           <label htmlFor="editProfileImg">
             <img
-              className="absolute right-[-10px] bottom-[-10px] cursor-pointer"
+              className="absolute right-[-5px] bottom-[-5px] w-10 cursor-pointer"
               src={profileEdit}
               alt="profile-edit"
             />

@@ -78,8 +78,6 @@ export default function UserCard({
       <UserProfile
         BackWidth={BackWidth}
         BackHeight={BackHeight}
-        IconWidth={IconWidth}
-        IconHeight={IconHeight}
         edit={edit}
         update={update}
         userImg={userImg}
@@ -99,7 +97,7 @@ export default function UserCard({
               <input
                 type="text"
                 id="updateName"
-                className="text-lg font-extrabold w-[180px] py-[5px] disabled:bg-white outline-none focus:border 
+                className="text-lg font-bold w-[180px] py-[5px] disabled:bg-white outline-none focus:border 
                 focus: border-[#bcbcbc] rounded-[5px] px-[3px]"
                 maxLength={8}
                 value={updateName}

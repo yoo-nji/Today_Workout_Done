@@ -141,12 +141,7 @@ export default function PostInfo({
       <div className="flex items-center justify-between">
         {/* 왼쪽 프로필 */}
         <div className="flex gap-[10px] items-center">
-          <UserProfile
-            BackWidth="w-[36px]"
-            BackHeight="h-[36px]"
-            IconWidth="w-[25px]"
-            IconHeight="h-[25px]"
-          />
+          <UserProfile BackWidth="w-[36px]" BackHeight="h-[36px]" />
           <div>
             <p className="text-[13px] mb-[6px] font-bold">{fullName}</p>
             <p className="text-xs">{formattedDate}</p>

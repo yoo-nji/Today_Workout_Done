@@ -110,16 +110,16 @@ export default function Sidebar() {
       </a>
 
       {/* 멘트 */}
-      <div className="flex flex-col items-center gap-[14px] pb-[23px] w-full">
+      <div className="flex flex-col items-center gap-[10px] pb-[15px] w-full text-lg font-medium">
         <div
           className={twMerge(
-            "flex flex-col items-center text-xl font-bold text-center",
+            "flex flex-col items-center text-center mt-2",
             !isToggle && "hidden"
           )}
         >
           <div>
             어서오세요{" "}
-            <span className="text-[#265CAC] text-[26px] font-extrabold">
+            <span className="text-[#265CAC] text-[19px] font-bold">
               {userInfo && isLoggedIn ? userInfo.fullName : "회원"}
             </span>
             님
@@ -129,10 +129,8 @@ export default function Sidebar() {
         {/* 유저 프로필 */}
         {isToggle && (
           <UserProfile
-            BackWidth="w-[122px]"
-            BackHeight="h-[122px]"
-            IconWidth="w-[84px]"
-            IconHeight="h-[84px]"
+            BackWidth="w-[100px]"
+            BackHeight="h-[100px]"
             onClick={isLoggedIn ? () => navigate("/myprofile") : undefined}
             userImg={userInfo?.image}
             myProfile={isLoggedIn} //로그인 여부에 따라 홈 아이콘 표시
@@ -142,13 +140,13 @@ export default function Sidebar() {
 
       {/* 한달 운동 횟수 */}
       {isLoggedIn && isToggle ? (
-        <CheckDone textSize="text-[18px]" width="w-[90px]" />
+        <CheckDone textSize="text-[16px]" width="w-[65px]" />
       ) : null}
 
-      <div className="flex flex-col justify-between w-full h-full mt-[20px] border-t">
+      <div className="flex flex-col justify-between w-full h-full border-t">
         {/* 채널목록 */}
         <div className="w-full">
-          <ul className="flex flex-col w-full gap-1">
+          <ul className="flex flex-col w-full gap-2 p-1">
             {channel.map((item) => {
               return (
                 <ChannelList
