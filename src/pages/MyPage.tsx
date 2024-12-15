@@ -27,8 +27,8 @@ export default function MyPage() {
               update={true}
               userImg={myInfo.image}
             />
-            <div className="flex items-center w-full gap-4">
-              {/* <CustomCalendar /> */}
+            <div className="flex xl:flex-row flex-col items-center w-full gap-4">
+              <CustomCalendar />
               <CheckDone bg="bg-[#F7FAFF]" />
             </div>
             <div className="border-t pt-[10px] px-1 flex justify-center">
