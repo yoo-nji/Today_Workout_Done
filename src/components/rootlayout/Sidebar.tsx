@@ -88,7 +88,6 @@ export default function Sidebar() {
       )}
       onClick={(e) => handleBackClick(e)}
     >
-      <div></div>
       {/* 토글 버튼 */}
       <button
         onClick={handleToggleClick}
@@ -167,7 +166,7 @@ export default function Sidebar() {
           <div className="flex justify-center">
             <button
               className={twMerge(
-                "mt-2 self-center w-[243px] h-[50px] bg-[#265CAC] rounded-[20px] text-lg text-white font-bold relative",
+                "mt-2 self-center w-[243px] h-[50px] bg-[#265CAC] hover:bg-[#1e4d8a] rounded-[20px] text-lg text-white font-bold relative",
                 !isToggle && "hidden"
               )}
               onClick={(e) => {
