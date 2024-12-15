@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { useAuth } from "../../stores/authStore";
 import CheckDoneMonth from "./CheckDoneMonth";
 import DoneProgressBar from "./DoneProgressBar";
+import { channelMapping } from "../../constants/channel";
+import moment from "moment";
 
 interface CheckDoneType {
   width?: string;
@@ -10,23 +12,22 @@ interface CheckDoneType {
 }
 
 export default function CheckDone({ width, textSize, bg }: CheckDoneType) {
-  const CHANNEL_ID = "6757a3a7ce18fa02ded5c758";
-
   const myInfo = useAuth((state) => state.user)!;
-  // console.log(myInfo);
 
   const [checkNumber, setCheckNumber] = useState(0);
 
   useEffect(() => {
     if (!myInfo) return;
 
-    const checkPosts = myInfo.posts.filter(
-      (post) => post.channel === CHANNEL_ID
-    );
+    const mark = [
+      ...new Set(
+        myInfo?.posts
+          .filter((post) => post.channel === channelMapping.records)
+          .map((post) => moment(post.createdAt).format("YYYY-MM-DD"))
+      ),
+    ];
 
-    setCheckNumber(checkPosts.length);
-
-    // console.log(checkNumber);
+    setCheckNumber(mark.length);
   }, [myInfo]);
 
   return (
