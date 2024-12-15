@@ -33,7 +33,7 @@ export default function MyPage() {
             </div>
             <div className="border-t pt-[10px] px-1 flex justify-center">
               <div className="flex flex-col items-start mt-[20px]">
-                <p className="text-[22px] mb-[20px] font-bold">
+                <p className="text-[18px] mb-[20px] font-bold">
                   게시물 {myInfo.posts.length}개
                 </p>
                 <div className="flex items-center justify-center">
