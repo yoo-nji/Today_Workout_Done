@@ -4,6 +4,7 @@ import { updatePost } from "../../utils/updatePost";
 import { deletePost } from "../../utils/api/deletePosts";
 import DeleteConfirm from "../modal/DeleteConfirm";
 import { useNavigate } from "react-router";
+import { channelMapping } from "../../constants/channel";
 
 interface PostInfoProps {
   title: string;
@@ -138,11 +139,23 @@ export default function PostInfo({
   const formattedDate = `${date.getFullYear()}.${(date.getMonth() + 1)
     .toString()
     .padStart(2, "0")}.${date.getDate().toString().padStart(2, "0")}`;
+
+  // 게시판 이름
+
+  const channel = Object.keys(channelMapping).find(
+    (key) => channelMapping[key] === channelId
+  );
+
+  const channelName: { [key: string]: string } = {
+    records: "오운완 인증",
+    protein: "프로틴 추천",
+    routine: "루틴 공유",
+    gymreview: "헬스장 리뷰",
+  };
+
   return (
     <>
-      <div className="text-sm ">
-        게시판이름 (넣을려고했는데 어떻게 처리할지고 고민중)
-      </div>
+      <div className="text-sm ">{channel ? channelName[channel] : null} </div>
       {edit ? (
         <input
           className="py-3 mb-4 text-4xl focus:outline-none border w-full border-[#d3d3d3d3]"

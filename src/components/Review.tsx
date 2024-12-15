@@ -45,7 +45,7 @@ export default function Review({
   return (
     <div
       className="w-[900px] h-[315px] mb-[109px] relative flex flex-row"
-      onClick={() => navigate(`/records/${post_id}`)}
+      onClick={() => navigate(`/gymreview/${post_id}`)}
     >
       {/* 썸네일 */}
       <div>
