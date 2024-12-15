@@ -31,7 +31,7 @@ export default function DoneProgressBar({
             transition: "stroke-dashoffset 0.5s ease 0s",
           },
           trail: {
-            stroke: "#d6d6d6",
+            stroke: "#ececec",
           },
           text: {
             fill: "#265CAC",

@@ -27,11 +27,13 @@ export default function MyPage() {
               update={true}
               userImg={myInfo.image}
             />
-            <CheckDone bg="bg-[#f3f3f3]" />
-            <CustomCalendar />
+            <div className="flex xl:flex-row flex-col items-center w-full gap-4">
+              <CustomCalendar />
+              <CheckDone bg="bg-[#F7FAFF]" />
+            </div>
             <div className="border-t pt-[10px] px-1 flex justify-center">
               <div className="flex flex-col items-start mt-[20px]">
-                <p className="text-[22px] mb-[20px] font-bold">
+                <p className="text-[18px] mb-[20px] font-bold">
                   게시물 {myInfo.posts.length}개
                 </p>
                 <div className="flex items-center justify-center">

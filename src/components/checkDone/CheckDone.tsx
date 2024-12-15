@@ -33,7 +33,7 @@ export default function CheckDone({ width, textSize, bg }: CheckDoneType) {
     <div
       className={`flex justify-center items-center gap-[20px] ${
         bg ? bg : ""
-      } p-3 ${bg && "w-[400px] h-[220px] rounded-[10px]"}`}
+      } p-3 ${bg && "w-[380px] h-[188px] rounded-[10px]"}`}
     >
       <DoneProgressBar checkNumber={checkNumber} width={width} />
       <CheckDoneMonth checkNumber={checkNumber} textSize={textSize} />

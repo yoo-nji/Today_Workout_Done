@@ -74,7 +74,7 @@ export default function UserCard({
   };
 
   return (
-    <div className="w-[350px] h-[132px] flex justify-between items-center">
+    <div className="w-[350px] flex items-center gap-[30px] text-base">
       <UserProfile
         BackWidth={BackWidth}
         BackHeight={BackHeight}
@@ -84,9 +84,9 @@ export default function UserCard({
         update={update}
         userImg={userImg}
       />
-      <div>
-        <div className="flex mb-6 gap-[32px] items-center">
-          <p className="text-4xl hidden">{uname}</p>
+      <div className="flex flex-col gap-1">
+        <div className="flex">
+          {/* <p className="text-lg hidden">{uname}</p> */}
           {isFollowBtn && (
             <FollowButton
               width="w-[128px]"
@@ -95,11 +95,11 @@ export default function UserCard({
             />
           )}
           {update && (
-            <div className="absolute l-0">
+            <div className="flex items-center gap-2">
               <input
                 type="text"
                 id="updateName"
-                className="text-3xl font-bold w-[180px] py-[5px] disabled:bg-white outline-none focus:border 
+                className="text-lg font-extrabold w-[180px] py-[5px] disabled:bg-white outline-none focus:border 
                 focus: border-[#bcbcbc] rounded-[5px] px-[3px]"
                 maxLength={8}
                 value={updateName}
@@ -111,7 +111,7 @@ export default function UserCard({
               />
               <label
                 htmlFor="updateName"
-                className="ml-[3px] text-[18px] text-[#265CAC] underline
+                className=" text-[15px] leading-[15px] text-[#265CAC] underline
                 cursor-pointer"
                 onClick={() => setDisabled(false)}
               >
@@ -120,7 +120,7 @@ export default function UserCard({
             </div>
           )}
         </div>
-        <div className="flex text-2xl gap-[28px]">
+        <div className="flex text-[15px] gap-[10px] ml-1">
           <p>팔로워: {followers && followers.length}</p>
           <p>팔로우: {following && following.length}</p>
         </div>
