@@ -4,10 +4,16 @@ import downIcon from "../assets/down.svg";
 import PostStatus from "../components/posting/PostStatus";
 import { postingFn } from "../utils/postingFn";
 import { useNavigate } from "react-router";
+import { useLoadingStore } from "../stores/loadingStore";
+import Loading from "../components/Loading";
 
 export default function Posting() {
   const navigate = useNavigate();
-  const [isLoading, setIsLoading] = useState(false);
+
+  // 로딩중
+  const isLoading = useLoadingStore((state) => state.isLoading);
+  const startLoading = useLoadingStore((state) => state.startLoading);
+  const stopLoading = useLoadingStore((state) => state.stopLoading);
 
   const imgRef = useRef<HTMLInputElement>(null);
   // 이미지
@@ -85,20 +91,19 @@ export default function Posting() {
     const route = channels.filter((ch) => channelId === ch.id);
 
     try {
-      setIsLoading(true);
+      startLoading();
       const response = await postingFn(formData);
       console.log(response);
-      alert("글 등록 성공!!");
       navigate(route[0].route);
     } catch (error) {
       console.log(error);
     } finally {
-      setIsLoading(false);
+      stopLoading();
     }
   };
 
   return (
-    <div className="flex justify-start items-start outline-none h-full bg-slate-100">
+    <div className="relative flex justify-start items-start outline-none h-full bg-slate-100">
       <div className="m-auto pt-[20px] pb-[20px] h-[650px] bg-white flex flex-col items-center gap-5 rounded-[20px]">
         <h1 className="text-[#030712] font-bold text-[30px]">글쓰기</h1>
         {/* log */}
@@ -220,6 +225,7 @@ export default function Posting() {
           </div>
         </form>
       </div>
+      {isLoading && <Loading />}
     </div>
   );
 }

@@ -2,6 +2,7 @@ import { useRef, useState } from "react";
 import FollowButton from "../FollowButton";
 import UserProfile from "../UserProfile";
 import { updateNameFn } from "../../utils/updateName";
+import { useLoadingStore } from "../../stores/loadingStore";
 
 interface UserCardType {
   uname: string;
@@ -33,17 +34,23 @@ export default function UserCard({
   const [disabled, setDisabled] = useState(true);
   const [updateName, setUpdateName] = useState(uname);
 
+  // 로딩중
+  const startLoading = useLoadingStore((state) => state.startLoading);
+  const stopLoading = useLoadingStore((state) => state.stopLoading);
+
   const inputRef = useRef<HTMLInputElement>(null);
 
   const handleOutFocus = async (e: React.ChangeEvent<HTMLInputElement>) => {
     setDisabled(true);
     if (updateName === uname) return;
     try {
+      startLoading();
       const response = await updateNameFn(e.target.value);
       console.log(response);
-      alert("이름이 수정되었습니다");
     } catch (error) {
       console.log(error);
+    } finally {
+      stopLoading();
     }
   };
 
@@ -53,12 +60,15 @@ export default function UserCard({
     if (e.key === "Enter") {
       setDisabled(true);
       try {
+        startLoading();
         const response = await updateNameFn(updateName);
         console.log(response);
         inputRef.current?.blur();
-        alert("이름이 수정되었습니다");
+        window.location.reload();
       } catch (error) {
         console.log(error);
+      } finally {
+        stopLoading();
       }
     }
   };
