@@ -4,6 +4,7 @@ import profileEdit from "../assets/profile-edit.svg";
 import home from "../assets/icons/home_icon.svg";
 import { useRef, useState } from "react";
 import { updateUserImg } from "../utils/updateUserImg";
+import { useLoadingStore } from "../stores/loadingStore";
 
 export default function UserProfile({
   edit,
@@ -18,9 +19,11 @@ export default function UserProfile({
 }: userProfileType) {
   const imgRef = useRef<HTMLInputElement>(null);
 
-  const [isLoading, setIsLoading] = useState(true);
+  // 로딩중
+  const startLoading = useLoadingStore((state) => state.startLoading);
+  const stopLoading = useLoadingStore((state) => state.stopLoading);
 
-  const handleImgUpdate = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleImgUpdate = async () => {
     if (!imgRef.current || !imgRef.current.files) return;
 
     const formData = new FormData();
@@ -30,16 +33,14 @@ export default function UserProfile({
 
     console.log(formData);
     try {
-      setIsLoading(true);
-
+      startLoading();
       const response = await updateUserImg(formData);
       console.log(response);
-      alert("이미지 변경 완료!");
       window.location.reload();
     } catch (error) {
       console.log(error);
     } finally {
-      setIsLoading(false);
+      stopLoading();
     }
   };
 
@@ -67,6 +68,7 @@ export default function UserProfile({
           onClick={onClick}
         />
       )}
+
 
       {/* 로그인 유저 마이페이지 아이콘 표시 */}
       {myProfile && (
