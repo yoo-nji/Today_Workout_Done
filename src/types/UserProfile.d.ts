@@ -7,4 +7,5 @@ interface userProfileType {
   onClick?: () => void;
   update?: boolean;
   userImg?: string;
+  myProfile?: boolean;
 }

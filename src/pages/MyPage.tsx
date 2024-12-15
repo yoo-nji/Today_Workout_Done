@@ -4,7 +4,7 @@ import ImageCard from "../components/ImageCard";
 import CheckDone from "../components/checkDone/CheckDone";
 import Loading from "../components/Loading";
 import { useLoadingStore } from "../stores/loadingStore";
-
+import CustomCalendar from "../components/MyPage/CustomCalendar";
 export default function MyPage() {
   const myInfo = useAuth((state) => state.user);
 
@@ -28,7 +28,7 @@ export default function MyPage() {
               userImg={myInfo.image}
             />
             <CheckDone bg="bg-[#f3f3f3]" />
-
+            <CustomCalendar />
             <div className="border-t pt-[10px] px-1 flex justify-center">
               <div className="flex flex-col items-start mt-[20px]">
                 <p className="text-[22px] mb-[20px] font-bold">

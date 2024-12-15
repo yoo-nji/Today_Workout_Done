@@ -32,7 +32,7 @@ export default function UserBox({
   //로그인 여부
   const isLogin = useAuth((state) => state.isLoggedIn);
   return (
-    <div className="w-[320px] h-[75px] bg-[#EFEFEF] flex items-center gap-3 pl-[20px] rounded-[10px] flex-shrink-0">
+    <div className="w-[320px] h-[75px] bg-[#EFEFEF] flex items-center gap-3 px-[20px] rounded-[10px] flex-shrink-0">
       {/* 유저 프로필, 현활 */}
       <div
         className="bg-white w-[48px] h-[48px] flex justify-center items-center rounded-[50%] shadow-inner cursor-pointer relative"
@@ -49,8 +49,8 @@ export default function UserBox({
       </div>
 
       {/* 유저  info*/}
-      <div>
-        <div className="flex gap-3 items-center">
+      <div className="w-full">
+        <div className="flex justify-between items-center">
           <p className="font-semibold text-[18px]">{fullname}</p>
           {isLogin && (
             <FollowButton

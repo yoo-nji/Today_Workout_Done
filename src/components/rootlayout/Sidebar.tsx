@@ -14,8 +14,11 @@ import right from "../../assets/double-right.svg";
 import user from "../../assets/user_icon.svg";
 import { useAuth } from "../../stores/authStore";
 import CheckDone from "../checkDone/CheckDone";
+import { useNavigate } from "react-router";
 
 export default function Sidebar() {
+  const navigate = useNavigate();
+
   //로그인상태
   const isLoggedIn = useAuth((state) => state.isLoggedIn);
   // 유저정보
@@ -88,7 +91,6 @@ export default function Sidebar() {
       )}
       onClick={(e) => handleBackClick(e)}
     >
-      <div></div>
       {/* 토글 버튼 */}
       <button
         onClick={handleToggleClick}
@@ -127,12 +129,13 @@ export default function Sidebar() {
         {/* 유저 프로필 */}
         {isToggle && (
           <UserProfile
-            edit
             BackWidth="w-[122px]"
             BackHeight="h-[122px]"
             IconWidth="w-[84px]"
             IconHeight="h-[84px]"
+            onClick={isLoggedIn ? () => navigate("/myprofile") : undefined}
             userImg={userInfo?.image}
+            myProfile={isLoggedIn} //로그인 여부에 따라 홈 아이콘 표시
           />
         )}
       </div>
@@ -167,7 +170,7 @@ export default function Sidebar() {
           <div className="flex justify-center">
             <button
               className={twMerge(
-                "mt-2 self-center w-[243px] h-[50px] bg-[#265CAC] rounded-[20px] text-lg text-white font-bold relative",
+                "mt-2 self-center w-[243px] h-[50px] bg-[#265CAC] hover:bg-[#1e4d8a] rounded-[20px] text-lg text-white font-bold relative",
                 !isToggle && "hidden"
               )}
               onClick={(e) => {
