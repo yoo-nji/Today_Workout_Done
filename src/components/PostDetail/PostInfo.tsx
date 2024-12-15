@@ -67,26 +67,35 @@ export default function PostInfo({
   };
 
   const editButtonHandler = () => {
-    console.log(textarea.current);
-    if (textarea.current) {
-      console.log("hi");
-      textarea.current.style.height = "auto"; // 높이 초기화
-      textarea.current.style.height = `${textarea.current.scrollHeight}px`; // 내용에 맞게 높이 조정
-    }
     setEdit(true);
   };
 
-  // 이미지 미리보기
+  // 이미지 미리보기 & 이미지 업로드
   const handleChange = () => {
     if (imgRef.current && imgRef.current.files) {
       const image = imgRef.current.files[0];
-      if (image.type.startsWith("image/")) {
-        const imgUrl = URL.createObjectURL(image);
-        setImg(imgUrl);
-        setUploadImg(imgRef.current.files[0]);
-      } else {
-        alert("이미지 선택하세요");
-      }
+
+      const imgUrl = URL.createObjectURL(image);
+
+      // Image 객체를 사용하여 크기 확인
+      const img = new Image();
+      img.src = imgUrl;
+      img.onload = () => {
+        // 이미지가 로드된 후 너비와 높이 확인
+        const width = img.width;
+        const height = img.height;
+
+        // 최소 이미지 크기 지정
+        const minWidth = 400;
+        const minHeight = 400;
+
+        if (width < minWidth || height < minHeight) {
+          alert(`이미지는 최소 ${minWidth}x${minHeight} 크기여야 합니다.`);
+        } else {
+          setImg(imgUrl); // 이미지 미리보기 URL 설정
+          setUploadImg(image); // 이미지 파일 저장
+        }
+      };
     }
   };
 
@@ -157,8 +166,23 @@ export default function PostInfo({
                 onChange={handleChange}
               />
               <label htmlFor="uploadImg" className="cursor-pointer">
-                <div className="border-2 border-red-500 w-fit h-fit">
+                <div className="relative group">
                   <img src={img} alt="업로드이미지" className="" />
+                  <div className="absolute flex flex-col justify-center items-center inset-0 text-[20px] text-white bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <span>
+                      수정하려면{" "}
+                      <span className="text-[#265CAC] font-semibold">
+                        이미지
+                      </span>
+                      를 클릭하고
+                    </span>
+                    <span>
+                      <span className="text-[#265CAC] font-semibold">
+                        새로운 파일
+                      </span>
+                      을 선택해주세요.
+                    </span>
+                  </div>
                 </div>
               </label>
             </>
