@@ -12,7 +12,7 @@ export default function FollowButton({
   return (
     <button
       className={twMerge(
-        "bg-[#265CAC] text-white flex justify-center items-center text-sm cursor-pointer",
+        "bg-[#265CAC] hover:bg-[#1e4d8a] text-white flex justify-center items-center text-sm cursor-pointer",
         width,
         height,
         rounded
