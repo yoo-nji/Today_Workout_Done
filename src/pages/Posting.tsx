@@ -56,11 +56,11 @@ export default function Posting() {
   };
 
   const channels = [
-    { id: "6757a3a7ce18fa02ded5c758", name: "오운완 인증", route: "/" },
-    { id: "6758f6bf5f86e71ae5eb9b6c", name: "프로틴 추천", route: "/protein" },
-    { id: "6758f7305f86e71ae5eb9b82", name: "루틴 공유", route: "/routine" },
+    { id: "675a2e0d0d335f0ddae3a194", name: "오운완 인증", route: "/" },
+    { id: "675a2dac0d335f0ddae3a188", name: "프로틴 추천", route: "/protein" },
+    { id: "675a2dc40d335f0ddae3a18c", name: "루틴 공유", route: "/routine" },
     {
-      id: "6758f75b5f86e71ae5eb9bae",
+      id: "675a2ddc0d335f0ddae3a190",
       name: "헬스장 리뷰",
       route: "/gymreview",
     },
