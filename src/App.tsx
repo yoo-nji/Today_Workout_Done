@@ -15,6 +15,7 @@ import ReviewPost from "./pages/ReviewPost";
 import MyPage from "./pages/MyPage";
 import { useEffect } from "react";
 import { verifyUser } from "./utils/verifyUser";
+import Main from "./pages/Main";
 
 export default function App() {
   const path = useLocation();
@@ -27,6 +28,7 @@ export default function App() {
       <Routes>
         <Route element={<RootLayout />}>
           <Route path="/" element={<Home />} />
+          <Route path="main" element={<Main />} />
 
           <Route path="/protein" element={<Home />} />
           <Route path="/routine" element={<Home />} />

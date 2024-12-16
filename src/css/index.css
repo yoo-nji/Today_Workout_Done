@@ -1,9 +1,10 @@
 @import "./tailwind.css";
 @import "./fonts.css";
 @import "./calendar.css";
-
+@import "./swiper.css";
 * {
   margin: 0px;
   padding: 0px;
   box-sizing: border-box;
+  /* border: 1px solid #0e00d4; */
 }
