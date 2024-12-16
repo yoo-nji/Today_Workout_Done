@@ -41,7 +41,7 @@ export default function PostDetail() {
     try {
       // 여기에 포스트 id 값 넣기
       const { data } = await api.get(`/posts/${post_id}`);
-      console.log(data);
+      // console.log(data);
 
       const {
         author: { fullName, _id: userID, image: userImg },
@@ -58,7 +58,7 @@ export default function PostDetail() {
       const { data: channelData } = await api.get(
         `/posts/channel/${channelId}`
       );
-      console.log(channelData);
+      // console.log(channelData);
 
       setChannelData(channelData);
 
@@ -123,8 +123,8 @@ export default function PostDetail() {
       currentIndex < channelData.length - 1
         ? channelData[currentIndex + 1]._id
         : null;
-    console.log(`이전 페이지 ID : ${prevPostID}`);
-    console.log(`다음 페이지 ID : ${nextPostID}`);
+    // console.log(`이전 페이지 ID : ${prevPostID}`);
+    // console.log(`다음 페이지 ID : ${nextPostID}`);
     setPrevPost(prevPostID);
     setNextPost(nextPostID);
   };
