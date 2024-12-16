@@ -1,5 +1,6 @@
 import thumbnail from "../assets/images/feed_thumbnail.jpg";
 import likeIcon from "../assets/like_icon.svg";
+import likeFill from "../assets/icons/like_fill_icon.svg";
 import chatIcon from "../assets/chat_icon.svg";
 import UserProfile from "./UserProfile";
 import { useNavigate } from "react-router";
@@ -46,6 +47,9 @@ export default function ImageCard({
     (key) => channelMapping[key] === channel?._id
   );
 
+  // 본인 좋아요 확인
+  const checkIsLiked = likes.some((like) => like.user === author?._id);
+
   return (
     <div className="flex flex-col items-center gap-3">
       {/* 썸네일 */}
@@ -62,7 +66,11 @@ export default function ImageCard({
           {/* 아이콘 */}
           <div className="absolute bottom-6 right-6 flex gap-[18px] text-lg font-normal ">
             <div className="flex gap-1">
-              <img className="w-[26px]" src={likeIcon} alt="좋아요 아이콘" />
+              <img
+                className="w-[26px]"
+                src={checkIsLiked ? likeFill : likeIcon}
+                alt="좋아요 아이콘"
+              />
               <span>{likes.length}</span>
             </div>
             <div className="flex gap-1">
