@@ -23,29 +23,32 @@ export default function App() {
     verifyUser();
   }, [path]);
   return (
-    // 잠시 private 라우터 지우겠습니다.
-    // 수정해야할거같습니다.
     <>
       <Routes>
         <Route element={<RootLayout />}>
           <Route path="/" element={<Home />} />
+
           <Route path="/protein" element={<Home />} />
           <Route path="/routine" element={<Home />} />
           <Route path="/gymreview" element={<ReviewPost />} />
-
-          {/* 오운완 페이지 */}
           <Route path="/records/:post_id" element={<PostDetail />} />
           <Route path="/protein/:post_id" element={<PostDetail />} />
           <Route path="/routine/:post_id" element={<PostDetail />} />
           <Route path="/gymreview/:post_id" element={<PostDetail />} />
 
-          <Route path="/about" element={<About />} />
           <Route path="/user/:user_id" element={<User />} />
           <Route path="*" element={<Error />} />
-          <Route path="/posting" element={<Posting />} />
-          <Route path="/myprofile" element={<MyPage />} />
         </Route>
 
+        {/* 로그인 필요햔 기능 */}
+        <Route element={<PrivateRoute />}>
+          <Route element={<RootLayout />}>
+            <Route path="/posting" element={<Posting />} />
+            <Route path="/myprofile" element={<MyPage />} />
+          </Route>
+        </Route>
+
+        {/* 로그인시 redirect */}
         <Route element={<PublicRoute />}>
           <Route element={<AuthLayout />}>
             <Route path="/login" element={<Login />} />
