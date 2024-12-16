@@ -20,7 +20,7 @@ export default function ImageCard({
   channel,
 }: PostType & MyInfo) {
   const isLogin = useAuth((state) => state.isLoggedIn);
-
+  const myInfo = useAuth((state) => state.user);
   const navigate = useNavigate();
   const update = new Date(createdAt);
   const date = update
@@ -51,7 +51,8 @@ export default function ImageCard({
   );
 
   // 본인 좋아요 확인
-  const checkIsLiked = likes.some((like) => like.user === author?._id);
+  const checkIsLiked = likes.some((like) => like.user === myInfo?._id);
+  console.log(checkIsLiked);
 
   return (
     <div className="flex flex-col items-center gap-3">
