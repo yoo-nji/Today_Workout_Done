@@ -57,6 +57,7 @@ export default function UserBox({
               width="w-[80px]"
               height="h-[30px]"
               rounded="rounded-[10px]"
+              userid={userid}
             />
           )}
         </div>
