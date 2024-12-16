@@ -1,5 +1,12 @@
 interface PostType {
-  likes: string[];
+  likes: {
+    _id: string;
+    user: string;
+    post: string;
+    createdAt: string;
+    updatedAt: string;
+    __v: number;
+  }[];
   comments: string[];
   _id?: string;
   title: string;
