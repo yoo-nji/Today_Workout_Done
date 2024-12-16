@@ -125,8 +125,6 @@ export default function Header({
           <UserProfile
             BackWidth="w-[48px]"
             BackHeight="h-[48px]"
-            IconWidth="w-[33px]"
-            IconHeight="h-[33px]"
             // Todo : 추후 마이페이지 어케 이동하는지 보고 처리
             onClick={() => navigate("/myprofile")}
           />

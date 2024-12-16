@@ -93,7 +93,7 @@ export default function Home() {
   }, [searchTerm]);
 
   return (
-    <div className="relative">
+    <div className="relative flex flex-col gap-10">
       <Loading />
       <div className="flex flex-col items-center gap-16 mt-8">
         <div className="flex flex-col items-center gap-[30px] w-full px-4">
@@ -103,11 +103,11 @@ export default function Home() {
             onChange={(e) => setSearchTerm(e.target.value)}
             style="w-full max-w-[785px]"
           />
-          <div className="flex gap-[19px]">
+          {/* <div className="flex gap-[19px]">
             <Tag>#오운완</Tag>
             <Tag>#오운완</Tag>
             <Tag>#오운완</Tag>
-          </div>
+          </div> */}
         </div>
       </div>
       <div>

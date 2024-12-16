@@ -59,14 +59,14 @@ export default function ModeChange() {
           className={twMerge(
             `absolute w-[18px] h-[18x] rounded-full transition-all duration-300 ease-in-out translate-y-[5.5px] ${
               isClicked ? "translate-x-[8px]" : "translate-x-[34px]"
-            } mt-[-15px] top-[50%] group-hover:scale-75`
+            } mt-[-15px] top-[50%] group-hover:scale-110`
           )}
         />
         <img
           src={innercircle}
           alt="innercircle"
           className={twMerge(
-            `absolute w-[25px] h-[25x] rounded-full transition-all duration-300 ease-in-out z-10 translate-y-[3.3px] ${
+            `absolute w-[25px] h-[25x] rounded-full transition-all duration-300 ease-in-out translate-y-[3.3px] ${
               isClicked ? "translate-x-[36px]" : "translate-x-[2px]"
             } mt-[-15px] top-[50%]`
           )}

@@ -55,14 +55,14 @@ export default function ImageCard({
         onClick={() => navigate(`/${channelName}/${post_id}`)}
       >
         {/* Hover */}
-        <div className="absolute inset-0 flex flex-col items-center justify-center text-white transition-opacity duration-300 bg-black bg-opacity-50 rounded-lg opacity-0 group-hover:opacity-100">
-          <h3 className="w-[80%] text-[20px] font-semibold truncate">
+        <div className="absolute inset-0 flex flex-col items-center justify-center text-white transition-opacity duration-300 bg-black bg-opacity-50 rounded-2xl opacity-0 group-hover:opacity-100">
+          <h3 className="w-[80%] text-[22px] font-bold truncate">
             {postTitle}
           </h3>
           {/* 아이콘 */}
-          <div className="absolute bottom-6 right-6 flex gap-[18px] text-xl font-normal ">
+          <div className="absolute bottom-6 right-6 flex gap-[18px] text-lg font-normal ">
             <div className="flex gap-1">
-              <img src={likeIcon} alt="좋아요 아이콘" />
+              <img className="w-[26px]" src={likeIcon} alt="좋아요 아이콘" />
               <span>{likes.length}</span>
             </div>
             <div className="flex gap-1">
@@ -77,17 +77,15 @@ export default function ImageCard({
       <div className="flex items-center justify-between w-full px-2">
         <div className="flex items-center gap-[10px]">
           <UserProfile
-            BackWidth="w-[40px]"
-            BackHeight="h-[40px]"
-            IconWidth="w-[28px]"
-            IconHeight="h-[28px]"
+            BackWidth="w-[30px]"
+            BackHeight="h-[30px]"
             userImg={userImg ? userImg : author?.image}
           />
-          <div className="text-base font-bold">
+          <div className="text-base font-medium">
             {author ? author.fullName : fullName}
           </div>
         </div>
-        <div className="text-base font-light">{date}</div>
+        <div className="text-sm font-light">{date}</div>
       </div>
     </div>
   );

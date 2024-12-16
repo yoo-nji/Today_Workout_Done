@@ -7,7 +7,7 @@ export default {
         "profile-inner": "inset 0px 4px 11px 0px rgba(0, 0, 0, 0.25)",
       },
       fontFamily: {
-        pretendard: ["Pretendard-Regular"], //기본 폰트
+        pretendard: ["Pretendard"], //기본 폰트
         jalnan: ["yg-jalnan", "sans-serif"], //포인트 폰트
       },
     },

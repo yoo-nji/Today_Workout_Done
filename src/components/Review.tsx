@@ -63,8 +63,6 @@ export default function Review({
             <UserProfile
               BackWidth="w-[40px]"
               BackHeight="h-[40px]"
-              IconWidth="w-[28px]"
-              IconHeight="h-[28px]"
               userImg={userImg ? userImg : author?.image}
             />
             <div className="flex flex-col">
