@@ -31,35 +31,43 @@ export default function Signup() {
 
   /* 닉네임 필드에 따른 에러 처리 및 중복 확인 */
   const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const nameValue = e.target.value.trim();
+    // 공백 제거된 닉네임 값
+    const trimmedValue = e.target.value.trim();
+    // 허용 가능한 문자: 한글, 영문, 숫자
+    const regex = /^[A-Za-z0-9가-힣]+$/;
 
-    // 정규식을 사용하여 영문자와 숫자만 허용
-    const regex = /^[A-Za-z0-9]+$/;
+    // 닉네임 상태 업데이트
+    setName(trimmedValue);
+
+    console.log(Array.from(trimmedValue).length);
 
     // 빈 칸일 때 에러 메시지 제거
-    if (nameValue === "") {
+    if (trimmedValue === "") {
       setNameError("");
-    } // 영문자와 숫자로 제한
-    else if (!regex.test(nameValue)) {
-      setNameError("닉네임은 영문자와 숫자만 사용할 수 있습니다.");
-    } // 닉네임 글자 수를 12글자로 제한
-    else if (nameValue.length > 12) {
-      setNameError("닉네임은 최대 12글자까지 가능합니다.");
-    } else {
-      setNameError("");
-      // 실시간 닉네임 중복 체크
-      checkFullnameAvailability(nameValue);
+      return;
     }
-    setName(nameValue);
+    // 한글, 영문자, 숫자로 제한
+    else if (!regex.test(trimmedValue)) {
+      setNameError("닉네임은 한글, 영문자, 숫자만 사용할 수 있습니다.");
+      return;
+    }
+    // 닉네임 글자 수를 7글자로 제한 (한글은 1글자로 간주)
+    else if (Array.from(trimmedValue).length > 7) {
+      // 1초 뒤에 에러 메시지를 설정하도록 지연
+      setTimeout(() => {
+        setNameError("닉네임은 최대 7글자까지 가능합니다.");
+      }, 50);
+      return;
+    }
+    // 글자 수 제한을 통과한 후에 중복 확인
+    else {
+      setNameError(""); // 기본적으로 에러 초기화
+      checkFullnameAvailability(trimmedValue); // 닉네임 중복 확인
+    }
   };
 
   /* 닉네임 중복 확인 */
   const checkFullnameAvailability = async (name: string) => {
-    if (name.trim() === "") {
-      setNameError("");
-      return;
-    }
-
     try {
       const response = await api.get("/users/get-users");
       const existingUser = response.data.find(
@@ -69,19 +77,20 @@ export default function Signup() {
       if (existingUser) {
         setNameError("닉네임이 이미 사용 중입니다.");
       } else {
-        setNameError("");
+        setNameError(""); // 중복 없음
       }
     } catch (error) {
       console.error("사용자 목록 조회 실패:", error);
+      setNameError("닉네임 중복 확인 중 오류가 발생했습니다.");
     }
   };
 
+  /* 이메일 필드에 따른 에러 처리 */
   const validateEmail = (email: string) => {
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     return emailRegex.test(email);
   };
 
-  /* 이메일 필드에 따른 에러 처리 */
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const emailValue = e.target.value.replace(/\s/g, "");
 
@@ -234,7 +243,7 @@ export default function Signup() {
         {/* 닉네임 입력 필드 */}
         <input
           type="text"
-          placeholder="닉네임 (영문, 숫자 최대 12자)"
+          placeholder="닉네임 (한글, 영문, 숫자 최대 7자)"
           value={name}
           onChange={handleNameChange}
           onKeyDown={handleKeyDown}
