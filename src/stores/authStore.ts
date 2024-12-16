@@ -51,7 +51,7 @@ interface Like {
 
 interface Auth {
   user: MyInfo | null;
-  isLoggedIn: boolean;
+  isLoggedIn: boolean | null;
   login: () => void;
   logout: () => void;
   setUser: (u: MyInfo | null) => void;
@@ -59,7 +59,7 @@ interface Auth {
 
 export const useAuth = create<Auth>((set) => ({
   user: null,
-  isLoggedIn: false,
+  isLoggedIn: null,
   login: () => set({ isLoggedIn: true }),
   logout: () => set({ isLoggedIn: false, user: null }),
   setUser: (u: MyInfo | null) => set({ user: u }),
