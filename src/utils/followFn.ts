@@ -11,7 +11,7 @@ export const follow = async (userId: string) => {
   }
 };
 
-export const unfollow = async (id: string) => {
+export const unfollow = async (id: string | undefined) => {
   try {
     const { data } = await api.delete(`/follow/delete`, {
       data: { id },
