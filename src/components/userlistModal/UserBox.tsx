@@ -2,6 +2,7 @@ import { useNavigate } from "react-router";
 import defaultUserImg from "../../assets/defaultUser.svg";
 import FollowButton from "../FollowButton";
 import { useAuth } from "../../stores/authStore";
+import { useState } from "react";
 
 interface UserBoxPropsType {
   isOnline?: boolean;
@@ -22,6 +23,9 @@ export default function UserBox({
   userid,
   setIsOpen,
 }: UserBoxPropsType) {
+  const myfollowing = useAuth((state) => state.user?.following);
+  const [userFollowers, setUserFollowers] = useState(followers);
+  const [followingList, setFollowingList] = useState(myfollowing); //팔로우 리스트
   const navigate = useNavigate();
 
   const handleClick = (userId: string) => {
@@ -57,11 +61,15 @@ export default function UserBox({
               width="w-[80px]"
               height="h-[30px]"
               rounded="rounded-[10px]"
+              userid={userid}
+              followingList={followingList}
+              setFollowingList={setFollowingList}
+              setUserFollowers={setUserFollowers}
             />
           )}
         </div>
         <div className="text-[14px] flex gap-3 mt-[2px]">
-          <p>팔로워: {followers.length}</p>
+          <p>팔로워: {userFollowers.length}</p>
           <p>팔로잉: {following.length}</p>
         </div>
       </div>

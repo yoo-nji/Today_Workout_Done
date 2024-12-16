@@ -11,7 +11,7 @@ interface MyInfo {
   likes: Like[];
   comments: string[];
   followers: string[];
-  following: string[];
+  following: Following[];
   notifications: string[];
   messages: string[];
   _id: string;
@@ -47,6 +47,14 @@ interface Like {
   createdAt: string;
   updatedAt: string;
   __v: number;
+}
+export interface Following {
+  createdAt: string;
+  follower: string;
+  updatedAt: string;
+  user: string;
+  __v: number;
+  _id: string;
 }
 
 interface Auth {
