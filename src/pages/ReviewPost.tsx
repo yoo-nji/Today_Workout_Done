@@ -9,7 +9,7 @@ export default function ReviewPost() {
   const location = useLocation();
   const channelRoute = location.pathname.split("/")[1];
   const route: { [key: string]: string } = {
-    gymreview: "6758f75b5f86e71ae5eb9bae",
+    gymreview: "675a2ddc0d335f0ddae3a190",
   };
 
   // 상태

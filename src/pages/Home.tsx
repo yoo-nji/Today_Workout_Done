@@ -14,8 +14,8 @@ export default function Home() {
   const location = useLocation();
   const channelRoute = location.pathname.split("/")[1];
   const route: { [key: string]: string } = {
-    protein: "6758f6bf5f86e71ae5eb9b6c",
-    routine: "6758f7305f86e71ae5eb9b82",
+    protein: "675a2dac0d335f0ddae3a188",
+    routine: "675a2dc40d335f0ddae3a18c",
   };
 
   // 상태
@@ -42,7 +42,7 @@ export default function Home() {
       // await new Promise((resolve) => setTimeout(resolve, 2000));
 
       const { data } = await api.get(
-        `/posts/channel/${route[channelRoute] || "6757a3a7ce18fa02ded5c758"}`
+        `/posts/channel/${route[channelRoute] || "675a2e0d0d335f0ddae3a194"}`
       );
       if (data.length === 0) {
         console.log("등록된 게시물이 없습니다.");
