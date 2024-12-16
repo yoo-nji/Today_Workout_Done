@@ -5,6 +5,7 @@ import { deletePost } from "../../utils/api/deletePosts";
 import DeleteConfirm from "../modal/DeleteConfirm";
 import { useNavigate } from "react-router";
 import { channelMapping } from "../../constants/channel";
+import thumbnail from "../../assets/images/feed_thumbnail.jpg";
 
 interface PostInfoProps {
   title: string;
@@ -205,7 +206,11 @@ export default function PostInfo({
               />
               <label htmlFor="uploadImg" className="cursor-pointer">
                 <div className="relative group">
-                  <img src={img} alt="업로드이미지" className="" />
+                  <img
+                    src={img || thumbnail}
+                    alt={img ? "업로드된 이미지" : "기본 썸네일"}
+                    className=""
+                  />
                   <div className="absolute flex flex-col justify-center items-center inset-0 text-[20px] text-white bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                     <span>
                       수정하려면{" "}
@@ -225,7 +230,10 @@ export default function PostInfo({
               </label>
             </>
           ) : (
-            <img src={img} alt="업로드이미지" />
+            <img
+              src={img || thumbnail}
+              alt={img ? "업로드된 이미지" : "기본 썸네일"}
+            />
           )}
         </div>
         {edit ? (
