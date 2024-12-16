@@ -1,6 +1,4 @@
-import React from "react";
 import ErrorImg from "../assets/ErrorImg.svg";
-import jalnan from "../assets/fonts/jalnan.ttf";
 import Header from "../components/rootlayout/Header";
 
 export default function Error() {
