@@ -9,14 +9,14 @@ export default function MyPage() {
   const myInfo = useAuth((state) => state.user);
 
   const isLoading = useLoadingStore((state) => state.isLoading);
-
+  console.log(myInfo);
   return (
     <>
       {myInfo && (
         <div className="relative flex flex-col items-center">
           <div className="flex flex-col gap-[40px] pt-10">
             <UserCard
-              uname={myInfo.fullName}
+              uname={myInfo.fullName!}
               followers={myInfo.followers}
               following={myInfo.following}
               BackWidth="w-[100px]"
@@ -33,13 +33,13 @@ export default function MyPage() {
             </div>
             <div>
               <p className=" text-[18px] mb-[20px] font-medium">
-                게시물 {myInfo.posts.length}개
+                게시물 {myInfo.posts?.length}개
               </p>
               <div className="border-t pt-[10px] px-1 flex justify-center">
                 <div className="flex flex-col items-start mt-[20px]">
                   <div className="flex items-center justify-center">
                     <div className="grid gap-8 2xl:grid-cols-4 xl:grid-cols-3 lg:grid-cols-2">
-                      {myInfo.posts.map((post) => (
+                      {myInfo.posts?.map((post) => (
                         <ImageCard
                           key={post._id}
                           image={post.image}
