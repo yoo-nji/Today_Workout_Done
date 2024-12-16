@@ -16,6 +16,7 @@ interface PostInfoProps {
   owner: boolean;
   postID: string;
   edit: boolean;
+  userImg: string;
   setEdit: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
@@ -29,6 +30,7 @@ export default function PostInfo({
   owner,
   postID,
   edit,
+  userImg,
   setEdit,
 }: PostInfoProps) {
   // 삭제 모달 확인
@@ -168,7 +170,11 @@ export default function PostInfo({
       <div className="flex items-center justify-between">
         {/* 왼쪽 프로필 */}
         <div className="flex gap-[10px] items-center">
-          <UserProfile BackWidth="w-[36px]" BackHeight="h-[36px]" />
+          <UserProfile
+            BackWidth="w-[36px]"
+            BackHeight="h-[36px]"
+            userImg={userImg}
+          />
           <div>
             <p className="text-[13px] mb-[6px] font-bold">{fullName}</p>
             <p className="text-xs">{formattedDate}</p>

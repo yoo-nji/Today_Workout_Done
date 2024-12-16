@@ -18,6 +18,7 @@ interface PostInfo {
   likes: LikeType[];
   channelId: string;
   postID: string;
+  userImg: string;
 }
 
 export default function PostDetail() {
@@ -33,7 +34,7 @@ export default function PostDetail() {
       const { data } = await api.get(`/posts/${post_id}`);
       console.log(data);
       const {
-        author: { fullName, _id: userID },
+        author: { fullName, _id: userID, image: userImg },
         channel: { _id: channelId },
         // comments,
         title,
@@ -54,6 +55,7 @@ export default function PostDetail() {
         likes,
         channelId,
         postID,
+        userImg,
       });
     } catch (error) {
       console.error("Error fetching post data: ", error);
@@ -81,6 +83,7 @@ export default function PostDetail() {
           postID={data.postID}
           edit={edit}
           setEdit={setEdit}
+          userImg={data.userImg}
         />
         {/* 편집모드 일때는 댓글 렌더링 X */}
         {!edit && (
