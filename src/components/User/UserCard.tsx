@@ -3,11 +3,12 @@ import FollowButton from "../FollowButton";
 import UserProfile from "../UserProfile";
 import { updateNameFn } from "../../utils/updateName";
 import { useLoadingStore } from "../../stores/loadingStore";
+import { Following } from "../../stores/authStore";
 
 interface UserCardType {
   uname: string;
   followers?: string[];
-  following?: string[];
+  following?: Following[];
   BackWidth: string;
   BackHeight: string;
   IconWidth: string;

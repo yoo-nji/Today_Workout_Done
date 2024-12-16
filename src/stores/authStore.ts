@@ -27,7 +27,14 @@ interface MyInfo {
 }
 
 interface MyInfoPost {
-  likes: string[];
+  likes: {
+    _id: string;
+    user: string;
+    post: string;
+    createdAt: string;
+    updatedAt: string;
+    __v: number;
+  }[];
   comments: string[];
   _id: string;
   title: string;
@@ -58,11 +65,11 @@ export interface Following {
 }
 
 interface Auth {
-  user: MyInfo | null;
+  user: Partial<MyInfo> | null;
   isLoggedIn: boolean | null;
   login: () => void;
   logout: () => void;
-  setUser: (u: MyInfo | null) => void;
+  setUser: (u: Partial<MyInfo> | null) => void;
 }
 
 export const useAuth = create<Auth>((set) => ({
@@ -70,5 +77,6 @@ export const useAuth = create<Auth>((set) => ({
   isLoggedIn: null,
   login: () => set({ isLoggedIn: true }),
   logout: () => set({ isLoggedIn: false, user: null }),
-  setUser: (u: MyInfo | null) => set({ user: u }),
+  setUser: (u: Partial<MyInfo> | null) =>
+    set((state) => ({ user: state.user ? { ...state.user, ...u } : u })),
 }));

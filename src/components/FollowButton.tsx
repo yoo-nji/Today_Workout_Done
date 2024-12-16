@@ -20,8 +20,12 @@ export default function FollowButton({
   setFollowingList: React.Dispatch<
     React.SetStateAction<Following[] | undefined>
   >;
-  setUserFollowers: React.Dispatch<React.SetStateAction<string[]>>;
+  setUserFollowers: React.Dispatch<React.SetStateAction<number>>;
 }) {
+  const myInfo = useAuth((state) => state.user);
+  const setUser = useAuth((state) => state.setUser);
+  const myfollowing = useAuth((state) => state.user?.following);
+
   const isLogin = useAuth((state) => state.isLoggedIn); // 로그인 상태
   const myId = useAuth((state) => state.user?._id); // 로그인 상태
   // console.log(myId);
@@ -30,37 +34,49 @@ export default function FollowButton({
   useEffect(() => {
     if (!isLogin) return setIsFollowing(false);
 
-    const isUserFollowing = followingList?.some((item) => item.user === userid);
+    const isUserFollowing = myfollowing?.some((item) => item.user === userid);
     setIsFollowing(isUserFollowing || false);
-  }, [followingList]);
+  }, [myfollowing, isLogin, userid]);
 
   // 팔로우
   const handleFollow = async (userId: string) => {
     if (!isLogin) return;
 
-    try {
-      if (!isFollowing && myId) {
-        //팔로우
-        const data = await follow(userId);
-        setFollowingList(
-          (followingList) => followingList && [...followingList, data]
-        );
-        setUserFollowers((userFollowers) => [...userFollowers, myId]);
-      } else if (isFollowing) {
-        const id = followingList?.filter((item) => item.user === userid)[0]._id;
-        // console.log(id);
+    if (myInfo) {
+      try {
+        if (!isFollowing && myId) {
+          //팔로우
+          const data = await follow(userId);
+          console.log(data);
+          setUserFollowers((prev) => prev + 1);
+          setUser({
+            ...myInfo,
+            following: [...(myInfo?.following || []), data],
+          });
+          console.log(myInfo);
+          setIsFollowing(true);
+        } else if (isFollowing) {
+          //팔로우 취소
+          const targetFollowing = myInfo?.following?.find(
+            (item) => item.user === userid
+          );
+          if (!targetFollowing) return;
 
-        //팔로우 취소
-        await unfollow(id);
-        setFollowingList((followingList) =>
-          followingList?.filter((item) => item._id !== id)
-        );
-        setUserFollowers((userFollowers) =>
-          userFollowers.filter((id) => id !== myId)
-        );
+          await unfollow(targetFollowing._id);
+          setUserFollowers((prev) => prev - 1);
+          // 전역 상태 업데이트
+          setUser({
+            ...myInfo,
+            following:
+              myInfo.following?.filter(
+                (item) => item._id !== targetFollowing._id
+              ) || [],
+          });
+          setIsFollowing(false);
+        }
+      } catch (err) {
+        console.log(err);
       }
-    } catch (err) {
-      console.log(err);
     }
   };
 
