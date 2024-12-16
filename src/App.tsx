@@ -37,7 +37,6 @@ export default function App() {
           <Route path="/gymreview/:post_id" element={<PostDetail />} />
 
           <Route path="/user/:user_id" element={<User />} />
-          <Route path="*" element={<Error />} />
         </Route>
 
         {/* 로그인 필요햔 기능 */}
@@ -55,6 +54,9 @@ export default function App() {
             <Route path="/signup" element={<Signup />} />
           </Route>
         </Route>
+
+        {/* 에러 페이지 */}
+        <Route path="*" element={<Error />} />
       </Routes>
     </>
   );
