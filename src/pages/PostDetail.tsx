@@ -6,6 +6,8 @@ import { api } from "../api/axios";
 import { useAuth } from "../stores/authStore";
 import CommentSec from "../components/PostDetail/CommentSec";
 import { useNavigate, useParams } from "react-router";
+import { useLoadingStore } from "../stores/loadingStore";
+import Loading from "../components/Loading";
 
 // 아직 comments 타입을 정확히 지정하지않았다.
 interface PostInfo {
@@ -27,6 +29,10 @@ interface ChannelInfo {
 }
 
 export default function PostDetail() {
+  // 로딩
+  const startLoading = useLoadingStore((state) => state.startLoading);
+  const stopLoading = useLoadingStore((state) => state.stopLoading);
+
   const { post_id } = useParams();
   const loginId = useAuth((state) => state.user);
   const [data, setData] = useState<PostInfo | null>(null);
@@ -39,6 +45,7 @@ export default function PostDetail() {
 
   const getPostData = async () => {
     try {
+      startLoading();
       // 여기에 포스트 id 값 넣기
       const { data } = await api.get(`/posts/${post_id}`);
       // console.log(data);
@@ -100,6 +107,8 @@ export default function PostDetail() {
       getPrePostData(channelData, postID);
     } catch (error) {
       console.error("Error fetching post data: ", error);
+    } finally {
+      stopLoading();
     }
   };
 
@@ -140,7 +149,12 @@ export default function PostDetail() {
     getPostData();
   }, [post_id]);
 
-  if (!data) return <h1>렌더링중</h1>;
+  if (!data)
+    return (
+      <div className="relative flex flex-col">
+        <Loading />
+      </div>
+    );
 
   return (
     <div className="flex justify-center w-full h-full">
