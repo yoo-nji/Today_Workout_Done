@@ -22,10 +22,12 @@ interface PostInfo {
   postID: string;
   userImg: string;
   posts: string[];
+  channelName: string;
 }
 
 interface ChannelInfo {
   _id: string;
+  name: string;
 }
 
 export default function PostDetail() {
@@ -48,11 +50,11 @@ export default function PostDetail() {
       startLoading();
       // 여기에 포스트 id 값 넣기
       const { data } = await api.get(`/posts/${post_id}`);
-      // console.log(data);
+      console.log(data);
 
       const {
         author: { fullName, _id: userID, image: userImg },
-        channel: { _id: channelId, posts },
+        channel: { _id: channelId, posts, name: channelName },
         // comments,
         title,
         createdAt,
@@ -66,7 +68,6 @@ export default function PostDetail() {
         `/posts/channel/${channelId}`
       );
       // console.log(channelData);
-
       setChannelData(channelData);
 
       // title이 JSON 형식이 아닐 경우를 처리
@@ -102,6 +103,7 @@ export default function PostDetail() {
         postID,
         userImg,
         posts: posts || [],
+        channelName,
       });
 
       getPrePostData(channelData, postID);
@@ -182,7 +184,14 @@ export default function PostDetail() {
                 className={`w-[150px] h-[45px] hover:bg-[#265CAC]/5 border-[0.5px] flex items-center justify-center gap-4 rounded-[10px] ${
                   prevPost ? "cursor-pointer" : "cursor-not-allowed opacity-50"
                 }`}
-                onClick={() => prevPost && navigate(`/records/${prevPost}`)}
+                onClick={() =>
+                  prevPost &&
+                  navigate(
+                    data?.channelName === "WorkoutDone"
+                      ? `/records/${prevPost}`
+                      : `/${data.channelName.toLowerCase()}/${prevPost}`
+                  )
+                }
               >
                 <img src={leftIcon} alt="leftIcon" className="w-[16px]" />
                 <span>이전 포스트</span>
@@ -193,7 +202,14 @@ export default function PostDetail() {
                 className={`w-[150px] h-[45px] hover:bg-[#265CAC]/5 border-[0.5px] flex items-center gap-4 justify-center rounded-[10px] ${
                   nextPost ? "cursor-pointer" : "cursor-not-allowed opacity-50"
                 }`}
-                onClick={() => nextPost && navigate(`/records/${nextPost}`)}
+                onClick={() =>
+                  nextPost &&
+                  navigate(
+                    data?.channelName === "WorkoutDone"
+                      ? `/records/${nextPost}`
+                      : `/${data.channelName.toLowerCase()}/${nextPost}`
+                  )
+                }
               >
                 <span>다음 포스트</span>
                 <img src={rightIcon} alt="leftIcon" className="w-[16px]" />
