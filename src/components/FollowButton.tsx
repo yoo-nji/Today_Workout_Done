@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { twMerge } from "tailwind-merge";
-import { useAuth } from "../stores/authStore";
+import { Following, useAuth } from "../stores/authStore";
 import { follow, unfollow } from "../utils/followFn";
 
 export default function FollowButton({
@@ -8,17 +8,24 @@ export default function FollowButton({
   height,
   rounded,
   userid,
+  followingList,
+  setFollowingList,
+  setUserFollowers,
 }: {
   width: string;
   height: string;
   rounded: string;
   userid: string;
+  followingList: Following[] | undefined;
+  setFollowingList: React.Dispatch<
+    React.SetStateAction<Following[] | undefined>
+  >;
+  setUserFollowers: React.Dispatch<React.SetStateAction<string[]>>;
 }) {
   const isLogin = useAuth((state) => state.isLoggedIn); // 로그인 상태
+  const myId = useAuth((state) => state.user?._id); // 로그인 상태
+  // console.log(myId);
   const [isFollowing, setIsFollowing] = useState<boolean>(false); //팔로우 상태
-  const following = useAuth((state) => state.user?.following);
-  const [followingList, setFollowingList] = useState(following); //팔로우 리스트
-  // console.log(followingList);
 
   useEffect(() => {
     if (!isLogin) return setIsFollowing(false);
@@ -32,19 +39,24 @@ export default function FollowButton({
     if (!isLogin) return;
 
     try {
-      if (!isFollowing) {
+      if (!isFollowing && myId) {
         //팔로우
         const data = await follow(userId);
         setFollowingList(
           (followingList) => followingList && [...followingList, data]
         );
+        setUserFollowers((userFollowers) => [...userFollowers, myId]);
       } else if (isFollowing) {
         const id = followingList?.filter((item) => item.user === userid)[0]._id;
-        console.log(id);
+        // console.log(id);
+
         //팔로우 취소
         await unfollow(id);
         setFollowingList((followingList) =>
           followingList?.filter((item) => item._id !== id)
+        );
+        setUserFollowers((userFollowers) =>
+          userFollowers.filter((id) => id !== myId)
         );
       }
     } catch (err) {

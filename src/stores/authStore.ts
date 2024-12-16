@@ -48,7 +48,7 @@ interface Like {
   updatedAt: string;
   __v: number;
 }
-interface Following {
+export interface Following {
   createdAt: string;
   follower: string;
   updatedAt: string;
