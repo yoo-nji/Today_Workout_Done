@@ -5,6 +5,7 @@ import chatIcon from "../assets/chat_icon.svg";
 import UserProfile from "./UserProfile";
 import { useNavigate } from "react-router";
 import { channelMapping } from "../constants/channel";
+import { useAuth } from "../stores/authStore";
 
 export default function ImageCard({
   image,
@@ -18,6 +19,8 @@ export default function ImageCard({
   _id: post_id,
   channel,
 }: PostType & MyInfo) {
+  const isLogin = useAuth((state) => state.isLoggedIn);
+  const myInfo = useAuth((state) => state.user);
   const navigate = useNavigate();
   const update = new Date(createdAt);
   const date = update
@@ -48,7 +51,8 @@ export default function ImageCard({
   );
 
   // 본인 좋아요 확인
-  const checkIsLiked = likes.some((like) => like.user === author?._id);
+  const checkIsLiked = likes.some((like) => like.user === myInfo?._id);
+  console.log(checkIsLiked);
 
   return (
     <div className="flex flex-col items-center gap-3">
@@ -68,7 +72,7 @@ export default function ImageCard({
             <div className="flex gap-1">
               <img
                 className="w-[26px]"
-                src={checkIsLiked ? likeFill : likeIcon}
+                src={isLogin ? (checkIsLiked ? likeFill : likeIcon) : likeIcon}
                 alt="좋아요 아이콘"
               />
               <span>{likes.length}</span>

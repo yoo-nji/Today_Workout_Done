@@ -9,7 +9,6 @@ export default function MyPage() {
   const myInfo = useAuth((state) => state.user);
 
   const isLoading = useLoadingStore((state) => state.isLoading);
-  console.log(myInfo);
   return (
     <>
       {myInfo && (
