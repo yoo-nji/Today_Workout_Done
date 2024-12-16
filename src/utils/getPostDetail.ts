@@ -15,6 +15,7 @@ interface User {
   messages: string[];
   _id: string;
   fullName: string;
+  image?: string;
   email: string;
   createdAt: string;
   updatedAt: string;

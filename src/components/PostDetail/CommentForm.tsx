@@ -69,7 +69,7 @@ export default function CommentForm({
           value={newComment}
           onChange={(e) => setNewComment(e.target.value)}
           maxLength={300} // 최대 글자 수 제한
-          disabled={!loginId} // 로그인 상태가 아닐시 비활성화
+          // disabled={!loginId} // 로그인 상태가 아닐시 비활성화
         ></textarea>
         <div className="flex justify-between">
           <p>{newComment.length}/300</p>
@@ -77,7 +77,11 @@ export default function CommentForm({
             <div className="text-red-500">300자 이상 입력할 수 없습니다</div>
           )}
           <ButtonComponent
-            onClick={() => handleCommentSubmit(newComment)}
+            onClick={
+              loginId
+                ? () => handleCommentSubmit(newComment)
+                : () => alert("로그인 후 이용하실 수 있습니다")
+            } // 로그인 상태에 따라 동작
             bgcolor="bg-[#265CAC]"
             textcolor="text-[white]"
           >
