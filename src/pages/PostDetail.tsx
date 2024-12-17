@@ -156,6 +156,7 @@ export default function PostDetail() {
           edit={edit}
           setEdit={setEdit}
           userImg={data.userImg}
+          userid={data.userID}
         />
         {/* 편집모드 일때는 댓글 렌더링 X */}
         {!edit && (

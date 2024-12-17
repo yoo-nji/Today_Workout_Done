@@ -42,17 +42,19 @@ export default function Review({
     postTitle = title;
     postContent = title;
   }
+  const userid = author?._id;
+  const handleClick = (userid: string | undefined) => {
+    navigate(`/user/${userid}`);
+  };
   return (
-    <div
-      className="w-[814px] h-[315px] mb-[109px] mr-5 relative flex flex-row"
-      onClick={() => navigate(`/gymreview/${post_id}`)}
-    >
+    <div className="w-[814px] h-[315px] mb-[109px] mr-5 relative flex flex-row">
       {/* 썸네일 */}
       <div>
         <div
           className="group relative w-[380px] h-[300px] bg-cover bg-center
         rounded-[15px] shadow-lg mr-[60px] mt-2 mb-[7px] items-start"
           style={{ backgroundImage: `url(${image || thumbnail})` }}
+          onClick={() => navigate(`/gymreview/${post_id}`)}
         />
       </div>
 
@@ -60,11 +62,13 @@ export default function Review({
         {/* 글 작성자 정보 */}
         <div className="flex justify-start mb-[30px]">
           <div className="flex flex-row gap-[13px]">
-            <UserProfile
-              BackWidth="w-[40px]"
-              BackHeight="h-[40px]"
-              userImg={userImg ? userImg : author?.image}
-            />
+            <div onClick={() => handleClick(userid)}>
+              <UserProfile
+                BackWidth="w-[40px]"
+                BackHeight="h-[40px]"
+                userImg={userImg ? userImg : author?.image}
+              />
+            </div>
             <div className="flex flex-col">
               <div className="text-base font-medium">
                 {author ? author.fullName : fullName}
