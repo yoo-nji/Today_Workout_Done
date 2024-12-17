@@ -44,13 +44,13 @@ export default function Review({
   }
   return (
     <div
-      className="w-[900px] h-[315px] mb-[109px] relative flex flex-row"
+      className="w-[814px] h-[315px] mb-[109px] mr-5 relative flex flex-row"
       onClick={() => navigate(`/gymreview/${post_id}`)}
     >
       {/* 썸네일 */}
       <div>
         <div
-          className="group relative w-[400px] h-[300px] bg-cover bg-center
+          className="group relative w-[380px] h-[300px] bg-cover bg-center
         rounded-[15px] shadow-lg mr-[60px] mt-2 mb-[7px] items-start"
           style={{ backgroundImage: `url(${image || thumbnail})` }}
         />
@@ -66,8 +66,10 @@ export default function Review({
               userImg={userImg ? userImg : author?.image}
             />
             <div className="flex flex-col">
-              <div className="">{author ? author.fullName : fullName}</div>
-              <div className="">{date}</div>
+              <div className="text-base font-medium">
+                {author ? author.fullName : fullName}
+              </div>
+              <div className="text-sm font-light">{date}</div>
             </div>
           </div>
         </div>
