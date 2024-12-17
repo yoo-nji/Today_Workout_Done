@@ -70,38 +70,38 @@ export default function Notification({
               <div className="flex justify-between items-center w-full px-4 relative ">
                 <img
                   src={commentIcon}
-                  className="relative"
+                  className="relative h-[42px]"
                   onClick={() => {
                     console.log("comment");
                   }}
                 />
                 {notification[2] != 0 && (
-                  <div className="w-6 h-6 rounded-[50%] bg-red-500 absolute bottom-0 left-14 text-white text-center text-xs leading-loose">
+                  <div className="w-6 h-6 rounded-[50%] bg-red-500 absolute bottom-0 left-[44px] text-white text-center text-xs leading-loose">
                     {notification[2] >= 100 ? `99+` : notification[2]}
                   </div>
                 )}
                 <img
                   src={followIcon}
-                  className="relative"
+                  className="relative h-[37px]"
                   onClick={() => {
                     console.log("follow");
                   }}
                 />
                 {notification[1] != 0 && (
-                  <div className="w-6 h-6 rounded-[50%] bg-red-500 absolute bottom-0 left-48 text-white text-center z-50 text-xs leading-loose">
+                  <div className="w-6 h-6 rounded-[50%] bg-red-500 absolute bottom-0 left-[180px] text-white text-center z-50 text-xs leading-loose">
                     {notification[1] >= 100 ? `99+` : notification[1]}
                   </div>
                 )}
                 <img
                   src={likeIcon}
-                  className="relative z-40"
+                  className="relative h-[37px] z-40"
                   onClick={() => {
                     console.log("like");
                   }}
                 />
                 {notification[0] != 0 && (
-                  <div className="w-6 h-6 rounded-[50%] bg-red-500 absolute bottom-0 right-2.5 text-white justify-center text-center z-50 text-xs leading-loose">
-                    {notification[0] >= 100 ? `99+` : notification[1]}
+                  <div className="w-6 h-6 rounded-[50%] bg-red-500 absolute bottom-0 right-[5px] text-white text-xs flex items-center justify-center z-50">
+                    {notification[0] >= 100 ? `99+` : notification[0]}
                   </div>
                 )}
               </div>
