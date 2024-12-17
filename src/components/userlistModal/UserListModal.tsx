@@ -6,6 +6,9 @@ import UserNone from "./UserNone";
 import { getUserList, UserListType } from "../../utils/getUserList";
 import { searchUserFn, SearchUserType } from "../../utils/searchUser";
 import { usesidebarToggleStore } from "../../stores/sideberToggleStore";
+import Lottie from "react-lottie-player";
+import lottieJson from "../../assets/lottie/loading-b.json";
+import { twMerge } from "tailwind-merge";
 
 interface UserListModalType {
   handleBackClick: (e: React.MouseEvent<HTMLDivElement>) => void;
@@ -35,7 +38,7 @@ export default function UserListModal({
   // 검색한 유저 저장
   const [getUser, setGetUser] = useState<SearchUserType[]>();
 
-  // 초치 렌더링 유저목록 불러오기
+  // 초기 렌더링 유저목록 불러오기
   useEffect(() => {
     const setUser = async () => {
       setStatus("loading");
@@ -122,11 +125,24 @@ export default function UserListModal({
         </div>
         <div
           className="w-full h-full overflow-scroll flex flex-col justify-start
-        items-center gap-4 scrollbar-none 
+        items-center gap-4 scrollbar-none relative
         "
         >
           {/* 로딩중 */}
-          {status === "loading" && <p>로딩중..</p>}
+          {status === "loading" && (
+            <div
+              className={twMerge(
+                "absolute z-20 flex justify-center items-center w-full h-full bg-white/80"
+              )}
+            >
+              <Lottie
+                className="w-[130px] h-[130px]"
+                loop
+                animationData={lottieJson}
+                play
+              />
+            </div>
+          )}
 
           {status === "searching" &&
             (getUser?.length ? (
@@ -163,7 +179,18 @@ export default function UserListModal({
                   )
               )
             ) : (
-              <p>로딩중 ...</p>
+              <div
+                className={twMerge(
+                  "absolute z-20 flex justify-center items-center w-full h-full bg-white/80"
+                )}
+              >
+                <Lottie
+                  className="w-[130px] h-[130px]"
+                  loop
+                  animationData={lottieJson}
+                  play
+                />
+              </div>
             ))}
 
           {/* 초기 렌더링 오류 */}

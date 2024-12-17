@@ -53,4 +53,5 @@ interface PostType {
 interface MyInfo {
   fullName?: string;
   userImg?: string;
+  myLike?: (string | null)[];
 }

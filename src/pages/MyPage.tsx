@@ -6,12 +6,22 @@ import CheckDone from "../components/checkDone/CheckDone";
 import Loading from "../components/Loading";
 import CustomCalendar from "../components/MyPage/CustomCalendar";
 import MyImageCard from "../components/MyImageCard";
-
+import { useEffect, useState } from "react";
 export default function MyPage() {
   const myInfo = useAuth((state) => state.user);
-  // console.log(myInfo);
 
   const isLoading = useLoadingStore((state) => state.isLoading);
+
+  const [myLike, setMyLike] = useState<(string | null)[]>([]);
+
+  useEffect(() => {
+    if (myInfo?.likes) {
+      const myLike = myInfo?.likes.map((like) =>
+        like.post ? like.post : null
+      );
+      setMyLike(myLike);
+    }
+  }, []);
   return (
     <>
       {myInfo && (
@@ -53,6 +63,7 @@ export default function MyPage() {
                           userImg={myInfo.image}
                           _id={post._id}
                           channel={post.channel}
+                          myLike={myLike}
                         />
                       ))}
                     </div>

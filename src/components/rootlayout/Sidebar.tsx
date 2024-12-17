@@ -44,7 +44,7 @@ export default function Sidebar() {
       title: "오운완 인증",
       icon: dumbbell,
       alt: "오운완 아이콘",
-      route: "/",
+      route: "/records",
     },
     {
       id: 2,
