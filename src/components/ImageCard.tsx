@@ -52,7 +52,6 @@ export default function ImageCard({
 
   // 본인 좋아요 확인
   const checkIsLiked = likes.some((like) => like.user === myInfo?._id);
-  console.log(checkIsLiked);
 
   return (
     <div className="flex flex-col items-center gap-3">
@@ -63,7 +62,7 @@ export default function ImageCard({
         onClick={() => navigate(`/${channelName}/${post_id}`)}
       >
         {/* Hover */}
-        <div className="absolute inset-0 flex flex-col items-center justify-center text-white transition-opacity duration-300 bg-black bg-opacity-50 rounded-2xl opacity-0 group-hover:opacity-100">
+        <div className="absolute inset-0 flex flex-col items-center justify-center text-white transition-opacity duration-300 bg-black bg-opacity-50 opacity-0 rounded-2xl group-hover:opacity-100">
           <h3 className="w-[80%] text-[22px] font-bold truncate">
             {postTitle}
           </h3>
