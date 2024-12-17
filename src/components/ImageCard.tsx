@@ -54,9 +54,6 @@ export default function ImageCard({
   // 본인 좋아요 확인
   const checkIsLiked = likes.some((like) => like.user === myInfo?._id);
 
-  // 마이페이지 좋아요 확인
-  const checkMyLike = myLike?.some((id) => id === post_id);
-
   return (
     <div className="flex flex-col items-center gap-3">
       {/* 썸네일 */}
