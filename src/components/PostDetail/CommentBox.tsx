@@ -2,6 +2,8 @@ import UserProfile from "../UserProfile";
 import trashIcon from "../../assets/trash.svg";
 import { Comment } from "../../utils/getPostDetail";
 import { useAuth } from "../../stores/authStore";
+import { useNavigate } from "react-router";
+
 export default function CommentBox({
   comment,
   handleDelete,
@@ -11,6 +13,7 @@ export default function CommentBox({
 }) {
   // 사용자 정보 가져오기
   const loginId = useAuth((state) => state.user);
+  const navigate = useNavigate();
 
   //날짜 포맷
   const update = new Date(comment.createdAt);
@@ -20,15 +23,21 @@ export default function CommentBox({
   const day = update.getDate();
   const formattedDate = `${year}년 ${month}월 ${day}일`;
 
+  const handleClick = (userid: string) => {
+    navigate(`/user/${userid}`);
+  };
+
   return (
     <div className="flex flex-col py-5 border-b border-gray-200">
       <div className="flex justify-between ">
         <div className="flex gap-[12px] w-fit items-center">
-          <UserProfile
-            BackWidth="w-[36px]"
-            BackHeight="h-[36px]"
-            userImg={comment.author.image}
-          />
+          <div onClick={() => handleClick(comment.author._id)}>
+            <UserProfile
+              BackWidth="w-[36px]"
+              BackHeight="h-[36px]"
+              userImg={comment.author.image}
+            />
+          </div>
           <div>
             <p className="text-[13px] mb-[4px] font-bold">
               {comment.author.fullName}

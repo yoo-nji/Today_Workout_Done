@@ -66,7 +66,7 @@ export default function CommentForm({
       <form onSubmit={(e) => e.preventDefault()}>
         <textarea
           ref={commentinputRef}
-          className="my-3 h-[100px] px-4 py-3 text-sm border-2 rounded-[6px] w-full resize-none focus:outline-none"
+          className="mt-3 mb-1 h-[100px] px-4 py-3 text-sm border-2 rounded-[6px] w-full resize-none focus:outline-none"
           placeholder={
             loginId ? "댓글을 작성해 주세요" : "로그인 후 이용해 주세요"
           }
@@ -76,10 +76,15 @@ export default function CommentForm({
           // disabled={!loginId} // 로그인 상태가 아닐시 비활성화
         ></textarea>
         <div className="flex justify-between">
-          <p>{newComment.length}/300</p>
-          {newComment.length >= 300 && (
-            <div className="text-red-500">300자 이상 입력할 수 없습니다</div>
-          )}
+          <div className="flex gap-8">
+            <p className="text-sm">{newComment.length}/300</p>
+            {newComment.length >= 300 && (
+              <div className="text-red-500 text-[14px]">
+                300자 이상 입력하실 수 없습니다
+              </div>
+            )}
+          </div>
+
           <ButtonComponent
             onClick={
               loginId
