@@ -9,7 +9,7 @@ import { useState } from "react";
 import { api } from "../../api/axios";
 import { AxiosError } from "axios";
 import Notification from "../notification/Notification";
-import { useToken } from "../../stores/toeknStore";
+import { useToken } from "../../stores/tokenStore";
 import ModeChange from "../button/ModeChange";
 
 // 사이드바 접힐때 로고 보이도록 처리하자
