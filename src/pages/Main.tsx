@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import { api } from "../api/axios";
 import SwiperCustom from "../components/main/SwiperCustom";
-import banner from "../assets/images/banner.png";
-import BimCon from "../components/main/BimCon";
+import BmiCon from "../components/main/BmiCon";
 
 export default function Main() {
   const [posts, setPosts] = useState<PostType[]>([]);
@@ -31,7 +30,7 @@ export default function Main() {
   return (
     <>
       <div className="flex flex-col gap-20 w-full">
-        <BimCon />
+        <BmiCon />
         <div className="flex flex-col justify-center">
           {/* 게시글 피드 */}
           <div className="2xl:max-w-[1200px] xl:max-w-[884px] w-full mx-auto px-4 md:max-w-[582px] lg:max-w-[600px]">

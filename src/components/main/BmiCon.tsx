@@ -1,4 +1,4 @@
-export default function BimCon() {
+export default function BmiCon() {
   return (
     <>
       <div className="flex flex-col bg-[#f7faff] items-center py-20">
