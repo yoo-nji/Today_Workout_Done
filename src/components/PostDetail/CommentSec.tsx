@@ -90,7 +90,7 @@ export default function CommentSec({
   }, [likeList, isLogin]);
 
   // 포스트 좋아요 토글
-  const handleLike = async (postId: string) => {
+  const handleLike = async (postId: string, postAuthorId: string) => {
     if (!isLogin) return;
 
     // 좋아요 여부 확인
@@ -112,7 +112,7 @@ export default function CommentSec({
         }
       } else {
         //좋아요 등록
-        const data = await addPostLike(postId);
+        const data = await addPostLike(postId, postAuthorId);
         setLikeList((likeList) => [...likeList, data]);
         setIsLiked(true);
       }
@@ -133,6 +133,7 @@ export default function CommentSec({
           // likes={likes}
           // comments={comments}
           postId={postId}
+          postAuthorId={postAuthorId}
           handleCommentSubmit={handleCommentSubmit}
           newComment={newComment}
           commentList={commentList}

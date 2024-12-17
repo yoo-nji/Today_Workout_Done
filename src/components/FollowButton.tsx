@@ -40,7 +40,7 @@ export default function FollowButton({
       try {
         if (!isFollowing && myId) {
           //팔로우
-          const data = await follow(userId);
+          const data = await follow(userId, myId);
           console.log(data);
           if (setUserFollowers) {
             setUserFollowers((prev) => prev + 1);
