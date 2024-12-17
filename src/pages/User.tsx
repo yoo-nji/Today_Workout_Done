@@ -23,8 +23,8 @@ export default function User() {
   return (
     <>
       {user && (
-        <div className="relative flex flex-col items-start">
-          <div className=" flex flex-col gap-[40px] ml-[160px] mr-[160px] pt-10">
+        <div className="flex flex-col items-center">
+          <div className=" flex flex-col gap-[40px] pt-10">
             <UserInfoCard
               uname={user.fullName}
               userId={user._id}
@@ -42,24 +42,34 @@ export default function User() {
                   <div className="flex flex-col items-start mt-[20px]">
                     <div className="flex items-center justify-center">
                       <div className="grid gap-8 2xl:grid-cols-4 xl:grid-cols-3 lg:grid-cols-2">
-                        {user.posts?.map((post) => (
-                          <ImageCard
-                            key={post._id}
-                            image={post.image}
-                            comments={post.comments}
-                            createdAt={post.updatedAt}
-                            likes={post.likes}
-                            title={post.title}
-                            fullName={user.fullName}
-                            userImg={user.image}
-                            _id={post._id}
-                          />
-                        ))}
+                        {user.posts
+                          ?.sort(
+                            (a, b) =>
+                              new Date(b.updatedAt).getTime() -
+                              new Date(a.updatedAt).getTime()
+                          )
+                          .map((post) => (
+                            <ImageCard
+                              key={post._id}
+                              image={post.image}
+                              comments={post.comments}
+                              createdAt={post.updatedAt}
+                              likes={post.likes}
+                              title={post.title}
+                              fullName={user.fullName}
+                              userImg={user.image}
+                              _id={post._id}
+                            />
+                          ))}
                       </div>
                     </div>
                   </div>
                 ) : (
-                  <p className="text-gray-500">게시물이 없습니다.</p> // 게시물이 없을 경우 메시지
+                  <div className="w-[814px]">
+                    <p className="text-gray-500 text-center">
+                      게시물이 없습니다.
+                    </p>
+                  </div>
                 )}
               </div>
             </div>
