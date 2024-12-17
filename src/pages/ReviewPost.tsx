@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { api } from "../api/axios";
 import SearchBar from "../components/SearchBar";
-import Tag from "../components/Tag";
 import Review from "../components/Review";
 import { useLocation } from "react-router";
 
@@ -86,14 +85,9 @@ export default function ReviewPost() {
           onChange={(e) => setSearchTerm(e.target.value)}
           style="w-full max-w-[785px]"
         />
-        <div className="flex gap-[19px]">
-          <Tag>#오운완</Tag>
-          <Tag>#오운완</Tag>
-          <Tag>#오운완</Tag>
-        </div>
       </div>
       {/* 피드 게시물 */}
-      <div className="flex items-center">
+      <div className="flex items-center mt-8">
         <div>
           {status === "loading" && <p>로딩중..</p>}
 
