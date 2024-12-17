@@ -4,6 +4,7 @@ import { twMerge } from "tailwind-merge";
 export default function BmiCon() {
   const [kg, setKg] = useState<string>("");
   const [cm, setCm] = useState<string>("");
+  const weightCategory = useRef<HTMLSpanElement>(null);
   const bmiRef = useRef<HTMLSpanElement>(null);
   const [bmiStatus, setBmiStatus] = useState("");
 
@@ -25,8 +26,8 @@ export default function BmiCon() {
       message = "비만";
       setBmiStatus("비만");
     }
-
-    bmiRef.current!.innerText = message;
+    bmiRef.current!.innerText = bmi.toString();
+    weightCategory.current!.innerText = message;
   };
 
   const handleKgChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -79,29 +80,39 @@ export default function BmiCon() {
               setCm("");
               setBmiStatus("");
               bmiRef.current!.innerText = "--";
+              weightCategory.current!.innerText = "--";
             }}
             className="lg:w-[80px] w-full border border-[#265cac] bg-white text-[#265cac]  font-semibold py-2 px-4 rounded-lg hover:bg-[#f2f2f2] transition"
           >
             초기화
           </button>
         </form>
-        <div className="flex gap-2 mt-8 text-lg font-semibold text-gray-600">
-          <span className="text-lg font-semibold text-gray-600">
-            당신의 BMI는
-          </span>
-          <span
-            ref={bmiRef}
-            className={twMerge(
-              "text-xl font-bold text-[#265cac]",
-              bmiStatus === "저체중" && "text-blue-500",
-              bmiStatus === "정상" && "text-green-500",
-              bmiStatus === "과체중" && "text-yellow-500",
-              bmiStatus === "비만" && "text-red-500"
-            )}
-          >
-            --
-          </span>
-          <span> 입니다</span>
+        <div className="flex flex-col items-center gap-3 mt-8 text-lg font-semibold text-gray-600">
+          <div className="flex gap-2">
+            <span> 당신의 BMI는</span>
+            <span
+              ref={bmiRef}
+              className={twMerge("text-xl font-bold text-[#265cac]")}
+            >
+              --
+            </span>
+            <span> 입니다</span>
+          </div>
+          <div>
+            <span
+              ref={weightCategory}
+              className={twMerge(
+                "text-xl font-bold text-[#265cac]",
+                bmiStatus === "저체중" && "text-blue-500",
+                bmiStatus === "정상" && "text-green-500",
+                bmiStatus === "과체중" && "text-yellow-500",
+                bmiStatus === "비만" && "text-red-500"
+              )}
+            >
+              --
+            </span>
+            <span> 입니다</span>
+          </div>
         </div>
       </div>
     </>
