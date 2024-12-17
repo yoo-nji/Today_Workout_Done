@@ -24,7 +24,7 @@ export default function User() {
     <>
       {user && (
         <div className="relative flex flex-col items-start">
-          <div className="border-2 border-blue-600 flex flex-col gap-[40px] ml-[160px] mr-[160px] pt-10">
+          <div className=" flex flex-col gap-[40px] ml-[160px] mr-[160px] pt-10">
             <UserInfoCard
               uname={user.fullName}
               userId={user._id}
@@ -33,9 +33,10 @@ export default function User() {
               image={user.image}
             />
             <div>
-              <p className=" text-[18px] mb-[20px] font-medium">
+              <p className=" text-[18px] mb-[20px] font-medium ">
                 게시물 {user.posts?.length}개
               </p>
+
               <div className="border-t pt-[10px] px-1 flex justify-center">
                 {user.posts && user.posts.length > 0 ? (
                   <div className="flex flex-col items-start mt-[20px]">
