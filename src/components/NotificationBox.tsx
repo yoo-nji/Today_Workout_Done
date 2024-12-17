@@ -40,25 +40,13 @@ export default function NotificationBox({
           <p className="text-xs font-bold">
             {fullname} 님께서 회원님의 글에 댓글을 남겼습니다{" "}
           </p>
-          <article className="text-xs mt-0.5 line-clamp-2 pr-2">
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nisi dolor
-            commodi perspiciatis distinctio vero unde deleniti! Laudantium
-            blanditiis pariatur fugiat autem, quos enim doloribus itaque iste
-            ullam assumenda eius corrupti!
-          </article>
         </div>
       )}
-      {notificationType === "message" && (
+      {notificationType === "like" && (
         <div className=" w-[230px] h-[50px]">
           <p className="text-xs font-bold ">
-            {fullname} 님께서 회원님께 메세지를 보냈습니다
+            {fullname} 님께서 회원님께서 글에 좋아요를 눌러주셨습니다
           </p>
-          <article className="text-xs mt-0.5 line-clamp-2 pr-2 ">
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quisquam
-            at rerum velit? Eveniet nihil aperiam ut eius, nemo suscipit ullam
-            modi vel, voluptas eos porro accusamus numquam? Sunt, recusandae
-            temporibus.
-          </article>
         </div>
       )}
     </div>

@@ -5,38 +5,25 @@ import commentIcon from "../../assets/icons/Comment_Icon.svg";
 import NotificationBox from "../NotificationBox";
 import { api } from "../../api/axios";
 import { AxiosError } from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 interface notificationProps {
   closeNoti: () => void;
+  isNoti: () => void;
   notificationArray?: any;
   //   notification: [number, number, number];
 }
 
 // 여기에 좋아요, 팔로우, 메세지 갯수 받아서 사용
-const notification = [100, 1, 17];
-
-// const [notificationArrayAsync, setNotificationArrayAsync] = useState({
-//   fullname: "",
-//   image: "",
-//   type: "",
-//   email: "",
-// });
-
-// const notificationChangeHandler = (data: object) => {
-//   setNotificationArrayAsync({
-//     fullname: "",
-//     image: "",
-//     type: "",
-//     email: "",
-//   });
-// };
+const notificationNumber = [100, 1, 17];
 
 // API보고 notificationArray 받아서 처리하자
 export default function Notification({
   closeNoti,
+  isNoti,
   notificationArray,
 }: notificationProps) {
+  // 모두읽음처리
   const notificationSeen = async () => {
     try {
       const { status, data } = await api.put("/notifications/seen");
@@ -49,11 +36,16 @@ export default function Notification({
       }
     }
   };
+
+  // map돌려서 알람갯수 세기
+
+  console.log("12313", notificationArray[2].follow);
   const [showNotiList, setShowNotiList] = useState(true);
   const showNotiListHandler = () => {
     setShowNotiList(false);
     console.log(showNotiList);
   };
+
   return (
     <div>
       <div className="absolute z-10 top-[32px] right-[80px] mt-2 w-[280px]  p-[18px] rounded-[10px] ">
@@ -75,9 +67,11 @@ export default function Notification({
                     console.log("comment");
                   }}
                 />
-                {notification[2] != 0 && (
-                  <div className="w-6 h-6 rounded-[50%] bg-red-500 absolute bottom-0 left-[44px] text-white text-center text-xs leading-loose">
-                    {notification[2] >= 100 ? `99+` : notification[2]}
+                {notificationNumber[2] != 0 && (
+                  <div className="w-6 h-6 rounded-[50%] bg-red-500 absolute bottom-0 left-14 text-white text-center text-xs leading-loose">
+                    {notificationNumber[2] >= 100
+                      ? `99+`
+                      : notificationNumber[2]}
                   </div>
                 )}
                 <img
@@ -87,9 +81,11 @@ export default function Notification({
                     console.log("follow");
                   }}
                 />
-                {notification[1] != 0 && (
-                  <div className="w-6 h-6 rounded-[50%] bg-red-500 absolute bottom-0 left-[180px] text-white text-center z-50 text-xs leading-loose">
-                    {notification[1] >= 100 ? `99+` : notification[1]}
+                {notificationNumber[1] != 0 && (
+                  <div className="w-6 h-6 rounded-[50%] bg-red-500 absolute bottom-0 left-48 text-white text-center z-50 text-xs leading-loose">
+                    {notificationNumber[1] >= 100
+                      ? `99+`
+                      : notificationNumber[1]}
                   </div>
                 )}
                 <img
@@ -99,9 +95,11 @@ export default function Notification({
                     console.log("like");
                   }}
                 />
-                {notification[0] != 0 && (
-                  <div className="w-6 h-6 rounded-[50%] bg-red-500 absolute bottom-0 right-[5px] text-white text-xs flex items-center justify-center z-50">
-                    {notification[0] >= 100 ? `99+` : notification[0]}
+                {notificationNumber[0] != 0 && (
+                  <div className="w-6 h-6 rounded-[50%] bg-red-500 absolute bottom-0 right-2.5 text-white justify-center text-center z-50 text-xs leading-loose">
+                    {notificationNumber[0] >= 100
+                      ? `99+`
+                      : notificationNumber[1]}
                   </div>
                 )}
               </div>
@@ -112,12 +110,18 @@ export default function Notification({
             {/* 바디부분 길이 초과시 스크롤나게 */}
             <div className="w-full overflow-y-auto max-h-[330px] scrollbar-none">
               {notificationArray.length && showNotiList ? (
-                notificationArray.map((notification) => (
+                notificationArray.map((notification: any) => (
                   <NotificationBox
                     fullname={notification.author.fullName}
                     userid={notification.author.email}
                     image={""}
-                    notificationType={"follow"}
+                    notificationType={
+                      notification.like != undefined
+                        ? "like"
+                        : notification.follow != undefined
+                        ? "follow"
+                        : "comment"
+                    }
                   ></NotificationBox>
                 ))
               ) : (
@@ -134,6 +138,7 @@ export default function Notification({
                   onClick={() => {
                     // Todo 모두읽기 기능 구현
                     notificationSeen();
+                    isNoti();
                   }}
                 >
                   {"모두읽기"}

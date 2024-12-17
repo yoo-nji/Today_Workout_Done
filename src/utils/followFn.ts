@@ -1,9 +1,11 @@
 import { api } from "../api/axios";
+import { createNotification } from "./api/createNotification";
 
-export const follow = async (userId: string) => {
+export const follow = async (userId: string, myId: string) => {
   try {
     const { data } = await api.post("/follow/create", { userId });
 
+    await createNotification("FOLLOW", myId, userId, null);
     // console.log("팔로우 성공", data);
     return data;
   } catch (err) {
