@@ -113,7 +113,7 @@ export default function Header({
         onClick={() => setIsActive(!isActive)}
         className="lg:hidden block bars"
       >
-        <img src={isActive ? bars : close} alt="bars" />
+        <img src={isActive ? close : bars} alt="bars" />
       </div>
       {/* 로고 */}
       <div
