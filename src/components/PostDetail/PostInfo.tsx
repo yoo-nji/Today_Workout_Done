@@ -2,11 +2,11 @@ import { useRef, useState, useEffect } from "react";
 import UserProfile from "../UserProfile";
 import { updatePost } from "../../utils/updatePost";
 import { deletePost } from "../../utils/api/deletePosts";
-import DeleteConfirm from "../modal/DeleteConfirm";
 import { useNavigate } from "react-router";
 import { channelMapping } from "../../constants/channel";
 import thumbnail from "../../assets/images/feed_thumbnail.jpg";
 import { useLoadingStore } from "../../stores/loadingStore";
+import ConfirmModal from "../modal/ConfirmModal";
 
 interface PostInfoProps {
   title: string;
@@ -264,7 +264,7 @@ export default function PostInfo({
           <div className="w-full py-3 mt-10 whitespace-pre-line">{context}</div>
         )}
       </div>
-      <DeleteConfirm
+      <ConfirmModal
         isOpen={isOpen}
         onClose={() => setIsOpen(false)}
         onConfirm={deleteHandler}

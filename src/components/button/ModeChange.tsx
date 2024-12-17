@@ -7,7 +7,7 @@ import verticalAfternoon from "../../assets/verticalAfternoon.svg";
 import verticalNight from "../../assets/verticalNight.svg";
 import sun from "../../assets/sun.svg";
 import moon from "../../assets/moon.svg";
-import DeleteConfirm from "../modal/DeleteConfirm";
+import DeleteConfirm from "../modal/ConfirmModal";
 import innercircle from "../../assets/innercircle.svg";
 import { useDarkModeStore } from "../../stores/darkModeStore";
 
