@@ -106,7 +106,7 @@ export default function Header({
         "h-[70px] flex items-center justify-end py-[20px]",
         logo ? "justify-between" : "justify-end",
         sidebar ? "pl-[100px] pr-[36px]" : "px-[36px]",
-        !isActive && "on"
+        isActive && "on"
       )}
     >
       <div
