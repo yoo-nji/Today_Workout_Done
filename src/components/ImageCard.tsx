@@ -18,6 +18,7 @@ export default function ImageCard({
   userImg, // 마이페이지, 로그인 한 유저의 사진
   _id: post_id,
   channel,
+  myLike, // 마이페이지, 내가 좋아요한 게시글ID
 }: PostType & MyInfo) {
   const isLogin = useAuth((state) => state.isLoggedIn);
   const myInfo = useAuth((state) => state.user);
@@ -71,7 +72,13 @@ export default function ImageCard({
             <div className="flex gap-1">
               <img
                 className="w-[26px]"
-                src={isLogin ? (checkIsLiked ? likeFill : likeIcon) : likeIcon}
+                src={
+                  isLogin
+                    ? checkIsLiked || checkMyLike
+                      ? likeFill
+                      : likeIcon
+                    : likeIcon
+                }
                 alt="좋아요 아이콘"
               />
               <span>{likes.length}</span>

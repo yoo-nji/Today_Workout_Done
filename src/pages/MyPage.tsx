@@ -5,10 +5,21 @@ import CheckDone from "../components/checkDone/CheckDone";
 import Loading from "../components/Loading";
 import { useLoadingStore } from "../stores/loadingStore";
 import CustomCalendar from "../components/MyPage/CustomCalendar";
+import { useEffect, useState } from "react";
 export default function MyPage() {
   const myInfo = useAuth((state) => state.user);
-
   const isLoading = useLoadingStore((state) => state.isLoading);
+
+  const [myLike, setMyLike] = useState<(string | null)[]>([]);
+
+  useEffect(() => {
+    if (myInfo?.likes) {
+      const myLike = myInfo?.likes.map((like) =>
+        like.post ? like.post : null
+      );
+      setMyLike(myLike);
+    }
+  }, []);
   return (
     <>
       {myInfo && (
@@ -49,6 +60,7 @@ export default function MyPage() {
                           fullName={myInfo.fullName}
                           userImg={myInfo.image}
                           _id={post._id}
+                          myLike={myLike}
                         />
                       ))}
                     </div>
