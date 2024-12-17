@@ -4,7 +4,7 @@ export const createNotification = async (
   notificationType: string,
   notificationTypeId: string,
   userId: string,
-  postId?: string
+  postId?: string | null //팔로우일 시 null
 ) => {
   try {
     await api.post("/notifications/create", {
@@ -14,6 +14,6 @@ export const createNotification = async (
       postId,
     });
   } catch (error) {
-    console.error("글 삭제 도중 오류가 발생했습니다.", error);
+    console.error("알림발생 도중 오류가 발생했습니다.", error);
   }
 };

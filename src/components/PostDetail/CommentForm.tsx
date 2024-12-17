@@ -9,12 +9,13 @@ interface CommentFormProps {
   // likes: LikeType[];
   // comments: CommentType[];
   postId: string | undefined;
+  postAuthorId: string | undefined;
   handleCommentSubmit: (comment: string) => Promise<void>;
   newComment: string;
   commentList: Comment[];
   setNewComment: React.Dispatch<React.SetStateAction<string>>;
   commentinputRef: React.MutableRefObject<HTMLTextAreaElement | null>;
-  handleLike: (postId: string) => Promise<void>;
+  handleLike: (postId: string, postAuthorId: string) => Promise<void>;
   likeList: LikeType[];
   isLiked: boolean | undefined;
 }
@@ -23,6 +24,7 @@ export default function CommentForm({
   // likes,
   // comments,
   postId,
+  postAuthorId,
   handleCommentSubmit,
   newComment,
   commentList,
@@ -41,7 +43,9 @@ export default function CommentForm({
       {/* 좋아요 이모티콘 댓글 이모티콘 area */}
       <div className="flex gap-4">
         <div className="flex gap-1">
-          <button onClick={() => handleLike(postId as string)}>
+          <button
+            onClick={() => handleLike(postId as string, postAuthorId as string)}
+          >
             {isLiked ? (
               <img className="w-6" src={likeFill} alt="likeFill" />
             ) : (

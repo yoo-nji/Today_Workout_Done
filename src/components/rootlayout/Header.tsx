@@ -5,7 +5,7 @@ import logoImg from "../../assets/loge.svg";
 import UserProfile from "../UserProfile";
 import ButtonComponent from "../ButtonComponent";
 import { useAuth } from "../../stores/authStore";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { api } from "../../api/axios";
 import { AxiosError } from "axios";
 import Notification from "../notification/Notification";
@@ -22,6 +22,7 @@ export default function Header({
   logo?: boolean;
   sidebar?: boolean;
 }) {
+  // 헤더 반응형 토글
   const [isActive, setIsActive] = useState(false);
 
   const navigate = useNavigate();
@@ -41,7 +42,25 @@ export default function Header({
   const fastlogin = async () => {
     try {
       const { status, data } = await api.post("login", {
-        email: "test2@test.com",
+        email: "wjw1469@gmail.com",
+        password: "asdf1234",
+      });
+      setToken(data.token);
+      login();
+      setUser(data.user);
+      alert("로그인 되었습니다.");
+      navigate("/");
+    } catch (error) {
+      if ((error as AxiosError).response?.status === 400) {
+        alert("아이디나 비밀번호가 틀립니다.");
+      }
+    }
+  };
+
+  const fastlogin2 = async () => {
+    try {
+      const { status, data } = await api.post("login", {
+        email: "test1@test.com",
         password: "1234",
       });
       setToken(data.token);
@@ -56,6 +75,10 @@ export default function Header({
     }
   };
 
+  const test11 = () => {
+    console.log(userInfo?.notifications);
+  };
+
   const logoutHandler = () => {
     // 로그아웃 / 토큰 삭제 / 유저정보 삭제
     logout();
@@ -67,6 +90,12 @@ export default function Header({
 
   // Todo : 알림창 폼 보여줄지 분기처리
   const [showNoti, setShowNoti] = useState(false);
+  // 모두읽음 누르면 값 처리해서 뱃지 없애기
+  const [isNoti, setIsNoti] = useState(true);
+
+  const setIsNotiHandler = () => {
+    setIsNoti(false);
+  };
   const showNotiHandler = () => {
     setShowNoti(!showNoti);
   };
@@ -88,10 +117,16 @@ export default function Header({
       </div>
       {/* 로고 */}
       <div
-        className={twMerge("cursor-pointer lg:block hidden", !logo && "hidden")}
+        className={twMerge(
+          "cursor-pointer lg:block hidden logo",
+          !logo && "hidden",
+          !isActive && "hidden"
+        )}
       >
         <img src={logoImg} alt="logo" onClick={() => navigate("/")} />
       </div>
+      {/* <button onClick={() => test11()}>sdfsg</button> 테스트용버튼*/}
+
       {isLoggedIn ? (
         // 로그인 상태 분기
         <div className="flex gap-[10px] items-center header-inner">
@@ -127,13 +162,14 @@ export default function Header({
               }}
             />
             {/* 알림이 있다면 뱃지색 처리 */}
-            {userInfo?.notifications?.length != 0 && (
+            {userInfo?.notifications?.length != 0 && isNoti == true && (
               <div className="w-3 h-3 rounded-[50%] bg-red-500 absolute bottom-0 right-0"></div>
             )}
             {/* 알림창 보여줘야한다면 처리 */}
             {showNoti && (
               <Notification
                 closeNoti={showNotiHandler}
+                isNoti={setIsNotiHandler}
                 notificationArray={notificationArray}
               />
             )}
@@ -149,12 +185,20 @@ export default function Header({
         // 비로그인 상태 분기
         <div className="flex gap-[10px] items-center">
           {/* 정식배포시 삭제 */}
+          {/* <button
+            className="border border-solid border-rose-400 w-[220px] h-[36px] rounded-[10px]"
+            onClick={() => fastlogin2()}
+          >
+            test1로그인
+          </button>
+
           <button
             className="border border-solid border-rose-400 w-[220px] h-[36px] rounded-[10px]"
             onClick={() => fastlogin()}
           >
             로그인이 귀찮은자를 위해
-          </button>
+          </button> */}
+
           {/* 모드변경 버튼 */}
           <div className="flex justify-center">
             <ModeChange />
