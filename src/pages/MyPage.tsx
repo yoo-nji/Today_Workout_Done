@@ -1,7 +1,6 @@
 import { useAuth } from "../stores/authStore";
 import { useLoadingStore } from "../stores/loadingStore";
 import UserCard from "../components/User/UserCard";
-import ImageCard from "../components/ImageCard";
 import CheckDone from "../components/checkDone/CheckDone";
 import Loading from "../components/Loading";
 import CustomCalendar from "../components/MyPage/CustomCalendar";
@@ -56,7 +55,7 @@ export default function MyPage() {
                           key={post._id}
                           image={post.image}
                           comments={post.comments}
-                          createdAt={post.updatedAt}
+                          createdAt={post.createdAt}
                           likes={post.likes}
                           title={post.title}
                           fullName={myInfo.fullName}
