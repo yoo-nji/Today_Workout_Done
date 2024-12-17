@@ -8,6 +8,7 @@ import { AxiosError } from "axios";
 import { useToken } from "../stores/tokenStore";
 import ConfirmModal from "../components/modal/ConfirmModal";
 
+
 export default function Login() {
   const login = useAuth((state) => state.login);
   // 토큰 저장하기
@@ -146,7 +147,11 @@ export default function Login() {
         </p>
 
         {/* 비회원 버튼 */}
-        <button className="w-full h-[40px] py-auto border-2 border-[#265CAC]  rounded-[20px] bg-[#FFFFFF] text-[15px] font-jua">
+        <button
+          type="button"
+          onClick={() => navigate("/")}
+          className="w-full h-[40px] py-auto border-2 border-[#265CAC]  rounded-[20px] bg-[#FFFFFF] text-[15px] font-jua"
+        >
           비회원으로 둘러보기
         </button>
 

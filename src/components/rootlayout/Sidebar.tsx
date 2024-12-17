@@ -15,8 +15,19 @@ import user from "../../assets/user_icon.svg";
 import { useAuth } from "../../stores/authStore";
 import CheckDone from "../checkDone/CheckDone";
 import { useNavigate } from "react-router";
+import { useDarkModeStore } from "../../stores/darkModeStore";
+
+// 다크모드 아이콘
+import MainDarkLogo from "../../assets/darkicons/darkMainLogo.svg";
+import darkDumbellLogo from "../../assets/darkicons/darkCheckLogo.svg";
+import darkProteinLogo from "../../assets/darkicons/darkProteinLogo.svg";
+import darkRoutineLogo from "../../assets/darkicons/darkRoutineLogo.svg";
+import darkGymLogo from "../../assets/darkicons/darkGymLogo.svg";
+import darkLeft from "../../assets/darkicons/darkLeft.svg";
+import darkRight from "../../assets/darkicons/darkRight.svg";
 
 export default function Sidebar() {
+  const isDark = useDarkModeStore((state) => state.isDark);
   const navigate = useNavigate();
 
   //로그인상태
@@ -42,28 +53,28 @@ export default function Sidebar() {
     {
       id: 1,
       title: "오운완 인증",
-      icon: dumbbell,
+      icon: !isDark ? dumbbell : darkDumbellLogo,
       alt: "오운완 아이콘",
       route: "/records",
     },
     {
       id: 2,
       title: "프로틴 추천",
-      icon: protein,
+      icon: !isDark ? protein : darkProteinLogo,
       alt: "프로틴 아이콘",
       route: "protein",
     },
     {
       id: 3,
       title: "루틴 공유",
-      icon: routine,
+      icon: !isDark ? routine : darkRoutineLogo,
       alt: "루틴 아이콘",
       route: "routine",
     },
     {
       id: 4,
       title: "헬스장 후기",
-      icon: gym,
+      icon: !isDark ? gym : darkGymLogo,
       alt: "헬스장 아이콘",
       route: "gymreview",
     },
@@ -85,7 +96,7 @@ export default function Sidebar() {
       className={twMerge(
         `flex flex-col items-center gap-1 h-[100vh] z-10
       py-5 text-[#1D1D1D] bg-[#FEFEFE] border-r
-      border-gray-200/50 fixed transition-all `,
+      border-gray-200/50 fixed transition-all dark:bg-[#1A1A1A] `,
         isOpen ? "before:modal-back" : "",
         isToggle ? "w-[300px]" : "w-20"
       )}
@@ -95,22 +106,30 @@ export default function Sidebar() {
       <button
         onClick={handleToggleClick}
         className={twMerge(
-          "self-end w-10 mr-2 hover:brightness-95 transition-all",
+          "self-end w-10 mr-2 hover:brightness-95 dark:hover:brightness-75 transition-all",
           !isToggle && "m-auto"
         )}
       >
-        <img src={isToggle ? left : right} alt="" />
+        {!isDark ? (
+          <img src={isToggle ? left : right} alt="토글버튼" />
+        ) : (
+          <img src={isToggle ? darkLeft : darkRight} alt="토글버튼" />
+        )}
       </button>
       {/* 로고 */}
       <a
         className={twMerge("w-20 h-[53px] mb-[14px]", !isToggle && "hidden")}
         href="/"
       >
-        <img src="/src/assets/loge.svg" alt="loge" />
+        {!isDark ? (
+          <img src="/src/assets/loge.svg" alt="loge" />
+        ) : (
+          <img src={MainDarkLogo} alt="다크모드 로고" />
+        )}
       </a>
 
       {/* 멘트 */}
-      <div className="flex flex-col items-center gap-[10px] pb-[15px] w-full text-lg font-medium">
+      <div className="flex flex-col items-center gap-[10px] pb-[15px] w-full text-lg font-medium dark:text-[#EDEDED]">
         <div
           className={twMerge(
             "flex flex-col items-center text-center mt-2",
@@ -119,7 +138,7 @@ export default function Sidebar() {
         >
           <div>
             어서오세요{" "}
-            <span className="text-[#265CAC] text-[19px] font-bold">
+            <span className="text-[#265CAC] dark:text-[#6FBEFF] text-[19px] font-bold">
               {userInfo && isLoggedIn ? userInfo.fullName : "회원"}
             </span>
             님
@@ -168,7 +187,7 @@ export default function Sidebar() {
           <div className="flex justify-center">
             <button
               className={twMerge(
-                "mt-2 self-center w-[230px] h-[40px] bg-[#265CAC] hover:bg-[#1e4d8a] rounded-[15px] text-base text-white font-medium relative",
+                "mt-2 self-center w-[230px] h-[40px] bg-[#265CAC] dark:bg-[#81B4DD] dark:text-[#1A1A1A] hover:bg-[#1e4d8a] rounded-[15px] text-base text-white font-medium relative",
                 !isToggle && "hidden"
               )}
               onClick={(e) => {

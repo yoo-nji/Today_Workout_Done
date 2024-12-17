@@ -20,6 +20,7 @@ interface PostInfoProps {
   edit: boolean;
   userImg: string;
   setEdit: React.Dispatch<React.SetStateAction<boolean>>;
+  userid: string;
 }
 
 export default function PostInfo({
@@ -34,6 +35,7 @@ export default function PostInfo({
   edit,
   userImg,
   setEdit,
+  userid,
 }: PostInfoProps) {
   // 삭제 모달 확인
   const [isOpen, setIsOpen] = useState(false);
@@ -164,6 +166,10 @@ export default function PostInfo({
     gymreview: "헬스장 리뷰",
   };
 
+  const handleClick = (userid: string) => {
+    navigate(`/user/${userid}`);
+  };
+
   return (
     <>
       <div
@@ -184,11 +190,13 @@ export default function PostInfo({
       <div className="flex items-center justify-between">
         {/* 왼쪽 프로필 */}
         <div className="flex gap-[10px] items-center">
-          <UserProfile
-            BackWidth="w-[36px]"
-            BackHeight="h-[36px]"
-            userImg={userImg}
-          />
+          <div onClick={() => handleClick(userid)}>
+            <UserProfile
+              BackWidth="w-[36px]"
+              BackHeight="h-[36px]"
+              userImg={userImg}
+            />
+          </div>
           <div>
             <p className="text-[13px] mb-[6px] font-bold">{fullName}</p>
             <p className="text-xs">{formattedDate}</p>

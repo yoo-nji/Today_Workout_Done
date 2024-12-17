@@ -15,14 +15,14 @@ export default function CheckDoneMonth({
 
   const date = new Date();
   return (
-    <div className={`${textSize ? textSize : "text-[18px]"}`}>
-      <p className={`${textSize ? textSize : "text-[18px]"} font-medium`}>
+    <div className={`${textSize ? textSize : "text-[18px]"} dark:text-[#fff]`}>
+      <p className={`${textSize ? textSize : "text-[18px]"} font-medium `}>
         {myInfo?.fullName}님
       </p>
       <p
-        className={`text-[#265CAC] ${
+        className={`text-[#265CAC] dark:text-[#6FBEFF] ${
           textSize ? textSize : "text-[20px]"
-        } font-bold`}
+        } font-bold `}
       >
         {date.getMonth() + 1}월달에 총 {checkNumber}회
       </p>
