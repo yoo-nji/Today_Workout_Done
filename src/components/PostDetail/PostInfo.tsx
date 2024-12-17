@@ -158,7 +158,12 @@ export default function PostInfo({
 
   return (
     <>
-      <div className="text-sm ">{channel ? channelName[channel] : null} </div>
+      <div
+        className="text-sm hover:underline cursor-pointer"
+        onClick={() => navigate(`/${channel}`)}
+      >
+        {channel ? channelName[channel] : null}
+      </div>
       {edit ? (
         <input
           className="py-3 mb-4 text-4xl focus:outline-none border w-full border-[#d3d3d3d3]"

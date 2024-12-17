@@ -215,13 +215,13 @@ export default function PostDetail() {
                 <img src={rightIcon} alt="leftIcon" className="w-[16px]" />
               </div>
             </div>
-
             {/* 댓글 섹션 */}
             <CommentSec
               likes={data.likes}
               // comments={data.comments}
               //포스트 아이디
               postId={post_id}
+              postAuthorId={data.userID}
             />
           </>
         )}

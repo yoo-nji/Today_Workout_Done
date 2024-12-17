@@ -1,15 +1,22 @@
 import { api } from "../api/axios";
+import { createNotification } from "../utils/api/createNotification";
 
 interface newCommentFnType {
   comment: string;
   postId: string | undefined;
+  postAuthorId: string;
 }
 
 export const newCommentFn = async (option: newCommentFnType) => {
   try {
     const { data } = await api.post("/comments/create", option);
     // 응답 처리
-    // console.log("댓글 등록 성공:", data);
+    const rtype = "COMMENT";
+    const commentUserId = data.id;
+    const postUserId = option.postAuthorId;
+    const postId = data.post;
+
+    await createNotification(rtype, commentUserId, postUserId, postId);
     return data;
   } catch (err) {
     console.error(err);
