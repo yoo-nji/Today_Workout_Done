@@ -39,7 +39,7 @@ export default function Notification({
 
   // map돌려서 알람갯수 세기
 
-  console.log("12313", notificationArray[2].follow);
+  // console.log("12313", notificationArray[2].follow);
   const [showNotiList, setShowNotiList] = useState(true);
   const showNotiListHandler = () => {
     setShowNotiList(false);
