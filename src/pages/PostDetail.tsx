@@ -25,11 +25,6 @@ interface PostInfo {
   channelName: string;
 }
 
-interface ChannelInfo {
-  _id: string;
-  name: string;
-}
-
 export default function PostDetail() {
   // 로딩
   const startLoading = useLoadingStore((state) => state.startLoading);
@@ -38,7 +33,6 @@ export default function PostDetail() {
   const { post_id } = useParams();
   const loginId = useAuth((state) => state.user);
   const [data, setData] = useState<PostInfo | null>(null);
-  const [channelData, setChannelData] = useState<ChannelInfo | null>(null);
   const [prevPost, setPrevPost] = useState<string | null>(null);
   const [nextPost, setNextPost] = useState<string | null>(null);
   const navigate = useNavigate();
@@ -62,13 +56,6 @@ export default function PostDetail() {
         likes,
         _id: postID,
       } = data;
-
-      // 채널 데이터를 가져오고 채널의 포스트 배열을 추출
-      const { data: channelData } = await api.get(
-        `/posts/channel/${channelId}`
-      );
-      // console.log(channelData);
-      setChannelData(channelData);
 
       // title이 JSON 형식이 아닐 경우를 처리
       let HTitle = "";
@@ -106,7 +93,7 @@ export default function PostDetail() {
         channelName,
       });
 
-      getPrePostData(channelData, postID);
+      getPrePostData(posts, postID);
     } catch (error) {
       console.error("Error fetching post data: ", error);
     } finally {
@@ -114,13 +101,8 @@ export default function PostDetail() {
     }
   };
 
-  const getPrePostData = (
-    channelData: ChannelInfo[],
-    currentPostID: string
-  ) => {
-    const currentIndex = channelData.findIndex(
-      (post) => post._id === currentPostID
-    );
+  const getPrePostData = (posts: string[], currentPostID: string) => {
+    const currentIndex = posts.findIndex((post) => post === currentPostID);
     // console.log(currentIndex);
 
     if (currentIndex === -1) {
@@ -128,14 +110,11 @@ export default function PostDetail() {
       return;
     }
 
+    const nextPostID = currentIndex > 0 ? posts[currentIndex - 1] : null;
     const prevPostID =
-      currentIndex > 0 ? channelData[currentIndex - 1]._id : null;
-    const nextPostID =
-      currentIndex < channelData.length - 1
-        ? channelData[currentIndex + 1]._id
-        : null;
-    // console.log(`이전 페이지 ID : ${prevPostID}`);
-    // console.log(`다음 페이지 ID : ${nextPostID}`);
+      currentIndex < posts.length - 1 ? posts[currentIndex + 1] : null;
+    console.log(`이전 페이지 ID : ${prevPostID}`);
+    console.log(`다음 페이지 ID : ${nextPostID}`);
     setPrevPost(prevPostID);
     setNextPost(nextPostID);
   };
@@ -187,7 +166,7 @@ export default function PostDetail() {
                 onClick={() =>
                   prevPost &&
                   navigate(
-                    data?.channelName === "WorkoutDone"
+                    data?.channelName === "workoutDone"
                       ? `/records/${prevPost}`
                       : `/${data.channelName.toLowerCase()}/${prevPost}`
                   )
@@ -205,7 +184,7 @@ export default function PostDetail() {
                 onClick={() =>
                   nextPost &&
                   navigate(
-                    data?.channelName === "WorkoutDone"
+                    data?.channelName === "workoutDone"
                       ? `/records/${nextPost}`
                       : `/${data.channelName.toLowerCase()}/${nextPost}`
                   )
