@@ -6,7 +6,8 @@ import { useAuth } from "../stores/authStore";
 import { api } from "../api/axios";
 import { AxiosError } from "axios";
 import { useToken } from "../stores/tokenStore";
-import { Link } from "react-router";
+import ConfirmModal from "../components/modal/ConfirmModal";
+
 
 export default function Login() {
   const login = useAuth((state) => state.login);
@@ -19,6 +20,10 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [emailError, setEmailError] = useState("");
+
+  // 모달 창 관리
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isErrorModalOpen, setIsErrorModalOpen] = useState(false);
 
   const validateEmail = (email: string) => {
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -43,18 +48,20 @@ export default function Login() {
         email,
         password,
       });
-      // 토큰 저장하기
-      setToken(data.token);
-      // 로그인
-      login();
-      setUser(data.user);
-      alert("로그인 되었습니다.");
-      // Todo -> 로그인성공 후 이동페이지
-      navigate("/");
+      if (status === 200) {
+        setIsModalOpen(true);
+
+        // 토큰 저장하기
+        setToken(data.token);
+        // 로그인
+        // login();
+        setUser(data.user);
+      }
     } catch (error) {
       // error를 AxiosError로 명시적으로 타입 지정
       if ((error as AxiosError).response?.status === 400) {
-        alert("아이디나 비밀번호가 틀립니다.");
+        setIsErrorModalOpen(true);
+        // alert("아이디나 비밀번호가 틀립니다.");
       }
     }
   };
@@ -147,6 +154,25 @@ export default function Login() {
         >
           비회원으로 둘러보기
         </button>
+
+        {/* 로그인 완료 됬을 때 모달*/}
+        <ConfirmModal
+          onlyConfirm
+          isOpen={isModalOpen}
+          onClose={() => navigate("/")}
+          onConfirm={() => navigate("/")}
+          message={"로그인되었습니다."}
+          confirmColor="bg-[#265cac]"
+        />
+        {/* 로그인 실패 했을 때 모달*/}
+        <ConfirmModal
+          onlyConfirm
+          isOpen={isErrorModalOpen}
+          onClose={() => setIsErrorModalOpen(false)}
+          onConfirm={() => setIsErrorModalOpen(false)}
+          message={"아이디나 비밀번호가 틀립니다."}
+          confirmColor="bg-[#265cac]"
+        />
       </form>
     </>
   );
