@@ -1,47 +1,70 @@
 import { useParams } from "react-router";
-import UserCard from "../components/User/UserCard";
-//import ImageCard from "../components/ImageCard";
+import ImageCard from "../components/ImageCard";
+import { useEffect, useState } from "react";
+import { api } from "../api/axios";
+import UserInfoCard from "../components/User/UserInfoCard";
 
 export default function User() {
   const { user_id } = useParams();
+  const [user, setUser] = useState<UserInfoType | null>(null);
+
+  useEffect(() => {
+    const getUser = async () => {
+      try {
+        const { data } = await api.get(`/users/${user_id}`);
+        console.log("data", data);
+        setUser(data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getUser();
+  }, [user_id]);
   return (
-    <div className="flex flex-col items-center">
-      <div className="border-2 border-blue-500 gap-[68px] flex flex-col mt-[120px]">
-        <UserCard
-          uname={`유저${user_id}`}
-          BackWidth="w-[132px]"
-          BackHeight="h-[132px]"
-          IconWidth="w-[92px]"
-          IconHeight="h-[92px]"
-        />
-        <div>
-          게시물 12개
-          <div className="flex items-center">
-            <div className="grid gap-8 2xl:grid-cols-4 xl:grid-cols-3 lg:grid-cols-2">
-              {/* props 적어주면 적용됩니다! */}
-              {/* <ImageCard />
-              <ImageCard />
-              <ImageCard />
-              <ImageCard />
-              <ImageCard />
-              <ImageCard />
-              <ImageCard />
-              <ImageCard />
-              <ImageCard />
-              <ImageCard />
-              <ImageCard />
-              <ImageCard />
-              <ImageCard />
-              <ImageCard />
-              <ImageCard />
-              <ImageCard />
-              <ImageCard />
-              <ImageCard />
-              <ImageCard /> */}
+    <>
+      {user && (
+        <div className="relative flex flex-col items-start">
+          <div className="border-2 border-blue-600 flex flex-col gap-[40px] ml-[160px] mr-[160px] pt-10">
+            <UserInfoCard
+              uname={user.fullName}
+              userId={user._id}
+              followers={user.followers || []}
+              following={user.following || []}
+              image={user.image}
+            />
+            <div>
+              <p className=" text-[18px] mb-[20px] font-medium">
+                게시물 {user.posts?.length}개
+              </p>
+              <div className="border-t pt-[10px] px-1 flex justify-center">
+                {user.posts && user.posts.length > 0 ? (
+                  <div className="flex flex-col items-start mt-[20px]">
+                    <div className="flex items-center justify-center">
+                      <div className="grid gap-8 2xl:grid-cols-4 xl:grid-cols-3 lg:grid-cols-2">
+                        {user.posts?.map((post) => (
+                          <ImageCard
+                            key={post._id}
+                            image={post.image}
+                            comments={post.comments}
+                            createdAt={post.updatedAt}
+                            likes={post.likes}
+                            title={post.title}
+                            fullName={user.fullName}
+                            userImg={user.image}
+                            _id={post._id}
+                          />
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                ) : (
+                  <p className="text-gray-500">게시물이 없습니다.</p> // 게시물이 없을 경우 메시지
+                )}
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </div>
+      )}
+    </>
   );
 }
