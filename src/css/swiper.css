@@ -27,6 +27,12 @@
   align-items: center;
   justify-content: center;
 }
+.swiper-button-next {
+  right: 2px;
+}
+.swiper-button-prev {
+  left: 2px;
+}
 
 .swiper-button-next::after,
 .swiper-button-prev::after {

@@ -15,10 +15,10 @@ export default function SwiperCustom({ posts }: { posts: PostType[] }) {
         }}
         breakpoints={{
           // 화면 너비에 따라 보여지는 슬라이드 수 조정
-          320: { slidesPerView: 1 }, // 모바일
-          855: { slidesPerView: 2 }, // 태블릿
-          1090: { slidesPerView: 3 }, // 데스크탑
-          1340: { slidesPerView: 4 }, // 큰 화면
+          768: { slidesPerView: 1 }, // 모바일
+          1024: { slidesPerView: 2 }, // 태블릿
+          1280: { slidesPerView: 3 }, // 데스크탑
+          1536: { slidesPerView: 4 }, // 큰 화면
         }}
         virtual
       >

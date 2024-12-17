@@ -21,10 +21,10 @@ export default function Main() {
   }, []);
 
   const category = [
-    { title: "👋 오운완 인증 최신글!" },
-    { title: "✅ 루틴 공유 최신글!" },
-    { title: "💪 프로틴 추천 최신글!" },
-    { title: "🏋️‍♂️ 헬스장 후기 최신글!" },
+    { title: "👋 오운완 인증 최신글!", body: posts },
+    { title: "✅ 루틴 공유 최신글!", body: posts },
+    { title: "💪 프로틴 추천 최신글!", body: posts },
+    { title: "🏋️‍♂️ 헬스장 후기 최신글!", body: posts },
   ];
 
   return (
@@ -32,13 +32,13 @@ export default function Main() {
       <div className="w-full mt-[60px]">
         <div className="flex flex-col justify-center">
           {/* 게시글 피드 */}
-          <div className="xl:max-w-[1200px] w-full mx-auto px-4 md:max-w-[582px] lg:max-w-[864px]">
+          <div className="2xl:max-w-[1200px] xl:max-w-[884px] w-full mx-auto px-4 md:max-w-[582px] lg:max-w-[600px]">
             {category.map((list, i) => (
               <div key={i} className="mb-8">
                 <h2 className="font-jalnan text-xl font-semibold mb-5">
                   {list.title}
                 </h2>
-                <SwiperCustom posts={posts} />
+                <SwiperCustom posts={list.body} />
               </div>
             ))}
           </div>
