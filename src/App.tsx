@@ -13,6 +13,7 @@ import PostDetail from "./pages/PostDetail";
 import PrivateRoute from "./route/PrivateRoute";
 import ReviewPost from "./pages/ReviewPost";
 import MyPage from "./pages/MyPage";
+import MyPostDetail from "./pages/MyPostDetail";
 import { useEffect } from "react";
 import { verifyUser } from "./utils/verifyUser";
 import Main from "./pages/Main";
@@ -45,6 +46,7 @@ export default function App() {
           <Route element={<RootLayout />}>
             <Route path="/posting" element={<Posting />} />
             <Route path="/myprofile" element={<MyPage />} />
+            <Route path="/myposting/:post_id" element={<MyPostDetail />} />
           </Route>
         </Route>
 

@@ -1,13 +1,15 @@
-import UserCard from "../components/User/UserCard";
 import { useAuth } from "../stores/authStore";
+import { useLoadingStore } from "../stores/loadingStore";
+import UserCard from "../components/User/UserCard";
 import ImageCard from "../components/ImageCard";
 import CheckDone from "../components/checkDone/CheckDone";
 import Loading from "../components/Loading";
-import { useLoadingStore } from "../stores/loadingStore";
 import CustomCalendar from "../components/MyPage/CustomCalendar";
+import MyImageCard from "../components/MyImageCard";
 import { useEffect, useState } from "react";
 export default function MyPage() {
   const myInfo = useAuth((state) => state.user);
+
   const isLoading = useLoadingStore((state) => state.isLoading);
 
   const [myLike, setMyLike] = useState<(string | null)[]>([]);
@@ -50,7 +52,7 @@ export default function MyPage() {
                   <div className="flex items-center justify-center">
                     <div className="grid gap-8 2xl:grid-cols-4 xl:grid-cols-3 lg:grid-cols-2">
                       {myInfo.posts?.map((post) => (
-                        <ImageCard
+                        <MyImageCard
                           key={post._id}
                           image={post.image}
                           comments={post.comments}
@@ -60,6 +62,7 @@ export default function MyPage() {
                           fullName={myInfo.fullName}
                           userImg={myInfo.image}
                           _id={post._id}
+                          channel={post.channel}
                           myLike={myLike}
                         />
                       ))}

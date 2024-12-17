@@ -25,7 +25,7 @@ interface PostInfo {
   channelName: string;
 }
 
-export default function PostDetail() {
+export default function MyPostDetail() {
   // 로딩
   const startLoading = useLoadingStore((state) => state.startLoading);
   const stopLoading = useLoadingStore((state) => state.stopLoading);
@@ -44,11 +44,11 @@ export default function PostDetail() {
       startLoading();
       // 여기에 포스트 id 값 넣기
       const { data } = await api.get(`/posts/${post_id}`);
-      console.log(data);
+      console.log(data.author.posts);
 
       const {
-        author: { fullName, _id: userID, image: userImg },
-        channel: { _id: channelId, posts, name: channelName },
+        author: { fullName, _id: userID, image: userImg, posts },
+        channel: { _id: channelId, name: channelName },
         // comments,
         title,
         createdAt,
@@ -103,7 +103,7 @@ export default function PostDetail() {
 
   const getPrePostData = (posts: string[], currentPostID: string) => {
     const currentIndex = posts.findIndex((post) => post === currentPostID);
-    // console.log(currentIndex);
+    console.log(currentIndex);
 
     if (currentIndex === -1) {
       console.error("Post not found in the posts array");
@@ -163,14 +163,7 @@ export default function PostDetail() {
                 className={`w-[150px] h-[45px] hover:bg-[#265CAC]/5 border-[0.5px] flex items-center justify-center gap-4 rounded-[10px] ${
                   prevPost ? "cursor-pointer" : "cursor-not-allowed opacity-50"
                 }`}
-                onClick={() =>
-                  prevPost &&
-                  navigate(
-                    data?.channelName === "workoutDone"
-                      ? `/records/${prevPost}`
-                      : `/${data.channelName.toLowerCase()}/${prevPost}`
-                  )
-                }
+                onClick={() => prevPost && navigate(`/myposting/${prevPost}`)}
               >
                 <img src={leftIcon} alt="leftIcon" className="w-[16px]" />
                 <span>이전 포스트</span>
@@ -181,14 +174,7 @@ export default function PostDetail() {
                 className={`w-[150px] h-[45px] hover:bg-[#265CAC]/5 border-[0.5px] flex items-center gap-4 justify-center rounded-[10px] ${
                   nextPost ? "cursor-pointer" : "cursor-not-allowed opacity-50"
                 }`}
-                onClick={() =>
-                  nextPost &&
-                  navigate(
-                    data?.channelName === "workoutDone"
-                      ? `/records/${nextPost}`
-                      : `/${data.channelName.toLowerCase()}/${nextPost}`
-                  )
-                }
+                onClick={() => nextPost && navigate(`/myposting/${nextPost}`)}
               >
                 <span>다음 포스트</span>
                 <img src={rightIcon} alt="leftIcon" className="w-[16px]" />
