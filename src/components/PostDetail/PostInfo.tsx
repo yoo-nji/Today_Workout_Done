@@ -6,6 +6,7 @@ import DeleteConfirm from "../modal/DeleteConfirm";
 import { useNavigate } from "react-router";
 import { channelMapping } from "../../constants/channel";
 import thumbnail from "../../assets/images/feed_thumbnail.jpg";
+import { useLoadingStore } from "../../stores/loadingStore";
 
 interface PostInfoProps {
   title: string;
@@ -44,6 +45,10 @@ export default function PostInfo({
   const [uploadImg, setUploadImg] = useState<File | null>(null);
   const textarea = useRef<HTMLTextAreaElement | null>(null);
 
+  // 로딩관리
+  const startLoading = useLoadingStore((state) => state.startLoading);
+  const stopLoading = useLoadingStore((state) => state.stopLoading);
+
   const handleInput = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     if (textarea.current) {
       textarea.current.style.height = "auto"; // 높이 초기화
@@ -66,11 +71,14 @@ export default function PostInfo({
     }
 
     try {
+      startLoading();
       await updatePost(formData);
-      alert("수정되었습니다.");
+      // alert("수정되었습니다.");
       setEdit(false);
     } catch (error) {
       console.log(error);
+    } finally {
+      stopLoading();
     }
   };
 
@@ -159,7 +167,7 @@ export default function PostInfo({
   return (
     <>
       <div
-        className="text-sm hover:underline cursor-pointer"
+        className="text-sm cursor-pointer hover:underline"
         onClick={() => navigate(`/${channel}`)}
       >
         {channel ? channelName[channel] : null}

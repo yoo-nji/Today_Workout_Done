@@ -138,7 +138,10 @@ export default function PostDetail() {
     );
 
   return (
-    <div className="flex justify-center w-full h-full">
+    <div className="relative flex justify-center">
+      {/* 로딩시 */}
+      <Loading />
+
       <div className="w-[766px] py-12 h-fit">
         {/* 포스트 정보  */}
         <PostInfo
