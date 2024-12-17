@@ -17,11 +17,16 @@ header.on .header-inner {
   gap: 30px;
 }
 
+header.on .logo {
+  display: none;
+}
+
 header.on .notification {
   display: none;
 }
 
 header.on .bars {
+  display: block;
   position: absolute;
   top: 20px;
   left: 20px;
