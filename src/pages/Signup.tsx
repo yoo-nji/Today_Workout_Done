@@ -6,21 +6,26 @@ import axios from "axios";
 import { api } from "../api/axios";
 import privateImg from "../assets/private.svg";
 import showPwImg from "../assets/showpw.svg";
+import { SignupConfirm } from "../components/modal/SignupConfirm";
 
 export default function Signup() {
   const navigate = useNavigate();
 
+  // input state
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  // error state
   const [nameError, setNameError] = useState("");
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [confirmPasswordError, setConfirmPasswordError] = useState("");
-  const [showPassword, setShowPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  // submit state
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   /* 공통 스페이스바 차단 핸들러 */
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -217,6 +222,7 @@ export default function Signup() {
 
       console.log("가입 성공:", response.data);
       // 성공 시 리다이렉트나 사용자 알림 처리
+      setIsModalOpen(true); // 회원가입 성공 시 모달 열기
     } catch (error) {
       console.error("가입 실패:", error);
       // 에러 메시지 처리
@@ -410,6 +416,9 @@ export default function Signup() {
         >
           {isSubmitting ? "가입 중..." : "가입하기"}
         </button>
+
+        {/* 모달 */}
+        {isModalOpen && <SignupConfirm setIsModalOpen={setIsModalOpen} />}
       </form>
     </div>
   );
