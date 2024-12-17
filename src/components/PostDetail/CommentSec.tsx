@@ -10,10 +10,12 @@ export default function CommentSec({
   likes,
   // comments,
   postId,
+  postAuthorId,
 }: {
   likes: LikeType[];
   // comments: CommentType[];
   postId: string | undefined;
+  postAuthorId: string;
 }) {
   const [commentList, setCommentList] = useState<Comment[]>([]); //댓글 목록
   const [isLoading, setIsLoading] = useState(false); // 로딩 상태
@@ -50,6 +52,7 @@ export default function CommentSec({
     const option = {
       comment,
       postId,
+      postAuthorId,
     };
 
     try {

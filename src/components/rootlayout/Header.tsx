@@ -31,13 +31,13 @@ export default function Header({
   const logout = useAuth((state) => state.logout);
   const setUser = useAuth((state) => state.setUser);
   const userInfo = useAuth((state) => state.user);
-
+  const notificationArray = userInfo?.notifications;
   // 테스트용 빠른 로그인입니다 귀찮으신분 자기 ID 비번 적어서 사용하세요
   const fastlogin = async () => {
     try {
       const { status, data } = await api.post("login", {
-        email: "wjw1469@gmail.com",
-        password: "asdf1234",
+        email: "test2@test.com",
+        password: "1234",
       });
       setToken(data.token);
       login();
@@ -119,7 +119,12 @@ export default function Header({
               <div className="w-3 h-3 rounded-[50%] bg-red-500 absolute bottom-0 right-0"></div>
             )}
             {/* 알림창 보여줘야한다면 처리 */}
-            {showNoti && <Notification closeNoti={showNotiHandler} />}
+            {showNoti && (
+              <Notification
+                closeNoti={showNotiHandler}
+                notificationArray={notificationArray}
+              />
+            )}
           </div>
 
           <UserProfile

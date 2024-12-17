@@ -32,18 +32,7 @@ export default function NotificationBox({
           <article className="text-xs font-bold">
             {fullname} 님께서 회원님을 팔로우합니다!
           </article>
-          <div className="flex items-center w-full mt-1">
-            <button
-              className="w-[60px] h-[30px] rounded-[10px] bg-blue-500 
-        text-white flex justify-center items-center cursor-pointer font-bold`,
-        "
-              onClick={() => {
-                alert("팔로우 기능 구현 예정!");
-              }}
-            >
-              Follow
-            </button>
-          </div>
+          <div className="flex items-center w-full mt-1"></div>
         </div>
       )}
       {notificationType === "comment" && (

@@ -3,7 +3,7 @@ import FollowButton from "../FollowButton";
 import UserProfile from "../UserProfile";
 import { updateNameFn } from "../../utils/updateName";
 import { useLoadingStore } from "../../stores/loadingStore";
-import { Following } from "../../stores/authStore";
+import { Following, useAuth } from "../../stores/authStore";
 
 interface UserCardType {
   uname: string;
@@ -35,9 +35,12 @@ export default function UserCard({
   const [disabled, setDisabled] = useState(true);
   const [updateName, setUpdateName] = useState(uname);
 
-  // 로딩중
-  const startLoading = useLoadingStore((state) => state.startLoading);
-  const stopLoading = useLoadingStore((state) => state.stopLoading);
+  const myInfo = useAuth((state) => state.user);
+  const setMyInfo = useAuth((state) => state.setUser);
+
+  // 로딩중 로딩 시간이 너무 짧아서 고민중
+  // const startLoading = useLoadingStore((state) => state.startLoading);
+  // const stopLoading = useLoadingStore((state) => state.stopLoading);
 
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -45,13 +48,16 @@ export default function UserCard({
     setDisabled(true);
     if (updateName === uname) return;
     try {
-      startLoading();
+      // startLoading();
       const response = await updateNameFn(e.target.value);
+      if (response) {
+        setMyInfo({ ...myInfo, fullName: response.data.fullName });
+      }
       console.log(response);
     } catch (error) {
       console.log(error);
     } finally {
-      stopLoading();
+      // stopLoading();
     }
   };
 
@@ -61,15 +67,17 @@ export default function UserCard({
     if (e.key === "Enter") {
       setDisabled(true);
       try {
-        startLoading();
+        // startLoading();
         const response = await updateNameFn(updateName);
         console.log(response);
         inputRef.current?.blur();
-        window.location.reload();
+        if (response) {
+          setMyInfo({ ...myInfo, fullName: response.data.fullName });
+        }
       } catch (error) {
         console.log(error);
       } finally {
-        stopLoading();
+        // stopLoading();
       }
     }
   };

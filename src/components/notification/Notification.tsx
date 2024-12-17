@@ -1,19 +1,59 @@
 import ButtonComponent from "../ButtonComponent";
 import likeIcon from "../../assets/noti_like_Icon.svg";
 import followIcon from "../../assets/noti_follow_Icon.svg";
-import messageIcon from "../../assets/noti_message_icon.svg";
+import commentIcon from "../../assets/icons/Comment_Icon.svg";
 import NotificationBox from "../NotificationBox";
+import { api } from "../../api/axios";
+import { AxiosError } from "axios";
+import { useState } from "react";
 
 interface notificationProps {
   closeNoti: () => void;
+  notificationArray?: any;
   //   notification: [number, number, number];
 }
 
 // 여기에 좋아요, 팔로우, 메세지 갯수 받아서 사용
 const notification = [100, 1, 17];
 
+// const [notificationArrayAsync, setNotificationArrayAsync] = useState({
+//   fullname: "",
+//   image: "",
+//   type: "",
+//   email: "",
+// });
+
+// const notificationChangeHandler = (data: object) => {
+//   setNotificationArrayAsync({
+//     fullname: "",
+//     image: "",
+//     type: "",
+//     email: "",
+//   });
+// };
+
 // API보고 notificationArray 받아서 처리하자
-export default function Notification({ closeNoti }: notificationProps) {
+export default function Notification({
+  closeNoti,
+  notificationArray,
+}: notificationProps) {
+  const notificationSeen = async () => {
+    try {
+      const { status, data } = await api.put("/notifications/seen");
+      console.log(data);
+      showNotiListHandler();
+    } catch (error) {
+      console.log(error);
+      if ((error as AxiosError).response?.status === 400) {
+        alert("아이디나 비밀번호가 틀립니다.");
+      }
+    }
+  };
+  const [showNotiList, setShowNotiList] = useState(true);
+  const showNotiListHandler = () => {
+    setShowNotiList(false);
+    console.log(showNotiList);
+  };
   return (
     <div>
       <div className="absolute z-10 top-[32px] right-[80px] mt-2 w-[280px]  p-[18px] rounded-[10px] ">
@@ -29,10 +69,10 @@ export default function Notification({ closeNoti }: notificationProps) {
             <div className="sticky top-0 bg-white z-10">
               <div className="flex justify-between items-center w-full px-4 relative ">
                 <img
-                  src={messageIcon}
+                  src={commentIcon}
                   className="relative"
                   onClick={() => {
-                    console.log("message");
+                    console.log("comment");
                   }}
                 />
                 {notification[2] != 0 && (
@@ -71,38 +111,18 @@ export default function Notification({ closeNoti }: notificationProps) {
             {/* 여기까지 */}
             {/* 바디부분 길이 초과시 스크롤나게 */}
             <div className="w-full overflow-y-auto max-h-[330px] scrollbar-none">
-              <div className="">
-                <NotificationBox
-                  fullname="정완"
-                  userid="wjw1469"
-                  notificationType="comment"
-                />
-                <NotificationBox
-                  fullname="수영"
-                  userid="wjw1469"
-                  notificationType="comment"
-                />
-                <NotificationBox
-                  fullname="규혁"
-                  userid="wjw1469"
-                  notificationType="follow"
-                />
-                <NotificationBox
-                  fullname="윤지"
-                  userid="wjw1469"
-                  notificationType="follow"
-                />
-                <NotificationBox
-                  fullname="송원"
-                  userid="wjw1469"
-                  notificationType="message"
-                />
-                <NotificationBox
-                  fullname="정인"
-                  userid="wjw1469"
-                  notificationType="follow"
-                />
-              </div>
+              {notificationArray.length && showNotiList ? (
+                notificationArray.map((notification) => (
+                  <NotificationBox
+                    fullname={notification.author.fullName}
+                    userid={notification.author.email}
+                    image={""}
+                    notificationType={"follow"}
+                  ></NotificationBox>
+                ))
+              ) : (
+                <p>알림이 없습니다</p>
+              )}
             </div>
             {/* 여기까지 */}
             {/* 푸터부분 */}
@@ -113,7 +133,7 @@ export default function Notification({ closeNoti }: notificationProps) {
                   textcolor="text-[#265CAC]"
                   onClick={() => {
                     // Todo 모두읽기 기능 구현
-                    console.log(1111);
+                    notificationSeen();
                   }}
                 >
                   {"모두읽기"}
