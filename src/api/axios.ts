@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useToken } from "../stores/toeknStore";
+import { useToken } from "../stores/tokenStore";
 
 export const api = axios.create({
   baseURL: "https://5th.fe.dev-cos.com:5008",

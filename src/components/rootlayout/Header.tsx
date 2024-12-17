@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 import { api } from "../../api/axios";
 import { AxiosError } from "axios";
 import Notification from "../notification/Notification";
-import { useToken } from "../../stores/toeknStore";
+import { useToken } from "../../stores/tokenStore";
 import ModeChange from "../button/ModeChange";
 import bars from "../../assets/icons/bars.svg";
 import close from "../../assets/icons/close-icon.svg";
