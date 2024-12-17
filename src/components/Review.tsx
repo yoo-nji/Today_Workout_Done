@@ -66,8 +66,10 @@ export default function Review({
               userImg={userImg ? userImg : author?.image}
             />
             <div className="flex flex-col">
-              <div className="">{author ? author.fullName : fullName}</div>
-              <div className="">{date}</div>
+              <div className="text-base font-medium">
+                {author ? author.fullName : fullName}
+              </div>
+              <div className="text-sm font-light">{date}</div>
             </div>
           </div>
         </div>
