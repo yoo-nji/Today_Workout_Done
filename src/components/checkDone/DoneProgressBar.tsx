@@ -1,5 +1,6 @@
 import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
+import { useDarkModeStore } from "../../stores/darkModeStore";
 
 interface DoneProgressBar {
   checkNumber: number;
@@ -19,6 +20,10 @@ export default function DoneProgressBar({
   // 해당 월의 게시글을 작성한 평균
   const percent = (checkNumber / lastDate) * 100;
 
+  const isDark = useDarkModeStore((state) => state.isDark);
+
+  const textFill = isDark ? "#6FBEFF" : "#265CAC";
+
   return (
     <div className={`${width ? width : "w-[110px]"}`}>
       <CircularProgressbar
@@ -34,7 +39,7 @@ export default function DoneProgressBar({
             stroke: "#ececec",
           },
           text: {
-            fill: "#265CAC",
+            fill: textFill,
           },
         }}
       />
