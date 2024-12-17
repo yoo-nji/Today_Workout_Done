@@ -9,6 +9,7 @@ import { usesidebarToggleStore } from "../../stores/sideberToggleStore";
 import Lottie from "react-lottie-player";
 import lottieJson from "../../assets/lottie/loading-b.json";
 import { twMerge } from "tailwind-merge";
+import { useDarkModeStore } from "../../stores/darkModeStore";
 
 interface UserListModalType {
   handleBackClick: (e: React.MouseEvent<HTMLDivElement>) => void;
@@ -19,6 +20,9 @@ export default function UserListModal({
   handleBackClick,
   setIsOpen,
 }: UserListModalType) {
+  // 다크모드
+  const isDark = useDarkModeStore((state) => state.isDark);
+
   // 토글 상태
   const isToggle = usesidebarToggleStore((state) => state.isToggle);
 
@@ -94,7 +98,7 @@ export default function UserListModal({
         isToggle ? `left-[290px]` : "left-[90px]"
       }
       before:modal-before  scrollbar-none flex flex-col justify-start items-center
-      gap-10 py-8 z-30`}
+      gap-10 py-8 z-30 dark:bg-black`}
         onClick={(e) => {
           e.stopPropagation();
         }}
