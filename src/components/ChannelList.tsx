@@ -24,14 +24,18 @@ export default function ChannelList({
         <li
           className={twMerge(
             "w-full border-l-4",
-            isActive ? "border-[#265CAC]" : "border-transparent"
+            isActive
+              ? "border-[#265CAC] dark:border-[#6FBEFF]"
+              : "border-transparent"
           )}
         >
           <div
             className={twMerge(
               `flex items-center gap-[10px] w-full h-[45px] pl-6  text-base font-normal rounded-lg ${
-                isActive ? "bg-[#E8F3FC]" : "bg-[#FEFEFE]"
-              } hover:bg-[#EAEAEA] transition cursor-pointer`,
+                isActive
+                  ? "bg-[#E8F3FC] dark:bg-[#6fbeff2c]"
+                  : "bg-[#FEFEFE] dark:bg-[#1A1A1A]"
+              } hover:bg-[#EAEAEA] dark:hover:bg-[#4f4f4f] transition cursor-pointer dark:text-[#fff]`,
               toggleStyle // 토글 스타일 지정
             )}
           >
