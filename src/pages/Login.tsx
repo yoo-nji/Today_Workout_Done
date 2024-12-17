@@ -5,7 +5,7 @@ import { twMerge } from "tailwind-merge";
 import { useAuth } from "../stores/authStore";
 import { api } from "../api/axios";
 import { AxiosError } from "axios";
-import { useToken } from "../stores/toeknStore";
+import { useToken } from "../stores/tokenStore";
 import ConfirmModal from "../components/modal/ConfirmModal";
 
 export default function Login() {
