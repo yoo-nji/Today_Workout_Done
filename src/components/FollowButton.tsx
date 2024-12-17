@@ -8,18 +8,12 @@ export default function FollowButton({
   height,
   rounded,
   userid,
-  followingList,
-  setFollowingList,
   setUserFollowers,
 }: {
   width: string;
   height: string;
   rounded: string;
   userid: string;
-  followingList: Following[] | undefined;
-  setFollowingList: React.Dispatch<
-    React.SetStateAction<Following[] | undefined>
-  >;
   setUserFollowers: React.Dispatch<React.SetStateAction<number>>;
 }) {
   const myInfo = useAuth((state) => state.user);

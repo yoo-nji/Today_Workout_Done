@@ -5,6 +5,7 @@ import home from "../assets/icons/home_icon.svg";
 import { useRef } from "react";
 import { updateUserImg } from "../utils/updateUserImg";
 import { useLoadingStore } from "../stores/loadingStore";
+import { useAuth } from "../stores/authStore";
 
 export default function UserProfile({
   edit,
@@ -21,6 +22,10 @@ export default function UserProfile({
   const startLoading = useLoadingStore((state) => state.startLoading);
   const stopLoading = useLoadingStore((state) => state.stopLoading);
 
+  // 내 정보
+  const myInfo = useAuth((state) => state.user);
+  const setMyInfo = useAuth((state) => state.setUser);
+
   const handleImgUpdate = async () => {
     if (!imgRef.current || !imgRef.current.files) return;
 
@@ -33,8 +38,9 @@ export default function UserProfile({
     try {
       startLoading();
       const response = await updateUserImg(formData);
-      console.log(response);
-      window.location.reload();
+      if (response) {
+        setMyInfo({ ...response.data });
+      }
     } catch (error) {
       console.log(error);
     } finally {
