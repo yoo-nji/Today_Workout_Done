@@ -13,8 +13,8 @@ export default function FollowButton({
   width: string;
   height: string;
   rounded: string;
-  userid: string;
-  setUserFollowers: React.Dispatch<React.SetStateAction<number>>;
+  userid?: string;
+  setUserFollowers?: React.Dispatch<React.SetStateAction<number>>;
 }) {
   const myInfo = useAuth((state) => state.user);
   const setUser = useAuth((state) => state.setUser);
@@ -42,7 +42,9 @@ export default function FollowButton({
           //팔로우
           const data = await follow(userId);
           console.log(data);
-          setUserFollowers((prev) => prev + 1);
+          if (setUserFollowers) {
+            setUserFollowers((prev) => prev + 1);
+          }
           setUser({
             ...myInfo,
             following: [...(myInfo?.following || []), data],
@@ -57,7 +59,9 @@ export default function FollowButton({
           if (!targetFollowing) return;
 
           await unfollow(targetFollowing._id);
-          setUserFollowers((prev) => prev - 1);
+          if (setUserFollowers) {
+            setUserFollowers((prev) => prev - 1);
+          }
           // 전역 상태 업데이트
           setUser({
             ...myInfo,
@@ -77,7 +81,9 @@ export default function FollowButton({
   return (
     <button
       onClick={() => {
-        handleFollow(userid);
+        if (userid) {
+          handleFollow(userid);
+        }
       }}
       className={twMerge(
         "bg-[#265CAC] hover:bg-[#1e4d8a] text-white flex justify-center items-center text-sm cursor-pointer",

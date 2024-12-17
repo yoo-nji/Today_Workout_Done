@@ -23,7 +23,6 @@ export default function UserProfile({
   const stopLoading = useLoadingStore((state) => state.stopLoading);
 
   // 내 정보
-  const myInfo = useAuth((state) => state.user);
   const setMyInfo = useAuth((state) => state.setUser);
 
   const handleImgUpdate = async () => {
