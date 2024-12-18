@@ -26,6 +26,7 @@ import darkGymLogo from "../../assets/darkicons/darkGymLogo.svg";
 // import darkLeft from "../../assets/darkicons/darkLeft.svg";
 import darkLeft from "../../assets/darkicons/darkLeftIcon.svg";
 import darkRight from "../../assets/darkicons/darkRightIcon.svg";
+import darkUserListIcon from "../../assets/darkicons/darkUserListIcon.svg";
 
 export default function Sidebar() {
   const isDark = useDarkModeStore((state) => state.isDark);
@@ -97,7 +98,7 @@ export default function Sidebar() {
       className={twMerge(
         `flex flex-col items-center gap-1 h-[100vh] z-10
       py-5 text-[#1D1D1D] bg-[#FEFEFE] border-r
-      border-gray-200/50 fixed transition-all dark:bg-[#2C2C2C] `,
+      border-gray-200/50 fixed transition-all dark:bg-[#2C2C2C] dark:border-darkGreyDark`,
         isOpen ? (!isDark ? "before:modal-back" : "before:darkModal-back") : "",
         isToggle ? "w-[300px]" : "w-20"
       )}
@@ -163,7 +164,7 @@ export default function Sidebar() {
         <CheckDone textSize="text-[16px]" width="w-[65px]" />
       ) : null}
 
-      <div className="flex flex-col justify-between w-full h-full border-t">
+      <div className="flex flex-col justify-between w-full h-full border-t dark:border-darkGreyDark">
         {/* 채널목록 */}
         <div className="w-full">
           <ul className="flex flex-col w-full gap-2 p-1">
@@ -200,7 +201,7 @@ export default function Sidebar() {
             </button>
             <button className={twMerge("mt-6", isToggle && "hidden")}>
               <img
-                src={user}
+                src={!isDark ? user : darkUserListIcon}
                 alt="유저아이콘"
                 className={twMerge("self-center m-auto")}
                 onClick={(e) => {
