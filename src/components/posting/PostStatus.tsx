@@ -15,6 +15,9 @@ export default function PostStatus({
   desc,
   channel,
 }: PostStatusProps) {
+  const isTitleValid = title.trim() !== "";
+  const isDescValid = desc.trim() !== "";
+
   return (
     <div className="w-[250px] h-[45px] flex items-center justify-between border-t border-[#c1c1c1] mt-3">
       {/* 아이콘 */}
@@ -23,7 +26,7 @@ export default function PostStatus({
       >
         <div
           className={`w-[45px] h-[45px] rounded-[50%] ${
-            img ? "bg-[#1d8a1d] " : "bg-[#c1c1c1] "
+            img ? "bg-[#4CAF50] " : "bg-[#c1c1c1] "
           } flex justify-center items-center `}
         >
           <img
@@ -34,7 +37,7 @@ export default function PostStatus({
         </div>
         <p
           className={`${
-            img ? "text-[#1d8a1d] " : "text-[#c1c1c1] "
+            img ? "text-[#4CAF50] " : "text-[#c1c1c1] "
           } text-center leading-[16px]`}
         >
           이미지 등록
@@ -46,7 +49,7 @@ export default function PostStatus({
       >
         <div
           className={`w-[45px] h-[45px] rounded-[50%] ${
-            channel !== "게시판 선택" ? "bg-[#1d8a1d]" : "bg-[#c1c1c1]"
+            channel !== "게시판 선택" ? "bg-[#4CAF50]" : "bg-[#c1c1c1]"
           } flex justify-center items-center`}
         >
           <img
@@ -57,7 +60,7 @@ export default function PostStatus({
         </div>
         <p
           className={`${
-            channel !== "게시판 선택" ? "text-[#1d8a1d]" : "text-[#c1c1c1]"
+            channel !== "게시판 선택" ? "text-[#4CAF50]" : "text-[#c1c1c1]"
           } text-center leading-[16px]`}
         >
           게시판 선택
@@ -69,7 +72,7 @@ export default function PostStatus({
       >
         <div
           className={`w-[45px] h-[45px] rounded-[50%] ${
-            title && desc ? "bg-[#1d8a1d] " : "bg-[#c1c1c1] "
+            isTitleValid && isDescValid ? "bg-[#4CAF50] " : "bg-[#c1c1c1] "
           } flex justify-center items-center`}
         >
           <img
@@ -80,7 +83,7 @@ export default function PostStatus({
         </div>
         <p
           className={`${
-            title && desc ? "text-[#1d8a1d]" : "text-[#c1c1c1]"
+            isTitleValid && isDescValid ? "text-[#4CAF50]" : "text-[#c1c1c1]"
           } text-center leading-[16px]`}
         >
           내용 작성
