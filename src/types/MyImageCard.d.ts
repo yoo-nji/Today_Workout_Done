@@ -1,6 +1,4 @@
 interface MyImageCardType {
-  image: string;
-  title: string;
   likes: {
     _id: string;
     user: string;
@@ -10,7 +8,20 @@ interface MyImageCardType {
     __v: number;
   }[];
   comments: string[];
-  createdAt: string;
+  _id?: string;
+  title: string;
+  image: string;
+  imagePublicId?: string;
+  channel?: {
+    authRequired: boolean;
+    posts: string[];
+    _id: string;
+    name: string;
+    description: string;
+    createdAt: string;
+    updatedAt: string;
+    __v: number;
+  };
   author?: {
     role: string;
     emailVerified: boolean;
@@ -34,8 +45,13 @@ interface MyImageCardType {
     image?: string;
     imagePublicId?: string;
   };
+  createdAt: string;
+  updatedAt?: string;
+  __v?: number;
+}
+
+interface MyInfo {
   fullName?: string;
-  userImg?: string; // 마이페이지, 로그인 한 유저의 사진
-  _id: string;
-  channel: string;
+  userImg?: string;
+  myLike?: (string | null)[];
 }
