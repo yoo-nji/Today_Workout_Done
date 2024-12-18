@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { api } from "../api/axios";
 import UserInfoCard from "../components/User/UserInfoCard";
 import MyImageCard from "../components/MyImageCard";
+import ImageCard from "../components/ImageCard";
 
 export default function User() {
   const { user_id } = useParams();
@@ -43,7 +44,7 @@ export default function User() {
                     <div className="flex items-center justify-center">
                       <div className="grid gap-8 2xl:grid-cols-4 xl:grid-cols-3 lg:grid-cols-2">
                         {user.posts?.map((post) => (
-                          <MyImageCard
+                          <ImageCard
                             key={post._id}
                             image={post.image}
                             comments={post.comments}

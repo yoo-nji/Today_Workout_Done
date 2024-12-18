@@ -52,9 +52,13 @@ export default function ImageCard({
     navigate(`/user/${userid}`);
   };
 
-  const channelName = Object.keys(channelMapping).find(
-    (key) => channelMapping[key] === channel?._id
-  );
+  const channelName = Object.keys(channelMapping).find((key) => {
+    if (typeof channel === "string") {
+      return channelMapping[key] === channel;
+    } else {
+      return channelMapping[key] === channel?._id;
+    }
+  });
 
   // 본인 좋아요 확인
   const checkIsLiked = likes.some((like) => like.user === myInfo?._id);

@@ -12,16 +12,18 @@ interface PostType {
   title: string;
   image: string;
   imagePublicId?: string;
-  channel?: {
-    authRequired: boolean;
-    posts: string[];
-    _id: string;
-    name: string;
-    description: string;
-    createdAt: string;
-    updatedAt: string;
-    __v: number;
-  };
+  channel?:
+    | {
+        authRequired: boolean;
+        posts: string[];
+        _id: string;
+        name: string;
+        description: string;
+        createdAt: string;
+        updatedAt: string;
+        __v: number;
+      }
+    | string;
   author?: {
     role: string;
     emailVerified: boolean;
