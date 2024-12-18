@@ -61,7 +61,7 @@ export default function CommentBox({
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         onConfirm={() => handleDelete(comment._id)}
-        message={"이 게시글을 정말 삭제하시겠습니까?"}
+        message={"이 댓글을 정말 삭제하시겠습니까?"}
       />
     </div>
   );
