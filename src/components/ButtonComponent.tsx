@@ -7,19 +7,21 @@ const ButtonComponent: React.FC<ButtonComponent> = ({
   textcolor,
   children,
   onClick,
+  disabled,
+  disabledBgColor,
 }) => {
   let bordercolorExport: string | undefined;
   if (bgcolor === "bg-white") {
     bordercolorExport = textcolor?.replace("text-", "border-");
   }
-
   return (
     <button
       onClick={onClick}
       className={twMerge(
-        `w-[120px] h-[36px] rounded-[10px] ${bgcolor} 
-        ${textcolor} flex justify-center items-center cursor-pointer font-bold`,
-        bgcolor === "bg-white" && `border-solid border ${bordercolorExport}`
+        `w-[120px] h-[36px] rounded-[10px] flex justify-center items-center font-bold cursor-pointer`,
+        bgcolor === "bg-white" && `border-solid border ${bordercolorExport}`,
+        disabled ? disabledBgColor : bgcolor,
+        textcolor
       )}
     >
       {children}
