@@ -131,7 +131,10 @@ export default function Home() {
   }, [searchTerm]);
 
   return (
-    <div className="relative flex flex-col gap-10 py-8">
+    <div
+      className="relative flex flex-col gap-10 py-8 dark:bg-lightBlackDark"
+      style={{ minHeight: "calc(100vh - 70px)" }}
+    >
       {/* 로딩창 */}
       <Loading />
 
