@@ -7,6 +7,7 @@ import { channelMapping } from "../../constants/channel";
 import thumbnail from "../../assets/images/feed_thumbnail.jpg";
 import { useLoadingStore } from "../../stores/loadingStore";
 import ConfirmModal from "../modal/ConfirmModal";
+import moment from "moment";
 
 interface PostInfoProps {
   title: string;
@@ -53,6 +54,11 @@ export default function PostInfo({
   const startLoading = useLoadingStore((state) => state.startLoading);
   const stopLoading = useLoadingStore((state) => state.stopLoading);
 
+  // 날짜 형식
+  const update = moment(createdAt); // moment로 변환
+  const formattedDate = update.format("YYYY.MM.DD"); // 원하는 형식으로 포맷팅
+
+  // 게시물 수정시 내용textarea 높이 조정 함수
   const handleInput = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     if (textarea.current) {
       textarea.current.style.height = "auto"; // 높이 초기화
@@ -148,15 +154,7 @@ export default function PostInfo({
     }
   }, [edit]);
 
-  // Date 객체로 변환
-  const date = new Date(createdAt);
-  // 원하는 포맷으로 변환
-  const formattedDate = `${date.getFullYear()}.${(date.getMonth() + 1)
-    .toString()
-    .padStart(2, "0")}.${date.getDate().toString().padStart(2, "0")}`;
-
   // 게시판 이름
-
   const channel = Object.keys(channelMapping).find(
     (key) => channelMapping[key] === channelId
   );

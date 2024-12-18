@@ -5,6 +5,7 @@ import { useAuth } from "../../stores/authStore";
 import { useNavigate } from "react-router";
 import ConfirmModal from "../modal/ConfirmModal";
 import { useState } from "react";
+import moment from "moment";
 
 export default function CommentBox({
   comment,
@@ -18,12 +19,8 @@ export default function CommentBox({
   const navigate = useNavigate();
 
   //날짜 포맷
-  const update = new Date(comment.createdAt);
-  // 연도, 월, 일 추출
-  const year = update.getFullYear();
-  const month = update.getMonth() + 1;
-  const day = update.getDate();
-  const formattedDate = `${year}년 ${month}월 ${day}일`;
+  const update = moment(comment.createdAt); // moment로 변환
+  const formattedDate = update.format("YYYY.MM.DD"); // 원하는 형식으로 포맷팅
 
   // 모달창 제어
   const [isModalOpen, setIsModalOpen] = useState(false);
