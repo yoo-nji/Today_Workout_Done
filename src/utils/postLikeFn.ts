@@ -5,7 +5,9 @@ export const addPostLike = async (postId: string, postAuthorId: string) => {
   try {
     const { data } = await api.post("/likes/create", { postId });
 
-    await createNotification("LIKE", data._id, postAuthorId, postId);
+    if (data.user != postAuthorId) {
+      await createNotification("LIKE", data.user, postAuthorId, postId);
+    }
     return data;
   } catch (err) {
     console.log(err);
