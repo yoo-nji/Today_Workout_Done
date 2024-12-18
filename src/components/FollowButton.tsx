@@ -86,13 +86,13 @@ export default function FollowButton({
         }
       }}
       className={twMerge(
-        "bg-[#265CAC] hover:bg-[#1e4d8a] text-white flex justify-center items-center text-sm cursor-pointer",
+        "bg-[#265CAC] hover:bg-[#1e4d8a] text-white dark:text-[#000] flex justify-center items-center text-sm cursor-pointer",
         width,
         height,
         rounded,
         isFollowing
-          ? "bg-[#646464] hover:bg-[#4b4b4b]"
-          : "bg-[#265CAC] hover:bg-[#1e4d8a]"
+          ? "bg-[#646464] dark:bg-[#8e8e8e] hover:bg-[#4b4b4b] dark:hover:bg-[#7e7e7e]"
+          : "bg-[#265CAC] dark:bg-[#81B4DD] hover:bg-[#1e4d8a] dark:hover:bg-[#77a5cb]"
       )}
     >
       {isFollowing ? "팔로잉" : "팔로우"}
