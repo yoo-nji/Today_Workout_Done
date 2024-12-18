@@ -38,6 +38,21 @@ export default function CommentForm({
   const loginId = useAuth((state) => state.isLoggedIn);
   // console.log(loginId);
 
+  const commentHandler = () => {
+    // 로그인 안했을 때
+    if (!loginId) return alert("로그인 후 이용하실 수 있습니다");
+
+    // 공백만 적었을 때
+    if (!newComment.trim()) {
+      alert("내용을 입력해주세요");
+      // 다시 초기화 해주기
+      setNewComment("");
+      return;
+    }
+
+    handleCommentSubmit(newComment.trim());
+  };
+
   return (
     <div className="">
       {/* 좋아요 이모티콘 댓글 이모티콘 area */}
@@ -63,7 +78,7 @@ export default function CommentForm({
       </div>
 
       {/* 댓글작성 */}
-      <form onSubmit={(e) => e.preventDefault()}>
+      <div>
         <textarea
           ref={commentinputRef}
           className="mt-3 mb-1 h-[100px] px-4 py-3 text-sm border-2 rounded-[6px] w-full resize-none focus:outline-none"
@@ -86,18 +101,16 @@ export default function CommentForm({
           </div>
 
           <ButtonComponent
-            onClick={
-              loginId
-                ? () => handleCommentSubmit(newComment)
-                : () => alert("로그인 후 이용하실 수 있습니다")
-            } // 로그인 상태에 따라 동작
+            onClick={commentHandler} // 로그인 상태에 따라 동작
             bgcolor="bg-[#265CAC]"
+            disabledBgColor="bg-[#4772b2a5]"
             textcolor="text-[white]"
+            disabled={!newComment}
           >
             {"댓글 작성"}
           </ButtonComponent>
         </div>
-      </form>
+      </div>
     </div>
   );
 }
