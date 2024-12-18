@@ -23,8 +23,9 @@ import darkDumbellLogo from "../../assets/darkicons/darkCheckLogo.svg";
 import darkProteinLogo from "../../assets/darkicons/darkProteinLogo.svg";
 import darkRoutineLogo from "../../assets/darkicons/darkRoutineLogo.svg";
 import darkGymLogo from "../../assets/darkicons/darkGymLogo.svg";
-import darkLeft from "../../assets/darkicons/darkLeft.svg";
-import darkRight from "../../assets/darkicons/darkRight.svg";
+// import darkLeft from "../../assets/darkicons/darkLeft.svg";
+import darkLeft from "../../assets/darkicons/darkLeftIcon.svg";
+import darkRight from "../../assets/darkicons/darkRightIcon.svg";
 
 export default function Sidebar() {
   const isDark = useDarkModeStore((state) => state.isDark);
@@ -96,8 +97,8 @@ export default function Sidebar() {
       className={twMerge(
         `flex flex-col items-center gap-1 h-[100vh] z-10
       py-5 text-[#1D1D1D] bg-[#FEFEFE] border-r
-      border-gray-200/50 fixed transition-all dark:bg-[#1A1A1A] `,
-        isOpen ? "before:modal-back" : "",
+      border-gray-200/50 fixed transition-all dark:bg-[#2C2C2C] `,
+        isOpen ? (!isDark ? "before:modal-back" : "before:darkModal-back") : "",
         isToggle ? "w-[300px]" : "w-20"
       )}
       onClick={(e) => handleBackClick(e)}
