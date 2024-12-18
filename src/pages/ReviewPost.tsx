@@ -3,14 +3,17 @@ import { api } from "../api/axios";
 import SearchBar from "../components/SearchBar";
 import Review from "../components/Review";
 import { useLocation } from "react-router";
+import { channelMapping } from "../constants/channel";
+import { useLoadingStore } from "../stores/loadingStore";
+import Loading from "../components/Loading";
 
 export default function ReviewPost() {
+  // 로딩 관리
+  const startLoading = useLoadingStore((state) => state.startLoading);
+  const stopLoading = useLoadingStore((state) => state.stopLoading);
+
   const location = useLocation();
   const channelRoute = location.pathname.split("/")[1];
-  const route: { [key: string]: string } = {
-    gymreview: "675a2ddc0d335f0ddae3a190",
-  };
-
   // 상태
   const [status, setStatus] = useState<"idle" | "loading" | "searching">(
     "idle"
@@ -18,57 +21,46 @@ export default function ReviewPost() {
 
   // 게시글
   const [posts, setPosts] = useState<PostType[]>([]);
-
   // 검색 게시글
   const [searchTerm, setSearchTerm] = useState<string>("");
   // 검색 게시글  저장
   const [searchPosts, setSearchPosts] = useState<PostType[]>([]);
 
   // 초기 렌더링
-
   const getChannelPost = async () => {
-    setStatus("loading");
     try {
-      const { data } = await api.get(`/posts/channel/${route[channelRoute]}`);
-      if (data.length === 0) {
-        console.log("등록된 게시물이 없습니다.");
-      }
+      startLoading();
+      const { data } = await api.get(
+        `/posts/channel/${channelMapping[channelRoute]}`
+      );
       setPosts(data);
     } catch (err) {
       console.log(err);
     } finally {
-      setStatus("idle");
+      stopLoading();
     }
   };
 
   useEffect(() => {
-    if (!location) return;
     getChannelPost();
-  }, [location]);
+  }, []);
 
   // 검색 디바운스 처리
   useEffect(() => {
+    // 검색어가 없으면 초기화
     if (!searchTerm) {
       setStatus("idle");
       setSearchPosts([]);
       return;
     }
-    const searchDebounce = setTimeout(async () => {
+    // 디바운스 적용
+    const searchDebounce = setTimeout(() => {
       setStatus("searching");
-      if (searchTerm.length > 0) {
-        try {
-          setStatus("loading");
-          setSearchPosts(
-            posts.filter((post) =>
-              post.title.toLowerCase().includes(searchTerm.toLowerCase())
-            )
-          );
-        } catch (err) {
-          console.log(err);
-        } finally {
-          setStatus("searching");
-        }
-      }
+      setSearchPosts(
+        posts.filter((post) =>
+          post.title.toLowerCase().includes(searchTerm.toLowerCase())
+        )
+      );
     }, 1200);
 
     return () => {
@@ -77,8 +69,11 @@ export default function ReviewPost() {
   }, [searchTerm]);
 
   return (
-    <div className="flex flex-col items-center gap-16 mt-8">
-      <div className="flex flex-col items-center gap-[30px] w-full px-4">
+    <div className="relative flex flex-col items-center gap-8 py-8">
+      {/* 로딩창 */}
+      <Loading />
+      {/* 검색창 */}
+      <div className="flex justify-center w-full">
         <SearchBar
           placeholder="검색어를 입력해 주세요"
           value={searchTerm}
@@ -87,24 +82,20 @@ export default function ReviewPost() {
         />
       </div>
       {/* 피드 게시물 */}
-      <div className="flex items-center mt-8">
-        <div>
-          {status === "loading" && <p>로딩중..</p>}
+      <div className="flex flex-col items-center gap-8 mt-8">
+        {status === "searching" &&
+          (searchPosts.length ? (
+            searchPosts.map((post) => <Review key={post._id} {...post} />)
+          ) : (
+            <p>검색 결과가 없습니다.</p>
+          ))}
 
-          {status === "searching" &&
-            (searchPosts.length ? (
-              searchPosts.map((post) => <Review key={post._id} {...post} />)
-            ) : (
-              <p>검색 결과가 없습니다.</p>
-            ))}
-
-          {status === "idle" &&
-            (posts.length ? (
-              posts.map((post) => <Review key={post._id} {...post} />)
-            ) : (
-              <p>로딩중...</p>
-            ))}
-        </div>
+        {status === "idle" &&
+          (posts.length ? (
+            posts.map((post) => <Review key={post._id} {...post} />)
+          ) : (
+            <p>로딩중...</p>
+          ))}
       </div>
     </div>
   );
