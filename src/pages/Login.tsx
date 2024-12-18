@@ -7,6 +7,8 @@ import { api } from "../api/axios";
 import { AxiosError } from "axios";
 import { useToken } from "../stores/tokenStore";
 import ConfirmModal from "../components/modal/ConfirmModal";
+import { useDarkModeStore } from "../stores/darkModeStore";
+import darkMainLogo from "../assets/darkicons/darkMainLogo.svg";
 
 export default function Login() {
   const login = useAuth((state) => state.login);
@@ -71,16 +73,23 @@ export default function Login() {
 
   const isFormValid = email && password && emailError === "";
 
+  const isDark = useDarkModeStore((state) => state.isDark);
+
   return (
     <>
       <form
-        className="px-[50px] w-[400px] h-[500px] rounded-[20px] bg-[#FFFFFF]"
+        className="px-[50px] w-[400px] h-[500px] rounded-[20px] bg-[#FFFFFF] dark:bg-blackDark"
         onSubmit={handleSubmit}
       >
         {/* 로고 */}
-        <img src={logoImg} className="pt-[50px] block mx-auto " />
+        <img
+          src={!isDark ? logoImg : darkMainLogo}
+          className="pt-[50px] block mx-auto "
+        />
         {/* 제목 */}
-        <p className="text-center text-[20px] mt-[20px] font-jua ">로그인</p>
+        <p className="text-center text-[20px] mt-[20px] font-jua text-black dark:text-white">
+          로그인
+        </p>
 
         {/* 아이디 입력 필드 */}
         <input
@@ -89,7 +98,7 @@ export default function Login() {
           value={email}
           onChange={handleEmailChange}
           className={twMerge(
-            `w-full h-[40px] mb-[10px] py-auto pl-[15px] border border-[#C2C2C2] rounded-[10px] placeholder-[#B6B6B6] text-[18px] font-jua ${
+            `w-full h-[40px] mb-[10px] py-auto pl-[15px] bg-white dark:bg-darkGreyDark border border-[#C2C2C2] dark:border-greyDark rounded-[10px] placeholder-[#B6B6B6] dark:placeholder-semiDarkGreyDark text-[18px] font-jua ${
               email
                 ? "text-[#265CAC] border-[#265CAC] border-[2px] font-ibm font-bold text-[16px]"
                 : "text-gray-400"
@@ -103,7 +112,7 @@ export default function Login() {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           className={twMerge(
-            `w-full h-[40px] mb-[10px] py-auto pl-[15px] border border-[#C2C2C2] rounded-[10px] placeholder-[#B6B6B6] text-[18px] font-jua ${
+            `w-full h-[40px] mb-[10px] py-auto pl-[15px] bg-white dark:bg-darkGreyDark border border-[#C2C2C2] dark:border-greyDark rounded-[10px] placeholder-[#B6B6B6] dark:placeholder-semiDarkGreyDark text-[18px] font-jua ${
               password
                 ? "text-[#265CAC] border-[#265CAC] border-[2px] text-[16px]"
                 : "text-gray-400"
@@ -112,7 +121,7 @@ export default function Login() {
         />
         {/* 아이디 오류 메시지 출력 */}
         {emailError && (
-          <p className="ml-[15px] mb-[10px] text-red-500 text-[13px] font-dohyeon ">
+          <p className="ml-[15px] mb-[10px] text-red-500 dark:text-pinkDark text-[13px] font-dohyeon ">
             {emailError}
           </p>
         )}
@@ -120,7 +129,7 @@ export default function Login() {
         {/* 로그인 버튼 */}
         <button
           className={twMerge(
-            `w-full py-[5px] rounded-[20px] bg-[#265CAC] text-white text-[15px] font-jua`,
+            `w-full py-[5px] rounded-[20px] bg-[#265CAC] dark:bg-semiDarkGreyDark text-white text-[15px] font-jua`,
             emailError ? "mt-[5.5px]" : "mt-[35px]",
             isFormValid ? "" : "bg-[#BABABA] cursor-not-allowed"
           )}
@@ -132,7 +141,7 @@ export default function Login() {
         <button
           type="button"
           onClick={handleSignupClick}
-          className="w-full mt-[10px] py-[5px] rounded-[20px] bg-[#265CAC] text-white text-[15px] font-jua"
+          className="w-full mt-[10px] py-[5px] rounded-[20px] bg-[#265CAC] dark:bg-mainDark text-white dark:text-blackDark text-[15px] font-jua"
         >
           가입하기
         </button>
@@ -141,7 +150,7 @@ export default function Login() {
         <div className="w-full mt-[15px] mb-[10px] py-auto border-t border-[#B6B6B6]"></div>
 
         {/* 저희 서비스가 궁금하세요? */}
-        <p className="text-[#265CAC] text-[13px] text-center font-dohyeon mb-[10px]">
+        <p className="text-[#265CAC] dark:text-mainDark text-[13px] text-center font-dohyeon mb-[10px]">
           저희 서비스가 궁금하신가요?
         </p>
 
@@ -149,7 +158,7 @@ export default function Login() {
         <button
           type="button"
           onClick={() => navigate("/")}
-          className="w-full h-[40px] py-auto border-2 border-[#265CAC]  rounded-[20px] bg-[#FFFFFF] text-[15px] font-jua"
+          className="w-full h-[40px] py-auto border-2 border-[#265CAC] dark:border-mainDark  rounded-[20px] bg-[#FFFFFF] dark:bg-blackDark  text-white dark:text-mainDark text-[15px] font-jua"
         >
           비회원으로 둘러보기
         </button>
