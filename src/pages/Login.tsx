@@ -100,8 +100,8 @@ export default function Login() {
           className={twMerge(
             `w-full h-[40px] mb-[10px] py-auto pl-[15px] bg-white dark:bg-darkGreyDark border border-[#C2C2C2] dark:border-greyDark rounded-[10px] placeholder-[#B6B6B6] dark:placeholder-semiDarkGreyDark text-[18px] font-jua ${
               email
-                ? "text-[#265CAC] border-[#265CAC] border-[2px] font-ibm font-bold text-[16px]"
-                : "text-gray-400"
+                ? "text-[#265CAC] dark:text-mainDark border-[#265CAC] dark:border-mainDark border-[2px] font-ibm font-bold text-[16px]"
+                : "text-gray-400 dark:text-semiDarkGreyDark"
             }`
           )}
         />
@@ -114,8 +114,8 @@ export default function Login() {
           className={twMerge(
             `w-full h-[40px] mb-[10px] py-auto pl-[15px] bg-white dark:bg-darkGreyDark border border-[#C2C2C2] dark:border-greyDark rounded-[10px] placeholder-[#B6B6B6] dark:placeholder-semiDarkGreyDark text-[18px] font-jua ${
               password
-                ? "text-[#265CAC] border-[#265CAC] border-[2px] text-[16px]"
-                : "text-gray-400"
+                ? "text-[#265CAC]  dark:text-mainDark border-[#265CAC] dark:border-mainDark border-[2px] text-[16px]"
+                : "text-gray-400 dark:text-semiDarkGreyDark"
             }`
           )}
         />
@@ -129,9 +129,11 @@ export default function Login() {
         {/* 로그인 버튼 */}
         <button
           className={twMerge(
-            `w-full py-[5px] rounded-[20px] bg-[#265CAC] dark:bg-semiDarkGreyDark text-white text-[15px] font-jua`,
+            `w-full py-[5px] rounded-[20px] bg-[#BABABA] dark:bg-semiDarkGreyDark text-white text-[15px] font-jua`,
             emailError ? "mt-[5.5px]" : "mt-[35px]",
-            isFormValid ? "" : "bg-[#BABABA] cursor-not-allowed"
+            isFormValid
+              ? " bg-[#265CAC] dark:bg-mainDark text-white dark:text-blackDark texcursor-not-allowed"
+              : ""
           )}
         >
           로그인
@@ -158,7 +160,7 @@ export default function Login() {
         <button
           type="button"
           onClick={() => navigate("/")}
-          className="w-full h-[40px] py-auto border-2 border-[#265CAC] dark:border-mainDark  rounded-[20px] bg-[#FFFFFF] dark:bg-blackDark  text-white dark:text-mainDark text-[15px] font-jua"
+          className="w-full h-[40px] py-auto border-2 border-[#265CAC] dark:border-mainDark  rounded-[20px] bg-[#FFFFFF] dark:bg-blackDark  text-[#265CAC] dark:text-mainDark text-[15px] font-jua"
         >
           비회원으로 둘러보기
         </button>
