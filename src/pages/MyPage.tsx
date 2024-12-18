@@ -24,8 +24,8 @@ export default function MyPage() {
   return (
     <>
       {myInfo && (
-        <div className="relative flex flex-col items-center">
-          <div className="flex flex-col gap-[40px] pt-10">
+        <div className="relative flex flex-col items-center py-8">
+          <div className="flex flex-col gap-[40px]">
             <UserCard
               uname={myInfo.fullName!}
               followers={myInfo.followers}
@@ -38,7 +38,7 @@ export default function MyPage() {
               update={true}
               userImg={myInfo.image}
             />
-            <div className="flex xl:flex-row flex-col items-center w-full gap-4">
+            <div className="flex flex-col items-center w-full gap-4 xl:flex-row">
               <CustomCalendar />
               <CheckDone bg="bg-[#F7FAFF]" />
             </div>
