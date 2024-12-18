@@ -146,15 +146,17 @@ export default function Header({
           </div>
           <div className="lg:flex gap-2 hidden buttonComponent">
             <ButtonComponent
-              bgcolor="bg-[#265CAC] dark:bg-mainDark"
+              bgcolor="bg-[#265CAC] hover:bg-[#1e4d8a] dark:bg-mainDark dark:hover:bg-mainTextDark"
               textcolor="text-[white] dark:text-blackDark"
+              border="border-0"
               onClick={logoutHandler}
             >
               {"로그아웃"}
             </ButtonComponent>
             <ButtonComponent
-              bgcolor="bg-white dark:bg-skyDark"
-              textcolor="text-[#265CAC] dark:text-blackDark"
+              bgcolor="bg-white hover:bg-skyDark dark:bg-lightBlackDark dark:hover:bg-darkGreyDark"
+              textcolor="text-[#265CAC] dark:text-mainDark"
+              border="border-[2px] border-[#265CAC] dark:border-mainDark"
               onClick={() => navigate("/posting")}
             >
               {"새글등록"}
@@ -216,7 +218,7 @@ export default function Header({
           </div>
 
           <ButtonComponent
-            bgcolor="bg-[#265CAC] dark:bg-mainDark"
+            bgcolor="bg-[#265CAC] hover:bg-[#1e4d8a] dark:bg-mainDark dark:hover:bg-mainTextDark"
             textcolor="text-white dark:text-blackDark"
             border="border-0"
             onClick={() => navigate("/login")}
@@ -225,7 +227,7 @@ export default function Header({
           </ButtonComponent>
 
           <ButtonComponent
-            bgcolor="bg-white dark:bg-lightBlackDark"
+            bgcolor="bg-white hover:bg-skyDark dark:bg-lightBlackDark dark:hover:bg-darkGreyDark"
             textcolor="text-[#265CAC] dark:text-mainDark"
             border="border-[2px] border-[#265CAC] dark:border-mainDark"
             onClick={() => navigate("/signup")}

@@ -15,7 +15,7 @@ export default function AuthLayout() {
         {/* 다크 모드에서만 이미지 표시 */}
         <img
           src={!isDark ? lightAuthBhImg : darkAuthBgImg}
-          className="fixed w-[300px] h-auto object-contain z-20 top-1/2 left-1/2 translate-x-[200px]"
+          className="fixed w-[300px] h-auto object-contain z-0 top-1/2 left-1/2 translate-x-[200px]"
         />
 
         {/* 로그인 & 회원가입 컴포넌트 */}
