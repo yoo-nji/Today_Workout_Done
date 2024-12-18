@@ -1,5 +1,3 @@
-Notification;
-
 import ButtonComponent from "../ButtonComponent";
 import likeIcon from "../../assets/noti_like_Icon.svg";
 import followIcon from "../../assets/noti_follow_Icon.svg";
@@ -95,7 +93,7 @@ export default function Notification({
   // console.log({ likeNumber });
   return (
     <div>
-      <div className="absolute z-10 top-[32px] right-[80px] mt-2 w-[280px]  p-[18px] rounded-[10px] ">
+      <div className="absolute z-10 top-[32px] right-[-10px] mt-2 w-[280px]  p-[18px] rounded-[10px] ">
         {/* 말풍선 꼬리 */}
         {/* Todo 말풍선 꼬리 tailwind로 만드는법 알아보자 */}
         {/* 말풍선 본문 */}

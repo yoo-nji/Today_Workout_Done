@@ -1,5 +1,3 @@
-NotificationBox;
-
 import { useNavigate } from "react-router";
 import defaultUserImg from "../assets/defaultUser.svg";
 
@@ -36,23 +34,25 @@ export default function NotificationBox({
       </div>
 
       {notificationType === "follow" && (
-        <div className=" w-[220px] h-[50px] flex items-center justify-center">
-          <article className="text-sm font-bold">
-            {fullname} 님께서 회원님을 팔로우합니다!
+        <div className=" w-[220px] h-[50px] flex items-center ">
+          <article className="text-sm font-bold ">
+            {fullname} 님께서 <br />
+            회원님을 팔로우합니다!
           </article>
         </div>
       )}
       {notificationType === "comment" && (
-        <div className="w-[220px] h-[50px] flex items-center justify-center  ">
+        <div className="w-[220px] h-[50px] flex items-center ">
           <p className="text-sm font-bold ">
-            {fullname} 님께서 회원님의 글에 댓글을 남겼습니다{" "}
+            {fullname} 님께서 <br /> 회원님의 글에 댓글을 남겼습니다{" "}
           </p>
         </div>
       )}
       {notificationType === "like" && (
-        <div className=" w-[230px] h-[50px] flex items-center justify-center  ">
+        <div className=" w-[230px] h-[50px] flex items-center   ">
           <p className="text-sm font-bold ">
-            {fullname} 님께서 회원님께서 글에 좋아요를 눌러주셨습니다
+            {fullname} 님께서 회원님께서 <br />
+            글에 좋아요를 눌러주셨습니다
           </p>
         </div>
       )}
