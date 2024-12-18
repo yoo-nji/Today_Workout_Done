@@ -148,13 +148,15 @@ export default function Header({
             <ButtonComponent
               bgcolor="bg-[#265CAC] dark:bg-mainDark"
               textcolor="text-[white] dark:text-blackDark"
+              border="border-0"
               onClick={logoutHandler}
             >
               {"로그아웃"}
             </ButtonComponent>
             <ButtonComponent
-              bgcolor="bg-white dark:bg-skyDark"
-              textcolor="text-[#265CAC] dark:text-blackDark"
+              bgcolor="bg-white dark:bg-lightBlackDark"
+              textcolor="text-[#265CAC] dark:text-mainDark"
+              border="border-[2px] border-[#265CAC] dark:border-mainDark"
               onClick={() => navigate("/posting")}
             >
               {"새글등록"}
