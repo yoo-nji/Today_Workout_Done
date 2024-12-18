@@ -3,6 +3,8 @@ import trashIcon from "../../assets/trash.svg";
 import { Comment } from "../../utils/getPostDetail";
 import { useAuth } from "../../stores/authStore";
 import { useNavigate } from "react-router";
+import ConfirmModal from "../modal/ConfirmModal";
+import { useState } from "react";
 
 export default function CommentBox({
   comment,
@@ -22,6 +24,9 @@ export default function CommentBox({
   const month = update.getMonth() + 1;
   const day = update.getDate();
   const formattedDate = `${year}년 ${month}월 ${day}일`;
+
+  // 모달창 제어
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleClick = (userid: string) => {
     navigate(`/user/${userid}`);
@@ -46,15 +51,18 @@ export default function CommentBox({
           </div>
         </div>
         {loginId?._id === comment.author._id && (
-          <button
-            onClick={() => handleDelete(comment._id)}
-            className="w-8 mr-2"
-          >
+          <button onClick={() => setIsModalOpen(true)} className="w-8 mr-2">
             <img src={trashIcon} alt="trashIcon" />
           </button>
         )}
       </div>
       <div className="mt-3 text-[14px]">{comment.comment}</div>
+      <ConfirmModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        onConfirm={() => handleDelete(comment._id)}
+        message={"이 댓글을 정말 삭제하시겠습니까?"}
+      />
     </div>
   );
 }

@@ -92,7 +92,6 @@ export default function Home() {
       const firstEntry = entries[0];
       // 화면에 보였을 때 실행할 함수
       if (firstEntry.isIntersecting && !loading) {
-        console.log("보인다");
         setOffset((prev) => prev + limit);
       }
     });
