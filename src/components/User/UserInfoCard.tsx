@@ -32,7 +32,9 @@ export default function UserInfoCard({
       </div>
       <div className="flex flex-col gap-1">
         <div className="flex gap-2 py-[5px]">
-          <div className="text-lg font-bold w-[180px]">{uname}</div>
+          <div className="text-black dark:text-mainTextDark text-lg font-bold w-[180px] ">
+            {uname}
+          </div>
 
           {isLogin && (
             <FollowButton
@@ -44,7 +46,7 @@ export default function UserInfoCard({
             />
           )}
         </div>
-        <div className="flex text-[15px] gap-[10px]">
+        <div className="flex text-black dark:text-white text-[15px] gap-[10px]">
           <p>팔로워: {userFollowers}</p>
           <p>팔로우: {following.length}</p>
         </div>
