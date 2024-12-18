@@ -8,7 +8,10 @@ const ButtonComponent: React.FC<ButtonComponent> = ({
   border,
   children,
   onClick,
+  disabled,
+  disabledBgColor,
 }) => {
+
   return (
     <button
       onClick={onClick}

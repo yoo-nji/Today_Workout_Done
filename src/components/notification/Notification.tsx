@@ -23,7 +23,6 @@ export default function Notification({
   const notificationSeen = async () => {
     try {
       const { status, data } = await api.put("/notifications/seen");
-      console.log(data);
       showNotiListHandler();
       notificationNumberClean();
     } catch (error) {
@@ -35,9 +34,7 @@ export default function Notification({
   };
 
   const notificationNumberClean = () => {
-    console.log(12344);
     setNotificationNumber([0, 0, 0]);
-    console.log(notificationNumber);
   };
 
   // map돌려서 알람갯수 세기
@@ -56,11 +53,12 @@ export default function Notification({
 
   useEffect(() => {
     if (notificationArray.length != 0) {
+      console.log(notificationArray[0].like);
       let likeCount = 0;
       let followCount = 0;
       let commentCount = 0;
       notificationArray.map((notification: any) =>
-        notification.like != undefined
+        notification.like === null || undefined
           ? (likeCount = likeCount + 1)
           : notification.follow != undefined
           ? (followCount = followCount + 1)
@@ -145,7 +143,7 @@ export default function Notification({
                     userid={notification.author.email}
                     image={notification.author.image}
                     notificationType={
-                      notification.like != undefined
+                      notification.like === null || undefined
                         ? "like"
                         : notification.follow != undefined
                         ? "follow"

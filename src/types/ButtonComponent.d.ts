@@ -5,4 +5,6 @@ interface ButtonComponent {
   children: React.ReactNode;
   onClick?: () => void;
   className?: string;
+  disabled?: boolean;
+  disabledBgColor?: string;
 }

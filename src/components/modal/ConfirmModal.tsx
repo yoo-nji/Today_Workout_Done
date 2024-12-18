@@ -26,7 +26,7 @@ export default function ConfirmModal({
     >
       <div className=" bg-white py-[50px] w-[310px] h-[183px] rounded-[15px] font-bold text-[14px] dark:bg-blackDark">
         <div className="flex flex-col items-center">
-          <p className="text-[16px] dark:text-white dark:font-medium">
+          <p className="text-[16px] text-black dark:text-white dark:font-medium">
             {message}
           </p>
           <div

@@ -52,9 +52,13 @@ export default function ImageCard({
     navigate(`/user/${userid}`);
   };
 
-  const channelName = Object.keys(channelMapping).find(
-    (key) => channelMapping[key] === channel?._id
-  );
+  const channelName = Object.keys(channelMapping).find((key) => {
+    if (typeof channel === "string") {
+      return channelMapping[key] === channel;
+    } else {
+      return channelMapping[key] === channel?._id;
+    }
+  });
 
   // 본인 좋아요 확인
   const checkIsLiked = likes.some((like) => like.user === myInfo?._id);
@@ -107,11 +111,11 @@ export default function ImageCard({
               userImg={userImg ? userImg : author?.image}
             />
           </div>
-          <div className="text-base font-medium">
+          <div className="text-base font-medium dark:text-[#fff]">
             {author ? author.fullName : fullName}
           </div>
         </div>
-        <div className="text-sm font-light">{date}</div>
+        <div className="text-sm font-light dark:text-white">{date}</div>
       </div>
     </div>
   );
