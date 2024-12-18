@@ -142,7 +142,7 @@ export default function UserListModal({
           {status === "loading" && (
             <div
               className={twMerge(
-                "absolute z-20 flex justify-center items-center w-full h-full bg-white/80"
+                "absolute z-20 flex justify-center items-center w-full h-full bg-white/80 dark:bg-lightBlackDark/50"
               )}
             >
               <Lottie
@@ -191,7 +191,7 @@ export default function UserListModal({
             ) : (
               <div
                 className={twMerge(
-                  "absolute z-20 flex justify-center items-center w-full h-full bg-white/80"
+                  "absolute z-20 flex justify-center items-center w-full h-full bg-white/80 dark:bg-lightBlackDark/50"
                 )}
               >
                 <Lottie
