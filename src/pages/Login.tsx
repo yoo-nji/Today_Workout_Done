@@ -172,7 +172,7 @@ export default function Login() {
           onClose={() => navigate("/")}
           onConfirm={() => navigate("/")}
           message={"로그인되었습니다."}
-          confirmColor="bg-[#265cac]"
+          confirmColor="bg-[#265cac] dark:bg-maindark"
         />
         {/* 로그인 실패 했을 때 모달*/}
         <ConfirmModal
@@ -181,7 +181,7 @@ export default function Login() {
           onClose={() => setIsErrorModalOpen(false)}
           onConfirm={() => setIsErrorModalOpen(false)}
           message={"아이디나 비밀번호가 틀립니다."}
-          confirmColor="bg-[#265cac]"
+          confirmColor="bg-[#265cac] dark:bg-mainDark"
         />
       </form>
     </>
