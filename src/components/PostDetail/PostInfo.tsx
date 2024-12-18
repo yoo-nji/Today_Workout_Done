@@ -37,8 +37,6 @@ export default function PostInfo({
   setEdit,
   userid,
 }: PostInfoProps) {
-  // 삭제 모달 확인
-  const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
   const imgRef = useRef<HTMLInputElement>(null);
   const [titleInput, setTitleInput] = useState(title);
@@ -46,6 +44,10 @@ export default function PostInfo({
   const [img, setImg] = useState(image);
   const [uploadImg, setUploadImg] = useState<File | null>(null);
   const textarea = useRef<HTMLTextAreaElement | null>(null);
+
+  // 모달 관리
+  const [isOpen, setIsOpen] = useState(false); // 삭제 모달
+  const [saveModal, setSaveModal] = useState(false); // 저장 모달
 
   // 로딩관리
   const startLoading = useLoadingStore((state) => state.startLoading);
@@ -126,9 +128,9 @@ export default function PostInfo({
     navigate("/");
   };
 
-  // 삭제 모달 창 떴을 때 스크롤 제한
+  // 모달 창 떴을 때 스크롤 제한(삭제 모달, 수정 모달)
   useEffect(() => {
-    if (isOpen) {
+    if (isOpen || saveModal) {
       document.body.style.overflow = "hidden"; // 스크롤 금지
     } else {
       document.body.style.overflow = ""; // 원래 상태 복원
@@ -136,7 +138,7 @@ export default function PostInfo({
     return () => {
       document.body.style.overflow = ""; // 컴포넌트 언마운트 시 복원
     };
-  }, [isOpen]);
+  }, [isOpen, saveModal]);
 
   // 수정 버튼 눌렀을 때 높이 조정
   useEffect(() => {
@@ -205,11 +207,11 @@ export default function PostInfo({
         {/* 오른쪽 수정 및 삭제 */}
         {owner &&
           (edit ? (
-            <button onClick={updateHandler}>저장</button>
+            <button onClick={() => setSaveModal(true)}>저장</button>
           ) : (
             <div className="flex gap-2 text-[#505050]">
               <button onClick={editButtonHandler}>수정</button>
-              <button onClick={() => setIsOpen(!isOpen)}>삭제</button>
+              <button onClick={() => setIsOpen(true)}>삭제</button>
             </div>
           ))}
       </div>
@@ -272,11 +274,20 @@ export default function PostInfo({
           <div className="w-full py-3 mt-10 whitespace-pre-line">{context}</div>
         )}
       </div>
+      {/* 삭제 모달 */}
       <ConfirmModal
         isOpen={isOpen}
         onClose={() => setIsOpen(false)}
         onConfirm={deleteHandler}
         message={"이 게시글을 정말 삭제하시겠습니까?"}
+      />
+      {/* 저장 모달 */}
+      <ConfirmModal
+        isOpen={saveModal}
+        onClose={() => setSaveModal(false)}
+        onConfirm={updateHandler}
+        confirmColor="bg-[#265cac]"
+        message={"수정을 완료하고 저장하시겠습니까?"}
       />
     </>
   );
