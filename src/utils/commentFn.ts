@@ -14,11 +14,12 @@ export const newCommentFn = async (option: newCommentFnType) => {
 
     // notification 알림 생성 위한 데이터처리
     const rtype = "COMMENT";
-    const commentUserId = data.id;
+    const commentUserId = data.author._id;
     const postUserId = option.postAuthorId;
     const postId = data.post;
-
-    await createNotification(rtype, commentUserId, postUserId, postId);
+    if (commentUserId != postUserId) {
+      await createNotification(rtype, commentUserId, postUserId, postId);
+    }
     return data;
   } catch (err) {
     console.error(err);
