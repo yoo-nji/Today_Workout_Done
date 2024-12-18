@@ -8,6 +8,7 @@ import thumbnail from "../../assets/images/feed_thumbnail.jpg";
 import { useLoadingStore } from "../../stores/loadingStore";
 import ConfirmModal from "../modal/ConfirmModal";
 import moment from "moment";
+import { twMerge } from "tailwind-merge";
 
 interface PostInfoProps {
   title: string;
@@ -57,6 +58,8 @@ export default function PostInfo({
   // 날짜 형식
   const update = moment(createdAt); // moment로 변환
   const formattedDate = update.format("YYYY.MM.DD"); // 원하는 형식으로 포맷팅
+  // 시간 포맷팅
+  const formattedTime = update.format("HH:mm");
 
   // 게시물 수정시 내용textarea 높이 조정 함수
   const handleInput = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -173,19 +176,22 @@ export default function PostInfo({
   return (
     <>
       <div
-        className="text-sm cursor-pointer hover:underline"
-        onClick={() => navigate(`/${channel}`)}
+        className={twMerge(
+          "pb-2 text-sm cursor-pointer",
+          !edit && "hover:underline"
+        )}
+        onClick={() => (!edit ? navigate(`/${channel}`) : null)}
       >
         {channel ? channelName[channel] : null}
       </div>
       {edit ? (
         <input
-          className="py-3 mb-4 text-4xl focus:outline-none border w-full border-[#d3d3d3d3]"
+          className="py-1 pl-2 mb-4 text-3xl focus:outline-none focus:ring-2 focus:ring-[#265cac] border w-full border-[#d3d3d3d3] rounded-lg"
           value={titleInput}
           onChange={(e) => setTitleInput(e.target.value)}
         />
       ) : (
-        <h1 className="py-3 mb-4 text-4xl">{titleInput}</h1>
+        <h1 className="py-1 mb-4 text-3xl">{titleInput}</h1>
       )}
       <div className="flex items-center justify-between">
         {/* 왼쪽 프로필 */}
@@ -199,17 +205,32 @@ export default function PostInfo({
           </div>
           <div>
             <p className="text-[13px] mb-[6px] font-bold">{fullName}</p>
-            <p className="text-xs">{formattedDate}</p>
+            <div className="flex gap-1 text-[#505050]">
+              <p className="text-xs">{formattedDate}</p>
+              <p className="text-xs">{formattedTime}</p>
+            </div>
           </div>
         </div>
         {/* 오른쪽 수정 및 삭제 */}
         {owner &&
           (edit ? (
-            <button onClick={() => setSaveModal(true)}>저장</button>
+            <button
+              className="hover:underline"
+              onClick={() => setSaveModal(true)}
+            >
+              저장
+            </button>
           ) : (
             <div className="flex gap-2 text-[#505050]">
-              <button onClick={editButtonHandler}>수정</button>
-              <button onClick={() => setIsOpen(true)}>삭제</button>
+              <button className="hover:underline" onClick={editButtonHandler}>
+                수정
+              </button>
+              <button
+                className="hover:underline"
+                onClick={() => setIsOpen(true)}
+              >
+                삭제
+              </button>
             </div>
           ))}
       </div>
@@ -258,10 +279,10 @@ export default function PostInfo({
           )}
         </div>
         {edit ? (
-          <div className="py-3 border border-[#d3d3d3d3] w-full mt-10">
+          <div className="w-full mt-10 ">
             <textarea
               ref={textarea}
-              className="w-full overflow-hidden resize-none focus:outline-none"
+              className=" py-3 pl-2 w-full overflow-hidden resize-none  border border-[#d3d3d3d3] focus:outline-none focus:ring-2  focus:ring-[#265cac] rounded-lg "
               onChange={(e) => handleInput(e)}
               value={context}
             >
