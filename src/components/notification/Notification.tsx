@@ -11,11 +11,7 @@ interface notificationProps {
   closeNoti: () => void;
   isNoti: () => void;
   notificationArray?: any;
-  //   notification: [number, number, number];
 }
-
-// 여기에 좋아요, 팔로우, 메세지 갯수 받아서 사용
-const notificationNumber = [100, 1, 17];
 
 // API보고 notificationArray 받아서 처리하자
 export default function Notification({
@@ -29,6 +25,7 @@ export default function Notification({
       const { status, data } = await api.put("/notifications/seen");
       console.log(data);
       showNotiListHandler();
+      notificationNumberClean();
     } catch (error) {
       console.log(error);
       if ((error as AxiosError).response?.status === 400) {
@@ -37,15 +34,47 @@ export default function Notification({
     }
   };
 
-  // map돌려서 알람갯수 세기
+  const notificationNumberClean = () => {
+    console.log(12344);
+    setNotificationNumber([0, 0, 0]);
+    console.log(notificationNumber);
+  };
 
-  // console.log("12313", notificationArray[2].follow);
+  // map돌려서 알람갯수 세기
   const [showNotiList, setShowNotiList] = useState(true);
+
   const showNotiListHandler = () => {
     setShowNotiList(false);
     console.log(showNotiList);
   };
 
+  // notificatioArray갯수 따라서 표시해주기
+  // const notificationNumber: number[] = [0, 0, 0];
+  const [notificationNumber, setNotificationNumber] = useState<number[]>([
+    0, 0, 0,
+  ]);
+
+  useEffect(() => {
+    if (notificationArray.length != 0) {
+      let likeCount = 0;
+      let followCount = 0;
+      let commentCount = 0;
+      notificationArray.map((notification: any) =>
+        notification.like != undefined
+          ? (likeCount = likeCount + 1)
+          : notification.follow != undefined
+          ? (followCount = followCount + 1)
+          : (commentCount = commentCount + 1)
+      );
+
+      setNotificationNumber([commentCount, followCount, likeCount]);
+    }
+  }, []);
+
+  // 여기에 좋아요, 팔로우, 메세지 갯수 받아서 사용
+  // const [notificationNumber, setNotificationNumber] = useState([0, 0, 0]);
+
+  // console.log({ likeNumber });
   return (
     <div>
       <div className="absolute z-10 top-[32px] right-[80px] mt-2 w-[280px]  p-[18px] rounded-[10px] ">
@@ -67,11 +96,11 @@ export default function Notification({
                     console.log("comment");
                   }}
                 />
-                {notificationNumber[2] != 0 && (
+                {notificationNumber[0] != 0 && (
                   <div className="w-6 h-6 rounded-[50%] bg-red-500 absolute bottom-0 left-14 text-white text-center text-xs leading-loose">
-                    {notificationNumber[2] >= 100
+                    {notificationNumber[0] >= 100
                       ? `99+`
-                      : notificationNumber[2]}
+                      : notificationNumber[0]}
                   </div>
                 )}
                 <img
@@ -95,11 +124,11 @@ export default function Notification({
                     console.log("like");
                   }}
                 />
-                {notificationNumber[0] != 0 && (
+                {notificationNumber[2] != 0 && (
                   <div className="w-6 h-6 rounded-[50%] bg-red-500 absolute bottom-0 right-2.5 text-white justify-center text-center z-50 text-xs leading-loose">
-                    {notificationNumber[0] >= 100
+                    {notificationNumber[2] >= 100
                       ? `99+`
-                      : notificationNumber[1]}
+                      : notificationNumber[2]}
                   </div>
                 )}
               </div>
@@ -114,7 +143,7 @@ export default function Notification({
                   <NotificationBox
                     fullname={notification.author.fullName}
                     userid={notification.author.email}
-                    image={""}
+                    image={notification.author.image}
                     notificationType={
                       notification.like != undefined
                         ? "like"
