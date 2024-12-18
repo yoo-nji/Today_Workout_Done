@@ -23,7 +23,7 @@ export default function User() {
   return (
     <>
       {user && (
-        <div className="flex flex-col items-center py-8 bg-white dark:bg-lightBlackDark">
+        <div className="h-full flex flex-col items-center py-8 dark:bg-lightBlackDark">
           <div className=" flex flex-col gap-[40px]">
             <UserInfoCard
               uname={user.fullName}
@@ -33,7 +33,7 @@ export default function User() {
               image={user.image}
             />
             <div>
-              <p className="text-black dark:text-white text-[18px] mb-[20px] font-medium ">
+              <p className="dark:text-white text-[18px] mb-[20px] font-medium ">
                 게시물 {user.posts?.length}개
               </p>
 
