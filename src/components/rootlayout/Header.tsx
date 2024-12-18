@@ -1,5 +1,3 @@
-Header;
-
 import { useNavigate } from "react-router";
 import notifyIcon from "../../assets/notifyIcon.svg";
 import { twMerge } from "tailwind-merge";
@@ -81,7 +79,7 @@ export default function Header({
   };
 
   const test11 = () => {
-    console.log(userInfo);
+    console.log(userInfo?.notifications);
   };
 
   const logoutHandler = () => {
@@ -137,7 +135,7 @@ export default function Header({
           onClick={() => navigate("/")}
         />
       </div>
-      {/* <button onClick={() => test11()}>sdfsg</button> */}
+      {/* <button onClick={() => test11()}>sdfsg</button> 테스트용버튼*/}
 
       {isLoggedIn ? (
         // 로그인 상태 분기
@@ -148,22 +146,24 @@ export default function Header({
           </div>
           <div className="lg:flex gap-2 hidden buttonComponent">
             <ButtonComponent
-              bgcolor="bg-[#265CAC] dark:bg-mainDark"
+              bgcolor="bg-[#265CAC] hover:bg-[#1e4d8a] dark:bg-mainDark dark:hover:bg-mainTextDark"
               textcolor="text-[white] dark:text-blackDark"
+              border="border-0"
               onClick={logoutHandler}
             >
               {"로그아웃"}
             </ButtonComponent>
             <ButtonComponent
-              bgcolor="bg-white dark:bg-skyDark"
-              textcolor="text-[#265CAC] dark:text-blackDark"
+              bgcolor="bg-white hover:bg-skyDark dark:bg-lightBlackDark dark:hover:bg-darkGreyDark"
+              textcolor="text-[#265CAC] dark:text-mainDark"
+              border="border-[2px] border-[#265CAC] dark:border-mainDark"
               onClick={() => navigate("/posting")}
             >
               {"새글등록"}
             </ButtonComponent>
           </div>
           {/* 알림 */}
-          <div className="w-[48px] h-[48px]  flex justify-center items-center mx-[10px] relative notification">
+          <div className="w-[48px] h-[48px] flex justify-center items-center mx-[10px] relative notification">
             <img
               src={!isDark ? notifyIcon : darkNotifyIcon}
               alt="알림 아이콘"
@@ -203,7 +203,6 @@ export default function Header({
           >
             test1로그인
           </button>
-
           <button
             className="border border-solid border-rose-400 w-[220px] h-[36px] rounded-[10px]"
             onClick={() => fastlogin()}
@@ -218,16 +217,18 @@ export default function Header({
           </div>
 
           <ButtonComponent
-            bgcolor="bg-[#265CAC] dark:bg-mainDark"
+            bgcolor="bg-[#265CAC] hover:bg-[#1e4d8a] dark:bg-mainDark dark:hover:bg-mainTextDark"
             textcolor="text-white dark:text-blackDark"
+            border="border-0"
             onClick={() => navigate("/login")}
           >
             {"로그인"}
           </ButtonComponent>
 
           <ButtonComponent
-            bgcolor="bg-white dark:bg-skyDark"
-            textcolor="text-[#265CAC] dark:text-blackDark"
+            bgcolor="bg-white hover:bg-skyDark dark:bg-lightBlackDark dark:hover:bg-darkGreyDark"
+            textcolor="text-[#265CAC] dark:text-mainDark"
+            border="border-[2px] border-[#265CAC] dark:border-mainDark"
             onClick={() => navigate("/signup")}
           >
             {"가입하기"}
