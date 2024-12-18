@@ -23,8 +23,8 @@ export default function User() {
   return (
     <>
       {user && (
-        <div className="flex flex-col items-center">
-          <div className=" flex flex-col gap-[40px] pt-10">
+        <div className="flex flex-col items-center py-8">
+          <div className=" flex flex-col gap-[40px]">
             <UserInfoCard
               uname={user.fullName}
               userId={user._id}
@@ -61,7 +61,7 @@ export default function User() {
                   </div>
                 ) : (
                   <div className="w-[814px]">
-                    <p className="text-gray-500 text-center">
+                    <p className="text-center text-gray-500">
                       게시물이 없습니다.
                     </p>
                   </div>
