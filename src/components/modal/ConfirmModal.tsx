@@ -22,11 +22,13 @@ export default function ConfirmModal({
   return (
     <div
       onClick={onClose}
-      className="fixed inset-0 z-10 flex items-center justify-center bg-black bg-opacity-50"
+      className="fixed inset-0 z-10 flex items-center justify-center bg-black bg-opacity-50 dark:bg-darkGreyDark dark:bg-opacity-80"
     >
-      <div className=" bg-white py-[50px] w-[310px] h-[183px] rounded-[15px] font-bold text-[14px]">
+      <div className=" bg-white py-[50px] w-[310px] h-[183px] rounded-[15px] font-bold text-[14px] dark:bg-blackDark">
         <div className="flex flex-col items-center">
-          <p className="text-[16px]">{message}</p>
+          <p className="text-[16px] dark:text-white dark:font-medium">
+            {message}
+          </p>
           <div
             className={twMerge(
               "flex mt-[24px] w-[210px] h-[38px]",
@@ -36,7 +38,7 @@ export default function ConfirmModal({
             <button
               onClick={onConfirm}
               className={twMerge(
-                "w-[100px] h-[38px] rounded text-white",
+                "w-[100px] h-[38px] rounded text-white dark:text-blackDark dark:font-bold",
                 confirmColor
               )}
             >
