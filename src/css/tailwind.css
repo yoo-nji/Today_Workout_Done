@@ -14,6 +14,16 @@
     left: -9px;
     transform: rotate(45deg);
   }
+  .darkModal-before {
+    content: "";
+    position: absolute;
+    background-color: #252525;
+    width: 25px;
+    height: 25px;
+    bottom: 30px;
+    left: -9px;
+    transform: rotate(45deg);
+  }
   .scrollbar-none::-webkit-scrollbar {
     display: none;
   }
@@ -23,6 +33,15 @@
     content: "";
     position: absolute;
     background-color: rgba(0, 0, 0, 0.7);
+    width: 100vw;
+    height: 100vh;
+    inset: 0;
+    z-index: 20;
+  }
+  .darkModal-back {
+    content: "";
+    position: absolute;
+    background-color: #0000009b;
     width: 100vw;
     height: 100vh;
     inset: 0;

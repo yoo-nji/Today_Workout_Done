@@ -37,7 +37,7 @@ export default function UserBox({
   //로그인 여부
   const isLogin = useAuth((state) => state.isLoggedIn);
   return (
-    <div className="w-[320px] h-[75px] bg-[#f5f5f5] flex items-center gap-3 px-[20px] rounded-[10px] flex-shrink-0">
+    <div className="w-[320px] h-[75px] bg-[#f5f5f5] dark:bg-[#373737] flex items-center gap-3 px-[20px] rounded-[10px] flex-shrink-0">
       {/* 유저 프로필, 현활 */}
       <div
         className="bg-white w-[48px] h-[48px] flex justify-center items-center rounded-[50%] shadow-inner cursor-pointer relative"
@@ -54,7 +54,7 @@ export default function UserBox({
       </div>
 
       {/* 유저  info*/}
-      <div className="flex-1">
+      <div className="flex-1 dark:text-[#fff]">
         <div className="flex justify-between items-center">
           <p className="font-bold text-[15px]">{fullname}</p>
           {isLogin && (
@@ -63,8 +63,6 @@ export default function UserBox({
               height="h-[30px]"
               rounded="rounded-[10px]"
               userid={userid}
-              followingList={followingList}
-              setFollowingList={setFollowingList}
               setUserFollowers={setUserFollowers}
             />
           )}

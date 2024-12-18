@@ -1,6 +1,8 @@
 import UserBox from "./UserBox";
 import closeIcon from "../../assets/close.svg";
+import darkCloseIcon from "../../assets/darkicons/darkClose.svg";
 import searchIcon from "../../assets/searchIcon.svg";
+import darkSearchIcon from "../../assets/darkicons/darkSearchIcon.svg";
 import { useEffect, useState } from "react";
 import UserNone from "./UserNone";
 import { getUserList, UserListType } from "../../utils/getUserList";
@@ -98,23 +100,27 @@ export default function UserListModal({
         isToggle ? `left-[290px]` : "left-[90px]"
       }
       before:modal-before  scrollbar-none flex flex-col justify-start items-center
-      gap-10 py-8 z-30 dark:bg-black`}
+      gap-10 py-8 z-30 dark:bg-[#252525] dark:before:darkModal-before`}
         onClick={(e) => {
           e.stopPropagation();
         }}
       >
         <div
-          className="w-[30px] h-[30px] absolute top-3 right-3 cursor-pointer hover:bg-[rgba(0,0,0,0.1)] rounded-[50%]
+          className="w-[30px] h-[30px] absolute top-3 right-3 cursor-pointer hover:bg-[rgba(0,0,0,0.1)] dark:hover:bg-[rgba(0,0,0,0.6)] rounded-[50%]
           flex items-center justify-center
         "
           onClick={(e) => handleBackClick(e)}
         >
-          <img src={closeIcon} alt="닫기 버튼" />
+          {!isDark ? (
+            <img src={closeIcon} alt="닫기 버튼" />
+          ) : (
+            <img src={darkCloseIcon} alt="다크모드 닫기 버튼" />
+          )}
         </div>
         <div className="relative flex justify-center items-center mt-4">
           <input
             className="px-5 py-2 w-[320px] rounded-[25px] border border-[rgb(208, 208, 208)]
-            outline-none
+            outline-none dark:bg-[#373737] dark:border-[#fff] dark:text-[#fff] dark:placeholder:text-[#bdbdbd]
           "
             type="text"
             placeholder="찾으시는 유저를 검색하세요"
@@ -122,7 +128,7 @@ export default function UserListModal({
             onChange={handleChange}
           />
           <img
-            src={searchIcon}
+            src={!isDark ? searchIcon : darkSearchIcon}
             alt="검색 아이콘"
             className="absolute  right-4"
           />
