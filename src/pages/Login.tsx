@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router";
 import logoImg from "../assets/loge.svg";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { twMerge } from "tailwind-merge";
 import { useAuth } from "../stores/authStore";
 import { api } from "../api/axios";
@@ -98,10 +98,14 @@ export default function Login() {
           value={email}
           onChange={handleEmailChange}
           className={twMerge(
-            `w-full h-[40px] mb-[10px] py-auto pl-[15px] bg-white dark:bg-darkGreyDark border border-[#C2C2C2] dark:border-greyDark rounded-[10px] placeholder-[#B6B6B6] dark:placeholder-semiDarkGreyDark text-[18px] font-jua ${
+            `w-full h-[40px] mb-[10px] py-auto pl-[15px] bg-white border border-[#C2C2C2] rounded-[10px] placeholder-[#B6B6B6] text-[18px] font-jua dark:bg-darkGreyDark dark:border-greyDark dark:placeholder-semiDarkGreyDark ${
               email
-                ? "text-[#265CAC] dark:text-mainDark border-[#265CAC] dark:border-mainDark border-[2px] font-ibm font-bold text-[16px]"
-                : "text-gray-400 dark:text-semiDarkGreyDark"
+                ? "text-[#265CAC] border-[#265CAC] border-[2px] text-[16px] font-ibm font-bold dark:text-mainDark dark:border-mainDark dark:font-semibold"
+                : "text-gray-400 border-[1px] dark:text-semiDarkGreyDark "
+            }  ${
+              emailError
+                ? "border-[#EB003E] border-[2px] text-[#EB003E] dark:border-pinkDark dark:text-pinkDark"
+                : ""
             }`
           )}
         />
@@ -112,16 +116,16 @@ export default function Login() {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           className={twMerge(
-            `w-full h-[40px] mb-[10px] py-auto pl-[15px] bg-white dark:bg-darkGreyDark border border-[#C2C2C2] dark:border-greyDark rounded-[10px] placeholder-[#B6B6B6] dark:placeholder-semiDarkGreyDark text-[18px] font-jua ${
+            `w-full h-[40px] mb-[10px] py-auto pl-[15px] bg-white  border border-[#C2C2C2] rounded-[10px] placeholder-[#B6B6B6] text-[18px] font-jua dark:bg-darkGreyDark dark:border-greyDark dark:placeholder-semiDarkGreyDark ${
               password
-                ? "text-[#265CAC]  dark:text-mainDark border-[#265CAC] dark:border-mainDark border-[2px] text-[16px]"
-                : "text-gray-400 dark:text-semiDarkGreyDark"
+                ? "text-[#265CAC] border-[#265CAC] border-[2px] text-[16px] font-ibm font-bold dark:text-mainDark dark:border-mainDark dark:font-semibold"
+                : "text-gray-400 border-[1px] dark:text-semiDarkGreyDark"
             }`
           )}
         />
         {/* 아이디 오류 메시지 출력 */}
         {emailError && (
-          <p className="ml-[15px] mb-[10px] text-red-500 dark:text-pinkDark text-[13px] font-dohyeon ">
+          <p className="ml-[15px] mb-[10px] text-red-500 text-[13px] font-dohyeon dark:text-pinkDark">
             {emailError}
           </p>
         )}
@@ -172,7 +176,7 @@ export default function Login() {
           onClose={() => navigate("/")}
           onConfirm={() => navigate("/")}
           message={"로그인되었습니다."}
-          confirmColor="bg-[#265cac] dark:bg-maindark"
+          confirmColor="bg-[#265cac] dark:bg-mainDark"
         />
         {/* 로그인 실패 했을 때 모달*/}
         <ConfirmModal
@@ -181,7 +185,7 @@ export default function Login() {
           onClose={() => setIsErrorModalOpen(false)}
           onConfirm={() => setIsErrorModalOpen(false)}
           message={"아이디나 비밀번호가 틀립니다."}
-          confirmColor="bg-[#265cac] dark:bg-mainDark"
+          confirmColor="bg-[#265cac] dark:bg-pinkDark"
         />
       </form>
     </>
