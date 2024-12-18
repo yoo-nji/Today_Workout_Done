@@ -115,7 +115,7 @@ export default function ImageCard({
             {author ? author.fullName : fullName}
           </div>
         </div>
-        <div className="text-sm font-light dark:text-white">{date}</div>
+        <div className="text-sm font-light dark:text-[#fff]">{date}</div>
       </div>
     </div>
   );

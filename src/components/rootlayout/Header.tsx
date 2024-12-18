@@ -1,3 +1,5 @@
+Header;
+
 import { useNavigate } from "react-router";
 import notifyIcon from "../../assets/notifyIcon.svg";
 import { twMerge } from "tailwind-merge";
@@ -79,7 +81,7 @@ export default function Header({
   };
 
   const test11 = () => {
-    console.log(userInfo?.notifications);
+    console.log(userInfo);
   };
 
   const logoutHandler = () => {
@@ -135,7 +137,7 @@ export default function Header({
           onClick={() => navigate("/")}
         />
       </div>
-      {/* <button onClick={() => test11()}>sdfsg</button> 테스트용버튼*/}
+      {/* <button onClick={() => test11()}>sdfsg</button> */}
 
       {isLoggedIn ? (
         // 로그인 상태 분기

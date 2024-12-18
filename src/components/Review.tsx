@@ -43,46 +43,55 @@ export default function Review({
     postContent = title;
   }
   const userid = author?._id;
-  const handleClick = (userid: string | undefined) => {
+  const handleClick = (
+    userid: string | undefined,
+    e: React.MouseEvent<HTMLDivElement, MouseEvent>
+  ) => {
+    e.stopPropagation(); // 이벤트 전파 중지
     navigate(`/user/${userid}`);
   };
   return (
-    <div className="w-[814px] h-[315px] mb-[109px] mr-5 relative flex flex-row">
-      {/* 썸네일 */}
-      <div>
-        <div
-          className="group relative w-[380px] h-[300px] bg-cover bg-center
-        rounded-[15px] shadow-lg mr-[60px] mt-2 mb-[7px] items-start"
-          style={{ backgroundImage: `url(${image || thumbnail})` }}
-          onClick={() => navigate(`/gymreview/${post_id}`)}
-        />
-      </div>
-
-      <div className="relative">
+    <div
+      className="w-[814px] h-[315px] flex gap-8 cursor-pointer"
+      onClick={() => navigate(`/gymreview/${post_id}`)}
+    >
+      {/* 썸네일(왼쪽) */}
+      <div
+        className="w-[380px] h-[300px] bg-cover bg-center
+        rounded-[15px] shadow-lg"
+        style={{ backgroundImage: `url(${image || thumbnail})` }}
+      />
+      {/* 게시물 정보(오른쪽) */}
+      <div className="flex flex-col justify-between">
         {/* 글 작성자 정보 */}
-        <div className="flex justify-start mb-[30px]">
-          <div className="flex flex-row gap-[13px]">
-            <div onClick={() => handleClick(userid)}>
-              <UserProfile
-                BackWidth="w-[40px]"
-                BackHeight="h-[40px]"
-                userImg={userImg ? userImg : author?.image}
-              />
+        <div className="flex justify-start gap-[13px]">
+          {/* 유저 프로필 이미지 */}
+          <div onClick={(e) => handleClick(userid, e)}>
+            <UserProfile
+              BackWidth="w-[40px]"
+              BackHeight="h-[40px]"
+              userImg={userImg ? userImg : author?.image}
+            />
+          </div>
+          {/* 유저 정보 */}
+          <div className="flex flex-col">
+            <div className="text-base font-medium">
+              {author ? author.fullName : fullName}
             </div>
-            <div className="flex flex-col">
-              <div className="text-base font-medium">
-                {author ? author.fullName : fullName}
-              </div>
-              <div className="text-sm font-light">{date}</div>
-            </div>
+            <div className="text-sm font-light">{date}</div>
           </div>
         </div>
-        <h3 className="ml-[45px] mb-[30px] text-[24px] ">{postTitle}</h3>
-        <p className="ml-[45px] text-[16px]  w-[400px] h-[120px] line-clamp-5">
-          {postContent}
-        </p>
+
+        {/* 게시물 내용 */}
+        <div className="">
+          <h3 className="mb-[30px] text-[24px]">{postTitle}</h3>
+          <p className="text-[16px]  w-[400px] h-[120px] line-clamp-5">
+            {postContent}
+          </p>
+        </div>
+
         {/* 아이콘 */}
-        <div className="absolute flex flex-row gap-[18px] bottom-1 right-1">
+        <div className="flex flex-row gap-[18px] justify-end">
           <div className="flex flex-row gap-1">
             <img src={likeIcon} alt="좋아요 아이콘" />
             <span>{likes.length}</span>

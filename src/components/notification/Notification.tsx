@@ -1,3 +1,5 @@
+Notification;
+
 import ButtonComponent from "../ButtonComponent";
 import likeIcon from "../../assets/noti_like_Icon.svg";
 import followIcon from "../../assets/noti_follow_Icon.svg";
@@ -6,6 +8,7 @@ import NotificationBox from "../NotificationBox";
 import { api } from "../../api/axios";
 import { AxiosError } from "axios";
 import { useEffect, useState } from "react";
+import { useAuth } from "../../stores/authStore";
 
 interface notificationProps {
   closeNoti: () => void;
@@ -22,8 +25,22 @@ export default function Notification({
   // 모두읽음처리
   const notificationSeen = async () => {
     try {
-      const { status, data } = await api.put("/notifications/seen");
-      showNotiListHandler();
+      // 전역 상태 업데이트
+      setUser({
+        ...userInfo,
+        notifications: userInfo?.notifications?.splice(
+          0,
+          userInfo?.notifications?.length
+        ),
+      });
+      const { status } = await api.put("/notifications/seen");
+      try {
+        setUser(userInfo);
+      } catch (error) {
+        if (status === 400) console.log(error);
+      }
+
+      // showNotiListHandler();
       notificationNumberClean();
     } catch (error) {
       console.log(error);
@@ -32,6 +49,9 @@ export default function Notification({
       }
     }
   };
+
+  const userInfo = useAuth((state) => state.user);
+  const setUser = useAuth((state) => state.setUser);
 
   const notificationNumberClean = () => {
     setNotificationNumber([0, 0, 0]);
@@ -80,7 +100,7 @@ export default function Notification({
         {/* Todo 말풍선 꼬리 tailwind로 만드는법 알아보자 */}
         {/* 말풍선 본문 */}
         <div
-          className="w-[390px] max-h-[560px] overflow-y-scroll bg-white border border-gray-200 rounded-xl shadow-lg p-6 scrollbar-none"
+          className="w-[320px] max-h-[560px] overflow-y-scroll bg-white border border-gray-200 rounded-xl shadow-lg p-6 scrollbar-none"
           onClick={(e) => e.stopPropagation()}
         >
           <div className="space-y-4 scrollbar-none">
@@ -95,7 +115,7 @@ export default function Notification({
                   }}
                 />
                 {notificationNumber[0] != 0 && (
-                  <div className="w-6 h-6 rounded-[50%] bg-red-500 absolute bottom-0 left-14 text-white text-center text-xs leading-loose">
+                  <div className="w-6 h-6 rounded-[50%] bg-red-500 absolute bottom-0 left-12 text-white text-center z-50 text-xs leading-loose">
                     {notificationNumber[0] >= 100
                       ? `99+`
                       : notificationNumber[0]}
@@ -109,7 +129,7 @@ export default function Notification({
                   }}
                 />
                 {notificationNumber[1] != 0 && (
-                  <div className="w-6 h-6 rounded-[50%] bg-red-500 absolute bottom-0 left-48 text-white text-center z-50 text-xs leading-loose">
+                  <div className="w-6 h-6 rounded-[50%] bg-red-500 absolute bottom-0 left-36 text-white text-center z-50 text-xs leading-loose">
                     {notificationNumber[1] >= 100
                       ? `99+`
                       : notificationNumber[1]}
@@ -123,7 +143,7 @@ export default function Notification({
                   }}
                 />
                 {notificationNumber[2] != 0 && (
-                  <div className="w-6 h-6 rounded-[50%] bg-red-500 absolute bottom-0 right-2.5 text-white justify-center text-center z-50 text-xs leading-loose">
+                  <div className="w-6 h-6 rounded-[50%] bg-red-500 absolute bottom-0 right-1.5 text-white justify-center text-center z-50 text-xs leading-loose">
                     {notificationNumber[2] >= 100
                       ? `99+`
                       : notificationNumber[2]}
@@ -140,7 +160,7 @@ export default function Notification({
                 notificationArray.map((notification: any) => (
                   <NotificationBox
                     fullname={notification.author.fullName}
-                    userid={notification.author.email}
+                    userid={notification.author._id}
                     image={notification.author.image}
                     notificationType={
                       notification.like === null || undefined
