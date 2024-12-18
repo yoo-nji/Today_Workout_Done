@@ -2,39 +2,47 @@ import { useEffect, useState } from "react";
 import { api } from "../api/axios";
 import SwiperCustom from "../components/main/SwiperCustom";
 import BmiCon from "../components/main/BmiCon";
+import { useLoadingStore } from "../stores/loadingStore";
+import Loading from "../components/Loading";
 
 export default function Main() {
+  // 로딩 관리
+  const startLoading = useLoadingStore((state) => state.startLoading);
+  const stopLoading = useLoadingStore((state) => state.stopLoading);
+
   const [posts, setPosts] = useState<PostType[]>([]);
   const [proteinPosts, setProteinPosts] = useState<PostType[]>([]);
   const [routinePosts, setRoutinePosts] = useState<PostType[]>([]);
   const [gymreviewPosts, setGymreviewPosts] = useState<PostType[]>([]);
 
-  //TODO: 반복 작업 수정 필요
-  const getChannelPost = async () => {
+  const channels = [
+    { id: "675a2e0d0d335f0ddae3a194", setter: setPosts },
+    { id: "675a2dac0d335f0ddae3a188", setter: setProteinPosts },
+    { id: "675a2dc40d335f0ddae3a18c", setter: setRoutinePosts },
+    { id: "675a2ddc0d335f0ddae3a190", setter: setGymreviewPosts },
+  ];
+
+  const getChannelPost = async (channelId: string) => {
     try {
-      const { data: posts } = await api.get(
-        "/posts/channel/675a2e0d0d335f0ddae3a194"
-      );
-      const { data: proteinPosts } = await api.get(
-        "/posts/channel/675a2dac0d335f0ddae3a188"
-      );
-      const { data: routinePosts } = await api.get(
-        "/posts/channel/675a2dc40d335f0ddae3a18c"
-      );
-      const { data: gymreviewPosts } = await api.get(
-        "/posts/channel/675a2ddc0d335f0ddae3a190"
-      );
-      setPosts(posts.slice(0, 10));
-      setProteinPosts(proteinPosts.slice(0, 10));
-      setRoutinePosts(routinePosts.slice(0, 10));
-      setGymreviewPosts(gymreviewPosts.slice(0, 10));
+      const { data } = await api.get(`/posts/channel/${channelId}`);
+      return data.slice(0, 10);
     } catch (err) {
       console.error(err);
     }
   };
 
+  const fetchAllPosts = async () => {
+    startLoading();
+    const requests = channels.map(async (channel) => {
+      const data = await getChannelPost(channel.id);
+      channel.setter(data);
+    });
+    await Promise.all(requests);
+    stopLoading();
+  };
+
   useEffect(() => {
-    getChannelPost();
+    fetchAllPosts();
   }, []);
 
   const category = [
@@ -46,7 +54,8 @@ export default function Main() {
 
   return (
     <>
-      <div className="flex flex-col gap-20 w-full">
+      <div className="flex flex-col gap-20 w-full relative">
+        <Loading />
         <BmiCon />
         <div className="flex flex-col justify-center">
           {/* 게시글 피드 */}
