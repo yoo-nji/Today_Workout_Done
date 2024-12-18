@@ -1,6 +1,8 @@
 import PostInfo from "../components/PostDetail/PostInfo";
 import leftIcon from "../assets/icons/double-left_blue.svg";
 import rightIcon from "../assets/icons/double-right_blue.svg";
+import darkPostLeft from "../assets/darkicons/darkPostLeft.svg";
+import darkPostRight from "../assets/darkicons/darkPostRight.svg";
 import { useEffect, useState } from "react";
 import { api } from "../api/axios";
 import { useAuth } from "../stores/authStore";
@@ -8,6 +10,7 @@ import CommentSec from "../components/PostDetail/CommentSec";
 import { useNavigate, useParams } from "react-router";
 import { useLoadingStore } from "../stores/loadingStore";
 import Loading from "../components/Loading";
+import { useDarkModeStore } from "../stores/darkModeStore";
 
 // 아직 comments 타입을 정확히 지정하지않았다.
 interface PostInfo {
@@ -26,6 +29,8 @@ interface PostInfo {
 }
 
 export default function PostDetail() {
+  const isDark = useDarkModeStore((state) => state.isDark);
+
   // 로딩
   const startLoading = useLoadingStore((state) => state.startLoading);
   const stopLoading = useLoadingStore((state) => state.stopLoading);
@@ -138,7 +143,10 @@ export default function PostDetail() {
     );
 
   return (
-    <div className="relative flex justify-center">
+    <div
+      className="relative flex justify-center dark:bg-lightBlackDark"
+      style={{ minHeight: "calc(100vh - 70px)" }}
+    >
       {/* 로딩시 */}
       <Loading />
       <div className="w-[766px] py-12 h-fit">
@@ -163,9 +171,9 @@ export default function PostDetail() {
             <div className="flex justify-between">
               {/* 이전 페이지 버튼튼 */}
               <div
-                className={`w-[150px] h-[45px] hover:bg-[#265CAC]/5 border-[0.5px] flex items-center justify-center gap-4 rounded-[10px] ${
+                className={`w-[150px] h-[45px] hover:bg-[#265CAC]/5 border-[1px] flex items-center justify-center gap-4 rounded-[10px] ${
                   prevPost ? "cursor-pointer" : "cursor-not-allowed opacity-50"
-                }`}
+                } dark:text-white dark:border-semiDarkGreyDark dark:hover:bg-darkGreyDark`}
                 onClick={() =>
                   prevPost &&
                   navigate(
@@ -175,15 +183,19 @@ export default function PostDetail() {
                   )
                 }
               >
-                <img src={leftIcon} alt="leftIcon" className="w-[16px]" />
+                <img
+                  src={!isDark ? leftIcon : darkPostLeft}
+                  alt="leftIcon"
+                  className="w-[16px]"
+                />
                 <span>이전 포스트</span>
               </div>
 
               {/* 다음 페이지 버튼 */}
               <div
-                className={`w-[150px] h-[45px] hover:bg-[#265CAC]/5 border-[0.5px] flex items-center gap-4 justify-center rounded-[10px] ${
+                className={`w-[150px] h-[45px] hover:bg-[#265CAC]/5 border-[1px] flex items-center gap-4 justify-center rounded-[10px] ${
                   nextPost ? "cursor-pointer" : "cursor-not-allowed opacity-50"
-                }`}
+                } dark:text-white dark:border-semiDarkGreyDark dark:hover:bg-darkGreyDark`}
                 onClick={() =>
                   nextPost &&
                   navigate(
@@ -194,7 +206,11 @@ export default function PostDetail() {
                 }
               >
                 <span>다음 포스트</span>
-                <img src={rightIcon} alt="leftIcon" className="w-[16px]" />
+                <img
+                  src={!isDark ? rightIcon : darkPostRight}
+                  alt="leftIcon"
+                  className="w-[16px]"
+                />
               </div>
             </div>
             {/* 댓글 섹션 */}

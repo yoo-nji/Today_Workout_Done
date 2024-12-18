@@ -177,7 +177,7 @@ export default function PostInfo({
     <>
       <div
         className={twMerge(
-          "pb-2 text-sm cursor-pointer",
+          "pb-2 text-sm cursor-pointer dark:text-greyDark",
           !edit && "hover:underline"
         )}
         onClick={() => (!edit ? navigate(`/${channel}`) : null)}
@@ -191,7 +191,7 @@ export default function PostInfo({
           onChange={(e) => setTitleInput(e.target.value)}
         />
       ) : (
-        <h1 className="py-1 mb-4 text-3xl">{titleInput}</h1>
+        <h1 className="py-1 mb-4 text-3xl dark:text-white">{titleInput}</h1>
       )}
       <div className="flex items-center justify-between">
         {/* 왼쪽 프로필 */}
@@ -203,9 +203,9 @@ export default function PostInfo({
               userImg={userImg}
             />
           </div>
-          <div>
+          <div className="dark:text-white">
             <p className="text-[13px] mb-[6px] font-bold">{fullName}</p>
-            <div className="flex gap-1 text-[#505050]">
+            <div className="flex gap-1 text-[#505050] dark:text-greyDark">
               <p className="text-xs">{formattedDate}</p>
               <p className="text-xs">{formattedTime}</p>
             </div>
@@ -225,7 +225,7 @@ export default function PostInfo({
               저장
             </button>
           ) : (
-            <div className="flex gap-2 text-[#505050]">
+            <div className="flex gap-2 text-[#505050] dark:text-greyDark">
               <button className="hover:underline" onClick={editButtonHandler}>
                 수정
               </button>
@@ -257,7 +257,11 @@ export default function PostInfo({
                     alt={img ? "업로드된 이미지" : "기본 썸네일"}
                     className=""
                   />
-                  <div className="absolute flex flex-col justify-center items-center inset-0 text-[20px] text-white bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <div
+                    className="absolute flex flex-col justify-center items-center 
+                  inset-0 text-[20px] text-white bg-black bg-opacity-50 opacity-0 
+                  group-hover:opacity-100 transition-opacity duration-300"
+                  >
                     <span>
                       수정하려면{" "}
                       <span className="text-[#265CAC] font-semibold">
@@ -294,7 +298,9 @@ export default function PostInfo({
             </textarea>
           </div>
         ) : (
-          <div className="w-full py-3 mt-10 whitespace-pre-line">{context}</div>
+          <div className="w-full py-3 mt-10 whitespace-pre-line dark:text-lightGreyDark">
+            {context}
+          </div>
         )}
       </div>
       {/* 삭제 모달 */}

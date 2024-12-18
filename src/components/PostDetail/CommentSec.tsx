@@ -147,7 +147,7 @@ export default function CommentSec({
       <div className="">
         {/* 댓글 박스 */}
         {commentList.length === 0 ? (
-          <p className="text-base">
+          <p className="text-base dark:text-white">
             아직 댓글이 없습니다! 댓글을 작성해 주세요 😊
           </p>
         ) : (
