@@ -1,8 +1,10 @@
 import thumbnail from "../assets/images/feed_thumbnail.jpg";
 import likeIcon from "../assets/like_icon.svg";
+import likeFillIcon from "../assets/icons/like_fill_icon.svg";
 import chatIcon from "../assets/chat_icon_black.svg";
 import UserProfile from "./UserProfile";
 import { useNavigate } from "react-router";
+import { useAuth } from "../stores/authStore";
 
 export default function Review({
   image,
@@ -16,6 +18,8 @@ export default function Review({
   _id: post_id,
 }: PostType & MyInfo) {
   const navigate = useNavigate();
+  const myInfo = useAuth((state) => state.user);
+
   const update = new Date(createdAt);
   const date = update
     .toLocaleDateString("ko-KR")
@@ -50,6 +54,9 @@ export default function Review({
     e.stopPropagation(); // 이벤트 전파 중지
     navigate(`/user/${userid}`);
   };
+
+  const myLike = likes.some((like) => like.user === myInfo?._id);
+
   return (
     <div
       className="w-[814px] h-[315px] flex gap-8 cursor-pointer"
@@ -93,7 +100,7 @@ export default function Review({
         {/* 아이콘 */}
         <div className="flex flex-row gap-[18px] justify-end">
           <div className="flex flex-row gap-1">
-            <img src={likeIcon} alt="좋아요 아이콘" />
+            <img src={myLike ? likeFillIcon : likeIcon} alt="좋아요 아이콘" />
             <span>{likes.length}</span>
           </div>
           <div className="flex flex-row gap-1">
