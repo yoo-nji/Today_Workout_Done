@@ -216,7 +216,11 @@ export default function PostInfo({
           (edit ? (
             <button
               className="hover:underline"
-              onClick={() => setSaveModal(true)}
+              onClick={() => {
+                titleInput.trim() === "" || context.trim() === ""
+                  ? alert("빈 칸 없이 제목과 내용을 입력해주세요.")
+                  : setSaveModal(true);
+              }}
             >
               저장
             </button>
