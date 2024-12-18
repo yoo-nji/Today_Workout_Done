@@ -57,7 +57,7 @@ export default function ModeChange() {
       <button
         onClick={handleClick}
         className={twMerge(
-          "relative w-[63px] h-[30px] rounded-full text-white font-bold text-[16px] overflow-hidden group shadow-inner"
+          "relative w-[63px] h-[30px] dark:border dark:border-semiDarkGreyDark rounded-full text-white font-bold text-[16px] overflow-hidden group shadow-inner"
         )}
         style={{
           backgroundImage: isDark

@@ -13,6 +13,9 @@ import { useToken } from "../../stores/tokenStore";
 import ModeChange from "../button/ModeChange";
 import bars from "../../assets/icons/bars.svg";
 import close from "../../assets/icons/close-icon.svg";
+import { useDarkModeStore } from "../../stores/darkModeStore";
+import darkNotifyIcon from "../../assets/darkicons/darkNotifyIcon.svg";
+import darkMainLogo from "../../assets/darkicons/darkMainLogo.svg";
 
 // 사이드바 접힐때 로고 보이도록 처리하자
 export default function Header({
@@ -100,10 +103,13 @@ export default function Header({
     setShowNoti(!showNoti);
   };
 
+  // 다크모드
+  const isDark = useDarkModeStore((state) => state.isDark);
+
   return (
     <header
       className={twMerge(
-        "h-[70px] flex items-center justify-end py-[20px]",
+        "h-[70px] flex items-center justify-end py-[20px] dark:bg-lightBlackDark",
         logo ? "justify-between" : "justify-end",
         sidebar ? "pl-[100px] pr-[36px]" : "px-[36px]",
         isActive && "on"
@@ -123,7 +129,11 @@ export default function Header({
           !isActive && "hidden"
         )}
       >
-        <img src={logoImg} alt="logo" onClick={() => navigate("/")} />
+        <img
+          src={!isDark ? logoImg : darkMainLogo}
+          alt="logo"
+          onClick={() => navigate("/")}
+        />
       </div>
       {/* <button onClick={() => test11()}>sdfsg</button> 테스트용버튼*/}
 
@@ -136,15 +146,15 @@ export default function Header({
           </div>
           <div className="lg:flex gap-2 hidden buttonComponent">
             <ButtonComponent
-              bgcolor="bg-[#265CAC]"
-              textcolor="text-[white]"
+              bgcolor="bg-[#265CAC] dark:bg-mainDark"
+              textcolor="text-[white] dark:text-blackDark"
               onClick={logoutHandler}
             >
               {"로그아웃"}
             </ButtonComponent>
             <ButtonComponent
-              bgcolor="bg-white"
-              textcolor="text-[#265CAC]"
+              bgcolor="bg-white dark:bg-skyDark"
+              textcolor="text-[#265CAC] dark:text-blackDark"
               onClick={() => navigate("/posting")}
             >
               {"새글등록"}
@@ -153,7 +163,7 @@ export default function Header({
           {/* 알림 */}
           <div className="w-[48px] h-[48px]  flex justify-center items-center mx-[10px] relative notification">
             <img
-              src={notifyIcon}
+              src={!isDark ? notifyIcon : darkNotifyIcon}
               alt="알림 아이콘"
               className="cursor-pointer"
               // 알림창 띄워주는 변수
@@ -198,24 +208,24 @@ export default function Header({
           >
             로그인이 귀찮은자를 위해
           </button> */}
+          {/* 정식배포시 여기까지 삭제 */}
 
           {/* 모드변경 버튼 */}
           <div className="flex justify-center">
             <ModeChange />
           </div>
 
-          {/* 정식배포시 여기까지 삭제 */}
           <ButtonComponent
-            bgcolor="bg-[#265CAC]"
-            textcolor="text-white"
+            bgcolor="bg-[#265CAC] dark:bg-mainDark"
+            textcolor="text-white dark:text-blackDark"
             onClick={() => navigate("/login")}
           >
             {"로그인"}
           </ButtonComponent>
 
           <ButtonComponent
-            bgcolor="bg-white"
-            textcolor="text-[#265CAC]"
+            bgcolor="bg-white dark:bg-skyDark"
+            textcolor="text-[#265CAC] dark:text-blackDark"
             onClick={() => navigate("/signup")}
           >
             {"가입하기"}
