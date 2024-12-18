@@ -1,5 +1,7 @@
 import { twMerge } from "tailwind-merge";
 import searchIcon from "../assets/searchIcon.svg";
+import darkSearchIcon from "../assets/darkicons/darkSearchIcon.svg";
+import { useDarkModeStore } from "../stores/darkModeStore";
 
 export default function SearchBar({
   placeholder,
@@ -12,6 +14,8 @@ export default function SearchBar({
   value: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }) {
+  const isDark = useDarkModeStore((state) => state.isDark);
+
   return (
     <div
       className={twMerge(
@@ -20,13 +24,13 @@ export default function SearchBar({
       )}
     >
       <input
-        className="w-full outline-none"
+        className="w-full outline-none dark:bg-lightBlackDark dark:text-[#fff]"
         type="text"
         placeholder={placeholder}
         value={value}
         onChange={onChange}
       />
-      <img src={searchIcon} alt="검색 아이콘" />
+      <img src={!isDark ? searchIcon : darkSearchIcon} alt="검색 아이콘" />
     </div>
   );
 }
