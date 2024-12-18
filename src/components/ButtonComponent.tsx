@@ -11,13 +11,15 @@ const ButtonComponent: React.FC<ButtonComponent> = ({
   disabled,
   disabledBgColor,
 }) => {
-
   return (
     <button
       onClick={onClick}
       className={twMerge(
-        `w-[120px] h-[36px] rounded-[10px] ${bgcolor} ${border}
-        ${textcolor} flex justify-center items-center cursor-pointer font-bold`
+        `w-[120px] h-[36px] rounded-[10px] flex justify-center items-center cursor-pointer font-bold`,
+        bgcolor,
+        disabled ? disabledBgColor : bgcolor,
+        border,
+        textcolor
       )}
     >
       {children}
