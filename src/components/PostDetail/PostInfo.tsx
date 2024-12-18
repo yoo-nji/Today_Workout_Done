@@ -131,7 +131,7 @@ export default function PostInfo({
     setIsOpen(!isOpen);
     alert("삭제되었습니다");
     // 어디로 이동할지는 아직 미정입니다. 일단은 메인으로 이동하게 설정하였습니다.
-    navigate("/");
+    navigate(`/${channel}`);
   };
 
   // 모달 창 떴을 때 스크롤 제한(삭제 모달, 수정 모달)
