@@ -87,7 +87,7 @@ export default function Login() {
           className="pt-[50px] block mx-auto "
         />
         {/* 제목 */}
-        <p className="text-center text-[20px] mt-[20px] font-jua text-black dark:text-white">
+        <p className="text-center text-[20px] mt-[20px] font-jua dark:text-white">
           로그인
         </p>
 
@@ -98,7 +98,7 @@ export default function Login() {
           value={email}
           onChange={handleEmailChange}
           className={twMerge(
-            `w-full h-[40px] mb-[10px] py-auto pl-[15px] bg-white border border-[#C2C2C2] rounded-[10px] placeholder-[#B6B6B6] text-[18px] font-jua dark:bg-darkGreyDark dark:border-greyDark dark:placeholder-semiDarkGreyDark ${
+            `w-full h-[40px] mb-[10px] py-auto pl-[15px] border border-[#C2C2C2] rounded-[10px] placeholder-[#B6B6B6] text-[18px] font-jua dark:bg-darkGreyDark dark:border-greyDark dark:placeholder-semiDarkGreyDark ${
               email
                 ? "text-[#265CAC] border-[#265CAC] border-[2px] text-[16px] font-ibm font-bold dark:text-mainDark dark:border-mainDark dark:font-semibold"
                 : "text-gray-400 border-[1px] dark:text-semiDarkGreyDark "
@@ -116,7 +116,7 @@ export default function Login() {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           className={twMerge(
-            `w-full h-[40px] mb-[10px] py-auto pl-[15px] bg-white  border border-[#C2C2C2] rounded-[10px] placeholder-[#B6B6B6] text-[18px] font-jua dark:bg-darkGreyDark dark:border-greyDark dark:placeholder-semiDarkGreyDark ${
+            `w-full h-[40px] mb-[10px] py-auto pl-[15px] border border-[#C2C2C2] rounded-[10px] placeholder-[#B6B6B6] text-[18px] font-jua dark:bg-darkGreyDark dark:border-greyDark dark:placeholder-semiDarkGreyDark ${
               password
                 ? "text-[#265CAC] border-[#265CAC] border-[2px] text-[16px] font-ibm font-bold dark:text-mainDark dark:border-mainDark dark:font-semibold"
                 : "text-gray-400 border-[1px] dark:text-semiDarkGreyDark"
