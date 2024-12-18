@@ -161,7 +161,7 @@ export default function Header({
             </ButtonComponent>
           </div>
           {/* 알림 */}
-          <div className="w-[48px] h-[48px]  flex justify-center items-center mx-[10px] relative notification">
+          <div className="w-[48px] h-[48px] flex justify-center items-center mx-[10px] relative notification">
             <img
               src={!isDark ? notifyIcon : darkNotifyIcon}
               alt="알림 아이콘"
@@ -218,14 +218,16 @@ export default function Header({
           <ButtonComponent
             bgcolor="bg-[#265CAC] dark:bg-mainDark"
             textcolor="text-white dark:text-blackDark"
+            border="border-0"
             onClick={() => navigate("/login")}
           >
             {"로그인"}
           </ButtonComponent>
 
           <ButtonComponent
-            bgcolor="bg-white dark:bg-skyDark"
-            textcolor="text-[#265CAC] dark:text-blackDark"
+            bgcolor="bg-white dark:bg-lightBlackDark"
+            textcolor="text-[#265CAC] dark:text-mainDark"
+            border="border-[2px] border-[#265CAC] dark:border-mainDark"
             onClick={() => navigate("/signup")}
           >
             {"가입하기"}
