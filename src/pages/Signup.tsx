@@ -7,6 +7,9 @@ import { api } from "../api/axios";
 import privateImg from "../assets/private.svg";
 import showPwImg from "../assets/showpw.svg";
 import { SignupConfirm } from "../components/modal/SignupConfirm";
+import darkMainLogo from "../assets/darkicons/darkMainLogo.svg";
+import { useDarkModeStore } from "../stores/darkModeStore";
+import darkShowPwImg from "../assets/darkicons/darkShowPwImg.svg";
 
 export default function Signup() {
   const navigate = useNavigate();
@@ -231,17 +234,19 @@ export default function Signup() {
     }
   };
 
+  const isDark = useDarkModeStore((state) => state.isDark);
+
   return (
-    <div className="bg-[#FFFFFF] rounded-[20px] border-red-500 w-[400px] h-[500px] mx-auto my-auto">
+    <div className="bg-[#FFFFFF] dark:bg-blackDark rounded-[20px] border-red-500 w-[400px] h-[500px] mx-auto my-auto">
       {/* 로고 */}
       <img
-        src={logoImg}
+        src={!isDark ? logoImg : darkMainLogo}
         className="pt-[50px] block mx-auto cursor-pointer"
         onClick={() => navigate("/")}
       />
 
       {/* 제목 */}
-      <p className="text-center text-[20px] mt-[20px] font-jua ">
+      <p className="text-center text-[20px] mt-[20px] font-jua dark:text-white">
         새로운 계정 만들기
       </p>
 
@@ -254,19 +259,21 @@ export default function Signup() {
           onChange={handleNameChange}
           onKeyDown={handleKeyDown}
           className={twMerge(
-            `w-full h-[40px] py-auto pl-[15px] border rounded-[10px] mt-[10px] font-jua text-[18px] ${
+            `w-full h-[40px] py-auto pl-[15px] border rounded-[10px] mt-[10px] font-jua text-[18px] dark:bg-darkGreyDark dark:border-greyDark dark:placeholder-semiDarkGreyDark ${
               name
-                ? "text-[#265CAC] border-[#265CAC] border-[2px] text-[16px] font-ibm font-bold"
-                : "text-gray-400 border-[2px]"
+                ? "text-[#265CAC] border-[#265CAC] border-[2px] text-[16px] font-ibm font-bold dark:text-mainDark dark:border-mainDark dark:font-semibold"
+                : "text-gray-400 border-[1px] dark:text-semiDarkGreyDark"
             } ${
-              nameError ? "border-[#EB003E] border-[2px] text-[#EB003E]" : ""
+              nameError
+                ? "border-[#EB003E] border-[2px] text-[#EB003E] dark:border-pinkDark dark:text-pinkDark"
+                : ""
             }`
           )}
         />
 
         {/* 닉네임 에러 메시지 */}
         {nameError && (
-          <p className="ml-[15px] text-red-500 text-[13px] font-dohyeon">
+          <p className="ml-[15px] text-red-500 text-[13px] font-dohyeon dark:text-pinkDark">
             {nameError}
           </p>
         )}
@@ -279,20 +286,22 @@ export default function Signup() {
           onChange={handleEmailChange}
           onKeyDown={handleKeyDown}
           className={twMerge(
-            `w-full h-[40px] py-auto pl-[15px] border rounded-[10px] font-jua text-[18px] ${
+            `w-full h-[40px] py-auto pl-[15px] border rounded-[10px] font-jua text-[18px] dark:bg-darkGreyDark dark:border-greyDark dark:placeholder-semiDarkGreyDark ${
               nameError ? "mt-0" : "mt-[19.5px]"
             } ${
               email
-                ? "text-[#265CAC] border-[#265CAC] border-[2px] text-[16px] font-ibm font-bold"
-                : "text-gray-400"
+                ? "text-[#265CAC] border-[#265CAC] border-[2px] text-[16px] font-ibm font-bold dark:text-mainDark dark:border-mainDark dark:font-semibold"
+                : ""
             } ${
-              emailError ? "border-[#EB003E] border-[2px] text-[#EB003E]" : ""
+              emailError
+                ? "border-[#EB003E] border-[2px] text-[#EB003E] dark:border-pinkDark dark:text-pinkDark"
+                : ""
             }`
           )}
         />
         {/* 이메일 에러 메시지 */}
         {emailError && (
-          <p className="ml-[15px] text-red-500 text-[13px] font-dohyeon">
+          <p className="ml-[15px] text-red-500 text-[13px] font-dohyeon dark:text-pinkDark">
             {emailError}
           </p>
         )}
@@ -307,15 +316,15 @@ export default function Signup() {
               onChange={handlePasswordChange}
               onKeyDown={handleKeyDown}
               className={twMerge(
-                `w-full h-[40px] py-auto pl-[15px] border rounded-[10px] font-jua text-[18px] ${
+                `w-full h-[40px] py-auto pl-[15px] border rounded-[10px] font-jua text-[18px] dark:bg-darkGreyDark dark:border-greyDark dark:placeholder-semiDarkGreyDark ${
                   emailError ? "mt-0" : "mt-[19.5px]"
                 } ${
                   password
-                    ? "text-[#265CAC] border-[#265CAC] border-[2px] text-[16px]"
+                    ? "text-[#265CAC] border-[#265CAC] border-[2px] text-[16px] dark:text-mainDark dark:border-mainDark dark:font-semibold"
                     : "text-gray-400"
                 } ${
                   passwordError
-                    ? "border-[#EB003E] border-[2px] text-[#EB003E]"
+                    ? "border-[#EB003E] border-[2px] text-[#EB003E] dark:border-pinkDark dark:text-pinkDark"
                     : ""
                 }`
               )}
@@ -326,7 +335,11 @@ export default function Signup() {
               className="absolute right-[62px] top-[288px] translate-y-[0%] w-[20px] h-[20px] p-0 border-none bg-transparent"
             >
               <img
-                src={showPassword ? `${showPwImg}` : `${privateImg}`}
+                src={
+                  showPassword
+                    ? `${!isDark ? showPwImg : darkShowPwImg}`
+                    : `${privateImg}`
+                }
                 alt={showPassword ? "비밀번호 숨기기" : "비밀번호 보이기"}
                 className="w-full h-full"
               />
@@ -335,7 +348,7 @@ export default function Signup() {
 
           {/* 비밀번호 에러 메시지 */}
           {passwordError && (
-            <p className="ml-[15px] text-red-500 text-[13px] font-dohyeon">
+            <p className="ml-[15px] text-red-500 text-[13px] font-dohyeon dark:text-pinkDark">
               {passwordError}
             </p>
           )}
@@ -349,15 +362,15 @@ export default function Signup() {
               onChange={handleConfirmPasswordChange}
               onKeyDown={handleKeyDown}
               className={twMerge(
-                `w-full h-[40px] py-auto pl-[15px] border rounded-[10px] font-jua text-[18px] ${
+                `w-full h-[40px] py-auto pl-[15px] border rounded-[10px] font-jua text-[18px] dark:bg-darkGreyDark dark:border-greyDark dark:placeholder-semiDarkGreyDark ${
                   passwordError ? "mt-0" : "mt-[19.5px]"
                 } ${
                   confirmPassword
-                    ? "text-[#265CAC] border-[#265CAC] border-[2px] text-[16px]"
+                    ? "text-[#265CAC] border-[#265CAC] border-[2px] text-[16px] dark:text-mainDark dark:border-mainDark dark:font-semibold"
                     : "text-gray-400"
                 } ${
                   confirmPasswordError
-                    ? " border-[#EB003E] border-[2px] text-[#EB003E]"
+                    ? "border-[#EB003E] border-[2px] text-[#EB003E] dark:border-pinkDark dark:text-pinkDark"
                     : ""
                 }`
               )}
@@ -368,7 +381,11 @@ export default function Signup() {
               className="absolute right-[62px] top-[348px] translate-y-[0%] w-[20px] h-[20px] p-0 border-none bg-transparent"
             >
               <img
-                src={showConfirmPassword ? `${showPwImg}` : `${privateImg}`}
+                src={
+                  showConfirmPassword
+                    ? `${!isDark ? showPwImg : darkShowPwImg}`
+                    : `${privateImg}`
+                }
                 alt={
                   showConfirmPassword ? "비밀번호 숨기기" : "비밀번호 보이기"
                 }
@@ -379,7 +396,7 @@ export default function Signup() {
 
           {/* 비밀번호 확인 에러 메시지 */}
           {confirmPasswordError && (
-            <p className="ml-[15px] text-red-500 text-[13px] font-dohyeon">
+            <p className="ml-[15px] text-red-500 text-[13px] font-dohyeon dark:text-pinkDark">
               {confirmPasswordError}
             </p>
           )}
@@ -388,7 +405,7 @@ export default function Signup() {
         {/* 로그인으로 이동하는 링크 */}
         <p
           className={twMerge(
-            `text-center text-[#265CAC] font-dohyeon text-[13px] ${
+            `text-center text-[#265CAC] font-dohyeon text-[13px] dark:text-mainDark ${
               confirmPasswordError ? "mt-[10px]" : "mt-[29.5px]"
             }`
           )}
@@ -396,7 +413,7 @@ export default function Signup() {
           이미 계정이 있으신가요?{" "}
           <Link
             to="/login"
-            className="text-[#265CAC] text-[16px] font-bold underline"
+            className="text-[#265CAC] text-[16px] font-bold underline dark:text-mainDark"
           >
             로그인
           </Link>
@@ -406,10 +423,10 @@ export default function Signup() {
         <button
           type="submit"
           className={twMerge(
-            `w-full bg-[#265CAC] text-white py-[5px] text-[15px] rounded-[20px] mt-[10px] font-jua ${
+            `w-full bg-[#265CAC] text-white py-[5px] text-[15px] rounded-[20px] mt-[10px] font-jua dark:bg-mainDark dark:text-blackDark dark:font-bold ${
               isFormValid && !isSubmitting
                 ? ""
-                : "bg-[#BABABA] cursor-not-allowed"
+                : "bg-[#BABABA] cursor-not-allowed dark:bg-semiDarkGreyDark dark:text-white"
             }`
           )}
           disabled={!isFormValid || isSubmitting}
