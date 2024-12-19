@@ -186,7 +186,7 @@ export default function PostInfo({
       </div>
       {edit ? (
         <input
-          className="py-1 pl-2 mb-4 text-3xl focus:outline-none focus:ring-2 focus:ring-[#265cac] border w-full border-[#d3d3d3d3] rounded-lg"
+          className="py-1 pl-2 mb-4 text-3xl focus:outline-none focus:ring-2 focus:ring-[#265cac] border w-full border-[#d3d3d3d3] rounded-lg  dark:bg-darkGreyDark dark:text-white"
           value={titleInput}
           onChange={(e) => setTitleInput(e.target.value)}
         />
@@ -215,7 +215,7 @@ export default function PostInfo({
         {owner &&
           (edit ? (
             <button
-              className="hover:underline"
+              className="hover:underline dark:text-greyDark"
               onClick={() => {
                 titleInput.trim() === "" || context.trim() === ""
                   ? alert("빈 칸 없이 제목과 내용을 입력해주세요.")
@@ -259,18 +259,18 @@ export default function PostInfo({
                   />
                   <div
                     className="absolute flex flex-col justify-center items-center 
-                  inset-0 text-[20px] text-white bg-black bg-opacity-50 opacity-0 
+                  inset-0 text-[20px] text-white dark:text-greyDark bg-black bg-opacity-50 opacity-0 
                   group-hover:opacity-100 transition-opacity duration-300"
                   >
                     <span>
                       수정하려면{" "}
-                      <span className="text-[#265CAC] font-semibold">
+                      <span className="text-[#265CAC] dark:text-mainTextDark font-semibold">
                         이미지
                       </span>
                       를 클릭하고
                     </span>
                     <span>
-                      <span className="text-[#265CAC] font-semibold">
+                      <span className="text-[#265CAC] dark:text-mainTextDark font-semibold">
                         새로운 파일
                       </span>
                       을 선택해주세요.
@@ -290,7 +290,7 @@ export default function PostInfo({
           <div className="w-full mt-10 ">
             <textarea
               ref={textarea}
-              className=" py-3 pl-2 w-full overflow-hidden resize-none  border border-[#d3d3d3d3] focus:outline-none focus:ring-2  focus:ring-[#265cac] rounded-lg "
+              className=" py-3 pl-2 w-full overflow-hidden resize-none  border border-[#d3d3d3d3] focus:outline-none focus:ring-2  focus:ring-[#265cac] rounded-lg dark:bg-darkGreyDark dark:text-white"
               onChange={(e) => handleInput(e)}
               value={context}
             >
