@@ -6,6 +6,8 @@ import { useRef } from "react";
 import { updateUserImg } from "../utils/updateUserImg";
 import { useLoadingStore } from "../stores/loadingStore";
 import { useAuth } from "../stores/authStore";
+import { useDarkModeStore } from "../stores/darkModeStore";
+import darkProfileEdit from "../assets/darkicons/darkProfileEdit.svg";
 
 export default function UserProfile({
   edit,
@@ -46,7 +48,7 @@ export default function UserProfile({
       stopLoading();
     }
   };
-
+  const isDark = useDarkModeStore((state) => state.isDark);
   return (
     <div
       className={twMerge(
@@ -66,7 +68,7 @@ export default function UserProfile({
       {edit && (
         <img
           className="absolute right-[-5px] bottom-[-5px] w-10"
-          src={profileEdit}
+          src={!isDark ? profileEdit : darkProfileEdit}
           alt="profile-edit"
           onClick={onClick}
         />
@@ -96,7 +98,7 @@ export default function UserProfile({
           <label htmlFor="editProfileImg">
             <img
               className="absolute right-[-5px] bottom-[-5px] w-10 cursor-pointer"
-              src={profileEdit}
+              src={!isDark ? profileEdit : darkProfileEdit}
               alt="profile-edit"
             />
           </label>
