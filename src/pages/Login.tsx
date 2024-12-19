@@ -78,7 +78,7 @@ export default function Login() {
   return (
     <>
       <form
-        className="px-[50px] w-[400px] h-[500px] rounded-[20px] bg-[#FFFFFF] dark:bg-blackDark"
+        className="px-[50px] h-[500px] rounded-[20px] bg-[#FFFFFF] dark:bg-blackDark"
         onSubmit={handleSubmit}
       >
         {/* 로고 */}
