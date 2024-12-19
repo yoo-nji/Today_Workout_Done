@@ -1,11 +1,19 @@
 import { create } from "zustand";
+import { persist } from "zustand/middleware";
 
-interface sidebarToggle {
+interface SidebarToggle {
   isToggle: boolean;
   sidebarToggle: () => void;
 }
 
-export const usesidebarToggleStore = create<sidebarToggle>((set) => ({
-  isToggle: true,
-  sidebarToggle: () => set((state) => ({ isToggle: !state.isToggle })),
-}));
+export const usesidebarToggleStore = create<SidebarToggle>()(
+  persist(
+    (set) => ({
+      isToggle: true,
+      sidebarToggle: () => set((state) => ({ isToggle: !state.isToggle })),
+    }),
+    {
+      name: "sidebar-toggle",
+    }
+  )
+);
