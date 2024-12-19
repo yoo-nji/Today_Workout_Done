@@ -83,7 +83,7 @@ export default function Header({
       {/* 로고 */}
       <div
         className={twMerge(
-          "cursor-pointer lg:block hidden logo border-2 border-red-500",
+          "cursor-pointer lg:block hidden logo",
           !logo && "hidden",
           !isActive && "hidden"
         )}
