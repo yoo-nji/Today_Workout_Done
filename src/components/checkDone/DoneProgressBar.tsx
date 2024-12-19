@@ -23,6 +23,10 @@ export default function DoneProgressBar({
   const isDark = useDarkModeStore((state) => state.isDark);
 
   const textFill = isDark ? "#6FBEFF" : "#265CAC";
+  const circleFill = isDark ? "#252525" : "#ececec";
+  const circleDoneFill = isDark
+    ? `rgba(129, 180, 221, 100)`
+    : `rgba(38, 92, 172, ${percent / 100})`;
 
   return (
     <div className={`${width ? width : "w-[110px]"}`}>
@@ -31,12 +35,12 @@ export default function DoneProgressBar({
         text={`${percent.toFixed(0)}%`}
         styles={{
           path: {
-            stroke: `rgba(38, 92, 172, ${percent / 100})`,
+            stroke: circleDoneFill,
             strokeLinecap: "round",
             transition: "stroke-dashoffset 0.5s ease 0s",
           },
           trail: {
-            stroke: "#ececec",
+            stroke: circleFill,
           },
           text: {
             fill: textFill,
