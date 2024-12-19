@@ -19,19 +19,19 @@ import { verifyUser } from "./utils/verifyUser";
 import Main from "./pages/Main";
 
 export default function App() {
-  const path = useLocation();
+  const location = useLocation();
 
   useEffect(() => {
     verifyUser();
-  }, [path]);
+  }, [location]);
   return (
     <>
       <Routes>
         <Route element={<RootLayout />}>
           <Route path="/" element={<Main />} />
-          <Route path="/records" element={<Home />} />
-          <Route path="/protein" element={<Home />} />
-          <Route path="/routine" element={<Home />} />
+          <Route path="/records" element={<Home key={location.key} />} />
+          <Route path="/protein" element={<Home key={location.key} />} />
+          <Route path="/routine" element={<Home key={location.key} />} />
           <Route path="/gymreview" element={<ReviewPost />} />
           <Route path="/records/:post_id" element={<PostDetail />} />
           <Route path="/protein/:post_id" element={<PostDetail />} />
