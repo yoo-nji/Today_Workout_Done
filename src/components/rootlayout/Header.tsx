@@ -25,7 +25,7 @@ export default function Header({
 }) {
   // 헤더 반응형 토글
   const [isActive, setIsActive] = useState(false);
-  console.log("isActive", isActive);
+  // console.log("isActive", isActive);
   const navigate = useNavigate();
 
   // 토큰 설정
