@@ -1,6 +1,10 @@
 import uploadImgIcon from "../../assets/uploadImgIcon.svg";
 import selectChannel from "../../assets/selectChannel.svg";
 import writeTitle from "../../assets/writeTitle.svg";
+import { useDarkModeStore } from "../../stores/darkModeStore";
+import darkUploadImgIcon from "../../assets/darkicons/darkUploadImgIcon.svg";
+import darkSelectChannel from "../../assets/darkicons/darkSelectChannel.svg";
+import darkWriteTitle from "../../assets/darkicons/darkWriteTitle.svg";
 
 interface PostStatusProps {
   img: string;
@@ -18,6 +22,12 @@ export default function PostStatus({
   const isTitleValid = title.trim() !== "";
   const isDescValid = desc.trim() !== "";
 
+  const isDark = useDarkModeStore((state) => state.isDark);
+  const IconDone = isDark ? "bg-mainDark" : "bg-[#4CAF50] ";
+  const IconUndo = isDark ? "bg-semiDarkGreyDark" : "bg-[#c1c1c1]";
+  const textDone = isDark ? "text-mainDark" : "text-[#4CAF50] ";
+  const textUndo = isDark ? "text-semiDarkGreyDark" : "text-[#c1c1c1]";
+
   return (
     <div className="w-[250px] h-[45px] flex items-center justify-between border-t border-[#c1c1c1] mt-3">
       {/* 아이콘 */}
@@ -26,19 +36,17 @@ export default function PostStatus({
       >
         <div
           className={`w-[45px] h-[45px] rounded-[50%] ${
-            img ? "bg-[#4CAF50] " : "bg-[#c1c1c1] "
+            img ? IconDone : IconUndo
           } flex justify-center items-center `}
         >
           <img
-            src={uploadImgIcon}
+            src={!isDark ? uploadImgIcon : darkUploadImgIcon}
             alt="이미지 업로드 아이콘"
             className="w-[30px] h-[30px] block "
           />
         </div>
         <p
-          className={`${
-            img ? "text-[#4CAF50] " : "text-[#c1c1c1] "
-          } text-center leading-[16px]`}
+          className={`${img ? textDone : textUndo} text-center leading-[16px]`}
         >
           이미지 등록
         </p>
@@ -49,18 +57,18 @@ export default function PostStatus({
       >
         <div
           className={`w-[45px] h-[45px] rounded-[50%] ${
-            channel !== "게시판 선택" ? "bg-[#4CAF50]" : "bg-[#c1c1c1]"
+            channel !== "게시판 선택" ? IconDone : IconUndo
           } flex justify-center items-center`}
         >
           <img
-            src={selectChannel}
+            src={!isDark ? selectChannel : darkSelectChannel}
             alt="게시판 아이콘"
             className="w-[30px] h-[30px] block"
           />
         </div>
         <p
           className={`${
-            channel !== "게시판 선택" ? "text-[#4CAF50]" : "text-[#c1c1c1]"
+            channel !== "게시판 선택" ? textDone : textUndo
           } text-center leading-[16px]`}
         >
           게시판 선택
@@ -72,18 +80,18 @@ export default function PostStatus({
       >
         <div
           className={`w-[45px] h-[45px] rounded-[50%] ${
-            isTitleValid && isDescValid ? "bg-[#4CAF50] " : "bg-[#c1c1c1] "
+            isTitleValid && isDescValid ? IconDone : IconUndo
           } flex justify-center items-center`}
         >
           <img
-            src={writeTitle}
+            src={!isDark ? writeTitle : darkWriteTitle}
             alt="작성 아이콘"
             className="w-[30px] h-[30px] block ml-[6px]"
           />
         </div>
         <p
           className={`${
-            isTitleValid && isDescValid ? "text-[#4CAF50]" : "text-[#c1c1c1]"
+            isTitleValid && isDescValid ? textDone : textUndo
           } text-center leading-[16px]`}
         >
           내용 작성
