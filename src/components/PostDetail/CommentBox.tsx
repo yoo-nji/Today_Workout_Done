@@ -30,7 +30,7 @@ export default function CommentBox({
   };
 
   return (
-    <div className="flex flex-col py-5 border-b border-gray-200">
+    <div className="flex flex-col py-5 border-b border-gray-200 dark:border-[#717171]">
       <div className="flex justify-between ">
         <div className="flex gap-[12px] w-fit items-center">
           <div onClick={() => handleClick(comment.author._id)}>
@@ -41,10 +41,12 @@ export default function CommentBox({
             />
           </div>
           <div>
-            <p className="text-[13px] mb-[4px] font-bold">
+            <p className="text-[13px] mb-[4px] font-bold dark:text-white">
               {comment.author.fullName}
             </p>
-            <p className="text-xs font-light">{formattedDate}</p>
+            <p className="text-xs font-light dark:text-greyDark">
+              {formattedDate}
+            </p>
           </div>
         </div>
         {loginId?._id === comment.author._id && (
@@ -53,7 +55,7 @@ export default function CommentBox({
           </button>
         )}
       </div>
-      <div className="mt-3 text-[14px]">{comment.comment}</div>
+      <div className="mt-3 text-[14px] dark:text-white">{comment.comment}</div>
       <ConfirmModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}

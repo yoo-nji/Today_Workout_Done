@@ -6,10 +6,12 @@ import NotificationBox from "../NotificationBox";
 import { api } from "../../api/axios";
 import { AxiosError } from "axios";
 import { useEffect, useState } from "react";
+
 import darkCommentIcon from "../../assets/darkicons/darkCommentIcon.svg";
 import darkFollowIcon from "../../assets/darkicons/darkFollowIcon.svg";
 import darkLikeIcon from "../../assets/darkicons/darkLikeIcon.svg";
 import { useDarkModeStore } from "../../stores/darkModeStore";
+import { useAuth } from "../../stores/authStore";
 
 interface notificationProps {
   closeNoti: () => void;
@@ -26,8 +28,22 @@ export default function Notification({
   // 모두읽음처리
   const notificationSeen = async () => {
     try {
-      const { status, data } = await api.put("/notifications/seen");
-      showNotiListHandler();
+      // 전역 상태 업데이트
+      setUser({
+        ...userInfo,
+        notifications: userInfo?.notifications?.splice(
+          0,
+          userInfo?.notifications?.length
+        ),
+      });
+      const { status } = await api.put("/notifications/seen");
+      try {
+        setUser(userInfo);
+      } catch (error) {
+        if (status === 400) console.log(error);
+      }
+
+      // showNotiListHandler();
       notificationNumberClean();
     } catch (error) {
       console.log(error);
@@ -36,6 +52,9 @@ export default function Notification({
       }
     }
   };
+
+  const userInfo = useAuth((state) => state.user);
+  const setUser = useAuth((state) => state.setUser);
 
   const notificationNumberClean = () => {
     setNotificationNumber([0, 0, 0]);
@@ -147,7 +166,7 @@ export default function Notification({
                 notificationArray.map((notification: any) => (
                   <NotificationBox
                     fullname={notification.author.fullName}
-                    userid={notification.author.email}
+                    userid={notification.author._id}
                     image={notification.author.image}
                     notificationType={
                       notification.like === null || undefined

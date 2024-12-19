@@ -237,7 +237,7 @@ export default function Signup() {
   const isDark = useDarkModeStore((state) => state.isDark);
 
   return (
-    <div className="bg-[#FFFFFF] dark:bg-blackDark rounded-[20px] border-red-500 w-[400px] h-[500px] mx-auto my-auto">
+    <div className="bg-[#FFFFFF] dark:bg-blackDark rounded-[20px] border-red-500 w-full max-w-[400px] h-[500px] mx-auto my-auto">
       {/* 로고 */}
       <img
         src={!isDark ? logoImg : darkMainLogo}

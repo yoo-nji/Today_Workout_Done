@@ -10,7 +10,7 @@ export default function Loading() {
   return (
     <div
       className={twMerge(
-        "absolute z-20 flex justify-center items-center w-full bg-white/80"
+        "absolute z-20 flex justify-center items-center w-full bg-white/80 dark:bg-lightBlackDark/50"
       )}
       style={{ height: "calc(100vh - 70px)" }}
     >

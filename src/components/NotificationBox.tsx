@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router";
 import defaultUserImg from "../assets/defaultUser.svg";
 
 interface NotificationBoxPropsType {
@@ -13,17 +14,23 @@ export default function NotificationBox({
   userid,
   notificationType,
 }: NotificationBoxPropsType) {
+  const navigate = useNavigate();
+
   return (
     <div className="w-[320px] h-[75px] bg-[#EFEFEF] mb-[5px] flex items-center gap-3 pl-[20px] rounded-[10px] flex-shrink-0 dark:bg-darkGreyDark dark:text-greyDark">
       {/* 유저 프로필, 현활 */}
       <div
         className="bg-white w-[48px] h-[48px] flex justify-center items-center rounded-[50%] shadow-inner cursor-pointer relative dark:bg-greyDark"
+
         // onClick={() => handleClick(userid)}
       >
         <img
           src={image ? image : defaultUserImg}
           alt="사용자 프로필 사진"
-          className="w-[35px] h-[35px] rounded-[50%]"
+          className="w-[33px] h-[33px] rounded-[50%]"
+          onClick={() => {
+            navigate(`/user/${userid}`);
+          }}
         />
       </div>
 
@@ -32,7 +39,6 @@ export default function NotificationBox({
           <article className="text-xs font-bold">
             {fullname} 님께서 회원님을 팔로우합니다!
           </article>
-          <div className="flex items-center w-full mt-1"></div>
         </div>
       )}
       {notificationType === "comment" && (

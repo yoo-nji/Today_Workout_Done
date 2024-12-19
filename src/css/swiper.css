@@ -37,10 +37,23 @@
 .swiper-button-next::after,
 .swiper-button-prev::after {
   font-size: 20px;
-  /* 화살표 크기 */
 }
 .swiper-button-next:hover,
 .swiper-button-prev:hover {
   background-color: rgba(234, 234, 234, 0.7);
-  /* 호버 시 배경색 */
+}
+
+.swiper.dark .swiper-button-next,
+.swiper.dark .swiper-button-prev {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.swiper.dark .swiper-button-next::after,
+.swiper.dark .swiper-button-prev::after {
+  color: white;
+}
+
+.swiper.dark .swiper-button-next:hover,
+.swiper.dark .swiper-button-prev:hover {
+  background-color: rgba(0, 0, 0, 0.65);
 }
