@@ -90,7 +90,7 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="relative flex flex-col gap-8 py-8 dark:bg-lightBlackDark">
+    <div className="relative flex flex-col gap-8 py-8 ">
       {/* 로딩창 */}
       <Loading />
 
