@@ -19,20 +19,18 @@ export default function NotificationBox({
   userid,
   notificationType,
   postId,
-  follow,
 }: NotificationBoxPropsType) {
   const navigate = useNavigate();
 
   const handleClick = async () => {
     if (notificationType === "comment" || notificationType === "like") {
       if (postId) {
-        console.log(postId);
         const { data } = await api.get(`/posts/${postId}`);
-        console.log(data);
+
         const getChannel = Object.keys(channelMapping).find(
           (key) => channelMapping[key] === data.channel._id
         );
-        console.log(getChannel);
+
         if (getChannel) {
           navigate(`/${getChannel}/${postId}`);
         }
