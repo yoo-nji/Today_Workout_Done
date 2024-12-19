@@ -6,6 +6,11 @@ import NotificationBox from "../NotificationBox";
 import { api } from "../../api/axios";
 import { AxiosError } from "axios";
 import { useEffect, useState } from "react";
+
+import darkCommentIcon from "../../assets/darkicons/darkCommentIcon.svg";
+import darkFollowIcon from "../../assets/darkicons/darkFollowIcon.svg";
+import darkLikeIcon from "../../assets/darkicons/darkLikeIcon.svg";
+import { useDarkModeStore } from "../../stores/darkModeStore";
 import { useAuth } from "../../stores/authStore";
 
 interface notificationProps {
@@ -91,57 +96,60 @@ export default function Notification({
   // const [notificationNumber, setNotificationNumber] = useState([0, 0, 0]);
 
   // console.log({ likeNumber });
+
+  const isDark = useDarkModeStore((state) => state.isDark);
+
   return (
     <div>
-      <div className="absolute z-10 top-[32px] right-[-10px] mt-2 w-[280px]  p-[18px] rounded-[10px] ">
+      <div className="absolute z-10 top-[32px] right-[10%] mt-2 w-[280px] p-[18px] rounded-[10px] mr-[43px]">
         {/* 말풍선 꼬리 */}
         {/* Todo 말풍선 꼬리 tailwind로 만드는법 알아보자 */}
         {/* 말풍선 본문 */}
         <div
-          className="w-[320px] max-h-[560px] overflow-y-scroll bg-white border border-gray-200 rounded-xl shadow-lg p-6 scrollbar-none"
+          className="w-[390px] max-h-[560px] overflow-y-scroll bg-white border border-gray-200 rounded-xl shadow-lg p-6 scrollbar-none dark:bg-blackDark dark:border-darkGreyDark"
           onClick={(e) => e.stopPropagation()}
         >
-          <div className="space-y-4 scrollbar-none">
+          <div className="space-y-0 scrollbar-none">
             {/* 헤더고정부분 */}
-            <div className="sticky top-0 bg-white z-10">
-              <div className="flex justify-between items-center w-full px-4 relative ">
+            <div className="sticky top-0 bg-white z-10 dark:bg-blackDark">
+              <div className="flex justify-between items-center w-full px-10 relative ">
                 <img
-                  src={commentIcon}
+                  src={!isDark ? commentIcon : darkCommentIcon}
                   className="relative h-[42px]"
                   onClick={() => {
                     console.log("comment");
                   }}
                 />
                 {notificationNumber[0] != 0 && (
-                  <div className="w-6 h-6 rounded-[50%] bg-red-500 absolute bottom-0 left-12 text-white text-center z-50 text-xs leading-loose">
+                  <div className="w-6 h-6 rounded-[50%] bg-red-500 absolute bottom-0 left-16 text-white text-center text-xs leading-loose">
                     {notificationNumber[0] >= 100
                       ? `99+`
                       : notificationNumber[0]}
                   </div>
                 )}
                 <img
-                  src={followIcon}
+                  src={!isDark ? followIcon : darkFollowIcon}
                   className="relative h-[37px]"
                   onClick={() => {
                     console.log("follow");
                   }}
                 />
                 {notificationNumber[1] != 0 && (
-                  <div className="w-6 h-6 rounded-[50%] bg-red-500 absolute bottom-0 left-36 text-white text-center z-50 text-xs leading-loose">
+                  <div className="w-6 h-6 rounded-[50%] bg-red-500 absolute bottom-0 left-44 text-white text-center z-50 text-xs leading-loose">
                     {notificationNumber[1] >= 100
                       ? `99+`
                       : notificationNumber[1]}
                   </div>
                 )}
                 <img
-                  src={likeIcon}
+                  src={!isDark ? likeIcon : darkLikeIcon}
                   className="relative h-[37px] z-40"
                   onClick={() => {
                     console.log("like");
                   }}
                 />
                 {notificationNumber[2] != 0 && (
-                  <div className="w-6 h-6 rounded-[50%] bg-red-500 absolute bottom-0 right-1.5 text-white justify-center text-center z-50 text-xs leading-loose">
+                  <div className="w-6 h-6 rounded-[50%] bg-red-500 absolute bottom-0 right-8 text-white justify-center text-center z-50 text-xs leading-loose">
                     {notificationNumber[2] >= 100
                       ? `99+`
                       : notificationNumber[2]}
@@ -153,7 +161,7 @@ export default function Notification({
             </div>
             {/* 여기까지 */}
             {/* 바디부분 길이 초과시 스크롤나게 */}
-            <div className="w-full overflow-y-auto max-h-[330px] scrollbar-none">
+            <div className="w-full overflow-y-auto max-h-[330px] scrollbar-none flex flex-col items-center">
               {notificationArray.length && showNotiList ? (
                 notificationArray.map((notification: any) => (
                   <NotificationBox
@@ -175,11 +183,12 @@ export default function Notification({
             </div>
             {/* 여기까지 */}
             {/* 푸터부분 */}
-            <div className="sticky bottom-0 bg-white z-10">
+            <div className="sticky bottom-0 bg-white z-10 dark:bg-blackDark">
               <div className="flex justify-end space-x-2 mt-4 ">
                 <ButtonComponent
-                  bgcolor="bg-white"
-                  textcolor="text-[#265CAC]"
+                  bgcolor="bg-white dark:bg-blackDark dark:hover:bg-darkGreyDark"
+                  textcolor="text-[#265CAC] dark:text-mainDark"
+                  border="border-[1px] dark:border-mainDark"
                   onClick={() => {
                     // Todo 모두읽기 기능 구현
                     notificationSeen();
@@ -189,8 +198,8 @@ export default function Notification({
                   {"모두읽기"}
                 </ButtonComponent>
                 <ButtonComponent
-                  bgcolor="bg-[#265CAC]"
-                  textcolor="text-[white]"
+                  bgcolor="bg-[#265CAC] dark:bg-mainDark dark:hover:bg-mainTextDark"
+                  textcolor="text-[white] dark:text-blackDark"
                   onClick={closeNoti}
                 >
                   {"닫기"}
