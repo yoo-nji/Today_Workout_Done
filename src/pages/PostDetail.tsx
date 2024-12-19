@@ -11,6 +11,7 @@ import { useNavigate, useParams } from "react-router";
 import { useLoadingStore } from "../stores/loadingStore";
 import Loading from "../components/Loading";
 import { useDarkModeStore } from "../stores/darkModeStore";
+import { twMerge } from "tailwind-merge";
 
 // 아직 comments 타입을 정확히 지정하지않았다.
 interface PostInfo {
@@ -169,11 +170,14 @@ export default function PostDetail() {
         {!edit && (
           <>
             <div className="flex justify-between">
-              {/* 이전 페이지 버튼튼 */}
+              {/* 이전 페이지 버튼 */}
               <div
-                className={`w-[150px] h-[45px] hover:bg-[#265CAC]/5 border-[1px] flex items-center justify-center gap-4 rounded-[10px] ${
-                  prevPost ? "cursor-pointer" : "cursor-not-allowed opacity-50"
-                } dark:text-white dark:border-semiDarkGreyDark dark:hover:bg-darkGreyDark`}
+                className={twMerge(
+                  "w-[150px] h-[45px] hover:bg-[#265CAC]/5 border-[1px] flex items-center justify-center gap-4 rounded-[10px] dark:text-white dark:border-semiDarkGreyDark ",
+                  prevPost
+                    ? "cursor-pointer dark:hover:bg-darkGreyDark"
+                    : "cursor-not-allowed opacity-50 hover:bg-inherit"
+                )}
                 onClick={() =>
                   prevPost &&
                   navigate(
@@ -194,8 +198,10 @@ export default function PostDetail() {
               {/* 다음 페이지 버튼 */}
               <div
                 className={`w-[150px] h-[45px] hover:bg-[#265CAC]/5 border-[1px] flex items-center gap-4 justify-center rounded-[10px] ${
-                  nextPost ? "cursor-pointer" : "cursor-not-allowed opacity-50"
-                } dark:text-white dark:border-semiDarkGreyDark dark:hover:bg-darkGreyDark`}
+                  nextPost
+                    ? "cursor-pointer dark:hover:bg-darkGreyDark"
+                    : "cursor-not-allowed opacity-50  hover:bg-inherit"
+                } dark:text-white dark:border-semiDarkGreyDark`}
                 onClick={() =>
                   nextPost &&
                   navigate(
