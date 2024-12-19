@@ -68,7 +68,7 @@ export default function ImageCard({
     <div className="flex flex-col items-center gap-3">
       {/* 썸네일 */}
       <div
-        className="group relative w-[250px] h-[250px] bg-cover bg-center rounded-2xl shadow-lg cursor-pointer"
+        className="group relative w-full min-w-[250px] h-[250px] bg-cover bg-center rounded-2xl shadow-lg cursor-pointer"
         style={{ backgroundImage: `url(${image || thumbnail})` }}
         onClick={() => navigate(`/${channelName}/${post_id}`)}
       >

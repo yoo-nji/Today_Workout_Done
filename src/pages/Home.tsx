@@ -1,17 +1,15 @@
 import SearchBar from "../components/SearchBar";
 import ImageCard from "../components/ImageCard";
-import Tag from "../components/Tag";
 import { useEffect, useRef, useState } from "react";
-import { api } from "../api/axios";
 import { useLocation } from "react-router";
 import Loading from "../components/Loading";
 import { useLoadingStore } from "../stores/loadingStore";
 import InfinityLoading from "../components/InfinityLoading";
+import { getChannelPost } from "../utils/api/getChannelPost";
+import { usesidebarToggleStore } from "../stores/sideberToggleStore";
+import { twMerge } from "tailwind-merge";
 
-const route: { [key: string]: string } = {
-  protein: "675a2dac0d335f0ddae3a188",
-  routine: "675a2dc40d335f0ddae3a18c",
-};
+// 무한스크롤에서 몇개씩 보여줄지 선택
 const limit = 12;
 
 export default function Home() {
@@ -20,6 +18,9 @@ export default function Home() {
   const stopLoading = useLoadingStore((state) => state.stopLoading);
   const isLoading = useLoadingStore((state) => state.isLoading);
 
+  // 토글 유무 확인
+  const isToggle = usesidebarToggleStore((state) => state.isToggle);
+  console.log(isToggle);
   const location = useLocation();
   const channelRoute = location.pathname.split("/")[1];
 
@@ -27,12 +28,9 @@ export default function Home() {
   // prettier-ignore
   const [status, setStatus] = useState<"idle" | "loading" | "searching">("idle");
 
-  // 게시글
-  const [posts, setPosts] = useState<PostType[]>([]);
-  // 검색 게시글
-  const [searchTerm, setSearchTerm] = useState<string>("");
-  // 검색 게시글  저장
-  const [searchPosts, setSearchPosts] = useState<PostType[]>([]);
+  const [posts, setPosts] = useState<PostType[]>([]); // 게시글
+  const [keyword, setKeyword] = useState(""); // 검색 키워드
+  const [searchPosts, setSearchPosts] = useState<PostType[]>([]); // 검색 게시글  저장
 
   // 무한 스크롤 구현
   const [offset, setOffset] = useState(0); // 시작점
@@ -41,7 +39,7 @@ export default function Home() {
   const [loading, setLoading] = useState(false);
   const observerRef = useRef(null);
 
-  const getChannelPost = async (offset: number) => {
+  const getData = async (offset: number) => {
     try {
       // 로딩 테스트: 나중에 지우기!! ❌
       // await new Promise((resolve) => setTimeout(resolve, 2000));
@@ -49,12 +47,7 @@ export default function Home() {
       //로딩 시작 처음 렌더링때만 보이기
       if (offset === 0) startLoading();
       setLoading(true);
-
-      const { data } = await api.get(
-        `/posts/channel/${
-          route[channelRoute] || "675a2e0d0d335f0ddae3a194"
-        }?offset=${offset}&limit=${limit}`
-      );
+      const data = await getChannelPost(channelRoute, offset, limit);
 
       // 데이터 존재하는지 확인 -> 데이터 없으면 데이상 보여줄게 없다.
       if (data.length === 0) setHasNextPage(false);
@@ -74,15 +67,15 @@ export default function Home() {
     setPosts([]);
     setOffset(0);
     setStatus("idle");
-    setSearchTerm("");
+    setKeyword("");
     setSearchPosts([]);
     setHasNextPage(true);
-    getChannelPost(0);
+    getData(0);
   }, [location]);
 
   useEffect(() => {
     if (offset > 0) {
-      getChannelPost(offset);
+      getData(offset);
     }
   }, [offset]);
 
@@ -110,7 +103,7 @@ export default function Home() {
   // 검색 디바운스 처리
   useEffect(() => {
     // 검색어가 없으면 초기화
-    if (!searchTerm) {
+    if (!keyword) {
       setStatus("idle");
       setSearchPosts([]);
       return;
@@ -120,7 +113,7 @@ export default function Home() {
       setStatus("searching");
       setSearchPosts(
         posts.filter((post) =>
-          post.title.toLowerCase().includes(searchTerm.toLowerCase())
+          post.title.toLowerCase().includes(keyword.toLowerCase())
         )
       );
     }, 1200);
@@ -128,7 +121,7 @@ export default function Home() {
     return () => {
       clearTimeout(searchDebounce);
     };
-  }, [searchTerm]);
+  }, [keyword]);
 
   return (
     <div
@@ -142,15 +135,23 @@ export default function Home() {
       <div className="flex justify-center">
         <SearchBar
           placeholder="검색어를 입력해 주세요"
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
+          value={keyword}
+          onChange={(e) => setKeyword(e.target.value)}
           style="w-full max-w-[785px]"
         />
       </div>
 
       {/* 피드 이미지 */}
+      {/* <PostList /> 컴포넌트화 할때 사용 */}
       <div className="flex flex-col items-center mt-8">
-        <div className="grid gap-8 2xl:grid-cols-4 xl:grid-cols-3 lg:grid-cols-2">
+        <div
+          className={twMerge(
+            "grid grid-cols-4 gap-8 ",
+            isToggle
+              ? "max-[1396px]:grid-cols-3 max-[1114px]:grid-cols-2 max-[832px]:grid-cols-1"
+              : "max-[1176px]:grid-cols-3 max-[894px]:grid-cols-2 max-[612px]:grid-cols-1"
+          )}
+        >
           {status === "searching" &&
             (searchPosts.length ? (
               searchPosts.map((post) => <ImageCard key={post._id} {...post} />)
