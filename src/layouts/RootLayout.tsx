@@ -17,7 +17,7 @@ export default function RootLayout() {
       )}
     >
       <Sidebar />
-      <div className="flex flex-col w-full h-screen min-h-screen">
+      <div className="flex flex-col w-full h-screen min-h-screen dark:bg-lightBlackDark">
         <Header logo sidebar />
         <div
           className={twMerge(
