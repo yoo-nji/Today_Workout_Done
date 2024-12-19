@@ -84,7 +84,8 @@ export default function Login() {
         {/* 로고 */}
         <img
           src={!isDark ? logoImg : darkMainLogo}
-          className="pt-[50px] block mx-auto mb-10"
+          className="pt-[50px] block mx-auto mb-10 cursor-pointer"
+          onClick={() => navigate("/")}
         />
 
         {/* 아이디 입력 필드 */}
