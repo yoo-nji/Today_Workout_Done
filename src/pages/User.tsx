@@ -23,7 +23,7 @@ export default function User() {
   return (
     <>
       {user && (
-        <div className="h-full flex flex-col items-center py-8 dark:bg-lightBlackDark">
+        <div className="min-h-min h-full flex flex-col items-center py-8 dark:bg-lightBlackDark">
           <div className=" flex flex-col gap-[40px]">
             <UserInfoCard
               uname={user.fullName}

@@ -101,11 +101,11 @@ export default function MyImageCard({
             BackHeight="h-[30px]"
             userImg={userImg ? userImg : author?.image}
           />
-          <div className="text-base font-medium">
+          <div className="text-base font-medium dark:text-white">
             {author ? author.fullName : fullName}
           </div>
         </div>
-        <div className="text-sm font-light">{date}</div>
+        <div className="text-sm font-light dark:text-white">{date}</div>
       </div>
     </div>
   );

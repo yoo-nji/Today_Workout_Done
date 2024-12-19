@@ -24,7 +24,7 @@ export default function MyPage() {
   return (
     <>
       {myInfo && (
-        <div className="relative flex flex-col items-center py-8">
+        <div className="min-h-min h-full relative flex flex-col items-center py-8 dark:bg-lightBlackDark">
           <div className="flex flex-col gap-[40px]">
             <UserCard
               uname={myInfo.fullName!}
@@ -40,10 +40,10 @@ export default function MyPage() {
             />
             <div className="flex flex-col items-center w-full gap-4 xl:flex-row">
               <CustomCalendar />
-              <CheckDone bg="bg-[#F7FAFF]" />
+              <CheckDone bg="bg-[#F7FAFF] dark:bg-darkGreyDark" />
             </div>
             <div>
-              <p className=" text-[18px] mb-[20px] font-medium">
+              <p className=" text-[18px] mb-[20px] font-medium dark:text-white">
                 게시물 {myInfo.posts?.length}개
               </p>
               <div className="border-t pt-[10px] px-1 flex justify-center">
