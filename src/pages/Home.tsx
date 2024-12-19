@@ -51,7 +51,6 @@ export default function Home() {
     try {
       const data = await getChannelPost(channelRoute, offset, limit);
       // 데이터 존재하는지 확인 추가 데이터 있는지 확인
-      console.log(data.length);
       if (data.length < limit) setHasNextPage(false);
       setPosts((prev) => [...prev, ...data]);
       setPageParams((prev) => [...prev, offset]);
@@ -66,19 +65,6 @@ export default function Home() {
       }
     }
   };
-
-  // useEffect(() => {
-  //   // 상태 초기화
-  //   setPosts([]);
-  //   setOffset(0);
-  //   setStatus("idle");
-  //   setKeyword("");
-  //   setSearchPosts([]);
-  //   setHasNextPage(true);
-
-  //   // 첫 데이터 로드
-  //   getData(0);
-  // }, [location]);
 
   useEffect(() => {
     getData(offset);
@@ -103,7 +89,6 @@ export default function Home() {
     };
   }, []);
 
-  console.log(hasNextPage, loading);
   return (
     <div className="relative flex flex-col gap-8 py-8 dark:bg-lightBlackDark">
       {/* 로딩창 */}
