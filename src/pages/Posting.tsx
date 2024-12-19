@@ -6,6 +6,8 @@ import { postingFn } from "../utils/postingFn";
 import { useNavigate } from "react-router";
 import { useLoadingStore } from "../stores/loadingStore";
 import Loading from "../components/Loading";
+import { useDarkModeStore } from "../stores/darkModeStore";
+import darkDownIcon from "../assets/darkicons/darkDown.svg";
 
 export default function Posting() {
   const navigate = useNavigate();
@@ -102,6 +104,8 @@ export default function Posting() {
     }
   };
 
+  const isDark = useDarkModeStore((state) => state.isDark);
+
   return (
     <div className="relative flex justify-start items-start outline-none h-full bg-slate-100 dark:bg-lightBlackDark">
       <div className="m-auto pt-[20px] pb-[20px] h-[650px] bg-white flex flex-col items-center gap-5 rounded-[20px] dark:bg-blackDark">
@@ -155,25 +159,25 @@ export default function Posting() {
           </div>
 
           {/* 게시글 정보 입력 폼 */}
-          <div className="flex flex-col w-[500px] items-end gap-4 ">
+          <div className="flex flex-col w-[500px] items-end gap-4">
             <div
-              className="w-full h-[50px] relative bg-[#F4F6F8] dark:bg-darkGreyDark flex justify-between items-center px-[15px] text-[18px] text-[#91989E] dark:text-greyDark cursor-pointer"
+              className="w-full h-[50px] relative bg-[#F4F6F8] dark:bg-darkGreyDark flex justify-between items-center px-[15px] text-[18px] text-[#91989E] dark:text-greyDark cursor-pointer dark:border dark:border-greyDark"
               onClick={channelBtnClick}
             >
               {channel}
               <img
-                src={downIcon}
+                src={!isDark ? downIcon : darkDownIcon}
                 alt="down 아이콘"
                 className="w-[20px] cursor-pointer"
               />
-              <ul id="channel" className="absolute w-full left-0 top-[45px]">
+              <ul id="channel" className="absolute w-full left-0 top-[45px] ">
                 {channels.map((item) => {
                   return (
                     <li
                       key={item.id}
                       id={item.id}
                       className={twMerge(
-                        `bg-white dark:bg-blackDark border dark:border-darkGreyDark w-full h-[45px] px-[10px] text-[18px] flex items-center justify-center hover:bg-[#E8F3FC] dark:hover:bg-[#5d829f] ${
+                        `bg-white dark:bg-blackDark border dark:border-greyDark w-full h-[45px] px-[10px] text-[18px] flex items-center justify-center hover:bg-[#E8F3FC] dark:hover:bg-[#6f99ba] ${
                           openChannel ? "flex" : "hidden"
                         }`
                       )}
@@ -191,7 +195,7 @@ export default function Posting() {
             <input
               type="text"
               placeholder="제목을 입력해주세요"
-              className=" w-full h-[50px] bg-[#F4F6F8] dark:bg-darkGreyDark dark:placeholder-greyDark dark:text-white outline-none text-[18px] px-[15px]"
+              className=" w-full h-[50px] bg-[#F4F6F8] dark:bg-darkGreyDark dark:placeholder-greyDark dark:text-white outline-none text-[18px] px-[15px] dark:border dark:border-greyDark"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
             />
@@ -199,7 +203,7 @@ export default function Posting() {
               name="desc"
               id="desc"
               placeholder="내용을 작성해주세요"
-              className=" resize-none outline-none w-full h-[200px] bg-[#F4F6F8] dark:bg-darkGreyDark dark: dark:placeholder-greyDark dark:text-white py-[10px] px-[15px] text-[20px]"
+              className=" resize-none outline-none w-full h-[200px] bg-[#F4F6F8] dark:bg-darkGreyDark dark: dark:placeholder-greyDark dark:text-white py-[10px] px-[15px] text-[20px] dark:border dark:border-greyDark"
               maxLength={1000}
               value={desc}
               onChange={(e) => setDesc(e.target.value)}
