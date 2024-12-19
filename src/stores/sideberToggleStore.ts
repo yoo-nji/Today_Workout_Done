@@ -6,10 +6,7 @@ interface SidebarToggle {
   sidebarToggle: () => void;
 }
 
-export const usesidebarToggleStore = create<
-  SidebarToggle,
-  [["zustand/persist", SidebarToggle]]
->(
+export const usesidebarToggleStore = create<SidebarToggle>()(
   persist(
     (set) => ({
       isToggle: true,
