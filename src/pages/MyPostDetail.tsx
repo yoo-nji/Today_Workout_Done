@@ -138,8 +138,8 @@ export default function MyPostDetail() {
     );
 
   return (
-    <div className="flex justify-center w-full h-full">
-      <div className="w-[766px] py-12 h-fit">
+    <div className="flex justify-center w-full h-full min-h-min dark:bg-lightBlackDark">
+      <div className="w-[766px] py-12 h-fit dark:bg-lightBlackDark">
         {/* 포스트 정보  */}
         <PostInfo
           title={data.title}
@@ -158,10 +158,12 @@ export default function MyPostDetail() {
         {!edit && (
           <>
             <div className="flex justify-between">
-              {/* 이전 페이지 버튼튼 */}
+              {/* 이전 페이지 버튼 */}
               <div
-                className={`w-[150px] h-[45px] hover:bg-[#265CAC]/5 border-[0.5px] flex items-center justify-center gap-4 rounded-[10px] ${
-                  prevPost ? "cursor-pointer" : "cursor-not-allowed opacity-50"
+                className={`w-[150px] h-[45px] hover:bg-[#265CAC]/5 border-[0.5px] flex items-center justify-center gap-4 rounded-[10px] dark:text-white dark:border-semiDarkGreyDark ${
+                  prevPost
+                    ? "cursor-pointer dark:hover:bg-darkGreyDark"
+                    : "cursor-not-allowed opacity-50 hover:bg-inherit"
                 }`}
                 onClick={() => prevPost && navigate(`/myposting/${prevPost}`)}
               >
@@ -172,8 +174,10 @@ export default function MyPostDetail() {
               {/* 다음 페이지 버튼 */}
               <div
                 className={`w-[150px] h-[45px] hover:bg-[#265CAC]/5 border-[0.5px] flex items-center gap-4 justify-center rounded-[10px] ${
-                  nextPost ? "cursor-pointer" : "cursor-not-allowed opacity-50"
-                }`}
+                  nextPost
+                    ? "cursor-pointer dark:hover:bg-darkGreyDark"
+                    : "cursor-not-allowed opacity-50 hover:bg-inherit"
+                } dark:text-white dark:border-semiDarkGreyDark`}
                 onClick={() => nextPost && navigate(`/myposting/${nextPost}`)}
               >
                 <span>다음 포스트</span>

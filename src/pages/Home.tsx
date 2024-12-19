@@ -39,18 +39,19 @@ export default function Home() {
   const observerRef = useRef(null);
 
   const getData = async (offset: number) => {
+    if (pageParams.includes(offset)) return; // 중복 방지
+
+    //로딩 시작 처음 렌더링때만 보이기
+    if (offset === 0) {
+      startLoading();
+    } else {
+      setLoading(true);
+    }
+
     try {
-      //로딩 시작 처음 렌더링때만 보이기
-      if (offset === 0) {
-        startLoading();
-      } else {
-        setLoading(true);
-      }
-
       const data = await getChannelPost(channelRoute, offset, limit);
-
-      // 데이터 존재하는지 확인 -> 데이터 없으면 데이상 보여줄게 없다.
-      if (data.length === 0) setHasNextPage(false);
+      // 데이터 존재하는지 확인 추가 데이터 있는지 확인
+      if (data.length < limit) setHasNextPage(false);
       setPosts((prev) => [...prev, ...data]);
       setPageParams((prev) => [...prev, offset]);
     } catch (err) {
@@ -66,32 +67,17 @@ export default function Home() {
   };
 
   useEffect(() => {
-    // 초기화
-    setPosts([]);
-    setOffset(0);
-    setStatus("idle");
-    setKeyword("");
-    setSearchPosts([]);
-    setHasNextPage(true);
-    getData(0);
-  }, [location]);
-
-  useEffect(() => {
-    if (offset > 0) {
-      getData(offset);
-    }
+    getData(offset);
   }, [offset]);
 
   // observer를 통해 무한스크롤
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => {
       const firstEntry = entries[0];
-      // 화면에 보였을 때 실행할 함수
-      if (firstEntry.isIntersecting && !loading && !isLoading) {
+      if (firstEntry.isIntersecting && hasNextPage && !isLoading && !loading) {
         setOffset((prev) => prev + limit);
       }
     });
-
     if (observerRef.current) {
       observer.observe(observerRef.current);
     }
@@ -145,10 +131,11 @@ export default function Home() {
         </div>
 
         {/* 무한스크롤 적용 */}
-        <div ref={observerRef}>
-          {posts && hasNextPage && !loading && !isLoading && (
-            <InfinityLoading />
-          )}
+        <div
+          ref={observerRef}
+          className={twMerge(hasNextPage && !isLoading ? "" : "hidden")}
+        >
+          <InfinityLoading />
         </div>
       </div>
     </div>
