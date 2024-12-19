@@ -21,7 +21,7 @@ export default function RootLayout() {
         <Header logo sidebar />
         <div
           className={twMerge(
-            "h-full pl-[300px] transition-all",
+            "h-full pl-[300px] transition-all overflow-auto",
             !isToggle && "pl-20"
           )}
         >
