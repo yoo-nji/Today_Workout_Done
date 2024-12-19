@@ -106,8 +106,8 @@ export default function UserCard({
               <input
                 type="text"
                 id="updateName"
-                className="text-lg font-bold w-[180px] py-[5px] disabled:bg-white outline-none focus:border 
-                focus: border-[#bcbcbc] rounded-[5px] px-[3px]"
+                className="text-lg font-bold w-[180px] py-[5px] disabled:bg-white dark:bg-lightBlackDark  outline-none focus:border 
+                focus: border-[#bcbcbc] rounded-[5px] px-[3px] dark:text-mainTextDark"
                 maxLength={8}
                 value={updateName}
                 ref={inputRef}
@@ -118,7 +118,7 @@ export default function UserCard({
               />
               <label
                 htmlFor="updateName"
-                className=" text-[15px] leading-[15px] text-[#265CAC] underline
+                className=" text-[15px] leading-[15px] text-[#265CAC] dark:text-skyDark underline
                 cursor-pointer"
                 onClick={() => setDisabled(false)}
               >
@@ -127,7 +127,7 @@ export default function UserCard({
             </div>
           )}
         </div>
-        <div className="flex text-[15px] gap-[10px] ml-1">
+        <div className="flex text-[15px] gap-[10px] ml-1 dark:text-white">
           <p>팔로워: {followers && followers.length}</p>
           <p>팔로우: {following && following.length}</p>
         </div>
