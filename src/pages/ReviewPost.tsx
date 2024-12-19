@@ -76,9 +76,12 @@ export default function ReviewPost() {
       <div className="flex justify-center w-full">
         <SearchBar
           placeholder="검색어를 입력해 주세요"
-          value={searchTerm}
+          keyword={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
           style="w-full max-w-[785px] mb-8"
+          posts={posts}
+          setStatus={setStatus}
+          setSearchPosts={setSearchPosts}
         />
       </div>
       {/* 피드 게시물 */}
