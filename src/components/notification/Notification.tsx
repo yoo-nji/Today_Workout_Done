@@ -178,7 +178,9 @@ export default function Notification({
                   ></NotificationBox>
                 ))
               ) : (
-                <p>알림이 없습니다</p>
+                <p className="text-xl text-gray-500 my-10 jusitify-center items-center">
+                  알림이 없습니다
+                </p>
               )}
             </div>
             {/* 여기까지 */}
