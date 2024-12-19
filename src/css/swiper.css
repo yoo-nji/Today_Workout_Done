@@ -42,3 +42,18 @@
 .swiper-button-prev:hover {
   background-color: rgba(234, 234, 234, 0.7);
 }
+
+.swiper.dark .swiper-button-next,
+.swiper.dark .swiper-button-prev {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.swiper.dark .swiper-button-next::after,
+.swiper.dark .swiper-button-prev::after {
+  color: white;
+}
+
+.swiper.dark .swiper-button-next:hover,
+.swiper.dark .swiper-button-prev:hover {
+  background-color: rgba(0, 0, 0, 0.65);
+}

@@ -46,8 +46,8 @@ export default function BmiCon() {
 
   return (
     <>
-      <div className="flex flex-col bg-[#f7faff] items-center py-20">
-        <h2 className="font-jalnan text-xl font-semibold mb-6">
+      <div className="flex flex-col bg-[#f7faff] items-center py-20 dark:bg-darkGreyDark">
+        <h2 className="font-jalnan text-xl font-semibold mb-6 dark:text-white">
           👀 BMI 계산기
         </h2>
         <form
@@ -56,13 +56,17 @@ export default function BmiCon() {
         >
           <input
             placeholder="몸무게(kg)"
-            className="flex-1 border rounded-lg px-4 py-2 text-lg focus:outline-none focus:ring-1 focus:ring-[#e7effa] "
+            className="flex-1 border rounded-lg px-4 py-2 text-lg 
+            focus:outline-none focus:ring-1 focus:ring-[#e7effa] 
+            dark:bg-darkGreyDark dark:text-white"
             value={kg}
             onChange={handleKgChange}
           />
           <input
             placeholder="신장(cm)"
-            className="flex-1 border rounded-lg px-4 py-2 text-lg focus:outline-none focus:ring-1 focus:ring-[#e7effa]"
+            className="flex-1 border rounded-lg px-4 py-2 text-lg focus:outline-none 
+            focus:ring-1 focus:ring-[#e7effa]
+            dark:bg-darkGreyDark dark:text-white"
             value={cm}
             onChange={handleCmChange}
           />
@@ -70,7 +74,9 @@ export default function BmiCon() {
             onClick={() => {
               if (kg && cm) calcBmi(Number(kg), Number(cm));
             }}
-            className="lg:w-[80px] w-full bg-[#265cac] text-white font-semibold py-2 px-4 rounded-lg hover:bg-[#1e4d8a] transition"
+            className="lg:w-[80px] w-full bg-[#265cac] text-white font-semibold 
+            py-2 px-4 rounded-lg hover:bg-[#1e4d8a] transition
+            dark:bg-mainDark dark:text-black"
           >
             결과
           </button>
@@ -82,17 +88,22 @@ export default function BmiCon() {
               bmiRef.current!.innerText = "--";
               weightCategory.current!.innerText = "--";
             }}
-            className="lg:w-[80px] w-full border border-[#265cac] bg-white text-[#265cac]  font-semibold py-2 px-4 rounded-lg hover:bg-[#f2f2f2] transition"
+            className="lg:w-[80px] w-full border border-[#265cac] bg-white 
+            text-[#265cac]  font-semibold py-2 px-4 rounded-lg 
+            hover:bg-[#f2f2f2] dark:hover:bg-lightBlackDark transition
+            dark:border-mainTextDark dark:bg-darkGreyDark dark:text-mainTextDark"
           >
             초기화
           </button>
         </form>
         <div className="flex flex-col items-center gap-3 mt-8 text-lg font-semibold text-gray-600">
-          <div className="flex gap-2">
+          <div className="flex gap-2 dark:text-white">
             <span> 당신의 BMI는</span>
             <span
               ref={bmiRef}
-              className={twMerge("text-xl font-bold text-[#265cac]")}
+              className={twMerge(
+                "text-xl font-bold text-[#265cac] dark:text-mainTextDark"
+              )}
             >
               --
             </span>
@@ -102,16 +113,17 @@ export default function BmiCon() {
             <span
               ref={weightCategory}
               className={twMerge(
-                "text-xl font-bold text-[#265cac]",
-                bmiStatus === "저체중" && "text-blue-500",
-                bmiStatus === "정상" && "text-green-500",
-                bmiStatus === "과체중" && "text-yellow-500",
-                bmiStatus === "비만" && "text-red-500"
+                "text-xl font-bold text-[#265cac] dark:text-mainTextDark",
+                bmiStatus === "저체중" && "text-blue-500 dark:mainTextDark",
+                bmiStatus === "정상" && "text-green-500 dark:text-green-500",
+                bmiStatus === "과체중" &&
+                  "text-yellow-500 dark:text-yellow-500",
+                bmiStatus === "비만" && "text-red-500 dark:text-red-500"
               )}
             >
               --
             </span>
-            <span> 입니다</span>
+            <span className="dark:text-white"> 입니다</span>
           </div>
         </div>
       </div>

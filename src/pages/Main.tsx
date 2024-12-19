@@ -54,7 +54,7 @@ export default function Main() {
 
   return (
     <>
-      <div className="flex flex-col gap-20 w-full relative">
+      <div className="flex flex-col gap-20 w-full relative dark:bg-lightBlackDark">
         <Loading />
         <BmiCon />
         <div className="flex flex-col justify-center">
@@ -62,7 +62,7 @@ export default function Main() {
           <div className="2xl:max-w-[1200px] xl:max-w-[884px] w-full mx-auto px-4 md:max-w-[582px] lg:max-w-[600px]">
             {category.map((list, i) => (
               <div key={i} className="mb-8">
-                <h2 className="font-jalnan text-xl font-semibold mb-5">
+                <h2 className="font-jalnan text-xl font-semibold mb-5 dark:text-white">
                   {list.title}
                 </h2>
                 <SwiperCustom posts={list.body} />
