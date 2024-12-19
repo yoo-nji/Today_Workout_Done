@@ -19,20 +19,15 @@ export default function NotificationBox({
   return (
     <div className="w-[320px] h-[75px] bg-[#EFEFEF] mb-[5px] flex items-center gap-3 pl-[20px] rounded-[10px] flex-shrink-0 dark:bg-darkGreyDark dark:text-greyDark">
       {/* 유저 프로필, 현활 */}
-      <div
-        className="bg-white w-[48px] h-[48px] flex justify-center items-center rounded-[50%] shadow-inner cursor-pointer relative dark:bg-greyDark"
 
-        // onClick={() => handleClick(userid)}
-      >
-        <img
-          src={image ? image : defaultUserImg}
-          alt="사용자 프로필 사진"
-          className="w-[33px] h-[33px] rounded-[50%]"
-          onClick={() => {
-            navigate(`/user/${userid}`);
-          }}
-        />
-      </div>
+      <img
+        src={image ? image : defaultUserImg}
+        alt="사용자 프로필 사진"
+        className="w-[48px] h-[48px] rounded-[50%] shadow-inner cursor-pointer"
+        onClick={() => {
+          navigate(`/user/${userid}`);
+        }}
+      />
 
       {notificationType === "follow" && (
         <div className=" w-[220px] h-[50px] flex items-center justify-center">
