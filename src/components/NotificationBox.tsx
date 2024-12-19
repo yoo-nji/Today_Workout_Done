@@ -1,11 +1,16 @@
 import { useNavigate } from "react-router";
 import defaultUserImg from "../assets/defaultUser.svg";
+import { getPostDetail } from "../utils/getPostDetail";
+import { api } from "../api/axios";
+import { channelMapping } from "../constants/channel";
 
 interface NotificationBoxPropsType {
   fullname: string;
   image?: string | null;
   userid: string;
   notificationType: string;
+  postId?: string;
+  follow?: string;
 }
 
 export default function NotificationBox({
@@ -13,20 +18,45 @@ export default function NotificationBox({
   image,
   userid,
   notificationType,
+  postId,
 }: NotificationBoxPropsType) {
   const navigate = useNavigate();
 
+  const handleClick = async () => {
+    if (notificationType === "comment" || notificationType === "like") {
+      if (postId) {
+        const { data } = await api.get(`/posts/${postId}`);
+
+        const getChannel = Object.keys(channelMapping).find(
+          (key) => channelMapping[key] === data.channel._id
+        );
+
+        if (getChannel) {
+          navigate(`/${getChannel}/${postId}`);
+        }
+      } else {
+        return;
+      }
+    }
+
+    if (notificationType === "follow") {
+      navigate(`/user/${userid}`);
+    }
+  };
+
   return (
-    <div className="w-[320px] h-[75px] bg-[#EFEFEF] mb-[5px] flex items-center gap-3 pl-[20px] rounded-[10px] flex-shrink-0 dark:bg-darkGreyDark dark:text-greyDark">
+    <div
+      className="w-[320px] h-[75px] bg-[#EFEFEF] mb-[5px] flex items-center 
+      gap-3 pl-[20px] rounded-[10px] flex-shrink-0 
+      dark:bg-darkGreyDark dark:text-greyDark cursor-pointer"
+      onClick={handleClick}
+    >
       {/* 유저 프로필, 현활 */}
 
       <img
         src={image ? image : defaultUserImg}
         alt="사용자 프로필 사진"
         className="w-[48px] h-[48px] rounded-[50%] shadow-inner cursor-pointer"
-        onClick={() => {
-          navigate(`/user/${userid}`);
-        }}
       />
 
       {notificationType === "follow" && (

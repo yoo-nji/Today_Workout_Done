@@ -19,12 +19,48 @@ interface notificationProps {
   notificationArray?: any;
 }
 
+export interface notificationType {
+  seen: boolean;
+  _id: string;
+  author: {
+    role: string;
+    emailVerified: boolean;
+    banned: boolean;
+    isOnline: boolean;
+    posts: string[];
+    likes: string[];
+    comments: string[];
+    followers: string[];
+    following: string[];
+    notifications: string[];
+    messages: [];
+    _id: string;
+    fullName: string;
+    email: string;
+    password: string;
+    createdAt: string;
+    updatedAt: string;
+    __v: number;
+    username: null;
+    image: string;
+    imagePublicId: string;
+  };
+  user: string;
+  post: string;
+  follow?: string;
+  like: null;
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
+}
+
 // API보고 notificationArray 받아서 처리하자
 export default function Notification({
   closeNoti,
   isNoti,
   notificationArray,
 }: notificationProps) {
+  console.log(notificationArray);
   // 모두읽음처리
   const notificationSeen = async () => {
     try {
@@ -80,7 +116,7 @@ export default function Notification({
       let likeCount = 0;
       let followCount = 0;
       let commentCount = 0;
-      notificationArray.map((notification: any) =>
+      notificationArray.map((notification: notificationType) =>
         notification.like === null || undefined
           ? (likeCount = likeCount + 1)
           : notification.follow != undefined
@@ -91,11 +127,6 @@ export default function Notification({
       setNotificationNumber([commentCount, followCount, likeCount]);
     }
   }, []);
-
-  // 여기에 좋아요, 팔로우, 메세지 갯수 받아서 사용
-  // const [notificationNumber, setNotificationNumber] = useState([0, 0, 0]);
-
-  // console.log({ likeNumber });
 
   const isDark = useDarkModeStore((state) => state.isDark);
 
@@ -165,6 +196,7 @@ export default function Notification({
               {notificationArray.length && showNotiList ? (
                 notificationArray.map((notification: any) => (
                   <NotificationBox
+                    key={notification._id}
                     fullname={notification.author.fullName}
                     userid={notification.author._id}
                     image={notification.author.image}
@@ -175,6 +207,8 @@ export default function Notification({
                         ? "follow"
                         : "comment"
                     }
+                    postId={notification?.post}
+                    follow={notification?.follow}
                   ></NotificationBox>
                 ))
               ) : (
