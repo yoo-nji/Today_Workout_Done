@@ -5,9 +5,7 @@ import logoImg from "../../assets/loge.svg";
 import UserProfile from "../UserProfile";
 import ButtonComponent from "../ButtonComponent";
 import { useAuth } from "../../stores/authStore";
-import { useEffect, useState } from "react";
-import { api } from "../../api/axios";
-import { AxiosError } from "axios";
+import { useState } from "react";
 import Notification from "../notification/Notification";
 import { useToken } from "../../stores/tokenStore";
 import ModeChange from "../button/ModeChange";
@@ -35,7 +33,7 @@ export default function Header({
 
   // 로그인상태, 로그인, 로그아웃, 유저정보저장
   const isLoggedIn = useAuth((state) => state.isLoggedIn);
-  const login = useAuth((state) => state.login);
+  // const login = useAuth((state) => state.login);
   const logout = useAuth((state) => state.logout);
   const setUser = useAuth((state) => state.setUser);
   const userInfo = useAuth((state) => state.user);

@@ -164,7 +164,12 @@ export default function Sidebar() {
         <CheckDone textSize="text-[16px]" width="w-[65px]" />
       ) : null}
 
-      <div className="flex flex-col justify-between w-full h-full border-t dark:border-darkGreyDark">
+      <div
+        className={twMerge(
+          "flex flex-col justify-between w-full h-full border-t dark:border-darkGreyDark",
+          !isToggle && "border-t-0"
+        )}
+      >
         {/* 채널목록 */}
         <div className="w-full">
           <ul className="flex flex-col w-full gap-2 p-1">
