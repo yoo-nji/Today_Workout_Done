@@ -5,6 +5,8 @@ import chatIcon from "../assets/chat_icon_black.svg";
 import UserProfile from "./UserProfile";
 import { useNavigate } from "react-router";
 import { useAuth } from "../stores/authStore";
+import { useDarkModeStore } from "../stores/darkModeStore";
+import darkChatIcon from "../assets/chat_icon.svg";
 
 export default function Review({
   image,
@@ -57,21 +59,23 @@ export default function Review({
 
   const myLike = likes.some((like) => like.user === myInfo?._id);
 
+  const isDark = useDarkModeStore((state) => state.isDark);
+
   return (
     <div
-      className="w-[814px] h-[315px] flex gap-8 cursor-pointer"
+      className="w-[1014px] h-[360px] flex gap-16 cursor-pointer rounded-xl dark:bg-darkGreyDark dark:text-[#fff]"
       onClick={() => navigate(`/gymreview/${post_id}`)}
     >
       {/* 썸네일(왼쪽) */}
       <div
         className="w-[380px] h-[300px] bg-cover bg-center
-        rounded-[15px] shadow-lg"
+        rounded-2xl shadow-lg m-[30px]"
         style={{ backgroundImage: `url(${image || thumbnail})` }}
       />
       {/* 게시물 정보(오른쪽) */}
       <div className="flex flex-col justify-between">
         {/* 글 작성자 정보 */}
-        <div className="flex justify-start gap-[13px]">
+        <div className="flex justify-start gap-[13px] mt-[30px]">
           {/* 유저 프로필 이미지 */}
           <div onClick={(e) => handleClick(userid, e)}>
             <UserProfile
@@ -91,20 +95,20 @@ export default function Review({
 
         {/* 게시물 내용 */}
         <div className="">
-          <h3 className="mb-[30px] text-[24px]">{postTitle}</h3>
-          <p className="text-[16px]  w-[400px] h-[120px] line-clamp-5">
+          <h3 className="mb-[30px] text-[24px] ml-11">{postTitle}</h3>
+          <p className="text-[16px]  w-[400px] h-[120px] line-clamp-5 ml-11">
             {postContent}
           </p>
         </div>
 
         {/* 아이콘 */}
-        <div className="flex flex-row gap-[18px] justify-end">
+        <div className="flex flex-row gap-[18px] justify-end mb-[30px]">
           <div className="flex flex-row gap-1">
             <img src={myLike ? likeFillIcon : likeIcon} alt="좋아요 아이콘" />
             <span>{likes.length}</span>
           </div>
           <div className="flex flex-row gap-1">
-            <img src={chatIcon} alt="채팅 아이콘" />
+            <img src={!isDark ? chatIcon : darkChatIcon} alt="채팅 아이콘" />
             <span>{comments.length}</span>
           </div>
         </div>

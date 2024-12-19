@@ -69,7 +69,7 @@ export default function ReviewPost() {
   }, [searchTerm]);
 
   return (
-    <div className="relative flex flex-col items-center gap-8 py-8">
+    <div className="relative flex flex-col items-center gap-8 py-8 dark:bg-lightBlackDark">
       {/* 로딩창 */}
       <Loading />
       {/* 검색창 */}
@@ -78,11 +78,11 @@ export default function ReviewPost() {
           placeholder="검색어를 입력해 주세요"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          style="w-full max-w-[785px]"
+          style="w-full max-w-[785px] mb-8"
         />
       </div>
       {/* 피드 게시물 */}
-      <div className="flex flex-col items-center gap-8 mt-8">
+      <div className="flex flex-col items-center gap-16">
         {status === "searching" &&
           (searchPosts.length ? (
             searchPosts.map((post) => <Review key={post._id} {...post} />)
