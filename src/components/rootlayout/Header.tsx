@@ -97,7 +97,7 @@ export default function Header({
 
       {isLoggedIn ? (
         // 로그인 상태 분기
-        <div className="flex gap-[10px] items-center border-2 header-inner">
+        <div className="flex gap-[10px] items-center header-inner">
           {/* 모드변경 버튼 */}
           <div className="hidden lg:block modeChange">
             <ModeChange />
