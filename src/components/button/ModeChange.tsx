@@ -3,8 +3,6 @@ import { twMerge } from "tailwind-merge";
 import { usesidebarToggleStore } from "../../stores/sideberToggleStore";
 import horizontalAfternoon from "../../assets/horizontalAfternoon.svg";
 import horizontalNight from "../../assets/horizontalNight.svg";
-import verticalAfternoon from "../../assets/verticalAfternoon.svg";
-import verticalNight from "../../assets/verticalNight.svg";
 import sun from "../../assets/sun.svg";
 import moon from "../../assets/moon.svg";
 import DeleteConfirm from "../modal/ConfirmModal";
@@ -39,7 +37,6 @@ export default function ModeChange() {
   // /* 테스트용 코드 여기까지 */
 
   const handleClick = () => {
-    // setIsClicked((click) => !click);
     toggleDarkMode();
   };
 

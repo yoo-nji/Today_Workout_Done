@@ -84,12 +84,9 @@ export default function Login() {
         {/* 로고 */}
         <img
           src={!isDark ? logoImg : darkMainLogo}
-          className="pt-[50px] block mx-auto "
+          className="pt-[50px] block mx-auto mb-10 cursor-pointer"
+          onClick={() => navigate("/")}
         />
-        {/* 제목 */}
-        <p className="text-center text-[20px] mt-[20px] font-jua dark:text-white">
-          로그인
-        </p>
 
         {/* 아이디 입력 필드 */}
         <input
@@ -98,15 +95,11 @@ export default function Login() {
           value={email}
           onChange={handleEmailChange}
           className={twMerge(
-            `w-full h-[40px] mb-[10px] py-auto pl-[15px] border border-[#C2C2C2] rounded-[10px] placeholder-[#B6B6B6] text-[18px] font-jua dark:bg-darkGreyDark dark:border-greyDark dark:placeholder-semiDarkGreyDark ${
+            `w-full h-[40px] mb-[10px] py-auto pl-[15px] border border-[#C2C2C2] rounded-[10px] placeholder-[#B6B6B6] dark:bg-darkGreyDark dark:border-greyDark dark:placeholder-semiDarkGreyDark ${
               email
-                ? "text-[#265CAC] border-[#265CAC] border-[2px] text-[16px] font-ibm font-bold dark:text-mainDark dark:border-mainDark dark:font-semibold"
+                ? "text-[#3d3d3d] border dark:text-mainDark dark:border-mainDark dark:font-semibold"
                 : "text-gray-400 border-[1px] dark:text-semiDarkGreyDark "
-            }  ${
-              emailError
-                ? "border-[#EB003E] border-[2px] text-[#EB003E] dark:border-pinkDark dark:text-pinkDark"
-                : ""
-            }`
+            } `
           )}
         />
         {/* 비밀번호 입력 필드 */}
@@ -116,16 +109,16 @@ export default function Login() {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           className={twMerge(
-            `w-full h-[40px] mb-[10px] py-auto pl-[15px] border border-[#C2C2C2] rounded-[10px] placeholder-[#B6B6B6] text-[18px] font-jua dark:bg-darkGreyDark dark:border-greyDark dark:placeholder-semiDarkGreyDark ${
+            `w-full h-[40px] py-auto pl-[15px] border border-[#C2C2C2] rounded-[10px] placeholder-[#B6B6B6] dark:bg-darkGreyDark dark:border-greyDark dark:placeholder-semiDarkGreyDark ${
               password
-                ? "text-[#265CAC] border-[#265CAC] border-[2px] text-[16px] font-ibm font-bold dark:text-mainDark dark:border-mainDark dark:font-semibold"
+                ? "border dark:text-mainDark dark:border-mainDark dark:font-semibold"
                 : "text-gray-400 border-[1px] dark:text-semiDarkGreyDark"
             }`
           )}
         />
         {/* 아이디 오류 메시지 출력 */}
         {emailError && (
-          <p className="ml-[15px] mb-[10px] text-red-500 text-[13px] font-dohyeon dark:text-pinkDark">
+          <p className="ml-[5px] my-[5px] text-red-500 text-[13px] font-dohyeon dark:text-pinkDark">
             {emailError}
           </p>
         )}
@@ -133,8 +126,8 @@ export default function Login() {
         {/* 로그인 버튼 */}
         <button
           className={twMerge(
-            `w-full py-[5px] rounded-[20px] bg-[#BABABA] dark:bg-semiDarkGreyDark text-white text-[15px] font-jua`,
-            emailError ? "mt-[5.5px]" : "mt-[35px]",
+            `w-full h-[36px] py-[5px] rounded-[20px] bg-[#BABABA] dark:bg-semiDarkGreyDark text-white text-[15px] font-jua`,
+            emailError ? "mt-[5.5px]" : "mt-[20px]",
             isFormValid
               ? " bg-[#265CAC] dark:bg-mainDark text-white dark:text-blackDark texcursor-not-allowed"
               : ""
@@ -147,13 +140,13 @@ export default function Login() {
         <button
           type="button"
           onClick={handleSignupClick}
-          className="w-full mt-[10px] py-[5px] rounded-[20px] bg-[#265CAC] dark:bg-mainDark text-white dark:text-blackDark text-[15px] font-jua"
+          className="w-full h-[36px] mt-[10px] py-[5px] rounded-[20px] bg-[#265CAC] dark:bg-mainDark text-white dark:text-blackDark text-[15px] font-jua"
         >
           가입하기
         </button>
 
         {/* 구분선 */}
-        <div className="w-full mt-[15px] mb-[10px] py-auto border-t border-[#B6B6B6]"></div>
+        <div className="w-full mt-[25px] mb-[10px] py-auto border-t border-[#B6B6B6]"></div>
 
         {/* 저희 서비스가 궁금하세요? */}
         <p className="text-[#265CAC] dark:text-mainDark text-[13px] text-center font-dohyeon mb-[10px]">

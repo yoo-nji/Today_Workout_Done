@@ -1,8 +1,7 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import logoImg from "../assets/loge.svg";
-import { Link, Navigate, useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { twMerge } from "tailwind-merge";
-import axios from "axios";
 import { api } from "../api/axios";
 import privateImg from "../assets/private.svg";
 import showPwImg from "../assets/showpw.svg";
@@ -241,14 +240,9 @@ export default function Signup() {
       {/* 로고 */}
       <img
         src={!isDark ? logoImg : darkMainLogo}
-        className="pt-[50px] block mx-auto cursor-pointer"
+        className="pt-[50px] block mx-auto cursor-pointer mb-10"
         onClick={() => navigate("/")}
       />
-
-      {/* 제목 */}
-      <p className="text-center text-[20px] mt-[20px] font-jua dark:text-white">
-        새로운 계정 만들기
-      </p>
 
       <form className="px-[50px]" onSubmit={handleSubmit}>
         {/* 닉네임 입력 필드 */}
@@ -259,9 +253,9 @@ export default function Signup() {
           onChange={handleNameChange}
           onKeyDown={handleKeyDown}
           className={twMerge(
-            `w-full h-[40px] py-auto pl-[15px] border rounded-[10px] mt-[10px] font-jua text-[18px] dark:bg-darkGreyDark dark:border-greyDark dark:placeholder-semiDarkGreyDark ${
+            `w-full h-[40px] py-auto pl-[15px] border rounded-[10px] mt-[10px] dark:bg-darkGreyDark dark:border-greyDark dark:placeholder-semiDarkGreyDark ${
               name
-                ? "text-[#265CAC] border-[#265CAC] border-[2px] text-[16px] font-ibm font-bold dark:text-mainDark dark:border-mainDark dark:font-semibold"
+                ? "border-[2px] dark:text-mainDark dark:border-mainDark dark:font-semibold"
                 : "text-gray-400 border-[1px] dark:text-semiDarkGreyDark"
             } ${
               nameError
@@ -286,11 +280,11 @@ export default function Signup() {
           onChange={handleEmailChange}
           onKeyDown={handleKeyDown}
           className={twMerge(
-            `w-full h-[40px] py-auto pl-[15px] border rounded-[10px] font-jua text-[18px] dark:bg-darkGreyDark dark:border-greyDark dark:placeholder-semiDarkGreyDark ${
+            `w-full h-[40px] py-auto pl-[15px] border rounded-[10px] dark:bg-darkGreyDark dark:border-greyDark dark:placeholder-semiDarkGreyDark ${
               nameError ? "mt-0" : "mt-[19.5px]"
             } ${
               email
-                ? "text-[#265CAC] border-[#265CAC] border-[2px] text-[16px] font-ibm font-bold dark:text-mainDark dark:border-mainDark dark:font-semibold"
+                ? "text-[#265CAC] border-[#265CAC] border-[2px] dark:text-mainDark dark:border-mainDark dark:font-semibold"
                 : ""
             } ${
               emailError
@@ -316,11 +310,11 @@ export default function Signup() {
               onChange={handlePasswordChange}
               onKeyDown={handleKeyDown}
               className={twMerge(
-                `w-full h-[40px] py-auto pl-[15px] border rounded-[10px] font-jua text-[18px] dark:bg-darkGreyDark dark:border-greyDark dark:placeholder-semiDarkGreyDark ${
+                `w-full h-[40px] py-auto pl-[15px] border rounded-[10px] dark:bg-darkGreyDark dark:border-greyDark dark:placeholder-semiDarkGreyDark ${
                   emailError ? "mt-0" : "mt-[19.5px]"
                 } ${
                   password
-                    ? "text-[#265CAC] border-[#265CAC] border-[2px] text-[16px] dark:text-mainDark dark:border-mainDark dark:font-semibold"
+                    ? "text-[#265CAC] border-[#265CAC] border-[2px] dark:text-mainDark dark:border-mainDark dark:font-semibold"
                     : "text-gray-400"
                 } ${
                   passwordError
@@ -332,7 +326,7 @@ export default function Signup() {
             <button
               type="button"
               onClick={() => setShowPassword(!showPassword)}
-              className="absolute right-[62px] top-[288px] translate-y-[0%] w-[20px] h-[20px] p-0 border-none bg-transparent"
+              className="absolute right-[62px] top-[278px] translate-y-[0%] w-[20px] h-[20px] p-0 border-none bg-transparent"
             >
               <img
                 src={
@@ -362,11 +356,11 @@ export default function Signup() {
               onChange={handleConfirmPasswordChange}
               onKeyDown={handleKeyDown}
               className={twMerge(
-                `w-full h-[40px] py-auto pl-[15px] border rounded-[10px] font-jua text-[18px] dark:bg-darkGreyDark dark:border-greyDark dark:placeholder-semiDarkGreyDark ${
+                `w-full h-[40px] py-auto pl-[15px] border rounded-[10px] dark:bg-darkGreyDark dark:border-greyDark dark:placeholder-semiDarkGreyDark ${
                   passwordError ? "mt-0" : "mt-[19.5px]"
                 } ${
                   confirmPassword
-                    ? "text-[#265CAC] border-[#265CAC] border-[2px] text-[16px] dark:text-mainDark dark:border-mainDark dark:font-semibold"
+                    ? "text-[#265CAC] border-[#265CAC] border-[2px] dark:text-mainDark dark:border-mainDark dark:font-semibold"
                     : "text-gray-400"
                 } ${
                   confirmPasswordError
@@ -378,7 +372,7 @@ export default function Signup() {
             <button
               type="button"
               onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-              className="absolute right-[62px] top-[348px] translate-y-[0%] w-[20px] h-[20px] p-0 border-none bg-transparent"
+              className="absolute right-[62px] top-[338px] translate-y-[0%] w-[20px] h-[20px] p-0 border-none bg-transparent"
             >
               <img
                 src={
@@ -413,7 +407,7 @@ export default function Signup() {
           이미 계정이 있으신가요?{" "}
           <Link
             to="/login"
-            className="text-[#265CAC] text-[16px] font-bold underline dark:text-mainDark"
+            className="text-[#265CAC] underline dark:text-mainDark font-semibold"
           >
             로그인
           </Link>
@@ -423,7 +417,7 @@ export default function Signup() {
         <button
           type="submit"
           className={twMerge(
-            `w-full bg-[#265CAC] text-white py-[5px] text-[15px] rounded-[20px] mt-[10px] font-jua dark:bg-mainDark dark:text-blackDark dark:font-bold ${
+            `w-full h-9 bg-[#265CAC] text-white py-[5px] rounded-[20px] mt-[10px] dark:bg-mainDark dark:text-blackDark dark:font-bold ${
               isFormValid && !isSubmitting
                 ? ""
                 : "bg-[#BABABA] cursor-not-allowed dark:bg-semiDarkGreyDark dark:text-white"
