@@ -63,7 +63,7 @@ export default function Review({
 
   return (
     <div
-      className="w-[1014px] h-[360px] flex gap-16 cursor-pointer rounded-xl dark:bg-darkGreyDark dark:text-white"
+      className="w-[1014px] h-[360px] flex gap-16 cursor-pointer rounded-xl dark:bg-darkGreyDark dark:text-[#fff]"
       onClick={() => navigate(`/gymreview/${post_id}`)}
     >
       {/* 썸네일(왼쪽) */}
