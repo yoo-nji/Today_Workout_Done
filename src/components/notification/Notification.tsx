@@ -81,10 +81,7 @@ export default function Notification({
   const isDark = useDarkModeStore((state) => state.isDark);
 
   return (
-    <div
-      onClick={closeNoti}
-      className="fixed inset-0 z-10 flex items-center justify-center bg-black bg-opacity-50 dark:bg-darkGreyDark dark:bg-opacity-80"
-    >
+    <div>
       <div className="absolute z-10 top-[32px] right-[10%] mt-2 w-[280px] p-[18px] rounded-[10px] mr-[43px]">
         {/* 말풍선 꼬리 */}
         {/* Todo 말풍선 꼬리 tailwind로 만드는법 알아보자 */}
