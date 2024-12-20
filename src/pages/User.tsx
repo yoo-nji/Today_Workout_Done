@@ -23,7 +23,7 @@ export default function User() {
   return (
     <>
       {user && (
-        <div className="min-h-min h-full flex flex-col items-center py-8 dark:bg-lightBlackDark">
+        <div className="flex flex-col items-center h-full py-8 min-h-min dark:bg-lightBlackDark">
           <div className=" flex flex-col gap-[40px]">
             <UserInfoCard
               uname={user.fullName}
@@ -54,6 +54,7 @@ export default function User() {
                             userImg={user.image}
                             _id={post._id}
                             channel={post.channel}
+                            disableNavigate // 프로필 navigate 없애는 용도
                           />
                         ))}
                       </div>
