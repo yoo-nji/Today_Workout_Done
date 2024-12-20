@@ -57,7 +57,7 @@ export default function RootLayout() {
             <img
               src={!isDark ? scrollUp : darkScrollUp}
               alt="위로 이동"
-              className="rounded-full shadow-xl"
+              className="rounded-full shadow-xl object-fill"
             />
           </button>
         </form>
