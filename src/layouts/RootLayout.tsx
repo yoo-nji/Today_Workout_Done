@@ -4,10 +4,13 @@ import Sidebar from "../components/rootlayout/Sidebar";
 import { usesidebarToggleStore } from "../stores/sideberToggleStore";
 import { twMerge } from "tailwind-merge";
 import scrollUp from "../assets/scrollUp.svg";
+import darkScrollUp from "../assets/darkicons/darkScrollBtn.svg";
 import { useLoadingStore } from "../stores/loadingStore";
 import { useRef, useState } from "react";
+import { useDarkModeStore } from "../stores/darkModeStore";
 
 export default function RootLayout() {
+  const isDark = useDarkModeStore((state) => state.isDark);
   const isLoading = useLoadingStore((state) => state.isLoading);
   const isToggle = usesidebarToggleStore((state) => state.isToggle);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -52,9 +55,9 @@ export default function RootLayout() {
         >
           <button type="button" onClick={scrollToTop}>
             <img
-              src={scrollUp}
+              src={!isDark ? scrollUp : darkScrollUp}
               alt="위로 이동"
-              className="rounded-full shadow-xl"
+              className="rounded-full shadow-xl object-fill"
             />
           </button>
         </form>
