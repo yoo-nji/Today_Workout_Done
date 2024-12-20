@@ -35,7 +35,7 @@ export default function ChannelList({
                 isActive
                   ? "bg-[#E8F3FC] dark:bg-[#6fbeff2c]"
                   : "bg-[#FEFEFE] dark:bg-[#2C2C2C]"
-              } hover:bg-[#EAEAEA] dark:hover:bg-[#4f4f4f] transition cursor-pointer dark:text-[#fff]`,
+              } hover:bg-[#EAEAEA] dark:hover:bg-[#4f4f4f] hover:transition-colors cursor-pointer dark:text-[#fff]`,
               toggleStyle // 토글 스타일 지정
             )}
           >
