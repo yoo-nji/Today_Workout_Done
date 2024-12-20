@@ -139,7 +139,7 @@ export default function Home() {
           ref={observerRef}
           className={twMerge(hasNextPage && !isLoading ? "" : "hidden")}
         >
-          <InfinityLoading />
+          {status !== "searching" ? <InfinityLoading /> : null}
         </div>
       </div>
     </div>
