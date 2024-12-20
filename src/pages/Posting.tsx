@@ -43,13 +43,6 @@ export default function Posting() {
       } else {
         alert("이미지 선택하세요");
       }
-
-      // 다중 이미지 (나중에 api업데이트 시 사용)
-      // for (let i = 0; i < images.length; i++) {
-      //   const imgUrl = URL.createObjectURL(images[i]);
-      //   console.log(imgUrl);
-      //   setImg((prev) => [...prev, imgUrl]);
-      // }
     }
   };
 
@@ -58,7 +51,7 @@ export default function Posting() {
   };
 
   const channels = [
-    { id: "675a2e0d0d335f0ddae3a194", name: "오운완 인증", route: "/" },
+    { id: "675a2e0d0d335f0ddae3a194", name: "오운완 인증", route: "/records" },
     { id: "675a2dac0d335f0ddae3a188", name: "프로틴 추천", route: "/protein" },
     { id: "675a2dc40d335f0ddae3a18c", name: "루틴 공유", route: "/routine" },
     {
@@ -136,7 +129,7 @@ export default function Posting() {
                 <img
                   src={img}
                   alt="이미지"
-                  className="w-full h-full bg-white"
+                  className="w-[300px] h-[338px] bg-white"
                 />
               )}
               <p className="text-[#91989E] dark:text-greyDark w-[80px] text-center">
