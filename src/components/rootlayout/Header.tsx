@@ -49,12 +49,15 @@ export default function Header({
 
   // Todo : 알림창 폼 보여줄지 분기처리
   const [showNoti, setShowNoti] = useState(false);
-  // 모두읽음 누르면 값 처리해서 뱃지 없애기
-  const [isNoti, setIsNoti] = useState(true);
 
-  const setIsNotiHandler = () => {
-    setIsNoti(false);
-  };
+  // 아래 주석 없어도 작동 가능
+  // // 모두읽음 누르면 값 처리해서 뱃지 없애기
+  // const [isNoti, setIsNoti] = useState(true);
+
+  // const setIsNotiHandler = () => {
+  //   setIsNoti(false);
+  // };
+
   const showNotiHandler = () => {
     setShowNoti(!showNoti);
   };
@@ -129,14 +132,14 @@ export default function Header({
               }}
             />
             {/* 알림이 있다면 뱃지색 처리 */}
-            {userInfo?.notifications?.length != 0 && isNoti == true && (
+            {userInfo?.notifications?.length != 0 && (
               <div className="w-[10px] h-[10px] rounded-[50%] bg-red-500 absolute bottom-[28px] right-[11px]"></div>
             )}
             {/* 알림창 보여줘야한다면 처리 */}
             {showNoti && (
               <Notification
                 closeNoti={showNotiHandler}
-                isNoti={setIsNotiHandler}
+                // isNoti={setIsNotiHandler} // 필요없음
                 notificationArray={notificationArray}
               />
             )}
