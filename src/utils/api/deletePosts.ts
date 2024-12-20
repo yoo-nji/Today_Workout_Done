@@ -1,12 +1,11 @@
 import { api } from "../../api/axios";
-import { channelMapping } from "../../constants/channel";
 
 export const deletePost = async (postId: string) => {
   try {
-    const { data } = await api.get(
-      `/posts/channel/${channelMapping[channelRoute]}?offset=${offset}&limit=${limit}`
-    );
+    await api.delete("/posts/delete", {
+      data: { id: postId },
+    });
   } catch (error) {
-    console.error("데이터를 불러오는 중 오류가 발생했습니다.", error);
+    console.error("글 삭제 도중 오류가 발생했습니다.", error);
   }
 };
