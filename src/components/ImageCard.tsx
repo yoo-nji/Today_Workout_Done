@@ -3,7 +3,7 @@ import likeIcon from "../assets/like_icon.svg";
 import likeFill from "../assets/icons/like_fill_icon.svg";
 import chatIcon from "../assets/chat_icon.svg";
 import UserProfile from "./UserProfile";
-import { useNavigate } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 import { channelMapping } from "../constants/channel";
 import { useAuth } from "../stores/authStore";
 
@@ -20,6 +20,9 @@ export default function ImageCard({
   channel,
   myLike, // 마이페이지, 내가 좋아요한 게시글ID
 }: PostType & MyInfo) {
+  const { pathname } = useLocation();
+  console.log(pathname);
+
   const isLogin = useAuth((state) => state.isLoggedIn);
   const myInfo = useAuth((state) => state.user);
   const navigate = useNavigate();
@@ -74,7 +77,13 @@ export default function ImageCard({
       <div
         className="group relative w-full min-w-[250px] h-[250px] bg-cover bg-center rounded-2xl shadow-lg cursor-pointer"
         style={{ backgroundImage: `url(${image || thumbnail})` }}
-        onClick={() => navigate(`/${channelName}/${post_id}`)}
+        onClick={() => {
+          if (pathname === "/myprofile") {
+            navigate(`/myprofile/posts/${post_id}`);
+          } else {
+            navigate(`/${channelName}/${post_id}`);
+          }
+        }}
       >
         {/* Hover */}
         <div className="absolute inset-0 flex flex-col items-center justify-center text-white transition-opacity duration-300 bg-black bg-opacity-50 opacity-0 rounded-2xl group-hover:opacity-100">

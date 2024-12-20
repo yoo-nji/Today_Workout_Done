@@ -1,6 +1,5 @@
 import { Route, useLocation, Routes } from "react-router";
 import Home from "./pages/Home";
-import About from "./pages/About";
 import RootLayout from "./layouts/RootLayout";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
@@ -13,7 +12,6 @@ import PostDetail from "./pages/PostDetail";
 import PrivateRoute from "./route/PrivateRoute";
 import ReviewPost from "./pages/ReviewPost";
 import MyPage from "./pages/MyPage";
-import MyPostDetail from "./pages/MyPostDetail";
 import { useEffect } from "react";
 import { verifyUser } from "./utils/verifyUser";
 import Main from "./pages/Main";
@@ -46,7 +44,7 @@ export default function App() {
           <Route element={<RootLayout />}>
             <Route path="/posting" element={<Posting />} />
             <Route path="/myprofile" element={<MyPage />} />
-            <Route path="/myposting/:post_id" element={<MyPostDetail />} />
+            <Route path="/myprofile/posts/:post_id" element={<PostDetail />} />
           </Route>
         </Route>
 
