@@ -16,7 +16,7 @@ export default function CustomCalendar() {
   // 데이터 필터해서 운동한날 체크
   const mark = [
     ...new Set(
-      myInfo?.posts
+      (myInfo?.posts || [])
         .filter((post) => post.channel === channelMapping.records)
         .map((post) => moment(post.createdAt).format("YYYY-MM-DD"))
     ),
