@@ -75,6 +75,7 @@ export default function MyPage() {
                           _id={post._id}
                           channel={post.channel}
                           myLike={myLike}
+                          disableNavigate // 프로필 navigate 없애는 용도
                         />
                       ))}
                     </div>

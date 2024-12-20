@@ -6,4 +6,5 @@ interface userProfileType {
   update?: boolean;
   userImg?: string;
   myProfile?: boolean | null;
+  disableNavigate?: boolean | null;
 }

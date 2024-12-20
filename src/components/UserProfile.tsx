@@ -17,9 +17,10 @@ export default function UserProfile({
   update,
   userImg,
   myProfile,
+  disableNavigate,
 }: userProfileType) {
   const imgRef = useRef<HTMLInputElement>(null);
-
+  console.log("2차확인", disableNavigate);
   // 로딩중
   const startLoading = useLoadingStore((state) => state.startLoading);
   const stopLoading = useLoadingStore((state) => state.stopLoading);
@@ -52,9 +53,10 @@ export default function UserProfile({
   return (
     <div
       className={twMerge(
-        "relative flex justify-center items-center shadow-profile-inner rounded-[50%] cursor-pointer",
+        "relative flex justify-center items-center shadow-profile-inner rounded-[50%]",
         BackWidth,
-        BackHeight
+        BackHeight,
+        !disableNavigate && "cursor-pointer" // 이동가능할 때만 cursor point 바꾸기
       )}
     >
       <img
