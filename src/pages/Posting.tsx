@@ -119,7 +119,7 @@ export default function Posting() {
           {/* 이미지 등록 */}
           <div className="min-w-[300px] max-w-[300px] flex flex-col justify-center items-center gap-3 max-lg:h-[390px]">
             <div
-              className={`h-full w-full bg-[#F4F6F8] dark:bg-darkGreyDark flex gap-[10px] ${
+              className={`h-[340px] w-[300px] bg-[#F4F6F8] dark:bg-darkGreyDark flex gap-[10px] ${
                 img.length > 0
                   ? "flex-wrap items-start justify-start"
                   : "items-center justify-center"
@@ -129,7 +129,7 @@ export default function Posting() {
                 <img
                   src={img}
                   alt="이미지"
-                  className="w-[300px] h-[338px] bg-white"
+                  className="w-[300px] h-[340px] bg-white"
                 />
               )}
               <p className="text-[#91989E] dark:text-greyDark w-[80px] text-center">
