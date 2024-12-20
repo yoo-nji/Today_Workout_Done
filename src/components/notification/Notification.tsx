@@ -65,8 +65,6 @@ export default function Notification({
   isNoti,
   notificationArray,
 }: notificationProps) {
-  console.log(notificationArray);
-
   // 모두읽음처리
   const notificationSeen = async () => {
     try {
@@ -138,7 +136,7 @@ export default function Notification({
 
   useEffect(() => {
     if (notificationArray.length != 0) {
-      console.log(notificationArray[0].like);
+      // console.log(notificationArray[0].like);
       let likeCount = 0;
       let followCount = 0;
       let commentCount = 0;
@@ -209,7 +207,7 @@ export default function Notification({
                   {notification.count !== 0 && (
                     <div
                       className={twMerge(
-                        "min-w-5 h-5 rounded-[50%] bg-red-500 absolute bottom-0 left-[27px] text-white text-center z-50 text-[10px] font-light leading-loose"
+                        "min-w-5 h-5 rounded-[50%] bg-red-500 absolute bottom-0 left-[23px] text-white text-center z-50 text-[10px] font-light leading-loose"
                       )}
                     >
                       {notification.count >= 100 ? `99+` : notification.count}

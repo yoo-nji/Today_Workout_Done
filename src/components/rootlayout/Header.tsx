@@ -130,7 +130,7 @@ export default function Header({
             />
             {/* 알림이 있다면 뱃지색 처리 */}
             {userInfo?.notifications?.length != 0 && isNoti == true && (
-              <div className="w-3 h-3 rounded-[50%] bg-red-500 absolute bottom-0 right-0"></div>
+              <div className="w-[10px] h-[10px] rounded-[50%] bg-red-500 absolute bottom-[28px] right-[11px]"></div>
             )}
             {/* 알림창 보여줘야한다면 처리 */}
             {showNoti && (
