@@ -30,7 +30,6 @@ export default function CommentBox({
   // 작성자와 로그인한 사람이 같으면 myprofile로 이동
   // 그렇지않으면 유저 페이지로이동
   const handleClick = () => {
-    console.log(comment.author._id, loginId?._id);
     if (comment.author._id === loginId?._id) {
       navigate("/myprofile");
     } else {
