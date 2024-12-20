@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import { api } from "../api/axios";
 import { useAuth } from "../stores/authStore";
 import CommentSec from "../components/PostDetail/CommentSec";
-import { useNavigate, useParams } from "react-router";
+import { useLocation, useNavigate, useParams } from "react-router";
 import { useLoadingStore } from "../stores/loadingStore";
 import Loading from "../components/Loading";
 import { useDarkModeStore } from "../stores/darkModeStore";
@@ -30,6 +30,10 @@ interface PostInfo {
 }
 
 export default function PostDetail() {
+  const { pathname } = useLocation();
+  const isMyProfile = pathname.startsWith("/myprofile");
+  console.log(pathname);
+
   const isDark = useDarkModeStore((state) => state.isDark);
 
   // 로딩
@@ -51,10 +55,11 @@ export default function PostDetail() {
       // 여기에 포스트 id 값 넣기
       const { data } = await api.get(`/posts/${post_id}`);
       console.log(data);
+      console.log(data.author.posts);
 
       const {
-        author: { fullName, _id: userID, image: userImg },
-        channel: { _id: channelId, posts, name: channelName },
+        author,
+        channel,
         // comments,
         title,
         createdAt,
@@ -62,6 +67,21 @@ export default function PostDetail() {
         likes,
         _id: postID,
       } = data;
+
+      const {
+        fullName,
+        _id: userID,
+        image: userImg,
+        posts: authorPosts, // author의 posts
+      } = author || {};
+
+      const {
+        _id: channelId,
+        name: channelName,
+        posts: channelPosts, // channel의 posts
+      } = channel || {};
+
+      const posts = isMyProfile ? authorPosts : channelPosts;
 
       // title이 JSON 형식이 아닐 경우를 처리
       let HTitle = "";
@@ -174,14 +194,18 @@ export default function PostDetail() {
                     ? "cursor-pointer dark:hover:bg-darkGreyDark"
                     : "cursor-not-allowed opacity-50 hover:bg-inherit"
                 )}
-                onClick={() =>
-                  prevPost &&
-                  navigate(
-                    data?.channelName === "workoutDone"
-                      ? `/records/${prevPost}`
-                      : `/${data.channelName.toLowerCase()}/${prevPost}`
-                  )
-                }
+                onClick={() => {
+                  if (isMyProfile) {
+                    prevPost && navigate(`/myprofile/posts/${prevPost}`);
+                  } else {
+                    prevPost &&
+                      navigate(
+                        data?.channelName === "workoutDone"
+                          ? `/records/${prevPost}`
+                          : `/${data.channelName.toLowerCase()}/${prevPost}`
+                      );
+                  }
+                }}
               >
                 <img
                   src={!isDark ? leftIcon : darkPostLeft}
@@ -198,14 +222,18 @@ export default function PostDetail() {
                     ? "cursor-pointer dark:hover:bg-darkGreyDark"
                     : "cursor-not-allowed opacity-50  hover:bg-inherit"
                 } dark:text-white dark:border-semiDarkGreyDark`}
-                onClick={() =>
-                  nextPost &&
-                  navigate(
-                    data?.channelName === "workoutDone"
-                      ? `/records/${nextPost}`
-                      : `/${data.channelName.toLowerCase()}/${nextPost}`
-                  )
-                }
+                onClick={() => {
+                  if (isMyProfile) {
+                    nextPost && navigate(`/myprofile/posts/${nextPost}`);
+                  } else {
+                    nextPost &&
+                      navigate(
+                        data?.channelName === "workoutDone"
+                          ? `/records/${nextPost}`
+                          : `/${data.channelName.toLowerCase()}/${nextPost}`
+                      );
+                  }
+                }}
               >
                 <span>다음 포스트</span>
                 <img

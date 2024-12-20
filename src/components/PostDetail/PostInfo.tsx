@@ -23,7 +23,7 @@ interface PostInfoProps {
   edit: boolean;
   userImg: string;
   setEdit: React.Dispatch<React.SetStateAction<boolean>>;
-  userId: string;
+  userId?: string;
 }
 
 export default function PostInfo({
