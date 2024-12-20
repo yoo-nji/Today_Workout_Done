@@ -20,7 +20,7 @@ import { twMerge } from "tailwind-merge";
 
 interface notificationProps {
   closeNoti: () => void;
-  isNoti: () => void;
+  // isNoti: () => void;
   notificationArray?: any;
 }
 
@@ -62,7 +62,7 @@ export interface notificationType {
 // API보고 notificationArray 받아서 처리하자
 export default function Notification({
   closeNoti,
-  isNoti,
+  // isNoti, // 없어도 작동
   notificationArray,
 }: notificationProps) {
   // 모두읽음처리
@@ -188,8 +188,8 @@ export default function Notification({
       >
         <div className="scrollbar-none">
           {/* 헤더 버튼 필터링 */}
-          <div className="sticky top-0 bg-white z-10 dark:bg-blackDark pb-5">
-            <div className="flex justify-between items-center w-full px-10 relative ">
+          <div className="sticky top-0 z-10 pb-5 bg-white dark:bg-blackDark">
+            <div className="relative flex items-center justify-between w-full px-10 ">
               {notificationTypes.map((notification) => (
                 <div
                   key={notification.type}
@@ -292,14 +292,14 @@ export default function Notification({
             ) : (
               // 알림없을때 처리
 
-              <p className="text-xl text-gray-500 my-10 jusitify-center items-center">
+              <p className="items-center my-10 text-xl text-gray-500 jusitify-center">
                 알림이 없습니다
               </p>
             )}
           </div>
           {/* 버튼 */}
-          <div className="sticky bottom-0 bg-white z-10 dark:bg-blackDark">
-            <div className="flex justify-end space-x-2 mt-4 ">
+          <div className="sticky bottom-0 z-10 bg-white dark:bg-blackDark">
+            <div className="flex justify-end mt-4 space-x-2 ">
               <ButtonComponent
                 bgcolor="bg-white dark:bg-blackDark dark:hover:bg-darkGreyDark"
                 textcolor="text-[#265CAC] dark:text-mainDark"
@@ -307,7 +307,7 @@ export default function Notification({
                 onClick={() => {
                   // Todo 모두읽기 기능 구현
                   notificationSeen();
-                  isNoti();
+                  // isNoti(); // 없어도 가능
                 }}
               >
                 {"모두읽기"}
