@@ -57,11 +57,11 @@ abbr[title] {
   border-radius: 6px;
   color: #4a5660 !important;
 }
-/* .react-calendar__tile--active:enabled:hover,
+.react-calendar__tile--active:enabled:hover,
 .react-calendar__tile--active:enabled:focus {
   background: #6f48eb;
   color: white;
-} */
+}
 /* .react-calendar--selectRange .react-calendar__tile--hover {
   background-color: #f8f8fa;
 } */
@@ -112,7 +112,7 @@ abbr[title] {
   /* 원의 크기 */
   border-radius: 50%;
   /* 원 모양으로 만들기 */
-  background-color: #265cac;
+  background-color: #6f48eb;
   /* 원의 배경색 */
   color: white;
 }
