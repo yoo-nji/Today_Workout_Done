@@ -4,10 +4,10 @@ import UserCard from "../components/User/UserCard";
 import CheckDone from "../components/checkDone/CheckDone";
 import Loading from "../components/Loading";
 import CustomCalendar from "../components/MyPage/CustomCalendar";
-import MyImageCard from "../components/MyImageCard";
 import { useEffect, useState } from "react";
 import { usesidebarToggleStore } from "../stores/sideberToggleStore";
 import { twMerge } from "tailwind-merge";
+import ImageCard from "../components/ImageCard";
 export default function MyPage() {
   // 토글 유무 확인
   const isToggle = usesidebarToggleStore((state) => state.isToggle);
@@ -63,7 +63,7 @@ export default function MyPage() {
                       )}
                     >
                       {myInfo.posts?.map((post) => (
-                        <MyImageCard
+                        <ImageCard
                           key={post._id}
                           image={post.image}
                           comments={post.comments}
@@ -73,6 +73,7 @@ export default function MyPage() {
                           fullName={myInfo.fullName}
                           userImg={myInfo.image}
                           _id={post._id}
+                          channel={post.channel}
                           myLike={myLike}
                         />
                       ))}
