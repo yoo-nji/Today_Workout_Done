@@ -1,16 +1,23 @@
-import { useEffect, useState } from "react";
-import { api } from "../api/axios";
+import { useEffect, useRef, useState } from "react";
+// import { api } from "../api/axios";
 import SearchBar from "../components/SearchBar";
 import Review from "../components/Review";
 import { useLocation } from "react-router";
-import { channelMapping } from "../constants/channel";
+// import { channelMapping } from "../constants/channel";
 import { useLoadingStore } from "../stores/loadingStore";
 import Loading from "../components/Loading";
+import { getChannelPost } from "../utils/api/getChannelPost";
+import InfinityLoading from "../components/InfinityLoading";
+import { twMerge } from "tailwind-merge";
+
+// 무한스크롤에서 몇개씩 보여줄지 선택
+const limit = 5;
 
 export default function ReviewPost() {
   // 로딩 관리
   const startLoading = useLoadingStore((state) => state.startLoading);
   const stopLoading = useLoadingStore((state) => state.stopLoading);
+  const isLoading = useLoadingStore((state) => state.isLoading);
 
   const location = useLocation();
   const channelRoute = location.pathname.split("/")[1];
@@ -19,54 +26,66 @@ export default function ReviewPost() {
     "idle"
   );
 
-  // 게시글
-  const [posts, setPosts] = useState<PostType[]>([]);
-  // 검색 게시글
-  const [searchTerm, setSearchTerm] = useState<string>("");
-  // 검색 게시글  저장
-  const [searchPosts, setSearchPosts] = useState<PostType[]>([]);
+  const [posts, setPosts] = useState<PostType[]>([]); // 게시글
+  const [keyword, setKeyword] = useState(""); // 검색 키워드
+  const [searchPosts, setSearchPosts] = useState<PostType[]>([]); // 검색 게시글  저장
 
-  // 초기 렌더링
-  const getChannelPost = async () => {
-    try {
+  // 무한 스크롤 구현
+  const [offset, setOffset] = useState(0); // 시작점
+  const [hasNextPage, setHasNextPage] = useState(true);
+  const [pageParams, setPageParams] = useState<number[]>([]); // 히스토리 기록
+  const [loading, setLoading] = useState(false);
+  const observerRef = useRef(null);
+
+  const getData = async (offset: number) => {
+    if (pageParams.includes(offset)) return; // 중복 방지
+
+    if (offset === 0) {
       startLoading();
-      const { data } = await api.get(
-        `/posts/channel/${channelMapping[channelRoute]}`
-      );
-      setPosts(data);
+    } else {
+      setLoading(true);
+    }
+
+    try {
+      const data = await getChannelPost(channelRoute, offset, limit);
+      if (data.length < limit) setHasNextPage(false);
+
+      setPosts((prev) => [...prev, ...data]);
+      setPageParams((prev) => [...prev, offset]);
     } catch (err) {
       console.log(err);
     } finally {
-      stopLoading();
+      // 로딩종료
+      if (offset === 0) {
+        stopLoading();
+      } else {
+        setLoading(false);
+      }
     }
   };
 
   useEffect(() => {
-    getChannelPost();
-  }, []);
+    getData(offset);
+  }, [offset]);
 
-  // 검색 디바운스 처리
+  // observer를 통해 무한스크롤
   useEffect(() => {
-    // 검색어가 없으면 초기화
-    if (!searchTerm) {
-      setStatus("idle");
-      setSearchPosts([]);
-      return;
+    const observer = new IntersectionObserver((entries) => {
+      const firstEntry = entries[0];
+      if (firstEntry.isIntersecting && hasNextPage && !isLoading && !loading) {
+        setOffset((prev) => prev + limit);
+      }
+    });
+    if (observerRef.current) {
+      observer.observe(observerRef.current);
     }
-    // 디바운스 적용
-    const searchDebounce = setTimeout(() => {
-      setStatus("searching");
-      setSearchPosts(
-        posts.filter((post) =>
-          post.title.toLowerCase().includes(searchTerm.toLowerCase())
-        )
-      );
-    }, 1200);
 
     return () => {
-      clearTimeout(searchDebounce);
+      if (observerRef.current) {
+        observer.unobserve(observerRef.current);
+      }
     };
-  }, [searchTerm]);
+  }, []);
 
   return (
     <div className="relative flex flex-col items-center gap-8 py-8 dark:bg-lightBlackDark">
@@ -76,8 +95,8 @@ export default function ReviewPost() {
       <div className="flex justify-center w-full">
         <SearchBar
           placeholder="검색어를 입력해 주세요"
-          keyword={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
+          keyword={keyword}
+          onChange={(e) => setKeyword(e.target.value)}
           style="w-full max-w-[785px] mb-8"
           posts={posts}
           setStatus={setStatus}
@@ -99,6 +118,13 @@ export default function ReviewPost() {
           ) : (
             <p>로딩중...</p>
           ))}
+      </div>
+      {/* 무한스크롤 적용 */}
+      <div
+        ref={observerRef}
+        className={twMerge(hasNextPage && !isLoading ? "" : "hidden")}
+      >
+        <InfinityLoading />
       </div>
     </div>
   );
