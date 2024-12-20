@@ -19,9 +19,10 @@ export default function ImageCard({
   _id: post_id,
   channel,
   myLike, // 마이페이지, 내가 좋아요한 게시글ID
-}: PostType & MyInfo) {
+  disableNavigate = false,
+}: PostType & MyInfo & { disableNavigate?: boolean }) {
   const { pathname } = useLocation();
-  console.log(pathname);
+  console.log(disableNavigate, "확인");
 
   const isLogin = useAuth((state) => state.isLoggedIn);
   const myInfo = useAuth((state) => state.user);
@@ -52,6 +53,7 @@ export default function ImageCard({
 
   const userid = author?._id;
   const handleClick = () => {
+    if (disableNavigate) return;
     if (userid === myInfo?._id) {
       navigate("/myprofile");
     } else {
@@ -122,6 +124,7 @@ export default function ImageCard({
             BackHeight="h-[30px]"
             userImg={userImg ? userImg : author?.image}
             onClick={handleClick}
+            disableNavigate={disableNavigate} // 마우스 커서 변경여부
           />
           <div className="text-base font-medium dark:text-[#fff]">
             {author ? author.fullName : fullName}
