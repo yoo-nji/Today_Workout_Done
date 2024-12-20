@@ -26,7 +26,7 @@ export default function DoneProgressBar({
   const circleFill = isDark ? "#252525" : "#ececec";
   const circleDoneFill = isDark
     ? `rgba(129, 180, 221, 100)`
-    : `rgba(38, 92, 172, ${percent / 100})`;
+    : `rgba(38, 92, 172, 100)`;
 
   return (
     <div className={`${width ? width : "w-[110px]"}`}>
