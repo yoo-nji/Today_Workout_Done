@@ -16,11 +16,13 @@ import { useDarkModeStore } from "../../stores/darkModeStore";
 interface UserListModalType {
   handleBackClick: (e: React.MouseEvent<HTMLDivElement>) => void;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export default function UserListModal({
   handleBackClick,
   setIsOpen,
+  setIsModalOpen,
 }: UserListModalType) {
   // 다크모드
   const isDark = useDarkModeStore((state) => state.isDark);
@@ -109,7 +111,9 @@ export default function UserListModal({
           className="w-[30px] h-[30px] absolute top-3 right-3 cursor-pointer hover:bg-[rgba(0,0,0,0.1)] dark:hover:bg-[rgba(0,0,0,0.6)] rounded-[50%]
           flex items-center justify-center
         "
-          onClick={(e) => handleBackClick(e)}
+          onClick={(e) => {
+            handleBackClick(e);
+          }}
         >
           {!isDark ? (
             <img src={closeIcon} alt="닫기 버튼" />
