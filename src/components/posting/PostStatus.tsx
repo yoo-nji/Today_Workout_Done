@@ -29,7 +29,7 @@ export default function PostStatus({
   const textUndo = isDark ? "text-semiDarkGreyDark" : "text-[#c1c1c1]";
 
   return (
-    <div className="w-[250px] h-[45px] flex items-center justify-between border-t border-[#c1c1c1] mt-3">
+    <div className="w-[250px] h-[45px] flex items-center justify-between border-t border-[#c1c1c1] mt-3 text-sm">
       {/* 아이콘 */}
       <div
         className={`w-[45px] flex flex-col justify-center items-center gap-2`}
@@ -48,7 +48,9 @@ export default function PostStatus({
         <p
           className={`${img ? textDone : textUndo} text-center leading-[16px]`}
         >
-          이미지 등록
+          이미지
+          <br />
+          등록
         </p>
       </div>
 
@@ -71,7 +73,9 @@ export default function PostStatus({
             channel !== "게시판 선택" ? textDone : textUndo
           } text-center leading-[16px]`}
         >
-          게시판 선택
+          게시판
+          <br />
+          선택
         </p>
       </div>
 
@@ -94,7 +98,9 @@ export default function PostStatus({
             isTitleValid && isDescValid ? textDone : textUndo
           } text-center leading-[16px]`}
         >
-          내용 작성
+          내용
+          <br />
+          작성
         </p>
       </div>
     </div>

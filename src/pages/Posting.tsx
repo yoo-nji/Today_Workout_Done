@@ -110,8 +110,8 @@ export default function Posting() {
   const isDark = useDarkModeStore((state) => state.isDark);
 
   return (
-    <div className="relative flex justify-start items-start outline-none h-full bg-[#fdfdfd] dark:bg-lightBlackDark">
-      <div className="shadow m-auto pt-[20px] pb-[20px] h-[650px] bg-white/60 flex flex-col items-center gap-5 rounded-[20px] dark:bg-blackDark">
+    <div className="relative flex justify-center items-center outline-none min-h-full bg-[#fdfdfd] dark:bg-lightBlackDark">
+      <div className="shadow h-fit py-5 w-[900px] bg-white/60 flex flex-col items-center gap-5 rounded-[20px] dark:bg-blackDark px-[50px]">
         <h1 className="text-[#2e2e2e] dark:text-white font-bold text-[26px] pb-6">
           글작성
         </h1>
@@ -120,13 +120,13 @@ export default function Posting() {
         <PostStatus img={img} title={title} desc={desc} channel={channel} />
 
         <form
-          className="mt-2 w-[1000px] h-[480px] flex items-center justify-center gap-10 dark:bg-blackDark "
+          className="flex h-[390px] w-full gap-10 mt-2 dark:bg-blackDark max-lg:flex-col max-lg:items-center max-lg:h-fit"
           onSubmit={(e) => handleSubmit(e)}
         >
           {/* 이미지 등록 */}
-          <div className=" h-[390px] flex flex-col justify-center items-center gap-3 ">
+          <div className="min-w-[300px] max-w-[300px] flex flex-col justify-center items-center gap-3 max-lg:h-[390px]">
             <div
-              className={`w-[300px] h-full bg-[#F4F6F8] dark:bg-darkGreyDark flex  gap-[10px] ${
+              className={`h-full w-full bg-[#F4F6F8] dark:bg-darkGreyDark flex gap-[10px] ${
                 img.length > 0
                   ? "flex-wrap items-start justify-start"
                   : "items-center justify-center"
@@ -143,7 +143,7 @@ export default function Posting() {
                 {img.length < 1 ? "이미지 등록 필수입니다" : ""}
               </p>
             </div>
-            <div>
+            <div className="flex justify-center w-full">
               <input
                 type="file"
                 id="uploadImg"
@@ -154,7 +154,7 @@ export default function Posting() {
               />
               <label
                 htmlFor="uploadImg"
-                className="bg-[#B9B9B9] dark:bg-skyDark w-[180px] h-[40px] flex justify-center items-center cursor-pointer rounded-[5px] text-white dark:text-blackDark"
+                className="bg-[#B9B9B9] dark:bg-skyDark w-[60%] h-[40px] flex justify-center items-center cursor-pointer rounded-[5px] text-white text-sm dark:text-blackDark"
               >
                 이미지 파일 선택하기
               </label>
@@ -162,9 +162,9 @@ export default function Posting() {
           </div>
 
           {/* 게시글 정보 입력 폼 */}
-          <div className="flex flex-col w-[500px] items-end gap-4">
+          <div className="flex flex-col items-end w-full gap-4">
             <div
-              className="w-full h-[50px] relative bg-[#F4F6F8] dark:bg-darkGreyDark flex justify-between items-center px-[15px] text-[18px] text-[#91989E] dark:text-greyDark cursor-pointer rounded-[5px] dark:border dark:border-greyDark"
+              className="w-full h-[50px] relative bg-[#F4F6F8] dark:bg-darkGreyDark flex justify-between items-center px-[15px] text-[#91989E] dark:text-greyDark cursor-pointer rounded-[5px] dark:border dark:border-greyDark"
               onClick={channelBtnClick}
             >
               {channel}
@@ -180,7 +180,7 @@ export default function Posting() {
                       key={item.id}
                       id={item.id}
                       className={twMerge(
-                        `bg-white dark:bg-blackDark border border-[#f7f7f7] dark:border-greyDark w-full h-[45px] px-[10px] text-[18px] flex items-center justify-center hover:bg-[#E8F3FC] dark:hover:bg-[#6f99ba] ${
+                        `bg-white dark:bg-blackDark border border-[#f7f7f7] dark:border-greyDark w-full h-[45px] px-[10px] flex items-center justify-center hover:bg-[#E8F3FC] dark:hover:bg-[#6f99ba] ${
                           openChannel ? "flex" : "hidden"
                         }`
                       )}
@@ -198,7 +198,7 @@ export default function Posting() {
             <input
               type="text"
               placeholder="제목을 입력해주세요"
-              className=" w-full h-[50px] bg-[#F4F6F8] dark:bg-darkGreyDark dark:placeholder-greyDark dark:text-white outline-none text-[18px] px-[15px] rounded-[5px] dark:border dark:border-greyDark"
+              className=" w-full h-[50px] bg-[#F4F6F8] dark:bg-darkGreyDark dark:placeholder-greyDark dark:text-white outline-none px-[15px] rounded-[5px] dark:border dark:border-greyDark"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
             />
@@ -206,13 +206,13 @@ export default function Posting() {
               name="desc"
               id="desc"
               placeholder="내용을 작성해주세요"
-              className=" resize-none outline-none w-full h-[200px] bg-[#F4F6F8] dark:bg-darkGreyDark dark: dark:placeholder-greyDark dark:text-white py-[10px] px-[15px] text-[20px] rounded-[5px] dark:border dark:border-greyDark"
+              className=" resize-none outline-none w-full h-[200px] bg-[#F4F6F8] dark:bg-darkGreyDark dark: dark:placeholder-greyDark dark:text-white py-[10px] px-[15px] rounded-[5px] dark:border dark:border-greyDark"
               maxLength={1000}
               value={desc}
               onChange={(e) => setDesc(e.target.value)}
             ></textarea>
             <button
-              className={`w-[80px] h-[40px] text-white dark:text-blackDark dark:bg-mainDark rounded-[10px] ${
+              className={`w-[80px] h-[40px] text-white dark:text-blackDark dark:bg-mainDark rounded-[10px] text-sm ${
                 !img.length ||
                 channel === "게시판 선택" ||
                 // !title ||
