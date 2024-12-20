@@ -21,32 +21,41 @@ export default function CommentBox({
   //날짜 포맷
   const update = moment(comment.createdAt); // moment로 변환
   const formattedDate = update.format("YYYY.MM.DD"); // 원하는 형식으로 포맷팅
+  // 시간 포맷팅
+  const formattedTime = update.format("HH:mm");
 
   // 모달창 제어
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const handleClick = (userid: string) => {
-    navigate(`/user/${userid}`);
+  // 작성자와 로그인한 사람이 같으면 myprofile로 이동
+  // 그렇지않으면 유저 페이지로이동
+  const handleClick = () => {
+    if (comment.author._id === loginId?._id) {
+      navigate("/myprofile");
+    } else {
+      navigate(`/user/${comment.author._id}`);
+    }
   };
 
   return (
     <div className="flex flex-col py-5 border-b border-gray-200 dark:border-[#717171]">
       <div className="flex justify-between ">
         <div className="flex gap-[12px] w-fit items-center">
-          <div onClick={() => handleClick(comment.author._id)}>
-            <UserProfile
-              BackWidth="w-[36px]"
-              BackHeight="h-[36px]"
-              userImg={comment.author.image}
-            />
-          </div>
+          <UserProfile
+            BackWidth="w-[36px]"
+            BackHeight="h-[36px]"
+            userImg={comment.author.image}
+            onClick={handleClick}
+          />
+
           <div>
             <p className="text-[13px] mb-[4px] font-bold dark:text-white">
               {comment.author.fullName}
             </p>
-            <p className="text-xs font-light dark:text-greyDark">
-              {formattedDate}
-            </p>
+            <div className="flex gap-1 text-xs font-light dark:text-greyDark">
+              <p>{formattedDate}</p>
+              <p>{formattedTime}</p>
+            </div>
           </div>
         </div>
         {loginId?._id === comment.author._id && (
