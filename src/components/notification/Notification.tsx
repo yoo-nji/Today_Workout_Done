@@ -2,14 +2,18 @@ import ButtonComponent from "../ButtonComponent";
 import likeIcon from "../../assets/noti_like_Icon.svg";
 import followIcon from "../../assets/noti_follow_Icon.svg";
 import commentIcon from "../../assets/icons/Comment_Icon.svg";
+import action_comment from "../../assets/icons/action_comment.svg";
+import action_noti_follow from "../../assets/icons/action_noti_follow.svg";
+import action_noti_like from "../../assets/icons/action_noti_like.svg";
+
 import NotificationBox from "../NotificationBox";
 import { api } from "../../api/axios";
 import { AxiosError } from "axios";
 import { useEffect, useState } from "react";
 
-import darkCommentIcon from "../../assets/darkicons/darkCommentIcon.svg";
-import darkFollowIcon from "../../assets/darkicons/darkFollowIcon.svg";
-import darkLikeIcon from "../../assets/darkicons/darkLikeIcon.svg";
+// import darkCommentIcon from "../../assets/darkicons/darkCommentIcon.svg";
+// import darkFollowIcon from "../../assets/darkicons/darkFollowIcon.svg";
+// import darkLikeIcon from "../../assets/darkicons/darkLikeIcon.svg";
 import { useDarkModeStore } from "../../stores/darkModeStore";
 import { useAuth } from "../../stores/authStore";
 import { twMerge } from "tailwind-merge";
@@ -132,7 +136,7 @@ export default function Notification({
 
   useEffect(() => {
     if (notificationArray.length != 0) {
-      console.log(notificationArray[0].like);
+      // console.log(notificationArray[0].like);
       let likeCount = 0;
       let followCount = 0;
       let commentCount = 0;
@@ -148,184 +152,174 @@ export default function Notification({
     }
   }, []);
 
-  const isDark = useDarkModeStore((state) => state.isDark);
+  const notificationTypes = [
+    {
+      type: "comment",
+      icon: commentIcon,
+      actionIcon: action_comment,
+      isActive: isComment,
+      count: notificationNumber[0],
+      handler: showCommentHandler,
+    },
+    {
+      type: "follow",
+      icon: followIcon,
+      actionIcon: action_noti_follow,
+      isActive: isFollow,
+      count: notificationNumber[1],
+      handler: showFollowHandler,
+    },
+    {
+      type: "like",
+      icon: likeIcon,
+      actionIcon: action_noti_like,
+      isActive: isLike,
+      count: notificationNumber[2],
+      handler: showLikeHandler,
+    },
+  ];
 
   return (
-    <div>
-      <div className="absolute z-10 top-[32px] right-[10%] mt-2 w-[280px] p-[18px] rounded-[10px] mr-[43px]">
-        {/* 말풍선 본문 */}
-        <div
-          className="w-[390px] max-h-[560px] overflow-y-scroll bg-white border border-gray-200 rounded-xl shadow-lg p-6 scrollbar-none dark:bg-blackDark dark:border-darkGreyDark"
-          onClick={(e) => e.stopPropagation()}
-        >
-          <div className="space-y-0 scrollbar-none">
-            {/* 헤더고정부분 */}
-            <div className="sticky top-0 bg-white z-10 dark:bg-blackDark">
-              <div className="flex justify-between items-center w-full px-10 relative ">
-                <img
-                  src={!isDark ? commentIcon : darkCommentIcon}
-                  className={twMerge(
-                    "relative h-[42px] z-40",
-                    isComment && "border-b-4 border-b-blue-500 "
+    <div className="absolute z-10 top-[53px] right-[-78px] rounded-[10px]">
+      {/* 말풍선 본문 */}
+      <div
+        className="w-[380px] max-h-[560px] overflow-y-scroll bg-white border border-gray-200 rounded-xl shadow-lg p-6 scrollbar-none dark:bg-blackDark dark:border-darkGreyDark"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="scrollbar-none">
+          {/* 헤더 버튼 필터링 */}
+          <div className="sticky top-0 bg-white z-10 dark:bg-blackDark pb-5">
+            <div className="flex justify-between items-center w-full px-10 relative ">
+              {notificationTypes.map((notification) => (
+                <div
+                  key={notification.type}
+                  className="relative cursor-pointer"
+                  onClick={notification.handler}
+                >
+                  <img
+                    src={
+                      notification.isActive
+                        ? notification.actionIcon
+                        : notification.icon
+                    }
+                    className={twMerge("h-[36px] z-40")}
+                  />
+                  {notification.count !== 0 && (
+                    <div
+                      className={twMerge(
+                        "min-w-5 h-5 rounded-[50%] bg-red-500 absolute bottom-0 left-[23px] text-white text-center z-50 text-[10px] font-light leading-loose"
+                      )}
+                    >
+                      {notification.count >= 100 ? `99+` : notification.count}
+                    </div>
                   )}
-                  onClick={() => {
-                    showCommentHandler();
-                  }}
-                />
-                {notificationNumber[0] != 0 && (
-                  <div className="w-6 h-6 rounded-[50%] bg-red-500 absolute bottom-0 left-16 text-white text-center  z-50 text-xs leading-loose">
-                    {notificationNumber[0] >= 100
-                      ? `99+`
-                      : notificationNumber[0]}
-                  </div>
-                )}
-                <img
-                  src={!isDark ? followIcon : darkFollowIcon}
-                  className={twMerge(
-                    "relative h-[42px] z-40",
-                    isFollow && "border-b-4 border-b-blue-500 "
-                  )}
-                  onClick={() => {
-                    showFollowHandler();
-                  }}
-                />
-                {notificationNumber[1] != 0 && (
-                  <div className="w-6 h-6 rounded-[50%] bg-red-500 absolute bottom-0 left-44 text-white text-center z-50 text-xs leading-loose">
-                    {notificationNumber[1] >= 100
-                      ? `99+`
-                      : notificationNumber[1]}
-                  </div>
-                )}
-                <img
-                  src={!isDark ? likeIcon : darkLikeIcon}
-                  className={twMerge(
-                    "relative h-[42px] z-40",
-                    isLike && "border-b-4 border-b-blue-500"
-                  )}
-                  onClick={() => {
-                    showLikeHandler();
-                  }}
-                />
-                {notificationNumber[2] != 0 && (
-                  <div className="w-6 h-6 rounded-[50%] bg-red-500 absolute bottom-0 right-8 text-white justify-center text-center z-50 text-xs leading-loose">
-                    {notificationNumber[2] >= 100
-                      ? `99+`
-                      : notificationNumber[2]}
-                  </div>
-                )}
-              </div>
-              {/* 분단선 테스트 */}
-              <div className="border-t w-full px-3 mt-3 pb-2"></div>
+                </div>
+              ))}
             </div>
-            {/* 여기까지 */}
-            {/* 바디부분 길이 초과시 스크롤나게 */}
-            <div className="w-full overflow-y-auto max-h-[330px] scrollbar-none flex flex-col items-center">
-              {/* 커멘트만 보여주기 */}
-              {notificationArray && showNotiList && isComment ? (
-                notificationArray
-                  .filter(
-                    (notification) => notification.comment === null || undefined
-                  )
-                  .map((notification: notificationType) => (
-                    <NotificationBox
-                      key={notification._id}
-                      fullname={notification.author.fullName}
-                      userid={notification.author._id}
-                      image={notification.author.image}
-                      notificationType={"comment"}
-                      postId={notification?.post}
-                      follow={notification?.follow}
-                    ></NotificationBox>
-                  ))
-              ) : // 팔로우만 보여주기기
-              notificationArray && showNotiList && isFollow ? (
-                notificationArray
-                  .filter(
-                    (notification) => notification.follow != null || undefined
-                  )
-                  .map((notification: notificationType) => (
-                    <NotificationBox
-                      key={notification._id}
-                      fullname={notification.author.fullName}
-                      userid={notification.author._id}
-                      image={notification.author.image}
-                      notificationType={"follow"}
-                      postId={notification?.post}
-                      follow={notification?.follow}
-                    ></NotificationBox>
-                  ))
-              ) : // 좋아요만 보여주기
-              notificationArray && showNotiList && isLike ? (
-                notificationArray
-                  .filter(
-                    (notification) => notification.like === null || undefined
-                  )
-                  .map((notification: notificationType) => (
-                    <NotificationBox
-                      key={notification._id}
-                      fullname={notification.author.fullName}
-                      userid={notification.author._id}
-                      image={notification.author.image}
-                      notificationType={"like"}
-                      postId={notification?.post}
-                      follow={notification?.follow}
-                    ></NotificationBox>
-                  ))
-              ) : // 전체 다 보여주기
-              notificationArray.length && showNotiList ? (
-                notificationArray.map((notification: notificationType) => (
+          </div>
+          {/* 알림박스 */}
+          <div className="w-full overflow-y-auto max-h-[330px] scrollbar-none flex flex-col items-center gap-1">
+            {/* 커멘트만 보여주기 */}
+            {notificationArray && showNotiList && isComment ? (
+              notificationArray
+                .filter(
+                  (notification) => notification.comment === null || undefined
+                )
+                .map((notification: notificationType) => (
                   <NotificationBox
                     key={notification._id}
                     fullname={notification.author.fullName}
                     userid={notification.author._id}
                     image={notification.author.image}
-                    notificationType={
-                      notification.like === null || undefined
-                        ? "like"
-                        : notification.follow != undefined
-                        ? "follow"
-                        : "comment"
-                    }
+                    notificationType={"comment"}
                     postId={notification?.post}
                     follow={notification?.follow}
                   ></NotificationBox>
                 ))
-              ) : (
-                // 알림없을때 처리
+            ) : // 팔로우만 보여주기기
+            notificationArray && showNotiList && isFollow ? (
+              notificationArray
+                .filter(
+                  (notification) => notification.follow != null || undefined
+                )
+                .map((notification: notificationType) => (
+                  <NotificationBox
+                    key={notification._id}
+                    fullname={notification.author.fullName}
+                    userid={notification.author._id}
+                    image={notification.author.image}
+                    notificationType={"follow"}
+                    postId={notification?.post}
+                    follow={notification?.follow}
+                  ></NotificationBox>
+                ))
+            ) : // 좋아요만 보여주기
+            notificationArray && showNotiList && isLike ? (
+              notificationArray
+                .filter(
+                  (notification) => notification.like === null || undefined
+                )
+                .map((notification: notificationType) => (
+                  <NotificationBox
+                    key={notification._id}
+                    fullname={notification.author.fullName}
+                    userid={notification.author._id}
+                    image={notification.author.image}
+                    notificationType={"like"}
+                    postId={notification?.post}
+                    follow={notification?.follow}
+                  ></NotificationBox>
+                ))
+            ) : // 전체 다 보여주기
+            notificationArray.length && showNotiList ? (
+              notificationArray.map((notification: notificationType) => (
+                <NotificationBox
+                  key={notification._id}
+                  fullname={notification.author.fullName}
+                  userid={notification.author._id}
+                  image={notification.author.image}
+                  notificationType={
+                    notification.like === null || undefined
+                      ? "like"
+                      : notification.follow != undefined
+                      ? "follow"
+                      : "comment"
+                  }
+                  postId={notification?.post}
+                  follow={notification?.follow}
+                ></NotificationBox>
+              ))
+            ) : (
+              // 알림없을때 처리
 
-                <p className="text-xl text-gray-500 my-10 jusitify-center items-center">
-                  알림이 없습니다
-                </p>
-              )}
+              <p className="text-xl text-gray-500 my-10 jusitify-center items-center">
+                알림이 없습니다
+              </p>
+            )}
+          </div>
+          {/* 버튼 */}
+          <div className="sticky bottom-0 bg-white z-10 dark:bg-blackDark">
+            <div className="flex justify-end space-x-2 mt-4 ">
+              <ButtonComponent
+                bgcolor="bg-white dark:bg-blackDark dark:hover:bg-darkGreyDark"
+                textcolor="text-[#265CAC] dark:text-mainDark"
+                border="border-[1px] dark:border-mainDark"
+                onClick={() => {
+                  // Todo 모두읽기 기능 구현
+                  notificationSeen();
+                  isNoti();
+                }}
+              >
+                {"모두읽기"}
+              </ButtonComponent>
+              <ButtonComponent
+                bgcolor="bg-[#265CAC] dark:bg-mainDark dark:hover:bg-mainTextDark"
+                textcolor="text-[white] dark:text-blackDark"
+                onClick={closeNoti}
+              >
+                {"닫기"}
+              </ButtonComponent>
             </div>
-            {/* 여기까지 */}
-            {/* 푸터부분 */}
-            <div className="sticky bottom-0 bg-white z-10 dark:bg-blackDark">
-              <div className="flex justify-end space-x-2 mt-4 ">
-                <ButtonComponent
-                  bgcolor="bg-white dark:bg-blackDark dark:hover:bg-darkGreyDark"
-                  textcolor="text-[#265CAC] dark:text-mainDark"
-                  border="border-[1px] dark:border-mainDark"
-                  onClick={() => {
-                    // Todo 모두읽기 기능 구현
-                    notificationSeen();
-                    isNoti();
-                  }}
-                >
-                  {"모두읽기"}
-                </ButtonComponent>
-                <ButtonComponent
-                  bgcolor="bg-[#265CAC] dark:bg-mainDark dark:hover:bg-mainTextDark"
-                  textcolor="text-[white] dark:text-blackDark"
-                  onClick={closeNoti}
-                >
-                  {"닫기"}
-                </ButtonComponent>
-              </div>
-            </div>
-            {/* 여기까지 */}
-
-            {/* 댓글의 앞부분 가져와서 한줄로 보여주고 길이초과시 ...처리  */}
           </div>
         </div>
       </div>
