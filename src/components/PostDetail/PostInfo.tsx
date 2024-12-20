@@ -9,6 +9,7 @@ import { useLoadingStore } from "../../stores/loadingStore";
 import ConfirmModal from "../modal/ConfirmModal";
 import moment from "moment";
 import { twMerge } from "tailwind-merge";
+import { useAuth } from "../../stores/authStore";
 
 interface PostInfoProps {
   title: string;
@@ -22,7 +23,7 @@ interface PostInfoProps {
   edit: boolean;
   userImg: string;
   setEdit: React.Dispatch<React.SetStateAction<boolean>>;
-  userid: string;
+  userId: string;
 }
 
 export default function PostInfo({
@@ -37,7 +38,7 @@ export default function PostInfo({
   edit,
   userImg,
   setEdit,
-  userid,
+  userId,
 }: PostInfoProps) {
   const navigate = useNavigate();
   const imgRef = useRef<HTMLInputElement>(null);
@@ -46,6 +47,9 @@ export default function PostInfo({
   const [img, setImg] = useState(image);
   const [uploadImg, setUploadImg] = useState<File | null>(null);
   const textarea = useRef<HTMLTextAreaElement | null>(null);
+
+  // 내 정보 가져오기
+  const myInfo = useAuth((state) => state.user);
 
   // 모달 관리
   const [isOpen, setIsOpen] = useState(false); // 삭제 모달
@@ -169,8 +173,14 @@ export default function PostInfo({
     gymreview: "헬스장 리뷰",
   };
 
-  const handleClick = (userid: string) => {
-    navigate(`/user/${userid}`);
+  // 작성자와 로그인한 사람이 같으면 myprofile로 이동
+  // 그렇지않으면 유저 페이지로이동
+  const handleClick = () => {
+    if (userId === myInfo?._id) {
+      navigate("/myprofile");
+    } else {
+      navigate(`/user/${userId}`);
+    }
   };
 
   return (
@@ -196,13 +206,13 @@ export default function PostInfo({
       <div className="flex items-center justify-between">
         {/* 왼쪽 프로필 */}
         <div className="flex gap-[10px] items-center">
-          <div onClick={() => handleClick(userid)}>
-            <UserProfile
-              BackWidth="w-[36px]"
-              BackHeight="h-[36px]"
-              userImg={userImg}
-            />
-          </div>
+          <UserProfile
+            BackWidth="w-[36px]"
+            BackHeight="h-[36px]"
+            userImg={userImg}
+            onClick={handleClick}
+          />
+
           <div className="dark:text-white">
             <p className="text-[13px] mb-[6px] font-bold">{fullName}</p>
             <div className="flex gap-1 text-[#505050] dark:text-greyDark">

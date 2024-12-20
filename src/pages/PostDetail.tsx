@@ -109,8 +109,6 @@ export default function PostDetail() {
 
   const getPrePostData = (posts: string[], currentPostID: string) => {
     const currentIndex = posts.findIndex((post) => post === currentPostID);
-    // console.log(currentIndex);
-
     if (currentIndex === -1) {
       console.error("Post not found in the posts array");
       return;
@@ -119,8 +117,6 @@ export default function PostDetail() {
     const nextPostID = currentIndex > 0 ? posts[currentIndex - 1] : null;
     const prevPostID =
       currentIndex < posts.length - 1 ? posts[currentIndex + 1] : null;
-    console.log(`이전 페이지 ID : ${prevPostID}`);
-    console.log(`다음 페이지 ID : ${nextPostID}`);
     setPrevPost(prevPostID);
     setNextPost(nextPostID);
   };
@@ -164,7 +160,7 @@ export default function PostDetail() {
           edit={edit}
           setEdit={setEdit}
           userImg={data.userImg}
-          userid={data.userID}
+          userId={data.userID}
         />
         {/* 편집모드 일때는 댓글 렌더링 X */}
         {!edit && (

@@ -48,8 +48,12 @@ export default function ImageCard({
   }
 
   const userid = author?._id;
-  const handleClick = (userid: string | undefined) => {
-    navigate(`/user/${userid}`);
+  const handleClick = () => {
+    if (userid === myInfo?._id) {
+      navigate("/myprofile");
+    } else {
+      navigate(`/user/${userid}`);
+    }
   };
 
   const channelName = Object.keys(channelMapping).find((key) => {
@@ -104,13 +108,12 @@ export default function ImageCard({
       {/* 글 작성자 정보 */}
       <div className="flex items-center justify-between w-full px-2">
         <div className="flex items-center gap-[10px]">
-          <div onClick={() => handleClick(userid)}>
-            <UserProfile
-              BackWidth="w-[30px]"
-              BackHeight="h-[30px]"
-              userImg={userImg ? userImg : author?.image}
-            />
-          </div>
+          <UserProfile
+            BackWidth="w-[30px]"
+            BackHeight="h-[30px]"
+            userImg={userImg ? userImg : author?.image}
+            onClick={handleClick}
+          />
           <div className="text-base font-medium dark:text-[#fff]">
             {author ? author.fullName : fullName}
           </div>
