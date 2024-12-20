@@ -1,11 +1,13 @@
 import UserProfile from "../UserProfile";
 import trashIcon from "../../assets/trash.svg";
+import darkTrashIcon from "../../assets/darkicons/darkTrashIcon.svg";
 import { Comment } from "../../utils/getPostDetail";
 import { useAuth } from "../../stores/authStore";
 import { useNavigate } from "react-router";
 import ConfirmModal from "../modal/ConfirmModal";
 import { useState } from "react";
 import moment from "moment";
+import { useDarkModeStore } from "../../stores/darkModeStore";
 
 export default function CommentBox({
   comment,
@@ -14,6 +16,8 @@ export default function CommentBox({
   comment: Comment;
   handleDelete: (commentId: string) => Promise<void>;
 }) {
+  const isDark = useDarkModeStore((state) => state.isDark);
+
   // 사용자 정보 가져오기
   const loginId = useAuth((state) => state.user);
   const navigate = useNavigate();
@@ -51,7 +55,7 @@ export default function CommentBox({
         </div>
         {loginId?._id === comment.author._id && (
           <button onClick={() => setIsModalOpen(true)} className="w-8 mr-2">
-            <img src={trashIcon} alt="trashIcon" />
+            <img src={!isDark ? trashIcon : darkTrashIcon} alt="trashIcon" />
           </button>
         )}
       </div>
