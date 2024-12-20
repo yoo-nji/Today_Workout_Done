@@ -92,7 +92,7 @@ export default function Sidebar({ setIsModalOpen }: SidebarType) {
       className={twMerge(
         `flex flex-col items-center gap-1 h-[100vh] z-10
       py-5 text-[#1D1D1D] bg-[#FEFEFE] border-r
-      border-gray-200/50 fixed transition-all dark:bg-[#2C2C2C] dark:border-darkGreyDark`,
+      border-gray-200/50 fixed transition-[width] dark:bg-[#2C2C2C] dark:border-darkGreyDark`,
         isOpen ? (!isDark ? "before:modal-back" : "before:darkModal-back") : "",
         isToggle ? "w-[300px]" : "w-20"
       )}
