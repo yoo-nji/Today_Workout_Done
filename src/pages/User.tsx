@@ -61,8 +61,8 @@ export default function User() {
                   </div>
                 ) : (
                   <div className="w-[814px]">
-                    <p className="text-center text-gray-500">
-                      게시물이 없습니다.
+                    <p className="text-center text-[18p] text-lightBlackDark dark:text-skyDark mt-5">
+                      게시물이 없습니다
                     </p>
                   </div>
                 )}
