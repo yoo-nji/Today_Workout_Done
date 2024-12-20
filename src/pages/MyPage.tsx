@@ -6,7 +6,12 @@ import Loading from "../components/Loading";
 import CustomCalendar from "../components/MyPage/CustomCalendar";
 import MyImageCard from "../components/MyImageCard";
 import { useEffect, useState } from "react";
+import { usesidebarToggleStore } from "../stores/sideberToggleStore";
+import { twMerge } from "tailwind-merge";
 export default function MyPage() {
+  // 토글 유무 확인
+  const isToggle = usesidebarToggleStore((state) => state.isToggle);
+
   const myInfo = useAuth((state) => state.user);
 
   const isLoading = useLoadingStore((state) => state.isLoading);
@@ -24,7 +29,7 @@ export default function MyPage() {
   return (
     <>
       {myInfo && (
-        <div className="min-h-min h-full relative flex flex-col items-center py-8 dark:bg-lightBlackDark">
+        <div className="relative flex flex-col items-center h-full py-8 min-h-min dark:bg-lightBlackDark">
           <div className="flex flex-col gap-[40px]">
             <UserCard
               uname={myInfo.fullName!}
@@ -49,7 +54,14 @@ export default function MyPage() {
               <div className="border-t pt-[10px] px-1 flex justify-center">
                 <div className="flex flex-col items-start mt-[20px]">
                   <div className="flex items-center justify-center">
-                    <div className="grid gap-8 2xl:grid-cols-4 xl:grid-cols-3 lg:grid-cols-2">
+                    <div
+                      className={twMerge(
+                        "grid gap-8 grid-cols-4",
+                        isToggle
+                          ? "max-[1396px]:grid-cols-3 max-[1114px]:grid-cols-2 max-[832px]:grid-cols-1"
+                          : "max-[1176px]:grid-cols-3 max-[894px]:grid-cols-2 max-[612px]:grid-cols-1"
+                      )}
+                    >
                       {myInfo.posts?.map((post) => (
                         <MyImageCard
                           key={post._id}

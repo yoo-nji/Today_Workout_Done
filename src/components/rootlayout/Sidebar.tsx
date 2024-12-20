@@ -28,7 +28,11 @@ import darkLeft from "../../assets/darkicons/darkLeftIcon.svg";
 import darkRight from "../../assets/darkicons/darkRightIcon.svg";
 import darkUserListIcon from "../../assets/darkicons/darkUserListIcon.svg";
 
-export default function Sidebar() {
+interface SidebarType {
+  setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export default function Sidebar({ setIsModalOpen }: SidebarType) {
   const isDark = useDarkModeStore((state) => state.isDark);
   const navigate = useNavigate();
 
@@ -49,6 +53,7 @@ export default function Sidebar() {
   const handleBackClick = (e: React.MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();
     setIsOpen(false);
+    setIsModalOpen(false);
   };
 
   const channel = [
@@ -189,6 +194,7 @@ export default function Sidebar() {
               onClick={(e) => {
                 e.stopPropagation();
                 setIsOpen((prev) => !prev);
+                setIsModalOpen(true);
               }}
             >
               유저 목록
@@ -201,6 +207,7 @@ export default function Sidebar() {
                 onClick={(e) => {
                   e.stopPropagation();
                   setIsOpen((prev) => !prev);
+                  setIsModalOpen(true);
                 }}
               />
             </button>
@@ -211,6 +218,7 @@ export default function Sidebar() {
           <UserListModal
             handleBackClick={handleBackClick}
             setIsOpen={setIsOpen}
+            setIsModalOpen={setIsModalOpen}
           />
         )}
       </div>

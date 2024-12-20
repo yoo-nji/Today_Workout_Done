@@ -12,11 +12,47 @@ import darkFollowIcon from "../../assets/darkicons/darkFollowIcon.svg";
 import darkLikeIcon from "../../assets/darkicons/darkLikeIcon.svg";
 import { useDarkModeStore } from "../../stores/darkModeStore";
 import { useAuth } from "../../stores/authStore";
+import { twMerge } from "tailwind-merge";
 
 interface notificationProps {
   closeNoti: () => void;
   isNoti: () => void;
   notificationArray?: any;
+}
+
+export interface notificationType {
+  seen: boolean;
+  _id: string;
+  author: {
+    role: string;
+    emailVerified: boolean;
+    banned: boolean;
+    isOnline: boolean;
+    posts: string[];
+    likes: string[];
+    comments: string[];
+    followers: string[];
+    following: string[];
+    notifications: string[];
+    messages: [];
+    _id: string;
+    fullName: string;
+    email: string;
+    password: string;
+    createdAt: string;
+    updatedAt: string;
+    __v: number;
+    username: null;
+    image: string;
+    imagePublicId: string;
+  };
+  user: string;
+  post: string;
+  follow?: string;
+  like: null;
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
 }
 
 // API보고 notificationArray 받아서 처리하자
@@ -60,8 +96,28 @@ export default function Notification({
     setNotificationNumber([0, 0, 0]);
   };
 
+  const [isComment, setIsComment] = useState(false);
+  const [isFollow, setIsFollow] = useState(false);
+  const [isLike, setIsLike] = useState(false);
+
   // map돌려서 알람갯수 세기
   const [showNotiList, setShowNotiList] = useState(true);
+
+  const showCommentHandler = () => {
+    setIsComment(!isComment);
+    setIsFollow(false);
+    setIsLike(false);
+  };
+  const showFollowHandler = () => {
+    setIsFollow(!isFollow);
+    setIsComment(false);
+    setIsLike(false);
+  };
+  const showLikeHandler = () => {
+    setIsLike(!isLike);
+    setIsFollow(false);
+    setIsComment(false);
+  };
 
   const showNotiListHandler = () => {
     setShowNotiList(false);
@@ -80,7 +136,7 @@ export default function Notification({
       let likeCount = 0;
       let followCount = 0;
       let commentCount = 0;
-      notificationArray.map((notification: any) =>
+      notificationArray.map((notification: notificationType) =>
         notification.like === null || undefined
           ? (likeCount = likeCount + 1)
           : notification.follow != undefined
@@ -92,18 +148,11 @@ export default function Notification({
     }
   }, []);
 
-  // 여기에 좋아요, 팔로우, 메세지 갯수 받아서 사용
-  // const [notificationNumber, setNotificationNumber] = useState([0, 0, 0]);
-
-  // console.log({ likeNumber });
-
   const isDark = useDarkModeStore((state) => state.isDark);
 
   return (
     <div>
       <div className="absolute z-10 top-[32px] right-[10%] mt-2 w-[280px] p-[18px] rounded-[10px] mr-[43px]">
-        {/* 말풍선 꼬리 */}
-        {/* Todo 말풍선 꼬리 tailwind로 만드는법 알아보자 */}
         {/* 말풍선 본문 */}
         <div
           className="w-[390px] max-h-[560px] overflow-y-scroll bg-white border border-gray-200 rounded-xl shadow-lg p-6 scrollbar-none dark:bg-blackDark dark:border-darkGreyDark"
@@ -115,13 +164,16 @@ export default function Notification({
               <div className="flex justify-between items-center w-full px-10 relative ">
                 <img
                   src={!isDark ? commentIcon : darkCommentIcon}
-                  className="relative h-[42px]"
+                  className={twMerge(
+                    "relative h-[42px] z-40",
+                    isComment && "border-b-4 border-b-blue-500 "
+                  )}
                   onClick={() => {
-                    console.log("comment");
+                    showCommentHandler();
                   }}
                 />
                 {notificationNumber[0] != 0 && (
-                  <div className="w-6 h-6 rounded-[50%] bg-red-500 absolute bottom-0 left-16 text-white text-center text-xs leading-loose">
+                  <div className="w-6 h-6 rounded-[50%] bg-red-500 absolute bottom-0 left-16 text-white text-center  z-50 text-xs leading-loose">
                     {notificationNumber[0] >= 100
                       ? `99+`
                       : notificationNumber[0]}
@@ -129,9 +181,12 @@ export default function Notification({
                 )}
                 <img
                   src={!isDark ? followIcon : darkFollowIcon}
-                  className="relative h-[37px]"
+                  className={twMerge(
+                    "relative h-[42px] z-40",
+                    isFollow && "border-b-4 border-b-blue-500 "
+                  )}
                   onClick={() => {
-                    console.log("follow");
+                    showFollowHandler();
                   }}
                 />
                 {notificationNumber[1] != 0 && (
@@ -143,9 +198,12 @@ export default function Notification({
                 )}
                 <img
                   src={!isDark ? likeIcon : darkLikeIcon}
-                  className="relative h-[37px] z-40"
+                  className={twMerge(
+                    "relative h-[42px] z-40",
+                    isLike && "border-b-4 border-b-blue-500"
+                  )}
                   onClick={() => {
-                    console.log("like");
+                    showLikeHandler();
                   }}
                 />
                 {notificationNumber[2] != 0 && (
@@ -162,9 +220,62 @@ export default function Notification({
             {/* 여기까지 */}
             {/* 바디부분 길이 초과시 스크롤나게 */}
             <div className="w-full overflow-y-auto max-h-[330px] scrollbar-none flex flex-col items-center">
-              {notificationArray.length && showNotiList ? (
-                notificationArray.map((notification: any) => (
+              {/* 커멘트만 보여주기 */}
+              {notificationArray && showNotiList && isComment ? (
+                notificationArray
+                  .filter(
+                    (notification) => notification.comment === null || undefined
+                  )
+                  .map((notification: notificationType) => (
+                    <NotificationBox
+                      key={notification._id}
+                      fullname={notification.author.fullName}
+                      userid={notification.author._id}
+                      image={notification.author.image}
+                      notificationType={"comment"}
+                      postId={notification?.post}
+                      follow={notification?.follow}
+                    ></NotificationBox>
+                  ))
+              ) : // 팔로우만 보여주기기
+              notificationArray && showNotiList && isFollow ? (
+                notificationArray
+                  .filter(
+                    (notification) => notification.follow != null || undefined
+                  )
+                  .map((notification: notificationType) => (
+                    <NotificationBox
+                      key={notification._id}
+                      fullname={notification.author.fullName}
+                      userid={notification.author._id}
+                      image={notification.author.image}
+                      notificationType={"follow"}
+                      postId={notification?.post}
+                      follow={notification?.follow}
+                    ></NotificationBox>
+                  ))
+              ) : // 좋아요만 보여주기
+              notificationArray && showNotiList && isLike ? (
+                notificationArray
+                  .filter(
+                    (notification) => notification.like === null || undefined
+                  )
+                  .map((notification: notificationType) => (
+                    <NotificationBox
+                      key={notification._id}
+                      fullname={notification.author.fullName}
+                      userid={notification.author._id}
+                      image={notification.author.image}
+                      notificationType={"like"}
+                      postId={notification?.post}
+                      follow={notification?.follow}
+                    ></NotificationBox>
+                  ))
+              ) : // 전체 다 보여주기
+              notificationArray.length && showNotiList ? (
+                notificationArray.map((notification: notificationType) => (
                   <NotificationBox
+                    key={notification._id}
                     fullname={notification.author.fullName}
                     userid={notification.author._id}
                     image={notification.author.image}
@@ -175,9 +286,13 @@ export default function Notification({
                         ? "follow"
                         : "comment"
                     }
+                    postId={notification?.post}
+                    follow={notification?.follow}
                   ></NotificationBox>
                 ))
               ) : (
+                // 알림없을때 처리
+
                 <p className="text-xl text-gray-500 my-10 jusitify-center items-center">
                   알림이 없습니다
                 </p>

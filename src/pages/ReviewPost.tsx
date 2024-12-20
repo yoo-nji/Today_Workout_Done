@@ -109,7 +109,9 @@ export default function ReviewPost() {
           (searchPosts.length ? (
             searchPosts.map((post) => <Review key={post._id} {...post} />)
           ) : (
-            <p>검색 결과가 없습니다.</p>
+            <p className="text-[25px] font-semibold text-[#265CAC] dark:text-[#6FBEFF]">
+              검색 결과가 없습니다.
+            </p>
           ))}
 
         {status === "idle" &&
