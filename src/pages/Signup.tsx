@@ -46,8 +46,6 @@ export default function Signup() {
     // 닉네임 상태 업데이트
     setName(trimmedValue);
 
-    console.log(Array.from(trimmedValue).length);
-
     // 빈 칸일 때 에러 메시지 제거
     if (trimmedValue === "") {
       setNameError("");
@@ -192,21 +190,6 @@ export default function Signup() {
     passwordError === "" &&
     confirmPasswordError === "";
 
-  // useEffect(() => {
-  //   const getUser = async () => {
-  //     const response = await api.post("/signup", {
-  //       email: "sss@gmail.com",
-  //       fullName: "songwon",
-  //       password: "1234",
-  //     });
-  //     // axios.get(
-  //     //   "https://5th.fe.dev-cos.com:5001/users/get-users"
-  //     // );
-  //     console.log(response);
-  //   };
-  //   getUser();
-  // }, []);
-
   /* 사용자 입력 값 회원가입 요청 보내기 */
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -222,7 +205,6 @@ export default function Signup() {
         password: password,
       });
 
-      console.log("가입 성공:", response.data);
       // 성공 시 리다이렉트나 사용자 알림 처리
       setIsModalOpen(true); // 회원가입 성공 시 모달 열기
     } catch (error) {

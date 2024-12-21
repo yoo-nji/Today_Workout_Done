@@ -1,40 +1,16 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { twMerge } from "tailwind-merge";
-import { usesidebarToggleStore } from "../../stores/sideberToggleStore";
 import horizontalAfternoon from "../../assets/horizontalAfternoon.svg";
 import horizontalNight from "../../assets/horizontalNight.svg";
 import sun from "../../assets/sun.svg";
 import moon from "../../assets/moon.svg";
-import DeleteConfirm from "../modal/ConfirmModal";
 import innercircle from "../../assets/innercircle.svg";
 import { useDarkModeStore } from "../../stores/darkModeStore";
 
 export default function ModeChange() {
-  const [isClicked, setIsClicked] = useState(false);
-  const isToggle = usesidebarToggleStore((state) => state.isToggle);
-
   // 다크모드
   const isDark = useDarkModeStore((state) => state.isDark);
   const toggleDarkMode = useDarkModeStore((state) => state.toggleDarkMode);
-
-  // /* 삭제 모달 테스트용 코드 */
-  // const [isModalOpen, setIsModalOpen] = useState(false);
-  // const handleClick = () => {
-  //   // 모달 열기
-  //   setIsModalOpen(true);
-  // };
-
-  // const handleModalClose = () => {
-  //   // 모달 닫기
-  //   setIsModalOpen(false);
-  // };
-
-  // const handleModeChange = () => {
-  //   // 실제 모드 변경 로직
-  //   setIsClicked((click) => !click);
-  //   setIsModalOpen(false);
-  // };
-  // /* 테스트용 코드 여기까지 */
 
   const handleClick = () => {
     toggleDarkMode();
@@ -83,16 +59,6 @@ export default function ModeChange() {
           )}
         />
       </button>
-
-      {/* 테스트용 DeleteConfirm 모달 */}
-      {/* {isModalOpen && (
-        <DeleteConfirm
-          isOpen={isModalOpen}
-          onClose={handleModalClose}
-          onConfirm={handleModeChange}
-          message="이 게시글을 정말 삭제하시겠습니까?"
-        />
-      )} */}
     </div>
   );
 }

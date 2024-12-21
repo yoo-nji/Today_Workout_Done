@@ -35,7 +35,6 @@ export default function Posting() {
   // 이미지 미리보기
   const handleChange = () => {
     if (imgRef.current && imgRef.current.files) {
-      console.log(imgRef.current.files);
       const image = imgRef.current.files[0];
       if (image.type.startsWith("image/")) {
         const imgUrl = URL.createObjectURL(image);
@@ -91,7 +90,7 @@ export default function Posting() {
     try {
       startLoading();
       const response = await postingFn(formData);
-      console.log(response);
+
       navigate(route[0].route);
     } catch (error) {
       console.log(error);

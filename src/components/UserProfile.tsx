@@ -35,8 +35,6 @@ export default function UserProfile({
 
     formData.append("isCover", "false");
     formData.append("image", imgRef.current.files[0]);
-
-    console.log(formData);
     try {
       startLoading();
       const response = await updateUserImg(formData);

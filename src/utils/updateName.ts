@@ -5,7 +5,6 @@ export const updateNameFn = async (fullName: string) => {
     const response = await api.put("/settings/update-user", {
       fullName,
     });
-    console.log(response);
     return response;
   } catch (error) {
     console.log(error);

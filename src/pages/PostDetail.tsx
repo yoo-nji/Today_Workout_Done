@@ -32,7 +32,6 @@ interface PostInfo {
 export default function PostDetail() {
   const { pathname } = useLocation();
   const isMyProfile = pathname.startsWith("/myprofile");
-  console.log(pathname);
 
   const isDark = useDarkModeStore((state) => state.isDark);
 
@@ -54,8 +53,6 @@ export default function PostDetail() {
       startLoading();
       // 여기에 포스트 id 값 넣기
       const { data } = await api.get(`/posts/${post_id}`);
-      console.log(data);
-      console.log(data.author.posts);
 
       const {
         author,

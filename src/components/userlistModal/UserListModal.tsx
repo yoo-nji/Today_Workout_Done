@@ -16,13 +16,11 @@ import { useDarkModeStore } from "../../stores/darkModeStore";
 interface UserListModalType {
   handleBackClick: (e: React.MouseEvent<HTMLDivElement>) => void;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export default function UserListModal({
   handleBackClick,
   setIsOpen,
-  setIsModalOpen,
 }: UserListModalType) {
   // 다크모드
   const isDark = useDarkModeStore((state) => state.isDark);

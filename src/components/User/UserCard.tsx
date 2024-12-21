@@ -2,7 +2,6 @@ import { useRef, useState } from "react";
 import FollowButton from "../FollowButton";
 import UserProfile from "../UserProfile";
 import { updateNameFn } from "../../utils/updateName";
-import { useLoadingStore } from "../../stores/loadingStore";
 import { Following, useAuth } from "../../stores/authStore";
 
 interface UserCardType {
@@ -38,26 +37,19 @@ export default function UserCard({
   const myInfo = useAuth((state) => state.user);
   const setMyInfo = useAuth((state) => state.setUser);
 
-  // 로딩중 로딩 시간이 너무 짧아서 고민중
-  // const startLoading = useLoadingStore((state) => state.startLoading);
-  // const stopLoading = useLoadingStore((state) => state.stopLoading);
-
   const inputRef = useRef<HTMLInputElement>(null);
 
   const handleOutFocus = async (e: React.ChangeEvent<HTMLInputElement>) => {
     setDisabled(true);
     if (updateName === uname) return;
     try {
-      // startLoading();
       const response = await updateNameFn(e.target.value);
       if (response) {
         setMyInfo({ ...myInfo, fullName: response.data.fullName });
       }
-      console.log(response);
     } catch (error) {
       console.log(error);
     } finally {
-      // stopLoading();
     }
   };
 
@@ -67,9 +59,8 @@ export default function UserCard({
     if (e.key === "Enter") {
       setDisabled(true);
       try {
-        // startLoading();
         const response = await updateNameFn(updateName);
-        console.log(response);
+
         inputRef.current?.blur();
         if (response) {
           setMyInfo({ ...myInfo, fullName: response.data.fullName });
@@ -77,7 +68,6 @@ export default function UserCard({
       } catch (error) {
         console.log(error);
       } finally {
-        // stopLoading();
       }
     }
   };

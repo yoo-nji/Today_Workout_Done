@@ -1,5 +1,4 @@
 import { api } from "../api/axios";
-import { Navigate } from "react-router";
 
 export default function Register() {
   const signupHandler = async () => {
@@ -12,7 +11,6 @@ export default function Register() {
       });
 
       if (status === 200) {
-        console.log(data);
         // 로그인 화면으로 전환
         // Navigate("/login");
       } else if (status === 400) {

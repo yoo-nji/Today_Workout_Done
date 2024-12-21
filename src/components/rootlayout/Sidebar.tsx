@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import ChannelList from "../ChannelList";
 import UserListModal from "../userlistModal/UserListModal";
 import UserProfile from "../UserProfile";
@@ -23,7 +23,6 @@ import darkDumbellLogo from "../../assets/darkicons/darkCheckLogo.svg";
 import darkProteinLogo from "../../assets/darkicons/darkProteinLogo.svg";
 import darkRoutineLogo from "../../assets/darkicons/darkRoutineLogo.svg";
 import darkGymLogo from "../../assets/darkicons/darkGymLogo.svg";
-// import darkLeft from "../../assets/darkicons/darkLeft.svg";
 import darkLeft from "../../assets/darkicons/darkLeftIcon.svg";
 import darkRight from "../../assets/darkicons/darkRightIcon.svg";
 import darkUserListIcon from "../../assets/darkicons/darkUserListIcon.svg";
@@ -218,7 +217,6 @@ export default function Sidebar({ setIsModalOpen }: SidebarType) {
           <UserListModal
             handleBackClick={handleBackClick}
             setIsOpen={setIsOpen}
-            setIsModalOpen={setIsModalOpen}
           />
         )}
       </div>

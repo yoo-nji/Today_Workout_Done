@@ -40,7 +40,6 @@ export default function CommentForm({
 
   //로그인 상태
   const loginId = useAuth((state) => state.isLoggedIn);
-  // console.log(loginId);
 
   const commentHandler = () => {
     // 로그인 안했을 때

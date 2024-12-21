@@ -12,16 +12,16 @@ interface CheckDoneType {
 }
 
 export default function CheckDone({ width, textSize, bg }: CheckDoneType) {
-  const myInfo = useAuth((state) => state.user)!;
+  const myInfo = useAuth((state) => state.user);
 
   const [checkNumber, setCheckNumber] = useState(0);
 
   useEffect(() => {
-    if (!myInfo) return;
+    if (!myInfo || !myInfo.posts) return;
 
     const mark = [
       ...new Set(
-        myInfo?.posts
+        myInfo.posts
           .filter((post) => post.channel === channelMapping.records)
           .map((post) => moment(post.createdAt).format("YYYY-MM-DD"))
       ),
