@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { twMerge } from "tailwind-merge";
-import { Following, useAuth } from "../stores/authStore";
+import { useAuth } from "../stores/authStore";
 import { follow, unfollow } from "../utils/followFn";
 
 export default function FollowButton({
@@ -22,7 +22,7 @@ export default function FollowButton({
 
   const isLogin = useAuth((state) => state.isLoggedIn); // 로그인 상태
   const myId = useAuth((state) => state.user?._id); // 로그인 상태
-  // console.log(myId);
+
   const [isFollowing, setIsFollowing] = useState<boolean>(false); //팔로우 상태
 
   useEffect(() => {
@@ -41,7 +41,7 @@ export default function FollowButton({
         if (!isFollowing && myId) {
           //팔로우
           const data = await follow(userId, myId);
-          console.log(data);
+
           if (setUserFollowers) {
             setUserFollowers((prev) => prev + 1);
           }
@@ -49,7 +49,7 @@ export default function FollowButton({
             ...myInfo,
             following: [...(myInfo?.following || []), data],
           });
-          console.log(myInfo);
+
           setIsFollowing(true);
         } else if (isFollowing) {
           //팔로우 취소

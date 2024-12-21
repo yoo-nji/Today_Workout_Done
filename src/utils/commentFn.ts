@@ -31,7 +31,6 @@ export const delCommentFn = async (commentId: string) => {
     await api.delete("/comments/delete", {
       data: { id: commentId },
     });
-    // console.log(`삭제 성공: ${JSON.stringify(data)}`);
   } catch (err) {
     console.error("삭제 실패:", err);
   }

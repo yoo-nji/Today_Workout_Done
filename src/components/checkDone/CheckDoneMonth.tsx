@@ -8,7 +8,6 @@ interface CheckDoneMonthType {
 
 export default function CheckDoneMonth({
   checkNumber,
-  width,
   textSize,
 }: CheckDoneMonthType) {
   const myInfo = useAuth((state) => state.user);

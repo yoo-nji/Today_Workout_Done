@@ -12,7 +12,6 @@ export default function User() {
     const getUser = async () => {
       try {
         const { data } = await api.get(`/users/${user_id}`);
-        console.log("data", data);
         setUser(data);
       } catch (err) {
         console.log(err);

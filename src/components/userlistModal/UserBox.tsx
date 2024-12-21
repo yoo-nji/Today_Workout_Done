@@ -2,7 +2,7 @@ import { useNavigate } from "react-router";
 import defaultUserImg from "../../assets/defaultUser.svg";
 import FollowButton from "../FollowButton";
 import { useAuth } from "../../stores/authStore";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 interface UserBoxPropsType {
   isOnline?: boolean;
@@ -23,9 +23,7 @@ export default function UserBox({
   userid,
   setIsOpen,
 }: UserBoxPropsType) {
-  const myfollowing = useAuth((state) => state.user?.following);
   const [userFollowers, setUserFollowers] = useState(followers.length);
-  const [followingList, setFollowingList] = useState(myfollowing); //팔로우 리스트
 
   const navigate = useNavigate();
 

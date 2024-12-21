@@ -57,7 +57,6 @@ export default function CommentSec({
 
     try {
       const newComment = await newCommentFn(option);
-      // console.log(newComment);
       setCommentList((commentList) => [...commentList, newComment]);
       setNewComment(""); //인풋 비우기
       commentinputRef.current?.focus();
@@ -68,8 +67,6 @@ export default function CommentSec({
 
   //내가 작성한 댓글 삭제
   const handleDelete = async (commentId: string) => {
-    // 삭제할 id
-    // console.log(commentId);
     try {
       await delCommentFn(commentId);
       // 상태 업데이트
@@ -100,7 +97,6 @@ export default function CommentSec({
     try {
       // 이미 좋아요 누른 경우
       if (alreadyLiked) {
-        // console.log("좋아요를 취소합니다!");
         //좋아요 취소
         const likeId = likeList.find((like) => like.user === UserId)?._id;
         if (likeId) {
