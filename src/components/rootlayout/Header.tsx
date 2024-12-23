@@ -61,9 +61,7 @@ export default function Header({
   const showNotiHandler = () => {
     setShowNoti(!showNoti);
   };
-  const testHandler = () => {
-    console.log(userInfo?.notifications);
-  };
+
   // 다크모드
   const isDark = useDarkModeStore((state) => state.isDark);
 
@@ -96,13 +94,7 @@ export default function Header({
           onClick={() => navigate("/")}
         />
       </div>
-      <button
-        onClick={() => {
-          testHandler();
-        }}
-      >
-        asdfafg
-      </button>
+
       {isLoggedIn ? (
         // 로그인 상태 분기
         <div className="flex gap-[10px] items-center header-inner">

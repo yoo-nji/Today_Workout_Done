@@ -20,7 +20,6 @@ import { twMerge } from "tailwind-merge";
 
 interface notificationProps {
   closeNoti: () => void;
-  // isNoti: () => void;
   notificationArray?: any;
 }
 
@@ -63,7 +62,6 @@ export interface notificationType {
 // API보고 notificationArray 받아서 처리하자
 export default function Notification({
   closeNoti,
-  // isNoti, // 없어도 작동
   notificationArray,
 }: notificationProps) {
   // 모두읽음처리
@@ -84,7 +82,6 @@ export default function Notification({
         if (status === 400) console.log(error);
       }
 
-      // showNotiListHandler();
       notificationNumberClean();
     } catch (error) {
       console.log(error);
@@ -104,9 +101,6 @@ export default function Notification({
   const [isComment, setIsComment] = useState(false);
   const [isFollow, setIsFollow] = useState(false);
   const [isLike, setIsLike] = useState(false);
-
-  // map돌려서 알람갯수 세기
-  const [showNotiList] = useState(true);
 
   const showCommentHandler = () => {
     setIsComment(!isComment);
@@ -216,7 +210,7 @@ export default function Notification({
           {/* 알림박스 */}
           <div className="w-full overflow-y-auto max-h-[330px] scrollbar-none flex flex-col items-center gap-1">
             {/* 커멘트만 보여주기 */}
-            {notificationArray && showNotiList && isComment ? (
+            {notificationArray && isComment ? (
               notificationArray
                 .filter(
                   (notification: notificationType) =>
@@ -234,7 +228,7 @@ export default function Notification({
                   ></NotificationBox>
                 ))
             ) : // 팔로우만 보여주기기
-            notificationArray && showNotiList && isFollow ? (
+            notificationArray && isFollow ? (
               notificationArray
                 .filter(
                   (notification: notificationType) =>
@@ -252,7 +246,7 @@ export default function Notification({
                   ></NotificationBox>
                 ))
             ) : // 좋아요만 보여주기
-            notificationArray && showNotiList && isLike ? (
+            notificationArray && isLike ? (
               notificationArray
                 .filter(
                   (notification: notificationType) =>
@@ -270,7 +264,7 @@ export default function Notification({
                   ></NotificationBox>
                 ))
             ) : // 전체 다 보여주기
-            notificationArray.length && showNotiList ? (
+            notificationArray.length ? (
               notificationArray.map((notification: notificationType) => (
                 <NotificationBox
                   key={notification._id}
