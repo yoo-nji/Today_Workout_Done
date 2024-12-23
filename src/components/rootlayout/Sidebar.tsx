@@ -73,9 +73,9 @@ export default function Sidebar({ setIsModalOpen }: SidebarType) {
     },
     {
       id: 3,
-      title: "루틴 공유",
+      title: "식단 공유",
       icon: !isDark ? routine : darkRoutineLogo,
-      alt: "루틴 아이콘",
+      alt: "식단 아이콘",
       route: "routine",
     },
     {
@@ -124,7 +124,12 @@ export default function Sidebar({ setIsModalOpen }: SidebarType) {
         )}
       </Link>
 
-      <div className="flex flex-col gap-[10px] min-h-[295px]">
+      <div
+        className={twMerge(
+          "flex flex-col gap-[10px] ",
+          isToggle ? "min-h-[295px]" : "h-0"
+        )}
+      >
         {isLoggedIn === null ? null : (
           <>
             {/* 멘트 */}
