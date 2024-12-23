@@ -15,7 +15,7 @@ import right from "../../assets/double-right.svg";
 import user from "../../assets/user_icon.svg";
 import { useAuth } from "../../stores/authStore";
 import CheckDone from "../checkDone/CheckDone";
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { useDarkModeStore } from "../../stores/darkModeStore";
 
 // 다크모드 아이콘
@@ -113,16 +113,16 @@ export default function Sidebar({ setIsModalOpen }: SidebarType) {
         )}
       </button>
       {/* 로고 */}
-      <a
+      <Link
         className={twMerge("w-20 h-[53px] mb-[14px]", !isToggle && "hidden")}
-        href="/"
+        to="/"
       >
         {!isDark ? (
           <img src={MainLogo} alt="loge" />
         ) : (
           <img src={MainDarkLogo} alt="다크모드 로고" />
         )}
-      </a>
+      </Link>
 
       {/* 멘트 */}
       <div className="flex flex-col items-center gap-[10px] pb-[15px] w-full text-lg font-medium dark:text-[#EDEDED]">
