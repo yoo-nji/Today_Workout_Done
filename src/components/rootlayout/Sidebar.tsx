@@ -124,43 +124,51 @@ export default function Sidebar({ setIsModalOpen }: SidebarType) {
         )}
       </Link>
 
-      {/* 멘트 */}
-      <div className="flex flex-col items-center gap-[10px] pb-[15px] w-full text-lg font-medium dark:text-[#EDEDED]">
-        <div
-          className={twMerge(
-            "flex flex-col items-center text-center mt-2",
-            !isToggle && "hidden"
-          )}
-        >
-          <div>
-            어서오세요{" "}
-            <span className="text-[#265CAC] dark:text-[#6FBEFF] text-[19px] font-bold">
-              {userInfo && isLoggedIn ? userInfo.fullName : "회원"}
-            </span>
-            님
-          </div>
-          <div>오늘도 운동 완료하셨나요?</div>
-        </div>
-        {/* 유저 프로필 */}
-        {isToggle && (
-          <UserProfile
-            BackWidth="w-[100px]"
-            BackHeight="h-[100px]"
-            onClick={isLoggedIn ? () => navigate("/myprofile") : undefined}
-            userImg={userInfo?.image}
-            myProfile={isLoggedIn} //로그인 여부에 따라 홈 아이콘 표시
-          />
+      <div className="flex flex-col gap-[10px] min-h-[295px]">
+        {isLoggedIn === null ? null : (
+          <>
+            {/* 멘트 */}
+            <div className="flex flex-col items-center gap-[10px] pb-[15px] w-full text-lg font-medium dark:text-[#EDEDED] ">
+              <div
+                className={twMerge(
+                  "flex flex-col items-center text-center mt-2",
+                  !isToggle && "hidden"
+                )}
+              >
+                <div>
+                  어서오세요{" "}
+                  <span className="text-[#265CAC] dark:text-[#6FBEFF] text-[19px] font-bold">
+                    {userInfo && isLoggedIn ? userInfo.fullName : "회원"}
+                  </span>
+                  님
+                </div>
+                <div>오늘도 운동 완료하셨나요?</div>
+              </div>
+              {/* 유저 프로필 */}
+              {isToggle && (
+                <UserProfile
+                  BackWidth="w-[100px]"
+                  BackHeight="h-[100px]"
+                  onClick={
+                    isLoggedIn ? () => navigate("/myprofile") : undefined
+                  }
+                  userImg={userInfo?.image}
+                  myProfile={isLoggedIn} //로그인 여부에 따라 홈 아이콘 표시
+                />
+              )}
+            </div>
+
+            {/* 한달 운동 횟수 */}
+            {isLoggedIn && isToggle ? (
+              <CheckDone textSize="text-[16px]" width="w-[65px]" />
+            ) : null}
+          </>
         )}
       </div>
 
-      {/* 한달 운동 횟수 */}
-      {isLoggedIn && isToggle ? (
-        <CheckDone textSize="text-[16px]" width="w-[65px]" />
-      ) : null}
-
       <div
         className={twMerge(
-          "flex flex-col justify-between w-full h-full border-t dark:border-darkGreyDark",
+          "flex flex-col justify-between w-full h-full border-t dark:border-darkGreyDark ",
           !isToggle && "border-t-0"
         )}
       >
