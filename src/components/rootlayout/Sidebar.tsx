@@ -5,6 +5,7 @@ import UserProfile from "../UserProfile";
 import { twMerge } from "tailwind-merge";
 import { usesidebarToggleStore } from "../../stores/sideberToggleStore";
 // 아이콘
+import MainLogo from "../../assets/loge.svg";
 import dumbbell from "../../assets/dumbbell_icon.svg";
 import protein from "../../assets/protein_icon.svg";
 import routine from "../../assets/routine_icon.svg";
@@ -117,7 +118,7 @@ export default function Sidebar({ setIsModalOpen }: SidebarType) {
         href="/"
       >
         {!isDark ? (
-          <img src="/src/assets/loge.svg" alt="loge" />
+          <img src={MainLogo} alt="loge" />
         ) : (
           <img src={MainDarkLogo} alt="다크모드 로고" />
         )}
