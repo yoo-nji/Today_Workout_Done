@@ -24,8 +24,6 @@ export default function UserCard({
   following,
   BackWidth,
   BackHeight,
-  IconWidth,
-  IconHeight,
   isFollowBtn,
   edit,
   update,
