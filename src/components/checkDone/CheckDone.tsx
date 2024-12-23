@@ -17,11 +17,11 @@ export default function CheckDone({ width, textSize, bg }: CheckDoneType) {
   const [checkNumber, setCheckNumber] = useState(0);
 
   useEffect(() => {
-    if (!myInfo || !myInfo.posts) return;
+    // if (!myInfo || !myInfo.posts) return;
 
     const mark = [
       ...new Set(
-        myInfo.posts
+        (myInfo?.posts || [])
           .filter((post) => post.channel === channelMapping.records)
           .map((post) => moment(post.createdAt).format("YYYY-MM-DD"))
       ),

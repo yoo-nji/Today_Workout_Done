@@ -164,7 +164,7 @@ export default function Sidebar({ setIsModalOpen }: SidebarType) {
             </div>
 
             {/* 한달 운동 횟수 */}
-            {isLoggedIn && isToggle ? (
+            {isToggle ? (
               <CheckDone textSize="text-[16px]" width="w-[65px]" />
             ) : null}
           </>

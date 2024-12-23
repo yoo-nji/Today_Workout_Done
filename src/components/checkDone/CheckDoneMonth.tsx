@@ -16,7 +16,7 @@ export default function CheckDoneMonth({
   return (
     <div className={`${textSize ? textSize : "text-[18px]"} dark:text-[#fff]`}>
       <p className={`${textSize ? textSize : "text-[18px]"} font-medium `}>
-        {myInfo?.fullName}님
+        {myInfo?.fullName || "회원"}님
       </p>
       <p
         className={`text-[#265CAC] dark:text-[#6FBEFF] ${
