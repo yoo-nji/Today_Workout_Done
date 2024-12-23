@@ -22,7 +22,7 @@ export default function ImageCard({
   disableNavigate = false,
 }: PostType & MyInfo & { disableNavigate?: boolean }) {
   const { pathname } = useLocation();
-  console.log(disableNavigate, "확인");
+  // console.log(disableNavigate, "확인");
 
   const isLogin = useAuth((state) => state.isLoggedIn);
   const myInfo = useAuth((state) => state.user);
