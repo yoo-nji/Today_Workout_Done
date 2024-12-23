@@ -237,12 +237,12 @@ export default function Signup() {
           className={twMerge(
             `w-full h-[40px] py-auto pl-[15px] border rounded-[10px] mt-[10px] dark:bg-darkGreyDark dark:border-greyDark dark:placeholder-semiDarkGreyDark ${
               name
-                ? "border-[2px] dark:text-mainDark dark:border-mainDark dark:font-semibold"
+                ? "border-[2px] border-[#265CAC] dark:text-mainDark dark:border-mainDark dark:font-semibold"
                 : "text-gray-400 border-[1px] dark:text-semiDarkGreyDark"
             } ${
               nameError
                 ? "border-[#EB003E] border-[2px] text-[#EB003E] dark:border-pinkDark dark:text-pinkDark"
-                : ""
+                : " text-[#265CAC]"
             }`
           )}
         />
