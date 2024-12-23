@@ -38,7 +38,7 @@ export default function ConfirmModal({
             <button
               onClick={onConfirm}
               className={twMerge(
-                "w-[100px] h-[38px] rounded text-white dark:text-blackDark dark:font-bold",
+                "w-[100px] h-[38px] rounded text-white dark:text-blackDark dark:font-bold dark:bg-[#F95896]",
                 confirmColor
               )}
             >

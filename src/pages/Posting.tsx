@@ -52,7 +52,7 @@ export default function Posting() {
   const channels = [
     { id: "675a2e0d0d335f0ddae3a194", name: "오운완 인증", route: "/records" },
     { id: "675a2dac0d335f0ddae3a188", name: "프로틴 추천", route: "/protein" },
-    { id: "675a2dc40d335f0ddae3a18c", name: "루틴 공유", route: "/routine" },
+    { id: "675a2dc40d335f0ddae3a18c", name: "식단 공유", route: "/routine" },
     {
       id: "675a2ddc0d335f0ddae3a190",
       name: "헬스장 리뷰",
