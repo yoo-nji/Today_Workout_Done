@@ -20,7 +20,7 @@ export default function UserProfile({
   disableNavigate,
 }: userProfileType) {
   const imgRef = useRef<HTMLInputElement>(null);
-  console.log("2차확인", disableNavigate);
+  // console.log("2차확인", disableNavigate);
   // 로딩중
   const startLoading = useLoadingStore((state) => state.startLoading);
   const stopLoading = useLoadingStore((state) => state.stopLoading);

@@ -13,7 +13,6 @@ export default function MyPage() {
   const isToggle = usesidebarToggleStore((state) => state.isToggle);
 
   const myInfo = useAuth((state) => state.user);
-
   const isLoading = useLoadingStore((state) => state.isLoading);
 
   const [myLike, setMyLike] = useState<(string | null)[]>([]);
@@ -25,7 +24,7 @@ export default function MyPage() {
       );
       setMyLike(myLike);
     }
-  }, []);
+  }, [myInfo]);
   return (
     <>
       {myInfo && (
