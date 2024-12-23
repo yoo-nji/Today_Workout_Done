@@ -21,8 +21,6 @@ export default function CustomCalendar() {
         .map((post) => moment(post.createdAt).format("YYYY-MM-DD"))
     ),
   ];
-  // 오늘 날짜 체크
-  const today = new Date();
 
   const isDark = useDarkModeStore((state) => state.isDark);
 
@@ -35,15 +33,15 @@ export default function CustomCalendar() {
           next2Label={null} // +1년 & +10년 이동 버튼 숨기기
           prev2Label={null} // -1년 & -10년 이동 버튼 숨기기
           // formatDay={(locale, date) => moment(date).format("D")}
-          formatDay={(locale, date) => ""}
+          formatDay={() => ""}
           value={value}
           showNeighboringMonth={false} //  이전, 이후 달의 날짜는 보이지 않도록 설정
           className="border-b"
-          formatShortWeekday={(locale, date) =>
+          formatShortWeekday={(_, date) =>
             moment(date).format("ddd").toUpperCase()
           } // SAN, MON 등으로 변경
           calendarType="gregory" // 일요일 부터 시작
-          formatMonthYear={(locale, date) => moment(date).format("MMMM YYYY")} // 상단 날짜 포맷 변경
+          formatMonthYear={(_, date) => moment(date).format("MMMM YYYY")} // 상단 날짜 포맷 변경
           tileContent={({ date, view }) => {
             if (mark.find((x) => x === moment(date).format("YYYY-MM-DD"))) {
               return (
