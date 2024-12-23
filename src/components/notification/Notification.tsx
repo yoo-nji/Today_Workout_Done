@@ -14,13 +14,12 @@ import { useEffect, useState } from "react";
 // import darkCommentIcon from "../../assets/darkicons/darkCommentIcon.svg";
 // import darkFollowIcon from "../../assets/darkicons/darkFollowIcon.svg";
 // import darkLikeIcon from "../../assets/darkicons/darkLikeIcon.svg";
-import { useDarkModeStore } from "../../stores/darkModeStore";
+// import { useDarkModeStore } from "../../stores/darkModeStore";
 import { useAuth } from "../../stores/authStore";
 import { twMerge } from "tailwind-merge";
 
 interface notificationProps {
   closeNoti: () => void;
-  // isNoti: () => void;
   notificationArray?: any;
 }
 
@@ -53,7 +52,8 @@ export interface notificationType {
   user: string;
   post: string;
   follow?: string;
-  like: null;
+  comment?: string[] | null | undefined;
+  like?: null;
   createdAt: string;
   updatedAt: string;
   __v: number;
@@ -62,7 +62,6 @@ export interface notificationType {
 // API보고 notificationArray 받아서 처리하자
 export default function Notification({
   closeNoti,
-  // isNoti, // 없어도 작동
   notificationArray,
 }: notificationProps) {
   // 모두읽음처리
@@ -83,7 +82,6 @@ export default function Notification({
         if (status === 400) console.log(error);
       }
 
-      // showNotiListHandler();
       notificationNumberClean();
     } catch (error) {
       console.log(error);
@@ -104,9 +102,6 @@ export default function Notification({
   const [isFollow, setIsFollow] = useState(false);
   const [isLike, setIsLike] = useState(false);
 
-  // map돌려서 알람갯수 세기
-  const [showNotiList, setShowNotiList] = useState(true);
-
   const showCommentHandler = () => {
     setIsComment(!isComment);
     setIsFollow(false);
@@ -121,11 +116,6 @@ export default function Notification({
     setIsLike(!isLike);
     setIsFollow(false);
     setIsComment(false);
-  };
-
-  const showNotiListHandler = () => {
-    setShowNotiList(false);
-    console.log(showNotiList);
   };
 
   // notificatioArray갯수 따라서 표시해주기
@@ -220,10 +210,11 @@ export default function Notification({
           {/* 알림박스 */}
           <div className="w-full overflow-y-auto max-h-[330px] scrollbar-none flex flex-col items-center gap-1">
             {/* 커멘트만 보여주기 */}
-            {notificationArray && showNotiList && isComment ? (
+            {notificationArray && isComment ? (
               notificationArray
                 .filter(
-                  (notification) => notification.comment === null || undefined
+                  (notification: notificationType) =>
+                    notification.comment === null || undefined
                 )
                 .map((notification: notificationType) => (
                   <NotificationBox
@@ -237,10 +228,11 @@ export default function Notification({
                   ></NotificationBox>
                 ))
             ) : // 팔로우만 보여주기기
-            notificationArray && showNotiList && isFollow ? (
+            notificationArray && isFollow ? (
               notificationArray
                 .filter(
-                  (notification) => notification.follow != null || undefined
+                  (notification: notificationType) =>
+                    notification.follow != null || undefined
                 )
                 .map((notification: notificationType) => (
                   <NotificationBox
@@ -254,10 +246,11 @@ export default function Notification({
                   ></NotificationBox>
                 ))
             ) : // 좋아요만 보여주기
-            notificationArray && showNotiList && isLike ? (
+            notificationArray && isLike ? (
               notificationArray
                 .filter(
-                  (notification) => notification.like === null || undefined
+                  (notification: notificationType) =>
+                    notification.like === null || undefined
                 )
                 .map((notification: notificationType) => (
                   <NotificationBox
@@ -271,7 +264,7 @@ export default function Notification({
                   ></NotificationBox>
                 ))
             ) : // 전체 다 보여주기
-            notificationArray.length && showNotiList ? (
+            notificationArray.length ? (
               notificationArray.map((notification: notificationType) => (
                 <NotificationBox
                   key={notification._id}
