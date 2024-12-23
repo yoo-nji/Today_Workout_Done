@@ -242,7 +242,7 @@ export default function Signup() {
             } ${
               nameError
                 ? "border-[#EB003E] border-[2px] text-[#EB003E] dark:border-pinkDark dark:text-pinkDark"
-                : ""
+                : " border-[#265CAC] text-[#265CAC]"
             }`
           )}
         />
