@@ -14,7 +14,7 @@ import { useEffect, useState } from "react";
 // import darkCommentIcon from "../../assets/darkicons/darkCommentIcon.svg";
 // import darkFollowIcon from "../../assets/darkicons/darkFollowIcon.svg";
 // import darkLikeIcon from "../../assets/darkicons/darkLikeIcon.svg";
-import { useDarkModeStore } from "../../stores/darkModeStore";
+// import { useDarkModeStore } from "../../stores/darkModeStore";
 import { useAuth } from "../../stores/authStore";
 import { twMerge } from "tailwind-merge";
 
@@ -53,7 +53,8 @@ export interface notificationType {
   user: string;
   post: string;
   follow?: string;
-  like: null;
+  comment?: string[] | null | undefined;
+  like?: null;
   createdAt: string;
   updatedAt: string;
   __v: number;
@@ -105,7 +106,7 @@ export default function Notification({
   const [isLike, setIsLike] = useState(false);
 
   // map돌려서 알람갯수 세기
-  const [showNotiList, setShowNotiList] = useState(true);
+  const [showNotiList] = useState(true);
 
   const showCommentHandler = () => {
     setIsComment(!isComment);
@@ -121,11 +122,6 @@ export default function Notification({
     setIsLike(!isLike);
     setIsFollow(false);
     setIsComment(false);
-  };
-
-  const showNotiListHandler = () => {
-    setShowNotiList(false);
-    console.log(showNotiList);
   };
 
   // notificatioArray갯수 따라서 표시해주기
@@ -223,7 +219,8 @@ export default function Notification({
             {notificationArray && showNotiList && isComment ? (
               notificationArray
                 .filter(
-                  (notification) => notification.comment === null || undefined
+                  (notification: notificationType) =>
+                    notification.comment === null || undefined
                 )
                 .map((notification: notificationType) => (
                   <NotificationBox
@@ -240,7 +237,8 @@ export default function Notification({
             notificationArray && showNotiList && isFollow ? (
               notificationArray
                 .filter(
-                  (notification) => notification.follow != null || undefined
+                  (notification: notificationType) =>
+                    notification.follow != null || undefined
                 )
                 .map((notification: notificationType) => (
                   <NotificationBox
@@ -257,7 +255,8 @@ export default function Notification({
             notificationArray && showNotiList && isLike ? (
               notificationArray
                 .filter(
-                  (notification) => notification.like === null || undefined
+                  (notification: notificationType) =>
+                    notification.like === null || undefined
                 )
                 .map((notification: notificationType) => (
                   <NotificationBox
