@@ -124,7 +124,12 @@ export default function Sidebar({ setIsModalOpen }: SidebarType) {
         )}
       </Link>
 
-      <div className="flex flex-col gap-[10px] min-h-[295px]">
+      <div
+        className={twMerge(
+          "flex flex-col gap-[10px] ",
+          isToggle ? "min-h-[295px]" : "h-0"
+        )}
+      >
         {isLoggedIn === null ? null : (
           <>
             {/* 멘트 */}
