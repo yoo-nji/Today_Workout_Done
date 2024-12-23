@@ -199,7 +199,7 @@ export default function Signup() {
     setIsSubmitting(true);
 
     try {
-      const response = await api.post("/signup", {
+      await api.post("/signup", {
         fullName: name,
         email: email,
         password: password,

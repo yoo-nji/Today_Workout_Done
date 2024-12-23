@@ -11,7 +11,6 @@ import { useDarkModeStore } from "../stores/darkModeStore";
 import darkMainLogo from "../assets/darkicons/darkMainLogo.svg";
 
 export default function Login() {
-  const login = useAuth((state) => state.login);
   // 토큰 저장하기
   const setToken = useToken((state) => state.setToken);
   const setUser = useAuth((state) => state.setUser);

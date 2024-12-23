@@ -89,7 +89,7 @@ export default function Posting() {
 
     try {
       startLoading();
-      const response = await postingFn(formData);
+      await postingFn(formData);
 
       navigate(route[0].route);
     } catch (error) {
