@@ -1,6 +1,6 @@
 import { Outlet } from "react-router";
 import Header from "../components/rootlayout/Header";
-import Sidebar from "../components/rootlayout/Sidebar";
+import Sidebar from "../components/rootlayout/Sidebar/Sidebar";
 import { usesidebarToggleStore } from "../stores/sideberToggleStore";
 import { twMerge } from "tailwind-merge";
 import scrollUp from "../assets/scrollUp.svg";
