@@ -1,5 +1,5 @@
 import { Outlet } from "react-router";
-import Header from "../components/rootlayout/Header";
+import Header from "../components/rootlayout/header/Header";
 import Sidebar from "../components/rootlayout/Sidebar/Sidebar";
 import { usesidebarToggleStore } from "../stores/sideberToggleStore";
 import { twMerge } from "tailwind-merge";

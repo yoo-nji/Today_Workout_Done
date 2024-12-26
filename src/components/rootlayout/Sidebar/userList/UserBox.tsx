@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router";
 import defaultUserImg from "../../../../assets/defaultUser.svg";
-import FollowButton from "../../../FollowButton";
+import FollowButton from "../../../common/FollowButton";
 import { useAuth } from "../../../../stores/authStore";
 import { useState } from "react";
 

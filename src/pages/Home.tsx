@@ -1,10 +1,10 @@
-import SearchBar from "../components/SearchBar";
-import ImageCard from "../components/ImageCard";
+import SearchBar from "../components/board/SearchBar";
+import ImageCard from "../components/common/ImageCard";
 import { useEffect, useRef, useState } from "react";
 import { useLocation } from "react-router";
-import Loading from "../components/Loading";
+import Loading from "../components/common/Loading";
 import { useLoadingStore } from "../stores/loadingStore";
-import InfinityLoading from "../components/InfinityLoading";
+import InfinityLoading from "../components/board/InfinityLoading";
 import { getChannelPost } from "../utils/api/getChannelPost";
 import { usesidebarToggleStore } from "../stores/sideberToggleStore";
 import { twMerge } from "tailwind-merge";
