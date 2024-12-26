@@ -1,19 +1,19 @@
 import { useNavigate } from "react-router";
-import notifyIcon from "../../assets/notifyIcon.svg";
+import notifyIcon from "../../../assets/notifyIcon.svg";
 import { twMerge } from "tailwind-merge";
-import logoImg from "../../assets/loge.svg";
-import UserProfile from "../UserProfile";
-import ButtonComponent from "../ButtonComponent";
-import { useAuth } from "../../stores/authStore";
+import logoImg from "../../../assets/loge.svg";
+import UserProfile from "../../common/UserProfile";
+import ButtonComponent from "../../common/ButtonComponent";
+import { useAuth } from "../../../stores/authStore";
 import { useState } from "react";
-import Notification from "../notification/Notification";
-import { useToken } from "../../stores/tokenStore";
-import ModeChange from "../button/ModeChange";
-import bars from "../../assets/icons/bars.svg";
-import close from "../../assets/icons/close-icon.svg";
-import { useDarkModeStore } from "../../stores/darkModeStore";
-import darkNotifyIcon from "../../assets/darkicons/darkNotifyIcon.svg";
-import darkMainLogo from "../../assets/darkicons/darkMainLogo.svg";
+import Notification from "./notification/Notification";
+import { useToken } from "../../../stores/tokenStore";
+import bars from "../../../assets/icons/bars.svg";
+import close from "../../../assets/icons/close-icon.svg";
+import { useDarkModeStore } from "../../../stores/darkModeStore";
+import darkNotifyIcon from "../../../assets/darkicons/darkNotifyIcon.svg";
+import darkMainLogo from "../../../assets/darkicons/darkMainLogo.svg";
+import ModeChange from "./ModeChange";
 
 // 사이드바 접힐때 로고 보이도록 처리하자
 export default function Header({

@@ -1,7 +1,7 @@
 import { useState } from "react";
-import ChannelList from "../../ChannelList";
+import ChannelList from "./ChannelList";
 import UserListModal from "./userList/UserListModal";
-import UserProfile from "../../UserProfile";
+import UserProfile from "../../common/UserProfile";
 import { twMerge } from "tailwind-merge";
 import { usesidebarToggleStore } from "../../../stores/sideberToggleStore";
 // 아이콘
@@ -14,7 +14,7 @@ import left from "../../../assets/double-left.svg";
 import right from "../../../assets/double-right.svg";
 import user from "../../../assets/user_icon.svg";
 import { useAuth } from "../../../stores/authStore";
-import CheckDone from "../../checkDone/CheckDone";
+import CheckDone from "./checkDone/CheckDone";
 import { Link, useNavigate } from "react-router";
 import { useDarkModeStore } from "../../../stores/darkModeStore";
 
