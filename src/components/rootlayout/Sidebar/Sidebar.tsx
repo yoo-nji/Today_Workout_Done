@@ -1,32 +1,32 @@
 import { useState } from "react";
-import ChannelList from "../ChannelList";
-import UserListModal from "../userlistModal/UserListModal";
-import UserProfile from "../UserProfile";
+import ChannelList from "../../ChannelList";
+import UserListModal from "./userList/UserListModal";
+import UserProfile from "../../UserProfile";
 import { twMerge } from "tailwind-merge";
-import { usesidebarToggleStore } from "../../stores/sideberToggleStore";
+import { usesidebarToggleStore } from "../../../stores/sideberToggleStore";
 // 아이콘
-import MainLogo from "../../assets/loge.svg";
-import dumbbell from "../../assets/dumbbell_icon.svg";
-import protein from "../../assets/protein_icon.svg";
-import routine from "../../assets/routine_icon.svg";
-import gym from "../../assets/gym_icon.svg";
-import left from "../../assets/double-left.svg";
-import right from "../../assets/double-right.svg";
-import user from "../../assets/user_icon.svg";
-import { useAuth } from "../../stores/authStore";
-import CheckDone from "../checkDone/CheckDone";
+import MainLogo from "../../../assets/loge.svg";
+import dumbbell from "../../../assets/dumbbell_icon.svg";
+import protein from "../../../assets/protein_icon.svg";
+import routine from "../../../assets/routine_icon.svg";
+import gym from "../../../assets/gym_icon.svg";
+import left from "../../../assets/double-left.svg";
+import right from "../../../assets/double-right.svg";
+import user from "../../../assets/user_icon.svg";
+import { useAuth } from "../../../stores/authStore";
+import CheckDone from "../../checkDone/CheckDone";
 import { Link, useNavigate } from "react-router";
-import { useDarkModeStore } from "../../stores/darkModeStore";
+import { useDarkModeStore } from "../../../stores/darkModeStore";
 
 // 다크모드 아이콘
-import MainDarkLogo from "../../assets/darkicons/darkMainLogo.svg";
-import darkDumbellLogo from "../../assets/darkicons/darkCheckLogo.svg";
-import darkProteinLogo from "../../assets/darkicons/darkProteinLogo.svg";
-import darkRoutineLogo from "../../assets/darkicons/darkRoutineLogo.svg";
-import darkGymLogo from "../../assets/darkicons/darkGymLogo.svg";
-import darkLeft from "../../assets/darkicons/darkLeftIcon.svg";
-import darkRight from "../../assets/darkicons/darkRightIcon.svg";
-import darkUserListIcon from "../../assets/darkicons/darkUserListIcon.svg";
+import MainDarkLogo from "../../../assets/darkicons/darkMainLogo.svg";
+import darkDumbellLogo from "../../../assets/darkicons/darkCheckLogo.svg";
+import darkProteinLogo from "../../../assets/darkicons/darkProteinLogo.svg";
+import darkRoutineLogo from "../../../assets/darkicons/darkRoutineLogo.svg";
+import darkGymLogo from "../../../assets/darkicons/darkGymLogo.svg";
+import darkLeft from "../../../assets/darkicons/darkLeftIcon.svg";
+import darkRight from "../../../assets/darkicons/darkRightIcon.svg";
+import darkUserListIcon from "../../../assets/darkicons/darkUserListIcon.svg";
 
 interface SidebarType {
   setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
