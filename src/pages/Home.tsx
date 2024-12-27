@@ -109,20 +109,20 @@ export default function Home() {
 
       {/* 피드 이미지 */}
       {/* <PostList /> 컴포넌트화 할때 사용 */}
-      <div className="flex flex-col items-center mt-8 relative">
+      <div className="relative flex flex-col items-center mt-8">
         <div
           className={twMerge(
             "grid grid-cols-4 gap-8",
             isToggle
-              ? "max-[1396px]:grid-cols-3 max-[1114px]:grid-cols-2 max-[832px]:grid-cols-1"
-              : "max-[1176px]:grid-cols-3 max-[894px]:grid-cols-2 max-[612px]:grid-cols-1"
+              ? "max-1396px:grid-cols-3 max-1114px:grid-cols-2 max-832px:grid-cols-1"
+              : "max-1176px:grid-cols-3 max-894px:grid-cols-2 max-612px:grid-cols-1"
           )}
         >
           {status === "searching" &&
             (searchPosts.length ? (
               searchPosts.map((post) => <ImageCard key={post._id} {...post} />)
             ) : (
-              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+              <div className="absolute transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
                 <p className="text-[25px] font-semibold text-[#265CAC] dark:text-[#6FBEFF]">
                   검색 결과가 없습니다.
                 </p>
