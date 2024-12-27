@@ -24,6 +24,12 @@ export default {
         pretendard: ["Pretendard"], //기본 폰트
         jalnan: ["yg-jalnan", "sans-serif"], //포인트 폰트
       },
+      screens: {
+        mobile: { max: "639px" },
+        tablet: { max: "767px" },
+        laptop: { max: "1023px" },
+        desktop: { max: "1279px" },
+      },
     },
   },
   plugins: [],

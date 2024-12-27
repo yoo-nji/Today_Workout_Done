@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ChannelList from "./ChannelList";
 import UserListModal from "./userList/UserListModal";
 import UserProfile from "../../common/UserProfile";
@@ -45,6 +45,20 @@ export default function Sidebar({ setIsModalOpen }: SidebarType) {
   // 사이드바 토글 상태
   const isToggle = usesidebarToggleStore((state) => state.isToggle);
   const sidebarToggle = usesidebarToggleStore((state) => state.sidebarToggle);
+
+  // 창 크기 변경 감지 및 상태 업데이트
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 1024 && isToggle) {
+        sidebarToggle(); // 사이드바를 닫음
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    // 컴포넌트 언마운트 시 이벤트 제거
+    return () => window.removeEventListener("resize", handleResize);
+  }, [isToggle, sidebarToggle]);
 
   const handleToggleClick = () => {
     sidebarToggle();
@@ -93,6 +107,7 @@ export default function Sidebar({ setIsModalOpen }: SidebarType) {
         `flex flex-col items-center gap-1 h-[100vh] z-10
       py-5 text-[#1D1D1D] bg-[#FEFEFE] border-r
       border-gray-200/50 fixed transition-[width] dark:bg-[#2C2C2C] dark:border-darkGreyDark`,
+        "laptop:fixed laptop:flex-row laptop:h-auto laptop:w-full laptop:bottom-0 laptop:py-0",
         isOpen ? (!isDark ? "before:modal-back" : "before:darkModal-back") : "",
         isToggle ? "w-[300px]" : "w-20"
       )}
@@ -102,7 +117,7 @@ export default function Sidebar({ setIsModalOpen }: SidebarType) {
       <button
         onClick={handleToggleClick}
         className={twMerge(
-          "self-end w-10 mr-2 hover:brightness-95 dark:hover:brightness-75 transition-all",
+          "self-end w-10 mr-2 hover:brightness-95 dark:hover:brightness-75 transition-all laptop:hidden",
           !isToggle && "m-auto"
         )}
       >
@@ -174,12 +189,13 @@ export default function Sidebar({ setIsModalOpen }: SidebarType) {
       <div
         className={twMerge(
           "flex flex-col justify-between w-full h-full border-t dark:border-darkGreyDark ",
+          "laptop:flex-row",
           !isToggle && "border-t-0"
         )}
       >
         {/* 채널목록 */}
-        <div className="w-full">
-          <ul className="flex flex-col w-full gap-2 p-1">
+        <div className="w-full laptop:w-4/5">
+          <ul className="flex flex-col flex-1 w-full gap-2 p-1 laptop:flex-row laptop:gap-0 laptop:p-1">
             {channel.map((item) => {
               return (
                 <ChannelList
@@ -196,9 +212,9 @@ export default function Sidebar({ setIsModalOpen }: SidebarType) {
             })}
           </ul>
         </div>
-        <div className="items-center ">
+        <div className="cursor-pointer laptop:w-1/5 laptop:flex laptop:justify-center laptop:items-center">
           {/* 유저목록 버튼 */}
-          <div className="flex justify-center">
+          <div className="flex justify-center laptop:items-center">
             <button
               className={twMerge(
                 "mt-2 self-center w-[230px] h-[40px] bg-[#265CAC] hover:bg-[#1e4d8a] rounded-[15px] text-base text-white font-medium relative dark:bg-mainDark dark:text-blackDark dark:hover:bg-mainTextDark",
@@ -212,7 +228,9 @@ export default function Sidebar({ setIsModalOpen }: SidebarType) {
             >
               유저 목록
             </button>
-            <button className={twMerge("mt-6", isToggle && "hidden")}>
+            <button
+              className={twMerge("mt-6 laptop:mt-0", isToggle && "hidden")}
+            >
               <img
                 src={!isDark ? user : darkUserListIcon}
                 alt="유저아이콘"

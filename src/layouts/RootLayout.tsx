@@ -30,7 +30,7 @@ export default function RootLayout() {
       {/* 메인 */}
       <div
         className={twMerge(
-          "flex-1 pt-[70px] transition-[padding] dark:bg-lightBlackDark",
+          "flex-1 pt-[70px] transition-[padding] dark:bg-lightBlackDark laptop:pl-0",
           isToggle ? "pl-[300px]" : "pl-20" // 사이드 바에 따라 padding 값 결정
         )}
       >
@@ -38,7 +38,7 @@ export default function RootLayout() {
       </div>
       {/* 위로 가기 버튼 */}
       <div
-        className={`fixed right-[25px] bottom-[10px] z-50 w-[40px] ${
+        className={`fixed right-[25px] bottom-[10px] z-50 w-[40px] laptop:bottom-[80px] ${
           isModalOpen && "hidden"
         }`}
       >
