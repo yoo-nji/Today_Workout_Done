@@ -1,11 +1,5 @@
 # 🏃 !O운완? O운완
 
-<div style="text-align: center;">
-  <img src="https://github.com/user-attachments/assets/a8a72ca2-c116-4908-8085-ef5002ad2530" alt="!O운완_O운완">
-</div>
-
-<br>
-
 건강한 라이프스타일을 위한 데일리 운동 인증 커뮤니티
 
 - **4가지 주요 채널 제공** : 오운완 인증, 프로틴 추천, 식단 공유, 헬스장 리뷰
@@ -61,7 +55,7 @@
 ![](https://camo.githubusercontent.com/fbe73eb0c50a7d491503c4e14d0a949a96f862997da5110f7ff0b9d28ef49a37/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f736c61636b2d3441313534423f7374796c653d666f722d7468652d6261646765266c6f676f3d736c61636b266c6f676f436f6c6f723d7768697465)
 ![](https://camo.githubusercontent.com/236fcd63f5c7932c0928a86fb7ebdbb5e8876cc4c03779cd1fc8aa9c0196aab2/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f6769746875622d3138313731373f7374796c653d666f722d7468652d6261646765266c6f676f3d676974687562266c6f676f436f6c6f723d7768697465)
 
-## 💡구현 목록
+## 💡 주요 기능 목록
 
 ### 헤더
 
@@ -79,7 +73,7 @@
 ### 유저 목록 모달창
 
 - 팔로우 / 언팔로우 기능
-- 유저 프로필
+- 유저 프로필 확인
 - 유저 검색 기능
 
 ### 메인 페이지
@@ -117,19 +111,19 @@
 
 <table>
   <tbody>
-     <tr>
+    <tr>
       <td align="center">메인 페이지</td>
-      <td align="center">게시판 페이지1</td>
+      <td align="center">마이 페이지</td>
     </tr>
     <tr>
       <td>
          <img src="https://github.com/user-attachments/assets/24ac7672-e724-4738-a0d2-4b96569a6d37" alt="메인페이지" />
       </td>
       <td>
-         <img src="https://github.com/user-attachments/assets/df897631-602a-4914-8d18-5bc4086f0f77" alt="게시판 페이지1" />
+         <img src="https://github.com/user-attachments/assets/c3faa5ce-d29f-4071-891d-2321db4f67c2" alt="마이페이지" />
       </td>
     </tr>
-     <tr>
+    <tr>
       <td align="center">게시판 페이지1</td>
       <td align="center">게시판 페이지2</td>
     </tr>
@@ -138,22 +132,56 @@
            <img src="https://github.com/user-attachments/assets/df897631-602a-4914-8d18-5bc4086f0f77" alt="게시판 페이지1" />
       </td>
       <td>
-               <img src="https://github.com/user-attachments/assets/d973878d-6aa6-4cb3-a7a3-44583be7aeac" alt="게시판 페이지2" />
-
+           <img src="https://github.com/user-attachments/assets/d973878d-6aa6-4cb3-a7a3-44583be7aeac" alt="게시판 페이지2" />
       </td>
     </tr>
-    tr>
-      <td align="center">메인 페이지</td>
-      <td align="center">게시판 페이지1</td>
+    <tr>
+      <td align="center">유저 목록 모달</td>
+      <td align="center">유저 페이지</td>
     </tr>
     <tr>
       <td>
-         <img src="https://github.com/user-attachments/assets/24ac7672-e724-4738-a0d2-4b96569a6d37" alt="메인페이지" />
+         <img src="https://github.com/user-attachments/assets/88bafea7-e7f1-4928-8598-7967f76f197e" alt="유저 목록 모달" />
       </td>
       <td>
-         <img src="https://github.com/user-attachments/assets/df897631-602a-4914-8d18-5bc4086f0f77" alt="게시판 페이지1" />
+         <img src="https://github.com/user-attachments/assets/3c7343e4-e43b-4f72-97b9-13a725ba6998" alt="유저 페이지" />
       </td>
     </tr>
-
+    <tr>
+      <td align="center">게시물 상세 페이지1</td>
+      <td align="center">게시물 작성 페이지</td>
+    </tr>
+    <tr>
+      <td>
+         <img src="https://github.com/user-attachments/assets/1a2f806f-1ada-4670-b66c-a5ac8df3f95c" alt="게시물 상세 페이지1" />
+      </td>
+      <td>
+        <img src="https://github.com/user-attachments/assets/deba16ad-8216-447a-a731-450fe689b84a" alt="게시물 작성 페이지" />
+      </td>
+    </tr>
+    <tr>
+      <td align="center">알림 창</td>
+      <td align="center">회원 가입 페이지</td>
+    </tr>
+    <tr>
+      <td>
+         <img src="https://github.com/user-attachments/assets/c43bce86-a0fe-404b-b338-19ab41a1f7e4" alt="알림 창" />
+      </td>
+      <td>
+        <img src="https://github.com/user-attachments/assets/e2de05db-1440-4b25-ba97-70e9e88032c9" alt="회원 가입 페이지" />
+      </td>
+    </tr>
+    <tr>
+      <td align="center">로그인 페이지</td>
+      <td align="center">다크 모드</td>
+    </tr>
+    <tr>
+      <td>
+         <img src="https://github.com/user-attachments/assets/3ff44a8b-1a61-43ed-b561-f9871882d94f" alt="로그인 페이지" />
+      </td>
+      <td>
+         <img src="https://github.com/user-attachments/assets/db6ed1e3-78f7-4df3-93a7-94dace1059a3" alt="회원 가입 페이지" />
+      </td>
+    </tr>
   </tbody>
 </table>
