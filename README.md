@@ -1,117 +1,123 @@
-# !O운완? O운완🏃
+# 🏃 !O운완? O운완
 
-🔗[!O운완?O운완](https://workoutdone.netlify.app/)
+<div style="text-align: center;">
+  <img src="https://github.com/user-attachments/assets/a8a72ca2-c116-4908-8085-ef5002ad2530" alt="!O운완_O운완">
+</div>
 
-## 👀프로젝트 소개
+<br>
 
-사용자들의 **건강한 라이프스타일 유지**를 목표로 한 데일리 운동 인증 웹사이트  
-오운완 인증, 프로틴 추천, 루틴 공유, 헬스장 리뷰 **4가지 채널을 제공**하며  
-게시글 작성을 통해 건강과 운동 정보를 공유하고, 좋아요, 댓글, 팔로우 기능으로 사용자 간 **활발한 커뮤니티를 형성**합니다.  
-**BMI 계산기**, **운동 인증 캘린더 및 원 그래프** 기능을 통해 사용자들에게 운동 동기를 부여합니다.
+건강한 라이프스타일을 위한 데일리 운동 인증 커뮤니티
 
-![image](https://github.com/user-attachments/assets/d310dfc5-5562-4793-98b2-c88f9748d0d6)
+- **4가지 주요 채널 제공** : 오운완 인증, 프로틴 추천, 식단 공유, 헬스장 리뷰
+  - 게시글 작성으로 건강 및 운동 정보를 공유
+  - 좋아요, 댓글, 팔로우 기능으로 **활발한 커뮤니티 형성**
+- **운동 동기 부여 기능**:
+  - BMI 계산기
+  - 운동 인증 캘린더 및 원 그래프
 
-## ⚙️기술 스택
+<br>
 
-![npm](https://img.shields.io/badge/npm-10.8.2-%23CB3837?logo=npm)
-![react](https://img.shields.io/badge/react-18.3.1-%2361DAFB?logo=react)
-![react-router](https://img.shields.io/badge/react%20router-7.0.2-%23CA4245?logo=react-router)
-![axios](https://img.shields.io/badge/axios-1.7.9-%235A29E4?logo=axios)
-![tailwind-merge](https://img.shields.io/badge/tailwind%20merge-2.5.5-%2306B6D4?logo=tailwindcss)
-![zustand](https://img.shields.io/badge/zustand-5.0.2-slategray?logo=redux)
+- 프로젝트 기간 : 2024.12.05 - 2024.12.23
+- 배포 주소 : 🔗[!O운완?O운완](https://workoutdone.netlify.app/)
+- 발표 자료 : 🔗[발표자료](https://drive.google.com/file/d/11MWfrNHX4UL63jxMdEfZ61SB-YJ_N_qu/view)
 
-**라이브러리**  
-![react-calendar](https://img.shields.io/badge/react%20calendar-5.1.0-%233D5B8A?logo=react)
-![react-circular-progressbar](https://img.shields.io/badge/react%20circular%20progressbar-2.1.0-blue?logo=react)
-![react-lottie](https://img.shields.io/badge/react%20lottie-2.1.0-%2300A9E0?logo=react)
-![moment](https://img.shields.io/badge/moment.js-2.30.1-%23FFCC00?logo=javascript)
-![swiper](https://img.shields.io/badge/swiper-11.1.15-%23104E8B?logo=swiper)
+## 🔥 Developers
 
-**협업툴**  
-[![My Skills](https://skillicons.dev/icons?i=figma,github,notion&theme=light)](https://skillicons.dev)
-<img src="https://avatars.githubusercontent.com/u/6911160?s=280&v=4" alt="title" width="50" height="50" >
+|                                                 Frontend                                                 |                                                 Frontend                                                 |                                                 Frontend                                                 |                                                 Frontend                                                  |                                                 Frontend                                                 |                                                 Frontend                                                 |
+| :------------------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------------: |
+| <img src="https://github.com/user-attachments/assets/b059e9ea-630c-40a3-854f-d8c6046870ce" width="100"/> | <img src="https://github.com/user-attachments/assets/3b0dc84d-6b50-439c-a114-37b0034ae3fc" width="100"/> | <img src="https://github.com/user-attachments/assets/9c75f5a3-e483-4f3e-8a2e-1a98228d6d71" width="100"/> | <img src="https://github.com/user-attachments/assets/a74b2a4f-8183-4782-9389-bb0540576323"  width="100"/> | <img src="https://github.com/user-attachments/assets/8766bc76-df5c-4eb2-8cb2-2febc8318aab" width="100"/> | <img src="https://github.com/user-attachments/assets/e339667e-8413-472e-bf9e-cc9ee19f1ed7" width="100"/> |
+|                                                  강수영                                                  |                                                  권윤지                                                  |                                                  성송원                                                  |                                                  우정완                                                   |                                                  윤정인                                                  |                                                  한규혁                                                  |
+|                              [@kangsuyeong](https://github.com/kangsuyeong)                              |                                  [@yoo-nji](https://github.com/yoo-nji)                                  |                             [@songwon-sung](https://github.com/songwon-sung)                             |                                [@WJoungWan](https://github.com/WJoungWan)                                 |                            [@yoongjeonging](https://github.com/yoongjeonging)                            |                                 [@kkyuheak](https://github.com/kkyuheak)                                 |
 
-## ⏱️개발기간
+## 💻기술 스택
 
-2024.12.05 - 2024.12.23 (약 3주)
+### 개발 환경
 
-## 🧑‍💻팀원 및 역할
+![](https://camo.githubusercontent.com/8290ef49e85a94c2ae9f929badf5aa1007b74d20f3f465c9222205064147bfa5/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f6e706d2d4342333833373f7374796c653d666f722d7468652d6261646765266c6f676f3d6e706d266c6f676f436f6c6f723d7768697465)
+![](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=Vite&logoColor=white)
+![](https://img.shields.io/badge/react-61DAFB?style=for-the-badge&logo=react&logoColor=black)
+![](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
 
-🏃**우정완** - 팀장 업무, 헤더 각 페이지 링크, 알림창 댓글 & 좋아요 & 팔로우 알림 및 필터링 기능,
-404 에러 페이지
+### 디자인
 
-🏃‍♂️**강수영** - 로그인 페이지 로그인상태관리,게시글 페이지 불러오기 및 수정/삭제 기능, 무한 스크롤 구현,
-마이 페이지 캘린더 구현
+![](https://camo.githubusercontent.com/7eda7e542b66f17cabacfb84a3b1daa01f81d39d95aeed3d844eef4897a6d2ba/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f6669676d612d4632344531453f7374796c653d666f722d7468652d6261646765266c6f676f3d6669676d61266c6f676f436f6c6f723d7768697465)
+![](https://camo.githubusercontent.com/0c62da1efcec3fd216176106debb2634aa7a419f097b9b313f326c893505dabe/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f4353532d3135373242363f7374796c653d666f722d7468652d6261646765266c6f676f3d63737333266c6f676f436f6c6f723d7768697465)
+![](https://camo.githubusercontent.com/ef6db79c0bc0a18363ef8ccf33cefbe94639871919540c826c50ab7d32fd6fc6/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f5461696c77696e644353532d3036423644343f7374796c653d666f722d7468652d6261646765266c6f676f3d7461696c77696e64637373266c6f676f436f6c6f723d7768697465)
 
-🏃‍♀️**권윤지** - 메인 페이지 데이터 필터링, BMI 계산기, 캐러셀, 사이드바 토글, 사이드바 채널 활성 상태 표시,  
-게시글 좋아요 & 댓글 기능, 유저정보 모달창/유저 프로필 페이지 팔로우 기능, 무한스크롤 구현
+### 라이브러리
 
-🏃**성송원** - 회원가입 페이지, 로그인 페이지, 상단 스크롤 버튼, 다크모드, 게시글 페이지 이전글, 다음글 이동,
-마이 페이지 이전글, 다음글 이동
+![](https://camo.githubusercontent.com/055871bebc176d2862669c452068ed436f006bde3d1f419667722ef149c4f598/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f72656163742d2d726f757465722d4341343234353f7374796c653d666f722d7468652d6261646765266c6f676f3d7265616374726f75746572266c6f676f436f6c6f723d7768697465)
+![](https://camo.githubusercontent.com/01a7047041b6b5a9aeeef23e34f31b6d02af577df53c5754cf603859a5740059/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f7a757374616e642d3243334535303f7374796c653d666f722d7468652d6261646765266c6f676f3d6a617661736372697074266c6f676f436f6c6f723d7768697465)
+![](https://camo.githubusercontent.com/91ff7f377105ca6fa979dd2bb85201b7ad56ae45d7dab821d24586e898f388b7/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f4178696f732d3541323945343f7374796c653d666f722d7468652d6261646765266c6f676f3d6178696f73266c6f676f436f6c6f723d7768697465)
+![](https://img.shields.io/badge/react--calendar-3DDC84?style=for-the-badge&logo=React&logoColor=white)
+![](https://img.shields.io/badge/react--circular--progressbar-61DAFB?style=for-the-badge&logo=React&logoColor=black)
+![](https://img.shields.io/badge/react--lottie-61DAFB?style=for-the-badge&logo=React&logoColor=black)
+![](https://img.shields.io/badge/Moment.js-FF6F61?style=for-the-badge&logo=JavaScript&logoColor=white)
+![](https://img.shields.io/badge/swiper-FF6F61?style=for-the-badge&logo=Swiper&logoColor=white)
 
-🏃‍♀️**윤정인** - 로그인 페이지, 채널 페이지, 각 채널 게시글 불러오기 및 게시글 정보 렌더링, 게시글 검색 기능,
-유저페이지, 다크모드
+### 협업툴
 
-🏃‍♂️**한규혁** - 게시글 작성 페이지 글 등록 기능, 유저정보 모달창 유저검색 기능,가입자 목록 표시,
-활동중인 유저 표시,마이 페이지 내 정보 수정 기능, CheckDone 기능,다크모드
+![](https://camo.githubusercontent.com/cfd00850da7d61d06eedd66f38d007989ed62131e6b920e99016ed95de13c9a5/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f6e6f74696f6e2d3030303030303f7374796c653d666f722d7468652d6261646765266c6f676f3d6e6f74696f6e266c6f676f436f6c6f723d7768697465)
+![](https://camo.githubusercontent.com/fbe73eb0c50a7d491503c4e14d0a949a96f862997da5110f7ff0b9d28ef49a37/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f736c61636b2d3441313534423f7374796c653d666f722d7468652d6261646765266c6f676f3d736c61636b266c6f676f436f6c6f723d7768697465)
+![](https://camo.githubusercontent.com/236fcd63f5c7932c0928a86fb7ebdbb5e8876cc4c03779cd1fc8aa9c0196aab2/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f6769746875622d3138313731373f7374796c653d666f722d7468652d6261646765266c6f676f3d676974687562266c6f676f436f6c6f723d7768697465)
 
 ## 💡구현 목록
 
-#### 헤더
+### 헤더
 
 ✔️로고  
 ✔️다크모드 토글  
 ✔️알림  
 ✔️로그인/회원가입/로그아웃/새 글 등록 버튼
 
-#### 사이드바
+### 사이드바
 
 ✔️유저 프로필  
 ✔️인증 횟수 원 그래프  
 ✔️채널 목록  
 ✔️유저 목록 버튼
 
-#### 유저 목록 모달창
+### 유저 목록 모달창
 
 ✔️팔로우 버튼  
 ✔️유저 프로필  
 ✔️검색 기능
 
-#### 로그인/회원가입 페이지
+### 로그인/회원가입 페이지
 
 ✔️유효성 검사 동적으로 관리
 
-#### 메인 페이지
+### 메인 페이지
 
 ✔️BMI 계산기  
 ✔️각 채널의 최신글 목록
 
-#### 채널 페이지
+### 채널 페이지
 
 ✔️게시글 검색 기능  
 ✔️게시글 목록
 
-#### 마이 페이지
+### 마이 페이지
 
 ✔️닉네임/프로필 사진 변경  
 ✔️나의 게시글 목록  
 ✔️나의 인증 캘린더 및 원 그래프
 
-#### 유저 페이지
+### 유저 페이지
 
 ✔️팔로우 버튼  
 ✔️유저의 게시글 목록
 
-#### 에러 페이지
+### 에러 페이지
 
 ✔️에러 메세지 화면
 
-#### 게시글 작성 페이지
+### 게시글 작성 페이지
 
 ✔️이미지 업로드  
 ✔️채널 선택
 
-#### 게시글 상세 페이지
+### 게시글 상세 페이지
 
 ✔️댓글 / 좋아요  
 ✔️이전글 /다음글  

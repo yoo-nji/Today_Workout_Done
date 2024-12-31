@@ -2,8 +2,8 @@ import { api } from "./axios";
 
 // 사용자 인증 확인
 export const getAuthUser = async () => {
-  const { data } = await api.get("/auth-user");
-  return data;
+  const { status, data } = await api.get("/auth-user");
+  return { status, data };
 };
 
 // 회원가입
