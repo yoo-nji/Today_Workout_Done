@@ -112,3 +112,48 @@
 - 댓글 / 좋아요 구현
 - 이전글 / 다음글 이동
 - 게시글 수정 / 삭제 기능
+
+## 화면 구성 🎥
+
+<table>
+  <tbody>
+     <tr>
+      <td align="center">메인 페이지</td>
+      <td align="center">게시판 페이지1</td>
+    </tr>
+    <tr>
+      <td>
+         <img src="https://github.com/user-attachments/assets/24ac7672-e724-4738-a0d2-4b96569a6d37" alt="메인페이지" />
+      </td>
+      <td>
+         <img src="https://github.com/user-attachments/assets/df897631-602a-4914-8d18-5bc4086f0f77" alt="게시판 페이지1" />
+      </td>
+    </tr>
+     <tr>
+      <td align="center">게시판 페이지1</td>
+      <td align="center">게시판 페이지2</td>
+    </tr>
+    <tr>
+      <td>
+           <img src="https://github.com/user-attachments/assets/df897631-602a-4914-8d18-5bc4086f0f77" alt="게시판 페이지1" />
+      </td>
+      <td>
+               <img src="https://github.com/user-attachments/assets/d973878d-6aa6-4cb3-a7a3-44583be7aeac" alt="게시판 페이지2" />
+
+      </td>
+    </tr>
+    tr>
+      <td align="center">메인 페이지</td>
+      <td align="center">게시판 페이지1</td>
+    </tr>
+    <tr>
+      <td>
+         <img src="https://github.com/user-attachments/assets/24ac7672-e724-4738-a0d2-4b96569a6d37" alt="메인페이지" />
+      </td>
+      <td>
+         <img src="https://github.com/user-attachments/assets/df897631-602a-4914-8d18-5bc4086f0f77" alt="게시판 페이지1" />
+      </td>
+    </tr>
+
+  </tbody>
+</table>
