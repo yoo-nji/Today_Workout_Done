@@ -23,6 +23,8 @@
 |                                                  강수영                                                  |                                                  권윤지                                                  |                                                  성송원                                                  |                                                  우정완                                                   |                                                  윤정인                                                  |                                                  한규혁                                                  |
 |                              [@kangsuyeong](https://github.com/kangsuyeong)                              |                                  [@yoo-nji](https://github.com/yoo-nji)                                  |                             [@songwon-sung](https://github.com/songwon-sung)                             |                                [@WJoungWan](https://github.com/WJoungWan)                                 |                            [@yoongjeonging](https://github.com/yoongjeonging)                            |                                 [@kkyuheak](https://github.com/kkyuheak)                                 |
 
+<br/>
+
 ## 💻기술 스택
 
 ### 개발 환경
@@ -54,6 +56,8 @@
 ![](https://camo.githubusercontent.com/cfd00850da7d61d06eedd66f38d007989ed62131e6b920e99016ed95de13c9a5/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f6e6f74696f6e2d3030303030303f7374796c653d666f722d7468652d6261646765266c6f676f3d6e6f74696f6e266c6f676f436f6c6f723d7768697465)
 ![](https://camo.githubusercontent.com/fbe73eb0c50a7d491503c4e14d0a949a96f862997da5110f7ff0b9d28ef49a37/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f736c61636b2d3441313534423f7374796c653d666f722d7468652d6261646765266c6f676f3d736c61636b266c6f676f436f6c6f723d7768697465)
 ![](https://camo.githubusercontent.com/236fcd63f5c7932c0928a86fb7ebdbb5e8876cc4c03779cd1fc8aa9c0196aab2/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f6769746875622d3138313731373f7374796c653d666f722d7468652d6261646765266c6f676f3d676974687562266c6f676f436f6c6f723d7768697465)
+
+<br/>
 
 ## 💡 주요 기능 목록
 
@@ -106,6 +110,8 @@
 - 댓글 / 좋아요 구현
 - 이전글 / 다음글 이동
 - 게시글 수정 / 삭제 기능
+
+<br/>
 
 ## 화면 구성 🎥
 
