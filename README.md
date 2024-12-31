@@ -12,8 +12,11 @@
 <br>
 
 - 프로젝트 기간 : 2024.12.05 - 2024.12.23
-- 배포 주소 : 🔗[!O운완?O운완](https://workoutdone.netlify.app/)
+- 배포 주소 : 🔗[!O운완 ?O운완](https://workoutdone.netlify.app/)
+- 시연 영상 : 🔗[시연 영상](https://www.youtube.com/watch?v=hqkzGfIKzKQ)
 - 발표 자료 : 🔗[발표자료](https://drive.google.com/file/d/11MWfrNHX4UL63jxMdEfZ61SB-YJ_N_qu/view)
+
+<br/>
 
 ## 🔥 Developers
 
@@ -22,6 +25,8 @@
 | <img src="https://github.com/user-attachments/assets/b059e9ea-630c-40a3-854f-d8c6046870ce" width="100"/> | <img src="https://github.com/user-attachments/assets/3b0dc84d-6b50-439c-a114-37b0034ae3fc" width="100"/> | <img src="https://github.com/user-attachments/assets/9c75f5a3-e483-4f3e-8a2e-1a98228d6d71" width="100"/> | <img src="https://github.com/user-attachments/assets/a74b2a4f-8183-4782-9389-bb0540576323"  width="100"/> | <img src="https://github.com/user-attachments/assets/8766bc76-df5c-4eb2-8cb2-2febc8318aab" width="100"/> | <img src="https://github.com/user-attachments/assets/e339667e-8413-472e-bf9e-cc9ee19f1ed7" width="100"/> |
 |                                                  강수영                                                  |                                                  권윤지                                                  |                                                  성송원                                                  |                                                  우정완                                                   |                                                  윤정인                                                  |                                                  한규혁                                                  |
 |                              [@kangsuyeong](https://github.com/kangsuyeong)                              |                                  [@yoo-nji](https://github.com/yoo-nji)                                  |                             [@songwon-sung](https://github.com/songwon-sung)                             |                                [@WJoungWan](https://github.com/WJoungWan)                                 |                            [@yoongjeonging](https://github.com/yoongjeonging)                            |                                 [@kkyuheak](https://github.com/kkyuheak)                                 |
+
+<br/>
 
 ## 💻기술 스택
 
@@ -54,6 +59,8 @@
 ![](https://camo.githubusercontent.com/cfd00850da7d61d06eedd66f38d007989ed62131e6b920e99016ed95de13c9a5/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f6e6f74696f6e2d3030303030303f7374796c653d666f722d7468652d6261646765266c6f676f3d6e6f74696f6e266c6f676f436f6c6f723d7768697465)
 ![](https://camo.githubusercontent.com/fbe73eb0c50a7d491503c4e14d0a949a96f862997da5110f7ff0b9d28ef49a37/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f736c61636b2d3441313534423f7374796c653d666f722d7468652d6261646765266c6f676f3d736c61636b266c6f676f436f6c6f723d7768697465)
 ![](https://camo.githubusercontent.com/236fcd63f5c7932c0928a86fb7ebdbb5e8876cc4c03779cd1fc8aa9c0196aab2/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f6769746875622d3138313731373f7374796c653d666f722d7468652d6261646765266c6f676f3d676974687562266c6f676f436f6c6f723d7768697465)
+
+<br/>
 
 ## 💡 주요 기능 목록
 
@@ -106,6 +113,8 @@
 - 댓글 / 좋아요 구현
 - 이전글 / 다음글 이동
 - 게시글 수정 / 삭제 기능
+
+<br/>
 
 ## 화면 구성 🎥
 
